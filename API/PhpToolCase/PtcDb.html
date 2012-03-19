@@ -1,0 +1,916 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class PtcDb</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> PtcDb</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">PHP TOOLCASE DATABASE(MYSQL) PARSING AND MANIPULATING CLASS</p>
+<p class="description"><p>PHP version 5</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Irony &lt;<a href="mailto:carlo@salapc.com">carlo@salapc.com</a>&gt;</li>
+				<li><span class="field">version:</span> 0.7</li>
+				<li><span class="field">link:</span> <a href="http://salapc.com">http://salapc.com</a></li>
+				<li><span class="field">license:</span> <a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a></li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_PhpToolCase---current---PtcDb.php.html">/PhpToolCase/current/PtcDb.php</a> (line <span class="field"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a12">12</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$mySqlFlag" title="details" class="var-name">$mySqlFlag</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">array</span>
+					<a href="#$queryResults" title="details" class="var-name">$queryResults</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																											
+				<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+					static 						<span class="method-result">void</span>
+										<a href="#selfInstance" title="details" class="method-name">selfInstance</a>
+										()
+									</div>
+																																																											
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">returns</span>
+										<a href="#countRows" title="details" class="method-name">countRows</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$ref</span> = <span class="var-default">0</span>])
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#dbClose" title="details" class="method-name">dbClose</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$dbLink</span> = <span class="var-default">null</span>])
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#dbConnect" title="details" class="method-name">dbConnect</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$dbHost</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$dbUser</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$dbPass</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$dbName</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$dbCharset</span> = <span class="var-default">NULL</span>])
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">returns</span>
+										<a href="#deleteRow" title="details" class="method-name">deleteRow</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$recordId</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$ref</span> = <span class="var-default">0</span>])
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">returns</span>
+										<a href="#executeSql" title="details" class="method-name">executeSql</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sql</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$ref</span> = <span class="var-default">0</span>])
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">returns</span>
+										<a href="#goFast" title="details" class="method-name">goFast</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$return</span> = <span class="var-default">&quot;id&quot;</span>])
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">returns</span>
+										<a href="#insertRow" title="details" class="method-name">insertRow</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$array</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$ref</span> = <span class="var-default">0</span>])
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">returns</span>
+										<a href="#lastId" title="details" class="method-name">lastId</a>
+										()
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">returns</span>
+										<a href="#readRow" title="details" class="method-name">readRow</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">array|string</span>&nbsp;<span class="var-name">$fields</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$ref</span> = <span class="var-default">0</span>])
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">returns</span>
+										<a href="#readTable" title="details" class="method-name">readTable</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, [<span class="var-type">array|string</span>&nbsp;<span class="var-name">$fields</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$order</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$ref</span> = <span class="var-default">0</span>])
+									</div>
+																							
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">returns</span>
+										<a href="#sqlToArray" title="details" class="method-name">sqlToArray</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sql</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$ref</span> = <span class="var-default">0</span>])
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">returns</span>
+										<a href="#updateRow" title="details" class="method-name">updateRow</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$array</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$recordId</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$ref</span> = <span class="var-default">0</span>])
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#_cleanQuery" title="details" class="method-name">_cleanQuery</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$string</span>)
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#_queryFields" title="details" class="method-name">_queryFields</a>
+											(<span class="var-type">array|string</span>&nbsp;<span class="var-name">$fields</span>)
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#_tracePhp" title="details" class="method-name">_tracePhp</a>
+										()
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$mySqlFlag" id="$mySqlFlag"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$mySqlFlag</span>
+			 = <span class="var-default">MYSQL_ASSOC</span>			(line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a19">19</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Mysql mode(MYSQL_BOTH,MYSQL_ASSOC,MYSQL_NUM)</p>
+	<ul class="tags">
+				<li><span class="field">tutorial:</span> <a href="../PhpToolCase/tutorial_PtcDb.cls.html#mySqlFlag">mySqlFlag Option</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$queryResults" id="$queryResults"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$queryResults</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a25">25</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Store query results in array</p>
+	<ul class="tags">
+				<li><span class="field">tutorial:</span> <a href="../PhpToolCase/tutorial_PtcDb.cls.html#references">Using References</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodselfInstance" id="selfInstance"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static selfInstance</span> (line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a29">29</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Call class methods without initializing the class</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result">void</span>
+		<span class="method-name">
+			selfInstance
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodcountRows" id="countRows"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">countRows</span> (line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a219">219</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Count rows of select query(based on reference)</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> number rows from select statement</li>
+				<li><span class="field">tutorial:</span> <a href="../PhpToolCase/tutorial_PtcDb.cls.html#select_data.countRows">Count Rows</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">returns</span>
+		<span class="method-name">
+			countRows
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$ref</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$ref</span><span class="var-description">: gives a reference to the resource. See <a href="../PhpToolCase/tutorial_PtcDb.cls.html#references">Using References</a></span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddbClose" id="dbClose"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">dbClose</span> (line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a238">238</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close link to DB</p>
+	<ul class="tags">
+				<li><span class="field">tutorial:</span> <a href="../PhpToolCase/tutorial_PtcDb.cls.html#getting_started.dbClose">Closing The Connetion</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			dbClose
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$dbLink</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$dbLink</span><span class="var-description">: link resource</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddbConnect" id="dbConnect"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">dbConnect</span> (line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a43">43</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Connect to database</p>
+	<ul class="tags">
+				<li><span class="field">tutorial:</span> <a href="../PhpToolCase/tutorial_PtcDb.cls.html#getting_started.dbConnect">Connecting To Database</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			dbConnect
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$dbHost</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$dbUser</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$dbPass</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$dbName</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$dbCharset</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$dbHost</span><span class="var-description">: address for mysql server</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$dbUser</span><span class="var-description">: user for mysql server</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$dbPass</span><span class="var-description">: password for mysql server</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$dbName</span><span class="var-description">: database name</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$dbCharset</span><span class="var-description">: charset to use</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddeleteRow" id="deleteRow"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">deleteRow</span> (line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a193">193</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Delete row from given table</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the sql reference.</li>
+				<li><span class="field">tutorial:</span> <a href="../PhpToolCase/tutorial_PtcDb.cls.html#manipulating data.deleteRow">Delete Row</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">returns</span>
+		<span class="method-name">
+			deleteRow
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$recordId</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$ref</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table</span><span class="var-description">: mysql table</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$recordId</span><span class="var-description">: the record id to be deleted</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$ref</span><span class="var-description">: gives a reference to the resource. See <a href="../PhpToolCase/tutorial_PtcDb.cls.html#references">Using References</a></span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodexecuteSql" id="executeSql"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">executeSql</span> (line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a91">91</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Execute sql statement and return result</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the sql reference.</li>
+				<li><span class="field">tutorial:</span> <a href="../PhpToolCase/tutorial_PtcDb.cls.html#complex_queries.executeSql">ExecuteSql</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">returns</span>
+		<span class="method-name">
+			executeSql
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sql</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$ref</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sql</span><span class="var-description">: sql query to be returned</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$ref</span><span class="var-description">: gives a reference to the resource. See <a href="../PhpToolCase/tutorial_PtcDb.cls.html#references">Using References</a></span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgoFast" id="goFast"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">goFast</span> (line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a207">207</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Retrive value from given table based on 1 field</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the value for the specified field,or null if query was empty</li>
+				<li><span class="field">tutorial:</span> <a href="../PhpToolCase/tutorial_PtcDb.cls.html#select_data.goFast">Retrieve only 1 Value</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">returns</span>
+		<span class="method-name">
+			goFast
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$return</span> = <span class="var-default">&quot;id&quot;</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table</span><span class="var-description">: mysql table</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$key</span><span class="var-description">: table field name</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value</span><span class="var-description">: the value to look for</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$return</span><span class="var-description">: the field to return</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodinsertRow" id="insertRow"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">insertRow</span> (line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a140">140</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Insert record from given table</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the sql reference.</li>
+				<li><span class="field">tutorial:</span> <a href="../PhpToolCase/tutorial_PtcDb.cls.html#manipulating data.insertRow">Insert Row</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">returns</span>
+		<span class="method-name">
+			insertRow
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$array</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$ref</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table</span><span class="var-description">: mysql table</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$array</span><span class="var-description">: query fields</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$ref</span><span class="var-description">: gives a reference to the resource. See <a href="../PhpToolCase/tutorial_PtcDb.cls.html#references">Using References</a></span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlastId" id="lastId"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">lastId</span> (line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a176">176</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get last inerted id</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> last inserted id</li>
+				<li><span class="field">tutorial:</span> <a href="../PhpToolCase/tutorial_PtcDb.cls.html#manipulating data.lastId">Last Inserted Id</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">returns</span>
+		<span class="method-name">
+			lastId
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodreadRow" id="readRow"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">readRow</span> (line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a111">111</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Read 1 row from given table</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> an array  with values or null if query is empty.</li>
+				<li><span class="field">tutorial:</span> <a href="../PhpToolCase/tutorial_PtcDb.cls.html#select_data.readRow">Read Row</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">returns</span>
+		<span class="method-name">
+			readRow
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">array|string</span>&nbsp;<span class="var-name">$fields</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$ref</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table</span><span class="var-description">: mysql table</span>			</li>
+					<li>
+				<span class="var-type">array|string</span>
+				<span class="var-name">$fields</span><span class="var-description">: query fields</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$ref</span><span class="var-description">: gives a reference to the resource. See <a href="../PhpToolCase/tutorial_PtcDb.cls.html#references">Using References</a></span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodreadTable" id="readTable"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">readTable</span> (line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a127">127</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Read records from given table</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> a multidimensional array or null if query is empty</li>
+				<li><span class="field">tutorial:</span> <a href="../PhpToolCase/tutorial_PtcDb.cls.html#select_data.readTable">Read Table</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">returns</span>
+		<span class="method-name">
+			readTable
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, [<span class="var-type">array|string</span>&nbsp;<span class="var-name">$fields</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$order</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$ref</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table</span><span class="var-description">: mysql table</span>			</li>
+					<li>
+				<span class="var-type">array|string</span>
+				<span class="var-name">$fields</span><span class="var-description">: query fields</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$order</span><span class="var-description">: order records</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$limit</span><span class="var-description">: limit number of records</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$ref</span><span class="var-description">: gives a reference to the resource. See <a href="../PhpToolCase/tutorial_PtcDb.cls.html#references">Using References</a></span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsqlToArray" id="sqlToArray"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">sqlToArray</span> (line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a71">71</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Execute any select statement</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> a 2 dimensions array with values or null if query is empty</li>
+				<li><span class="field">tutorial:</span> <a href="../PhpToolCase/tutorial_PtcDb.cls.html#complex_queries.sqlToArray">SqlToArray</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">returns</span>
+		<span class="method-name">
+			sqlToArray
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sql</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$ref</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sql</span><span class="var-description">: sql query to be returned</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$ref</span><span class="var-description">: gives a reference to the resource. See <a href="../PhpToolCase/tutorial_PtcDb.cls.html#references">Using References</a></span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodupdateRow" id="updateRow"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">updateRow</span> (line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a163">163</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Update 1 record in given table</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the sql reference.</li>
+				<li><span class="field">tutorial:</span> <a href="../PhpToolCase/tutorial_PtcDb.cls.html#manipulating data.updateRow">Update Row</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">returns</span>
+		<span class="method-name">
+			updateRow
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$array</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$recordId</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$ref</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table</span><span class="var-description">: mysql table</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$array</span><span class="var-description">: array of values to update</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$recordId</span><span class="var-description">: the record id to be updated</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$ref</span><span class="var-description">: gives a reference to the resource. See <a href="../PhpToolCase/tutorial_PtcDb.cls.html#references">Using References</a></span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method_cleanQuery" id="_cleanQuery"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">_cleanQuery</span> (line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a256">256</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Protect against sql injection</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			_cleanQuery
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$string</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$string</span><span class="var-description">: clean values before sql query(prevent sql injection)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method_queryFields" id="_queryFields"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">_queryFields</span> (line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a267">267</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Fields in the select statement WHERE clause</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			_queryFields
+		</span>
+					(<span class="var-type">array|string</span>&nbsp;<span class="var-name">$fields</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array|string</span>
+				<span class="var-name">$fields</span><span class="var-description">: query fields</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method_tracePhp" id="_tracePhp"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">_tracePhp</span> (line <span class="line-number"><a href="../__filesource/fsource_PhpToolCase__PhpToolCasecurrentPtcDb.php.html#a294">294</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			_tracePhp
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+	
+	<p class="notes" id="credit">
+		Documentation generated on Sun, 18 Mar 2012 23:01:57 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>
