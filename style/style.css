@@ -7,7 +7,7 @@ html
 
 body
 { font: normal .80em 'trebuchet ms', arial, sans-serif;
-  background: #F7F7F7 url(pattern.png) fixed;
+  background: #F7F7F7 url(../images/pattern.png) fixed;
   color: #555;}
 
 p
@@ -74,12 +74,12 @@ a:hover
   margin: 20px auto;}
 
 ul
-{ margin: 2px 0 22px 17px;}
+{ margin: 2px 0 10px 10px;}
 
 ul li
 { list-style-type: circle;
   margin: 0 0 0 0; 
-  padding: 0 0 4px 5px;}
+  /*padding: 0 0 4px 5px;*/}
 
 ol
 { margin: 8px 0 22px 20px;}
@@ -97,12 +97,12 @@ ol li
 
 #header
 { width: 952px;
-  height: 5px;}
+  height: 100px;}
 
 #logo
 { width: 950px;
   float: left;
-  height: 100px;
+  /*height: 100px;*/
   background: transparent;
   padding: 0 0 0px 10px;}
 
@@ -124,7 +124,7 @@ ol li
 { float: right; 
   padding-right: 25px;
   text-align: right; 
-  font: 500% 'tangerine', arial; 
+  font: 300% tangerine, aerial; 
   color: #111;}
 
 #menubar
@@ -213,7 +213,7 @@ ul#menu li a:hover
 
 #content ul li
 { list-style-type: none;
-  background: url(bullet.png) no-repeat;
+  background: url(../images/bullet.png) no-repeat;
   margin: 0 0 6px 0; 
   padding: 0 0 4px 25px;
   line-height: 1.5em;}
@@ -324,3 +324,37 @@ table tr td
 { background: #FBFBFB;
   color: #111;
   border-top: 1px solid #FFF;}
+.code{
+color:black;
+}
+.code li{
+		padding:0px;
+		margin:0px;
+		white-space: nowrap;
+}
+ .src-line {
+font-family: 'Courier New', Courier, monospace;
+font-weight: normal;
+}
+
+.src-inc {
+color: blue;
+}
+
+.src-sym {
+font-weight: bold;
+}
+
+.src-str {
+color: #6CC;
+}
+
+.src-comm {
+color: green;
+}
+
+.src-line a {
+color: #009;
+background-color: transparent;
+text-decoration: none;
+}
