@@ -9,7 +9,7 @@
 	* @version	0.7
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
-	* @link     	http://salapc.com
+	* @link     	http://phptoolcase.com
 	*/
 	class PtcDebug
 	{
