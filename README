@@ -1,16 +1,18 @@
-###############################################
+
+##########################################################
 
 PhpToolCase Version 0.7 open source project
 
 A powerfull set of tools
 
-###############################################
+##########################################################
+
 
 
 PhpToolCase is a library to speed up the process of programming in php. 
 
 
-All classes are independent, and can be used as stand alone.
+All classes are independent, and can be used as stand-alone.
 
 
 Visit phptoolcase.com for complete guides and examples.
