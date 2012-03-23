@@ -3,7 +3,7 @@
 	$db['host']="localhost";				# mysql host
 	$db['user']="mysql user";			# mysql user
 	$db['pass']="mysql pass";			# mysql pass
-	$db['database']="database name";	# mysql database name
+	$db['database']="db name";			# mysql database name
 	#########################################
 
 	# initialize the class
