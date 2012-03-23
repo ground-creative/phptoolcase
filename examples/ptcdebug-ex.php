@@ -1,6 +1,6 @@
 <?
 	//session_start();				# start session for persistent debugging
-	
+
 	require_once('../PtcDebug.php');	# include the PtcDebug class
 	
 	$options=array
