@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>PtcDb User Guide</title>
+	<link rel="stylesheet" type="text/css" href="../media/style.css">
+	<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+	<td class="header-top-left"><!--<img src="../media/logo.png" border="0" alt="phpDocumentor " />-->&nbsp;</td>
+    <td class="header-top-right">PhpToolCase<br /><div class="header-top-right-subpackage"></div></td>
+  </tr>
+  <tr><td colspan="2" class="header-line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td colspan="2" class="header-menu">
+      
+                        
+                      		[ <a href="../classtrees_PhpToolCase.html" class="menu">class tree: PhpToolCase</a> ]
+		[ <a href="../elementindex_PhpToolCase.html" class="menu">index: PhpToolCase</a> ]
+            [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td colspan="2" class="header-line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="195" class="menu">
+		<div class="package-title">PhpToolCase</div>
+  <div class="package">
+	<div id="ric">
+					<p><a href="../ric_README.html">README</a></p>
+					<p><a href="../ric_CHANGELOG.html">CHANGELOG</a></p>
+					<p><a href="../ric_TODO.html">TODO</a></p>
+			</div>
+	</div>
+      <b>Packages:</b><br />
+  <div class="package">
+              <a href="../li_PhpToolCase.html">PhpToolCase</a><br />
+      	</div>
+      <br />
+		<b>Tutorials/Manuals:</b><br />
+  <div class="package">
+							<strong>Class-level:</strong>
+							<ul>
+	<li type="square"><a href="../PhpToolCase/tutorial_PtcDebug.cls.html">PtcDebug User Guide</a>
+</ul>
+
+							<ul>
+	<li type="square"><a href="../PhpToolCase/tutorial_PtcDb.cls.html">PtcDb User Guide</a>
+</ul>
+
+							<ul>
+	<li type="square"><a href="../PhpToolCase/tutorial_PtcForms.cls.html">PtcForms User Guide</a>
+</ul>
+
+							                       <!-- <b>Files:</b><br />
+        <div class="package">
+				<span style="padding-left: 1em;"><a href="../PhpToolCase/_workshop---PhpToolCase---current---PtcDb.php.html">PtcDb.php</a></span><br />
+			<span style="padding-left: 1em;"><a href="../PhpToolCase/_workshop---PhpToolCase---current---PtcDebug.php.html">PtcDebug.php</a></span><br />
+			<span style="padding-left: 1em;"><a href="../PhpToolCase/_workshop---PhpToolCase---current---PtcForms.php.html">PtcForms.php</a></span><br />
+	  </div>
+        // github problem with these links-->
+            <br />
+                  <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../PhpToolCase/PtcDb.html">PtcDb</a>    	 <br />
+	    		<a href="../PhpToolCase/PtcDebug.html">PtcDebug</a>    	 <br />
+	    		<a href="../PhpToolCase/PtcForms.html">PtcForms</a>    	 <br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="10%" align="left" valign="bottom"><a href=
+"../PhpToolCase/tutorial_PtcDebug.cls.html">Prev</a></td>
+<td width="80%" align="center" valign="bottom"></td>
+<td width="10%" align="right" valign="bottom"><a href=
+"../PhpToolCase/tutorial_PtcForms.cls.html">Next</a></td>
+</tr>
+</table>
+<div><a name=""></a><div class="ref-title-box"><h1 class="ref-title">PtcDb User Guide</h1>
+		<h2 class="ref-purpose">MYSQL QUERY HELPER - VERSION 0.7</h2></div>
+	<h1 align="center">Table of Contents</h1>
+<ul>
+
+<a href="../PhpToolCase/tutorial_PtcDb.cls.html#intro">Introduction</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcDb.cls.html#getting_started">Getting Started</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDb.cls.html#getting_started.dbConnect">Connecting To Database</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDb.cls.html#getting_started.dbClose">Closing The Connetion</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcDb.cls.html#select_data">Selecting Data</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDb.cls.html#select_data.readRow">Read Row</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDb.cls.html#select_data.readTable">Read Table</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDb.cls.html#select_data.goFast">Retrieve only 1 Value</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDb.cls.html#select_data.countRows">Count Rows</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcDb.cls.html#manipulating data">Manipulating Data</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDb.cls.html#manipulating data.insertRow">Insert Row</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDb.cls.html#manipulating data.updateRow">Update Row</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDb.cls.html#manipulating data.deleteRow">Delete Row</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDb.cls.html#manipulating data.lastId">Last Inserted Id</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcDb.cls.html#complex_queries">More Complex Queries</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDb.cls.html#complex_queries.sqlToArray">SqlToArray</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDb.cls.html#complex_queries.executeSql">ExecuteSql</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcDb.cls.html#references">Using References</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcDb.cls.html#mySqlFlag">mySqlFlag Option</a><br />
+</ul>
+
+	<span><a name="intro"></a><h2 class="title">Introduction</h2><p>The goal of this class is to ease the process of parsing and manipulating data with mysql queries.Methods from this class allow to access mysql tables with just 2 or 3 lines of code.</p>
+		<p>Main Features:
+			<ul><li>Fast and clean programming for mysql queries</li>
+				<li>Stores references of queries for later use</li>
+				<li>Implements mysql_real_escape_string in every query(to prevent sql injection)</li> 
+				<li>Uses the PtcDebug class for logging all queries</li></ul></p></span>
+	<span><a name="getting_started"></a><h2 class="title">Getting Started</h2><p>To get started, we need to initialize the class and connect to the db.Next will try to show off the methods so that we can have a basic understanding of the possibilities  that this class offers.</p>
+		<a name="getting_started.dbConnect"></a><h3 class="title">Connecting To Database</h3><p>To establish a connection, we use the method <a href="../PhpToolCase/PtcDb.html#methoddbConnect">dbConnect()</a>, after initializing the class.
+				<ol><li><div class="src-line"><span class="src-comm">#&nbsp;initialize&nbsp;the&nbsp;class</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'../PtcDb.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$ptc</span>=<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../PhpToolCase/PtcDb.html">PtcDb</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;connect&nbsp;to&nbsp;db</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">dbConnect</span><span class="src-sym">(</span><span class="src-var">$db</span><span class="src-sym">[</span><span class="src-str">'host'</span><span class="src-sym">]</span><span class="src-sym">,</span><span class="src-var">$db</span><span class="src-sym">[</span><span class="src-str">'user'</span><span class="src-sym">]</span><span class="src-sym">,</span><span class="src-var">$db</span><span class="src-sym">[</span><span class="src-str">'pass'</span><span class="src-sym">]</span><span class="src-sym">,</span><span class="src-var">$db</span><span class="src-sym">[</span><span class="src-str">'database'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p><hr />
+		<a name="getting_started.dbClose"></a><h3 class="title">Closing The Connetion</h3>The method <a href="../PhpToolCase/PtcDb.html#methoddbClose">dbClose()</a> will close the connection to the db.
+			If we used this class to connect, there is no need to use  the <strong>&quot;$dbLink&quot;</strong> parameter.
+			<p><ol><li><div class="src-line"><span class="src-comm">#&nbsp;close&nbsp;connection</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">dbClose</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p><hr /></span>
+	<span><a name="select_data"></a><h2 class="title">Selecting Data</h2><p>The following examples, will show us how to select data with the help of this class.</p>
+		<a name="select_data.readRow"></a><h3 class="title">Read Row</h3><p>The method <a href="../PhpToolCase/PtcDb.html#methodreadRow">readRow()</a> is used to retrieve 1 row from any given table.
+				It will return an array or null if query was empty.
+				<ol><li><div class="src-line"><span class="src-comm">#&nbsp;query&nbsp;based&nbsp;on&nbsp;record&nbsp;id</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$field_id</span>=<span class="src-num">1</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$data</span>=<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">readRow</span><span class="src-sym">(</span><span class="src-str">&quot;test_table&quot;</span><span class="src-sym">,</span><span class="src-var">$field_id</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;b&gt;readRow()&nbsp;result(query&nbsp;based&nbsp;on&nbsp;record&nbsp;id)&lt;/b&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;pre&gt;&quot;</span>.<a href="http://www.php.net/print_r">print_r</a><span class="src-sym">(</span><span class="src-var">$data</span><span class="src-sym">,</span><span class="src-id">true</span><span class="src-sym">)</span>.<span class="src-str">&quot;&lt;/pre&gt;&quot;</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;single&nbsp;value&nbsp;search</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$value</span>=<span class="src-str">&quot;somevalue1&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$data</span>=<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">readRow</span><span class="src-sym">(</span><span class="src-str">&quot;test_table&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;field1:&quot;</span>.<span class="src-var">$value</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;b&gt;readRow()&nbsp;result(single&nbsp;value&nbsp;search)&lt;/b&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;pre&gt;&quot;</span>.<a href="http://www.php.net/print_r">print_r</a><span class="src-sym">(</span><span class="src-var">$data</span><span class="src-sym">,</span><span class="src-id">true</span><span class="src-sym">)</span>.<span class="src-str">&quot;&lt;/pre&gt;&quot;</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;array&nbsp;of&nbsp;values</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$fields</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;field1&quot;</span>=&gt;<span class="src-str">&quot;somevalue1&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;field2&quot;</span>=&gt;<span class="src-str">&quot;somevalue2&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$data</span>=<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">readRow</span><span class="src-sym">(</span><span class="src-str">&quot;test_table&quot;</span><span class="src-sym">,</span><span class="src-var">$fields</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;b&gt;readRow()&nbsp;result(array&nbsp;of&nbsp;values)&lt;/b&gt;&lt;pre&gt;&quot;</span>.<a href="http://www.php.net/print_r">print_r</a><span class="src-sym">(</span><span class="src-var">$data</span><span class="src-sym">,</span><span class="src-id">true</span><span class="src-sym">)</span>.<span class="src-str">&quot;&lt;/pre&gt;&quot;</span><span class="src-sym">;</span></div></li>
+</ol></p><hr />
+		<a name="select_data.readTable"></a><h3 class="title">Read Table</h3><p>The method <a href="../PhpToolCase/PtcDb.html#methodreadTable">readTable()</a> is used to retrieve multiple rows from any given table.
+				It will return a 2 dimensions array filled with rows or null if query was empty.
+				<ol><li><div class="src-line"><span class="src-comm">#&nbsp;all&nbsp;rows</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$data</span>=<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">readTable</span><span class="src-sym">(</span><span class="src-str">&quot;test_table&quot;</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;b&gt;readTable()&nbsp;result(all&nbsp;records)&lt;/b&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;pre&gt;&quot;</span>.<a href="http://www.php.net/print_r">print_r</a><span class="src-sym">(</span><span class="src-var">$data</span><span class="src-sym">,</span><span class="src-id">true</span><span class="src-sym">)</span>.<span class="src-str">&quot;&lt;/pre&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;single&nbsp;value&nbsp;search</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$value</span>=<span class="src-str">&quot;somevalue1&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$data</span>=<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">readTable</span><span class="src-sym">(</span><span class="src-str">&quot;test_table&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;field1:&quot;</span>.<span class="src-var">$value</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;b&gt;readTable()&nbsp;result(single&nbsp;value&nbsp;search)&lt;/b&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;pre&gt;&quot;</span>.<a href="http://www.php.net/print_r">print_r</a><span class="src-sym">(</span><span class="src-var">$data</span><span class="src-sym">,</span><span class="src-id">true</span><span class="src-sym">)</span>.<span class="src-str">&quot;&lt;/pre&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;array&nbsp;of&nbsp;values&nbsp;search</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$fields</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;field1&quot;</span>=&gt;<span class="src-str">&quot;somevalue1&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;field2&quot;</span>=&gt;<span class="src-str">&quot;somevalue2&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$data</span>=<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">readTable</span><span class="src-sym">(</span><span class="src-str">&quot;test_table&quot;</span><span class="src-sym">,</span><span class="src-var">$fields</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;b&gt;readTable()&nbsp;result(array&nbsp;of&nbsp;values)&lt;/b&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;pre&gt;&quot;</span>.<a href="http://www.php.net/print_r">print_r</a><span class="src-sym">(</span><span class="src-var">$data</span><span class="src-sym">,</span><span class="src-id">true</span><span class="src-sym">)</span>.<span class="src-str">&quot;&lt;/pre&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;order&nbsp;and&nbsp;limit</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$order</span>=<span class="src-str">&quot;ORDER&nbsp;BY&nbsp;`id`&nbsp;ASC&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$limit</span>=<span class="src-str">&quot;LIMIT&nbsp;2&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$data</span>=<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">readTable</span><span class="src-sym">(</span><span class="src-str">&quot;test_table&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;&quot;</span><span class="src-sym">,</span><span class="src-var">$order</span><span class="src-sym">,</span><span class="src-var">$limit</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;b&gt;readTable()&nbsp;result(with&nbsp;order&nbsp;and&nbsp;limit)&lt;/b&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;pre&gt;&quot;</span>.<a href="http://www.php.net/print_r">print_r</a><span class="src-sym">(</span><span class="src-var">$data</span><span class="src-sym">,</span><span class="src-id">true</span><span class="src-sym">)</span>.<span class="src-str">&quot;&lt;/pre&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;count&nbsp;rows&nbsp;for&nbsp;last&nbsp;select&nbsp;query</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<span class="src-str">&quot;&lt;b&gt;number&nbsp;of&nbsp;rows&nbsp;(select&nbsp;statement):&lt;/b&gt;&nbsp;&quot;</span>.<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">countRows</span><span class="src-sym">(</span><span class="src-sym">)</span>.<span class="src-str">&quot;&lt;br&gt;&lt;br&gt;&quot;</span><span class="src-sym">;</span></div></li>
+</ol></p><hr />
+		<a name="select_data.goFast"></a><h3 class="title">Retrieve only 1 Value</h3><p>The method <a href="../PhpToolCase/PtcDb.html#methodgoFast">goFast()</a> is used to retrieve only 1 field value, from a single record. It uses the method <a href="../PhpToolCase/PtcDb.html#methodreadRow">readRow()</a> but only returns the specified field value(<strong>record id</strong> by default).it is particularly useful when we are in a hurry and only need to retrieve 1 value based on 1 field query.
+				<ol><li><div class="src-line"><span class="src-comm">#&nbsp;returns&nbsp;1&nbsp;value&nbsp;instead&nbsp;of&nbsp;an&nbsp;array&nbsp;like&nbsp;readRow()</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$value</span>=<span class="src-str">&quot;somevalue1&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$data</span>=<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">goFast</span><span class="src-sym">(</span><span class="src-str">&quot;test_table&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;field1&quot;</span><span class="src-sym">,</span><span class="src-var">$value</span><span class="src-sym">,</span><span class="src-str">&quot;field2&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<span class="src-str">&quot;&lt;b&gt;goFast()&nbsp;result:&lt;/b&gt;&nbsp;&quot;</span>.<span class="src-var">$data</span>.<span class="src-str">&quot;&lt;br&gt;&lt;br&gt;&quot;</span><span class="src-sym">;</span></div></li>
+</ol></p><hr />
+		<a name="select_data.countRows"></a><h3 class="title">Count Rows</h3><p>The method <a href="../PhpToolCase/PtcDb.html#methodcountRows">countRows()</a> will count the rows from a select statement, that has been defined with <strong>&quot;$ref&quot;</strong> variable(defaults to last select).
+				<ol><li><div class="src-line"><span class="src-comm">#&nbsp;order&nbsp;and&nbsp;limit</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$order</span>=<span class="src-str">&quot;ORDER&nbsp;BY&nbsp;`id`&nbsp;ASC&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$limit</span>=<span class="src-str">&quot;LIMIT&nbsp;2&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$data</span>=<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">readTable</span><span class="src-sym">(</span><span class="src-str">&quot;test_table&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;&quot;</span><span class="src-sym">,</span><span class="src-var">$order</span><span class="src-sym">,</span><span class="src-var">$limit</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;b&gt;readTable()&nbsp;result(with&nbsp;order&nbsp;and&nbsp;limit)&lt;/b&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;pre&gt;&quot;</span>.<a href="http://www.php.net/print_r">print_r</a><span class="src-sym">(</span><span class="src-var">$data</span><span class="src-sym">,</span><span class="src-id">true</span><span class="src-sym">)</span>.<span class="src-str">&quot;&lt;/pre&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;count&nbsp;rows&nbsp;for&nbsp;last&nbsp;select&nbsp;query</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<span class="src-str">&quot;&lt;b&gt;number&nbsp;of&nbsp;rows&nbsp;(select&nbsp;statement):&lt;/b&gt;&nbsp;&quot;</span>.<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">countRows</span><span class="src-sym">(</span><span class="src-sym">)</span>.<span class="src-str">&quot;&lt;br&gt;&lt;br&gt;&quot;</span><span class="src-sym">;</span></div></li>
+</ol></p><hr /></span>
+	<span><a name="manipulating data"></a><h2 class="title">Manipulating Data</h2><p>The following examples will demonstrate how we can use this class to manipulate data in the database.</p>
+		<a name="manipulating data.insertRow"></a><h3 class="title">Insert Row</h3><p>The method <a href="../PhpToolCase/PtcDb.html#methodinsertRow">insertRow()</a> can be used to insert rows in any given table.
+				<ol><li><div class="src-line"><span class="src-comm">#&nbsp;single&nbsp;row&nbsp;insert</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$ins</span><span class="src-sym">[</span><span class="src-str">'field1'</span><span class="src-sym">]</span>=<span class="src-str">&quot;somevalue1&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$ins</span><span class="src-sym">[</span><span class="src-str">'field2'</span><span class="src-sym">]</span>=<span class="src-str">&quot;somevalue2&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">insertRow</span><span class="src-sym">(</span><span class="src-str">&quot;test_table&quot;</span><span class="src-sym">,</span><span class="src-var">$ins</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;multiple&nbsp;rows&nbsp;insert</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$arr1</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;field1&quot;</span>=&gt;<span class="src-str">&quot;somevalue3&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;field2&quot;</span>=&gt;<span class="src-str">&quot;somevalue5&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$arr2</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;field1&quot;</span>=&gt;<span class="src-str">&quot;somevalue4&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;field2&quot;</span>=&gt;<span class="src-str">&quot;somevalue6&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$arr3</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-var">$arr1</span><span class="src-sym">,</span><span class="src-var">$arr2</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">#&nbsp;2&nbsp;dimensions&nbsp;array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">foreach</span><span class="src-sym">(</span><span class="src-var">$arr3&nbsp;</span><span class="src-key">as&nbsp;</span><span class="src-var">$ins</span><span class="src-sym">)</span><span class="src-sym">{&nbsp;</span><span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">insertRow</span><span class="src-sym">(</span><span class="src-str">&quot;test_table&quot;</span><span class="src-sym">,</span><span class="src-var">$ins</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-sym">}</span></div></li>
+</ol></p><hr />
+		<a name="manipulating data.updateRow"></a><h3 class="title">Update Row</h3><p>The method <a href="../PhpToolCase/PtcDb.html#methodupdateRow">updateRow()</a> can be used to update rows in any given table.
+				<ol><li><div class="src-line"><span class="src-comm">#&nbsp;single&nbsp;row&nbsp;update</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$up</span><span class="src-sym">[</span><span class="src-str">'field1'</span><span class="src-sym">]</span>=<span class="src-str">&quot;somevalue5&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$up</span><span class="src-sym">[</span><span class="src-str">'field2'</span><span class="src-sym">]</span>=<span class="src-str">&quot;somevalue6&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$record_id</span>=<span class="src-num">1</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">#&nbsp;the&nbsp;record&nbsp;id</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">updateRow</span><span class="src-sym">(</span><span class="src-str">&quot;test_table&quot;</span><span class="src-sym">,</span><span class="src-var">$up</span><span class="src-sym">,</span><span class="src-var">$record_id</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;multiple&nbsp;rows&nbsp;update</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$arr1</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;field1&quot;</span>=&gt;<span class="src-str">&quot;somevalue7&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;id&quot;</span>=&gt;<span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$arr2</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;field1&quot;</span>=&gt;<span class="src-str">&quot;somevalue8&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;id&quot;</span>=&gt;<span class="src-num">2</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$arr3</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-var">$arr1</span><span class="src-sym">,</span><span class="src-var">$arr2</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">#&nbsp;2&nbsp;dimensions&nbsp;array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">foreach</span><span class="src-sym">(</span><span class="src-var">$arr3&nbsp;</span><span class="src-key">as&nbsp;</span><span class="src-var">$up</span><span class="src-sym">)</span><span class="src-sym">{&nbsp;</span><span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">updateRow</span><span class="src-sym">(</span><span class="src-str">&quot;test_table&quot;</span><span class="src-sym">,</span><span class="src-var">$up</span><span class="src-sym">,</span><span class="src-var">$up</span><span class="src-sym">[</span><span class="src-str">'id'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-sym">}</span></div></li>
+</ol></p><hr />
+		<a name="manipulating data.deleteRow"></a><h3 class="title">Delete Row</h3><p>The method <a href="../PhpToolCase/PtcDb.html#methoddeleteRow">deleteRow()</a> can be used to delete rows in any given table.
+				<ol><li><div class="src-line"><span class="src-comm">#&nbsp;single&nbsp;row</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$record_id</span>=<span class="src-num">1</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">#&nbsp;the&nbsp;record&nbsp;id</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">deleteRow</span><span class="src-sym">(</span><span class="src-str">&quot;test_table&quot;</span><span class="src-sym">,</span><span class="src-var">$record_id</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;multiple&nbsp;rows</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$arr3</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;2&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;3&quot;</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">#&nbsp;array&nbsp;of&nbsp;id's</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">foreach</span><span class="src-sym">(</span><span class="src-var">$arr3&nbsp;</span><span class="src-key">as&nbsp;</span><span class="src-var">$k</span>=&gt;<span class="src-var">$v</span><span class="src-sym">)</span><span class="src-sym">{&nbsp;</span><span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">deleteRow</span><span class="src-sym">(</span><span class="src-str">&quot;test_table&quot;</span><span class="src-sym">,</span><span class="src-var">$v</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-sym">}</span></div></li>
+</ol></p><hr />
+		<a name="manipulating data.lastId"></a><h3 class="title">Last Inserted Id</h3><p>With the <a href="../PhpToolCase/PtcDb.html#methodlastId">lastId()</a> method, we can retrieve the last id of an insert query.
+				<ol><li><div class="src-line"><span class="src-comm">#&nbsp;multiple&nbsp;rows&nbsp;insert</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$arr1</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;field1&quot;</span>=&gt;<span class="src-str">&quot;somevalue3&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;field2&quot;</span>=&gt;<span class="src-str">&quot;somevalue5&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$arr2</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;field1&quot;</span>=&gt;<span class="src-str">&quot;somevalue4&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;field2&quot;</span>=&gt;<span class="src-str">&quot;somevalue6&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$arr3</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-var">$arr1</span><span class="src-sym">,</span><span class="src-var">$arr2</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">#&nbsp;2&nbsp;dimensions&nbsp;array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">foreach</span><span class="src-sym">(</span><span class="src-var">$arr3&nbsp;</span><span class="src-key">as&nbsp;</span><span class="src-var">$ins</span><span class="src-sym">)</span><span class="src-sym">{&nbsp;</span><span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">insertRow</span><span class="src-sym">(</span><span class="src-str">&quot;test_table&quot;</span><span class="src-sym">,</span><span class="src-var">$ins</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;get&nbsp;last&nbsp;inserted&nbsp;id</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<span class="src-str">&quot;&lt;b&gt;last&nbsp;inserted&nbsp;id&nbsp;is:&lt;/b&gt;&nbsp;&quot;</span>.<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">lastId</span><span class="src-sym">(</span><span class="src-sym">)</span>.<span class="src-str">&quot;&lt;br&gt;&lt;br&gt;&quot;</span><span class="src-sym">;</span></div></li>
+</ol></p><hr /></span>
+	<span><a name="complex_queries"></a><h2 class="title">More Complex Queries</h2><p>This chapter will try to cover circumstances where we will need to use more complex queries.</p>
+		<a name="complex_queries.sqlToArray"></a><h3 class="title">SqlToArray</h3><p>The <a href="../PhpToolCase/PtcDb.html#methodsqlToArray">sqlToArray()</a> method, can be used to execute any type of select query, with a custom statement.
+				It willl return a 2 dimensions array or null if query was empty.
+				This method covers any type of query where the return should be an array.
+				<ol><li><div class="src-line"><span class="src-comm">#&nbsp;just&nbsp;a&nbsp;select&nbsp;statement</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$sql</span>=<span class="src-str">&quot;SELECT&nbsp;&nbsp;`field1`&nbsp;FROM&nbsp;test_table&nbsp;WHERE&nbsp;`field2`&nbsp;!=&nbsp;'somevalue'&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$data</span>=<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">sqlToArray</span><span class="src-sym">(</span><span class="src-var">$sql</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">#&nbsp;return&nbsp;a&nbsp;2&nbsp;dimensions&nbsp;array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;b&gt;sqlToArray()&nbsp;result(complex&nbsp;select)&lt;/b&gt;&lt;pre&gt;&quot;</span>.<a href="http://www.php.net/print_r">print_r</a><span class="src-sym">(</span><span class="src-var">$data</span><span class="src-sym">,</span><span class="src-id">true</span><span class="src-sym">)</span>.<span class="src-str">&quot;&lt;/pre&gt;&quot;</span><span class="src-sym">;</span></div></li>
+</ol></p><hr />
+		<a name="complex_queries.executeSql"></a><h3 class="title">ExecuteSql</h3><p>The method <a href="../PhpToolCase/PtcDb.html#methodexecuteSql">executeSql()</a>, can execute any query, and will return the result.
+				<ol><li><div class="src-line"><span class="src-comm">#&nbsp;just&nbsp;an&nbsp;update&nbsp;query</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$sql</span>=<span class="src-str">&quot;UPDATE&nbsp;test_table&nbsp;SET&nbsp;`field1`&nbsp;=&nbsp;'somevalue9'&nbsp;WHERE&nbsp;`field2`&nbsp;=&nbsp;'somevalue'&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">executeSql</span><span class="src-sym">(</span><span class="src-var">$sql</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol><ol><li><div class="src-line"><span class="src-comm">#&nbsp;drop&nbsp;example&nbsp;table</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">executeSql</span><span class="src-sym">(</span><span class="src-str">&quot;DROP&nbsp;TABLE&nbsp;IF&nbsp;EXISTS&nbsp;`test_table`&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;create&nbsp;example&nbsp;table</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">executeSql</span><span class="src-sym">(</span><span class="src-str">&quot;CREATE&nbsp;TABLE&nbsp;`test_table`&nbsp;</span></div></li>
+<li><div class="src-line"><span class="src-str">&nbsp;&nbsp;&nbsp;&nbsp;(</span></div></li>
+<li><div class="src-line"><span class="src-str">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`id`&nbsp;int&nbsp;NOT&nbsp;NULL&nbsp;AUTO_INCREMENT,&nbsp;</span></div></li>
+<li><div class="src-line"><span class="src-str">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY&nbsp;KEY(`id`),`field1`&nbsp;varchar(15),`field2`&nbsp;varchar(15)</span></div></li>
+<li><div class="src-line"><span class="src-str">&nbsp;&nbsp;&nbsp;&nbsp;)&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p><hr /></span>
+	<span><a name="references"></a><h2 class="title">Using References</h2><p>The <strong>&quot;$ref&quot;</strong> parameter can be used to retrieve more information about a query, as show in the examples below.
+			<ol><li><div class="src-line"><span class="src-comm">#&nbsp;just&nbsp;a&nbsp;select&nbsp;query</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$data</span>=<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">readTable</span><span class="src-sym">(</span><span class="src-str">&quot;test_table&quot;</span><span class="src-sym">,</span><span class="src-str">''</span><span class="src-sym">,</span><span class="src-str">''</span><span class="src-sym">,</span><span class="src-str">''</span><span class="src-sym">,</span><span class="src-str">&quot;testReference&quot;</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;b&gt;readTable()&nbsp;result&nbsp;adding&nbsp;reference&nbsp;&lt;i&gt;\&quot;testReference\&quot;&lt;/i&gt;&lt;/b&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;pre&gt;&quot;</span>.<a href="http://www.php.net/print_r">print_r</a><span class="src-sym">(</span><span class="src-var">$data</span><span class="src-sym">,</span><span class="src-id">true</span><span class="src-sym">)</span>.<span class="src-str">&quot;&lt;/pre&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;DO&nbsp;MORE&nbsp;QUERIES&nbsp;HERE</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;count&nbsp;rows&nbsp;from&nbsp;a&nbsp;select&nbsp;query&nbsp;with&nbsp;reference</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<span class="src-str">&quot;&lt;b&gt;countRows&nbsp;(select&nbsp;statement)&nbsp;with&nbsp;reference:&lt;/b&gt;&nbsp;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">countRows</span><span class="src-sym">(</span><span class="src-str">&quot;testReference&quot;</span><span class="src-sym">)</span>.<span class="src-str">&quot;&lt;br&gt;&quot;</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;show&nbsp;field&nbsp;id&nbsp;of&nbsp;first&nbsp;record&nbsp;with&nbsp;reference</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<span class="src-str">&quot;&lt;b&gt;show&nbsp;field1&nbsp;of&nbsp;second&nbsp;record&nbsp;with&nbsp;reference(mysql_resultt):&lt;/b&gt;&nbsp;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<a href="http://www.php.net/mysql_result">mysql_result</a><span class="src-sym">(</span><span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">queryResults</span><span class="src-sym">[</span><span class="src-str">&quot;testReference&quot;</span><span class="src-sym">]</span><span class="src-sym">,</span><span class="src-num">1</span><span class="src-sym">,</span><span class="src-num">1</span><span class="src-sym">)</span>.<span class="src-str">&quot;&lt;br&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;show&nbsp;number&nbsp;of&nbsp;fields</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$num_fields</span>=<a href="http://www.php.net/mysql_num_fields">mysql_num_fields</a><span class="src-sym">(</span><span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">queryResults</span><span class="src-sym">[</span><span class="src-str">&quot;testReference&quot;</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<span class="src-str">&quot;&lt;b&gt;number&nbsp;of&nbsp;fields&nbsp;in&nbsp;previous&nbsp;query&nbsp;&lt;i&gt;\&quot;testReference\&quot;&lt;/i&gt;:&lt;/b&gt;&nbsp;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;&nbsp;<span class="src-var">$num_fields</span>.<span class="src-str">&quot;&lt;br&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;get&nbsp;fields&nbsp;information</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<span class="src-str">&quot;&lt;b&gt;dump&nbsp;fields&nbsp;information&nbsp;(mysql_fetch_field)&nbsp;&lt;i&gt;\&quot;testReference\&quot;&lt;/i&gt;:&lt;/b&gt;&nbsp;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">for</span><span class="src-sym">(</span><span class="src-var">$a</span>=<span class="src-num">0</span><span class="src-sym">;</span><span class="src-var">$a</span>&lt;<span class="src-var">$num_fields</span><span class="src-sym">;</span><span class="src-var">$a</span>++<span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<span class="src-str">&quot;&lt;pre&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><a href="http://www.php.net/mysql_fetch_field">mysql_fetch_field</a><span class="src-sym">(</span><span class="src-var">$ptc</span><span class="src-sym">-&gt;</span><span class="src-id">queryResults</span><span class="src-sym">[</span><span class="src-str">&quot;testReference&quot;</span><span class="src-sym">]</span><span class="src-sym">,</span><span class="src-var">$a</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<span class="src-str">&quot;&lt;/pre&gt;&quot;</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+</ol></p></span>
+	<span><a name="mySqlFlag"></a><h2 class="title">mySqlFlag Option</h2><p>The variable <a href="../PhpToolCase/PtcDb.html#var$mySqlFlag">mySqlFlag</a> controls the mode for mysql.You can change the default with the following flags:
+			<ul><li>MYSQL_BOTH</li>
+				<li>MYSQL_ASSOC</li>
+				<li>MYSQL_NUM</li></ul>
+			It is adviced to use <strong>&quot;MYSQL_ASSOC&quot;</strong>.</p></span></div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="33%" align="left" valign="top"><a href="../PhpToolCase/tutorial_PtcDebug.cls.html">Prev</a></td>
+<td width="34%" align="center" valign="top">&nbsp;</td>
+<td width="33%" align="right" valign="top"><a href=
+"../PhpToolCase/tutorial_PtcForms.cls.html">Next</a></td>
+</tr>
+
+<tr>
+<td width="33%" align="left" valign="top">PtcDebug User Guide</td>
+<td width="34%" align="center" valign="top"></td>
+<td width="33%" align="right" valign="top">PtcForms User Guide</td>
+</tr>
+</table>
+        <div class="credit">
+		    <hr class="separator" />
+		    Documentation generated on Wed, 06 Mar 2013 23:45:39 +0100 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

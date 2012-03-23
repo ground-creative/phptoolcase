@@ -1,0 +1,2235 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Docs For Class PtcDebug</title>
+	<link rel="stylesheet" type="text/css" href="../media/style.css">
+	<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+	<td class="header-top-left"><!--<img src="../media/logo.png" border="0" alt="phpDocumentor " />-->&nbsp;</td>
+    <td class="header-top-right">PhpToolCase<br /><div class="header-top-right-subpackage"></div></td>
+  </tr>
+  <tr><td colspan="2" class="header-line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td colspan="2" class="header-menu">
+      
+                        
+                      		[ <a href="../classtrees_PhpToolCase.html" class="menu">class tree: PhpToolCase</a> ]
+		[ <a href="../elementindex_PhpToolCase.html" class="menu">index: PhpToolCase</a> ]
+            [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td colspan="2" class="header-line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="195" class="menu">
+		<div class="package-title">PhpToolCase</div>
+  <div class="package">
+	<div id="ric">
+					<p><a href="../ric_README.html">README</a></p>
+					<p><a href="../ric_CHANGELOG.html">CHANGELOG</a></p>
+					<p><a href="../ric_TODO.html">TODO</a></p>
+			</div>
+	</div>
+      <b>Packages:</b><br />
+  <div class="package">
+              <a href="../li_PhpToolCase.html">PhpToolCase</a><br />
+      	</div>
+      <br />
+		<b>Tutorials/Manuals:</b><br />
+  <div class="package">
+							<strong>Class-level:</strong>
+							<ul>
+	<li type="square"><a href="../PhpToolCase/tutorial_PtcDebug.cls.html">PtcDebug User Guide</a>
+</ul>
+
+							<ul>
+	<li type="square"><a href="../PhpToolCase/tutorial_PtcDb.cls.html">PtcDb User Guide</a>
+</ul>
+
+							<ul>
+	<li type="square"><a href="../PhpToolCase/tutorial_PtcForms.cls.html">PtcForms User Guide</a>
+</ul>
+
+							                       <!-- <b>Files:</b><br />
+        <div class="package">
+				<span style="padding-left: 1em;"><a href="../PhpToolCase/_workshop---PhpToolCase---current---PtcDb.php.html">PtcDb.php</a></span><br />
+			<span style="padding-left: 1em;"><a href="../PhpToolCase/_workshop---PhpToolCase---current---PtcDebug.php.html">PtcDebug.php</a></span><br />
+			<span style="padding-left: 1em;"><a href="../PhpToolCase/_workshop---PhpToolCase---current---PtcForms.php.html">PtcForms.php</a></span><br />
+	  </div>
+        // github problem with these links-->
+            <br />
+                  <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../PhpToolCase/PtcDb.html">PtcDb</a>    	 <br />
+	    		<a href="../PhpToolCase/PtcDebug.html">PtcDebug</a>    	 <br />
+	    		<a href="../PhpToolCase/PtcForms.html">PtcForms</a>    	 <br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: PtcDebug</h1>
+Source Location: /workshop/PhpToolCase/current/PtcDebug.php<br /><br />
+
+<h2 class="class-name">Class PtcDebug</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Class Overview</div>
+	<div class="nav-bar">
+					<span class="disabled">Class Overview</span>
+						
+											| <a href="#sec-var-summary">Property Summary</a> | <a href="#sec-vars">Properties Detail</a>
+														| <a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
+								</div>
+	<div class="info-box-body">
+		<table width="100%" border="0">
+		<tr><td valign="top" width="60%" class="class-overview">
+
+        		<p align="center" class="short-description"><strong>DEBUGGER &amp; LOGGER CLASS  <br />All class properties and methods are static because it's required  to let them work on script shutdown when FATAL error occurs.
+</strong></p>
+<span class="description"><p>PHP version 5</p></span>
+		<p class="notes">
+			Located in <a class="field" href="_workshop---PhpToolCase---current---PtcDebug.php.html">/workshop/PhpToolCase/current/PtcDebug.php</a> [<span class="field">line 14</span>]
+		</p>
+
+		
+		<pre></pre>
+
+		
+				<strong>Author(s):</strong>
+		<ul>
+		  			 			 <li>Irony &lt;<a href="mailto:carlo@salapc.com">carlo@salapc.com</a>&gt;</li>
+			 		  			 		  			 		  			 		  		</ul>
+		
+		
+<strong>Information Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+				<tr><td><strong>Version:</strong>&nbsp;&nbsp;</td><td>0.8.1</td></tr>
+				<tr><td><strong>Link:</strong>&nbsp;&nbsp;</td><td><a href="http://phptoolcase.com">http://phptoolcase.com</a></td></tr>
+				<tr><td><strong>License:</strong>&nbsp;&nbsp;</td><td><a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a></td></tr>
+	</table>
+		</td>
+
+				<td valign="top" width="20%" class="class-overview">
+		<p align="center" class="short-description"><strong><a href="#sec_vars">Properties</a></strong></p>
+		<ul>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#var$_buffer">$_buffer</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#var$_defaultOptions">$_defaultOptions</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#var$_endTime">$_endTime</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#var$_excludeTrace">$_excludeTrace</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#var$_options">$_options</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#var$_startTime">$_startTime</a></li>
+		  		</ul>
+		</td>
+		
+				<td valign="top" width="20%" class="class-overview">
+		<p align="center" class="short-description"><strong><a href="#sec_methods">Methods</a></strong></p>
+		<ul>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#methodaddToBuffer">addToBuffer</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#methodbufferLog">bufferLog</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#methodbufferSql">bufferSql</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#methodcheckReferer">checkReferer</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#methoddebugLoader">debugLoader</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#methoderrorHandler">errorHandler</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#methodload">load</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#methodlog">log</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#methodlogSql">logSql</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#methodsetErrorHandler">setErrorHandler</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#methodshowInterface">showInterface</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#methodstopTimer">stopTimer</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_buildBuffer">_buildBuffer</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_buildHtmlTable">_buildHtmlTable</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_buildInnerVars">_buildInnerVars</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_buildInterface">_buildInterface</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_buildMenu">_buildMenu</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_buildMsgPanel">_buildMsgPanel</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_buildPhpInfo">_buildPhpInfo</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_buildQueriesPanel">_buildQueriesPanel</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_buildTimerPanel">_buildTimerPanel</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_buildVarsPanel">_buildVarsPanel</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_buildW3cPanel">_buildW3cPanel</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_checkAccess">_checkAccess</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_cleanBuffer">_cleanBuffer</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_compressHtml">_compressHtml</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_debugTrace">_debugTrace</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_includeCss">_includeCss</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_includeJs">_includeJs</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_lastError">_lastError</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_menuLinks">_menuLinks</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_msgType">_msgType</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_phpInfoArray">_phpInfoArray</a></li>
+		  		  <li><a href="../PhpToolCase/PtcDebug.html#method_sortBuffer">_sortBuffer</a></li>
+		  		</ul>
+		</td>
+		
+		</tr></table>
+		<div class="top">[ <a href="#top">Top</a> ]</div>
+	</div>
+</div>
+
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Property Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Class Overview</a>
+									| <span class="disabled">Property Summary</span> | <a href="#sec-vars">Properties Detail</a>
+												| <a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
+							    				</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+			<table border="0" cellspacing="0" cellpadding="0" class="var-summary">
+										<div class="var-title">
+					<tr><td class="var-title">static <span class="var-type-summary">array</span>&nbsp;&nbsp;</td>
+					<td class="var-title"><a href="#$_buffer" title="details" class="var-name-summary">$_buffer</a>&nbsp;&nbsp;</td>
+					<td class="var-summary-description">the debug buffer</td></tr>
+				</div>
+													<div class="var-title">
+					<tr><td class="var-title">static <span class="var-type-summary">array</span>&nbsp;&nbsp;</td>
+					<td class="var-title"><a href="#$_defaultOptions" title="details" class="var-name-summary">$_defaultOptions</a>&nbsp;&nbsp;</td>
+					<td class="var-summary-description">default options for the debug class</td></tr>
+				</div>
+													<div class="var-title">
+					<tr><td class="var-title">static <span class="var-type-summary">time</span>&nbsp;&nbsp;</td>
+					<td class="var-title"><a href="#$_endTime" title="details" class="var-name-summary">$_endTime</a>&nbsp;&nbsp;</td>
+					<td class="var-summary-description">application end time</td></tr>
+				</div>
+													<div class="var-title">
+					<tr><td class="var-title">static <span class="var-type-summary">array</span>&nbsp;&nbsp;</td>
+					<td class="var-title"><a href="#$_excludeTrace" title="details" class="var-name-summary">$_excludeTrace</a>&nbsp;&nbsp;</td>
+					<td class="var-summary-description">Exclude functions in this array from the backtrace</td></tr>
+				</div>
+													<div class="var-title">
+					<tr><td class="var-title">static <span class="var-type-summary">array</span>&nbsp;&nbsp;</td>
+					<td class="var-title"><a href="#$_options" title="details" class="var-name-summary">$_options</a>&nbsp;&nbsp;</td>
+					<td class="var-summary-description">array with all options</td></tr>
+				</div>
+													<div class="var-title">
+					<tr><td class="var-title">static <span class="var-type-summary">time</span>&nbsp;&nbsp;</td>
+					<td class="var-title"><a href="#$_startTime" title="details" class="var-name-summary">$_startTime</a>&nbsp;&nbsp;</td>
+					<td class="var-summary-description">application start time</td></tr>
+				</div>
+																																																	</table>
+			</div>
+			<br /><div class="top">[ <a href="#top">Top</a> ]</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Class Overview</a>
+																		| <a href="#sec-var-summary">Property Summary</a> | <a href="#sec-vars">Properties Detail</a>
+							    					| <span class="disabled">Method Summary</span> | <a href="#sec-methods">Methods Detail</a>
+		</div>
+		<div class="info-box-body">
+			<div class="method-summary">
+				<table border="0" cellspacing="0" cellpadding="0" class="method-summary">
+												<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#addToBuffer" title="details" class="method-name">addToBuffer</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Attach message to the end of buffer array</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#bufferLog" title="details" class="method-name">bufferLog</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Write messsage to log panel</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#bufferSql" title="details" class="method-name">bufferSql</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Write message to sql panel</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#checkReferer" title="details" class="method-name">checkReferer</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Check if debug parameters are set on referer url</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#debugLoader" title="details" class="method-name">debugLoader</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Load the debug interface if requested</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#errorHandler" title="details" class="method-name">errorHandler</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Handle php errors</td></tr>
+				</div>
+																								<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#log" title="details" class="method-name">log</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Alias of <a href="../PhpToolCase/PtcDebug.html#methodbufferLog">PtcDebug::bufferLog()</a></td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#logSql" title="details" class="method-name">logSql</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Alias of <a href="../PhpToolCase/PtcDebug.html#methodbufferSql">PtcDebug::bufferSql()</a></td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#setErrorHandler" title="details" class="method-name">setErrorHandler</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Set the error handler to be the debug class. good for production if param is set to false</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#showInterface" title="details" class="method-name">showInterface</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Show the debug interface</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#stopTimer" title="details" class="method-name">stopTimer</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Monitor the execution of something</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_buildBuffer" title="details" class="method-name">_buildBuffer</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Build the buffer</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_buildHtmlTable" title="details" class="method-name">_buildHtmlTable</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Build the html log and sql tables</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_buildInnerVars" title="details" class="method-name">_buildInnerVars</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Build the inner vars div</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_buildInterface" title="details" class="method-name">_buildInterface</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Build the debug interface</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_buildMenu" title="details" class="method-name">_buildMenu</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Build the debug menu</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_buildMsgPanel" title="details" class="method-name">_buildMsgPanel</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Build the log panel</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_buildPhpInfo" title="details" class="method-name">_buildPhpInfo</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Format phpinfo() function</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_buildQueriesPanel" title="details" class="method-name">_buildQueriesPanel</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Build the sql panel</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_buildTimerPanel" title="details" class="method-name">_buildTimerPanel</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Build the timer panel</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_buildVarsPanel" title="details" class="method-name">_buildVarsPanel</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Build the vars panel</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_buildW3cPanel" title="details" class="method-name">_buildW3cPanel</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Build the W3C panel</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_checkAccess" title="details" class="method-name">_checkAccess</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Check if ip has access</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_cleanBuffer" title="details" class="method-name">_cleanBuffer</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Remove html entities from the buffer</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_compressHtml" title="details" class="method-name">_compressHtml</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Compress the html before render</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_debugTrace" title="details" class="method-name">_debugTrace</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Trace php as best as we can</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_includeCss" title="details" class="method-name">_includeCss</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Include the css for the debug interface</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_includeJs" title="details" class="method-name">_includeJs</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Include the javascript for the debug interface</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_lastError" title="details" class="method-name">_lastError</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Get fatal error on shutdown</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_menuLinks" title="details" class="method-name">_menuLinks</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Build the debug menu links</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_msgType" title="details" class="method-name">_msgType</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Check message types</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_phpInfoArray" title="details" class="method-name">_phpInfoArray</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Format phpinfo() into an array</td></tr>
+				</div>
+																<div class="method-definition">
+					<tr><td class="method-definition">static
+											<span class="method-result">void</span>&nbsp;&nbsp;
+					</td>
+					<td class="method-definition"><a href="#_sortBuffer" title="details" class="method-name">_sortBuffer</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Sort the buffer</td></tr>
+				</div>
+																																																																				<div class="method-definition">
+											<tr><td class="method-definition"><span class="method-result">void</span>&nbsp;&nbsp;</td>
+										<td class="method-definition"><a href="#load" title="details" class="method-name">load</a>()&nbsp;&nbsp;</td>
+					<td class="method-definition">Alias of <a href="../PhpToolCase/PtcDebug.html#methoddebugLoader">PtcDebug::debugLoader()</a></td></tr>
+				</div>
+																																																																																																																																																																																																																																				</table>
+			</div>
+			<br /><div class="top">[ <a href="#top">Top</a> ]</div>
+		</div>
+	</div>
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Properties</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Class Overview</a>
+													| <a href="#sec-var-summary">Property Summary</a> | <span class="disabled">Properties Detail</span>
+															| <a href="#sec-method-summary">Method Summary</a> | <a href="#sec-methods">Methods Detail</a>
+												</div>
+		<div class="info-box-body">
+			<a name="var$_buffer" id="$_buffer"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			static <span class="var-type">array</span>&nbsp;&nbsp;
+			<span class="var-name">$_buffer</span>
+			 = <span class="var-default">array()</span>			<span class="smalllinenumber">[line 825]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>the debug buffer
+</strong></p>
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>private</td>
+  </tr>
+</table>
+<br />
+
+
+	
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="var$_defaultOptions" id="$_defaultOptions"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			static <span class="var-type">array</span>&nbsp;&nbsp;
+			<span class="var-name">$_defaultOptions</span>
+			 = <span class="var-default">array<br />		(<br />			'url_key'				=&gt;	'debug',# the key to pass  to turn on debug<br />			'url_pass'				=&gt;	'true',# the pass to turn on debug<br />			'replace_error_handler'	=&gt;	true,# replace default php error handler<br />			'check_referer'			=&gt;   false,# check referer for key and pass(good for ajax debugging)<br />			'die_on_error'			=&gt;	true,# die if fatal error occurs(with class error handler)<br />			'debug_console'		=&gt;	false,# only for Chrome,show messages in console(phpConsole needed)<br />			'allowed_ips'			=&gt;	null,# restrict access with ip's<br />			'session_start'			=&gt;	false,# start session for persistent debugging<br />			'show_interface'		=&gt;	true	# show the interface(false to debug in console only)<br />		)</span>			<span class="smalllinenumber">[line 239]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>default options for the debug class
+</strong></p>
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+<strong>Information Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Tutorial:</strong>&nbsp;&nbsp;</td><td><a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions">Class Options</a></td>
+  </tr>
+</table>
+
+	
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="var$_endTime" id="$_endTime"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			static <span class="var-type">time</span>&nbsp;&nbsp;
+			<span class="var-name">$_endTime</span>
+			 = <span class="var-default">null</span>			<span class="smalllinenumber">[line 837]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>application end time
+</strong></p>
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>See:</strong>&nbsp;&nbsp;</td><td><a href="../PhpToolCase/PtcDebug.html#methodstopTimer">PtcDebug::stopTimer()</a></td>
+  </tr>
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>private</td>
+  </tr>
+</table>
+<br />
+
+
+	
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="var$_excludeTrace" id="$_excludeTrace"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			static <span class="var-type">array</span>&nbsp;&nbsp;
+			<span class="var-name">$_excludeTrace</span>
+			 = <span class="var-default">array(&quot;require&quot;,&quot;require_once&quot;,&quot;include&quot;)</span>			<span class="smalllinenumber">[line 842]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>Exclude functions in this array from the backtrace
+</strong></p>
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>private</td>
+  </tr>
+</table>
+<br />
+
+
+	
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="var$_options" id="$_options"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			static <span class="var-type">array</span>&nbsp;&nbsp;
+			<span class="var-name">$_options</span>
+			 = <span class="var-default">array()</span>			<span class="smalllinenumber">[line 820]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>array with all options
+</strong></p>
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>private</td>
+  </tr>
+</table>
+<br />
+
+
+	
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="var$_startTime" id="$_startTime"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			static <span class="var-type">time</span>&nbsp;&nbsp;
+			<span class="var-name">$_startTime</span>
+			 = <span class="var-default">null</span>			<span class="smalllinenumber">[line 831]</span>
+		</span>
+	</div>
+
+	<p align="center" class="short-description"><strong>application start time
+</strong></p>
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>See:</strong>&nbsp;&nbsp;</td><td><a href="../PhpToolCase/PtcDebug.html#methodstopTimer">PtcDebug::stopTimer()</a></td>
+  </tr>
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>private</td>
+  </tr>
+</table>
+<br />
+
+
+	
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+		</div>
+	</div>
+
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Class Overview</a>
+																		| <a href="#sec-var-summary">Property Summary</a> | <a href="#sec-vars">Properties Detail</a>
+																	| <a href="#sec-method-summary">Method Summary</a> | <span class="disabled">Methods Detail</span>
+					</div>
+		<div class="info-box-body">
+			<a name='method_detail'></a>
+<a name="methodaddToBuffer" id="addToBuffer"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">static method addToBuffer</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 199]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void addToBuffer(
+string
+$string, [
+$statement = null], [string
+$type = &quot;errstr&quot;]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Attach message to the end of buffer array
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$string:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> the message to show</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$type:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> the array key in the buffer</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type"></span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$statement:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodbufferLog" id="bufferLog"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">static method bufferLog</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 137]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void bufferLog(
+mixed
+$string, [mixed
+$statement = null], [string
+$function = null], [string
+$class = null]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Write messsage to log panel
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">mixed</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$string:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> the string to pass</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">mixed</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$statement:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> some statement if required</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$function:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> the name of the function</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$class:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> the name of the class</span>			</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+<strong>Information Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Tutorial:</strong>&nbsp;&nbsp;</td><td><a href="../PhpToolCase/tutorial_PtcDebug.cls.html#bufferLog">Logging Messages</a></td>
+  </tr>
+</table>
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodbufferSql" id="bufferSql"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">static method bufferSql</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 149]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void bufferSql(
+mixed
+$string, [mixed
+$statement = null], [string
+$function = null], [string
+$class = null]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Write message to sql panel
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">mixed</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$string:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> the string to pass</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">mixed</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$statement:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> some statement if required</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$function:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> the name of the function</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$class:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> the name of the class</span>			</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+<strong>Information Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Tutorial:</strong>&nbsp;&nbsp;</td><td><a href="../PhpToolCase/tutorial_PtcDebug.cls.html#bufferSql">Logging Sql Queries</a></td>
+  </tr>
+</table>
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodcheckReferer" id="checkReferer"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">static method checkReferer</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 37]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void checkReferer(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Check if debug parameters are set on referer url
+</strong></p>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methoddebugLoader" id="debugLoader"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">static method debugLoader</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 68]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void debugLoader(
+[array
+$options = null]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Load the debug interface if requested
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">array</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$options:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> array of options <a href="../PhpToolCase/PtcDebug.html#var$_defaultOptions">_defaultOptions</a></span>			</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+<strong>Information Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Tutorial:</strong>&nbsp;&nbsp;</td><td><a href="../PhpToolCase/tutorial_PtcDebug.cls.html#debugLoader">Getting Started</a></td>
+  </tr>
+</table>
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methoderrorHandler" id="errorHandler"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">static method errorHandler</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 184]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void errorHandler(
+string
+$errno, string
+$errstr, string
+$errfile, string
+$errline&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Handle php errors
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$errno:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> error number (php standards)</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$errstr:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> error string</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$errfile:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> error file</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$errline:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> error line</span>			</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>See:</strong>&nbsp;&nbsp;</td><td><a href="../PhpToolCase/PtcDebug.html#methodsetErrorHandler">PtcDebug::setErrorHandler()</a></td>
+  </tr>
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodlog" id="log"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">static method log</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 23]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void log(
+
+$string, [
+$statement = null], [
+$function = null], [
+$class = null]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Alias of <a href="../PhpToolCase/PtcDebug.html#methodbufferLog">PtcDebug::bufferLog()</a>
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type"></span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$string:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type"></span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$statement:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type"></span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$function:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type"></span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$class:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodlogSql" id="logSql"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">static method logSql</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 30]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void logSql(
+
+$string, [
+$statement = null], [
+$function = null], [
+$class = null]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Alias of <a href="../PhpToolCase/PtcDebug.html#methodbufferSql">PtcDebug::bufferSql()</a>
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type"></span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$string:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type"></span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$statement:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type"></span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$function:&nbsp;</span></td>
+				<td>
+							</td></tr>
+					<tr><td class="indent">
+				<span class="var-type"></span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$class:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodsetErrorHandler" id="setErrorHandler"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">static method setErrorHandler</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 55]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void setErrorHandler(
+[string
+$dieIfFatalError = true]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Set the error handler to be the debug class. good for production if param is set to false
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$dieIfFatalError:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> die if fatal error occurs</span>			</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+<strong>Information Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Tutorial:</strong>&nbsp;&nbsp;</td><td><a href="../PhpToolCase/tutorial_PtcDebug.cls.html#setErrorHandler">Replace Error Handler</a></td>
+  </tr>
+</table>
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodshowInterface" id="showInterface"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">static method showInterface</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 227]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void showInterface(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Show the debug interface
+</strong></p>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>See:</strong>&nbsp;&nbsp;</td><td><a href="../PhpToolCase/PtcDebug.html#methoddebugLoader">PtcDebug::debugLoader()</a></td>
+  </tr>
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="methodstopTimer" id="stopTimer"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">static method stopTimer</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 158]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void stopTimer(
+[string|numeric
+$precision = 1]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Monitor the execution of something
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string|numeric</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$precision:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> sec/ms</span>			</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+<strong>Information Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Tutorial:</strong>&nbsp;&nbsp;</td><td><a href="../PhpToolCase/tutorial_PtcDebug.cls.html#stopTimer">Execution Timing</a></td>
+  </tr>
+</table>
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_buildBuffer" id="_buildBuffer"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">static method _buildBuffer</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 275]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _buildBuffer(
+string
+$type, mixed
+$string, [mixed
+$statement = null], [string
+$function = null], [string
+$class = null]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Build the buffer
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$type:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> log/sql</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">mixed</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$string:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> the string to pass</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">mixed</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$statement:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> some statement preceding the string</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$function:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> the name of the function</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$class:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> the name of the class</span>			</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_buildHtmlTable" id="_buildHtmlTable"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">static method _buildHtmlTable</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 497]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _buildHtmlTable(
+string
+$type&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Build the html log and sql tables
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$type:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> sql|log</span>			</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_buildInnerVars" id="_buildInnerVars"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">static method _buildInnerVars</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 604]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _buildInnerVars(
+string
+$panelId, string
+$linkTitle, string
+$array&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Build the inner vars div
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$panelId:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> the id of the panel to show/hide</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$linkTitle:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> the title orf the link</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$array:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> array of parameters</span>			</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_buildInterface" id="_buildInterface"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">static method _buildInterface</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 414]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _buildInterface(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Build the debug interface
+</strong></p>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_buildMenu" id="_buildMenu"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">static method _buildMenu</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 435]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _buildMenu(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Build the debug menu
+</strong></p>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_buildMsgPanel" id="_buildMsgPanel"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">static method _buildMsgPanel</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 533]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _buildMsgPanel(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Build the log panel
+</strong></p>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_buildPhpInfo" id="_buildPhpInfo"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">static method _buildPhpInfo</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 631]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _buildPhpInfo(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Format phpinfo() function
+</strong></p>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_buildQueriesPanel" id="_buildQueriesPanel"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">static method _buildQueriesPanel</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 543]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _buildQueriesPanel(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Build the sql panel
+</strong></p>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_buildTimerPanel" id="_buildTimerPanel"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">static method _buildTimerPanel</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 552]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _buildTimerPanel(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Build the timer panel
+</strong></p>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_buildVarsPanel" id="_buildVarsPanel"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">static method _buildVarsPanel</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 563]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _buildVarsPanel(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Build the vars panel
+</strong></p>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_buildW3cPanel" id="_buildW3cPanel"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">static method _buildW3cPanel</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 616]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _buildW3cPanel(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Build the W3C panel
+</strong></p>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_checkAccess" id="_checkAccess"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">static method _checkAccess</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 255]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _checkAccess(
+[string|array
+$allowedIps = null]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Check if ip has access
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string|array</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$allowedIps:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> the ip's that are allowed</span>			</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_cleanBuffer" id="_cleanBuffer"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">static method _cleanBuffer</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 847]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _cleanBuffer(
+string
+$var&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Remove html entities from the buffer
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$var:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> some string</span>			</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>private</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_compressHtml" id="_compressHtml"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">static method _compressHtml</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 785]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _compressHtml(
+
+$html&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Compress the html before render
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type"></span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$html:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_debugTrace" id="_debugTrace"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">static method _debugTrace</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 356]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _debugTrace(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Trace php as best as we can
+</strong></p>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_includeCss" id="_includeCss"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">static method _includeCss</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 644]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _includeCss(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Include the css for the debug interface
+</strong></p>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_includeJs" id="_includeJs"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">static method _includeJs</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 691]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _includeJs(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Include the javascript for the debug interface
+</strong></p>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_lastError" id="_lastError"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">static method _lastError</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 398]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _lastError(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Get fatal error on shutdown
+</strong></p>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_menuLinks" id="_menuLinks"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">static method _menuLinks</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 454]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _menuLinks(
+string
+$Id, string
+$title, string
+$text&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Build the debug menu links
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$Id:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> the panel id</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$title:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> the panel title</span>			</td></tr>
+					<tr><td class="indent">
+				<span class="var-type">string</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$text:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> the text for the link</span>			</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_msgType" id="_msgType"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">static method _msgType</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 465]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _msgType(
+[string|numeric
+$msg = NULL]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Check message types
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type">string|numeric</span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$msg:&nbsp;</span></td>
+				<td>
+				<span class="var-description"> php standards</span>			</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_phpInfoArray" id="_phpInfoArray"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">static method _phpInfoArray</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 794]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _phpInfoArray(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Format phpinfo() into an array
+</strong></p>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+<a name="method_sortBuffer" id="_sortBuffer"><!-- --></a>
+<div class="evenrow">
+
+<div class="method-header">
+	<span class="method-title">static method _sortBuffer</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 340]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>static void _sortBuffer(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Sort the buffer
+</strong></p>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+
+<a name="methodload" id="load"><!-- --></a>
+<div class="oddrow">
+
+<div class="method-header">
+	<span class="method-title">load</span>&nbsp;&nbsp;<span class="smalllinenumber">[line 19]</span>
+</div>
+<br />
+
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">&nbsp;
+		<code>void load(
+[
+$options = null]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table><br /></div>
+
+	<p align="center" class="short-description"><strong>Alias of <a href="../PhpToolCase/PtcDebug.html#methoddebugLoader">PtcDebug::debugLoader()</a>
+</strong></p>
+
+			<strong>Parameters:</strong><br />
+			<table border="0" cellspacing="0" cellpadding="0">
+					<tr><td class="indent">
+				<span class="var-type"></span>&nbsp;&nbsp;</td>
+				<td>
+				<span class="var-name">$options:&nbsp;</span></td>
+				<td>
+							</td></tr>
+				</table>
+
+	<br />
+	<strong>API Tags:</strong><br />
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="indent"><strong>Access:</strong>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+<br />
+
+
+		
+		<br />
+	<div class="top">[ <a href="#top">Top</a> ]</div>
+</div>
+		</div>
+	</div>
+
+
+        <div class="credit">
+		    <hr class="separator" />
+		    Documentation generated on Wed, 06 Mar 2013 23:45:44 +0100 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,921 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>PtcForms User Guide</title>
+	<link rel="stylesheet" type="text/css" href="../media/style.css">
+	<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+	<td class="header-top-left"><!--<img src="../media/logo.png" border="0" alt="phpDocumentor " />-->&nbsp;</td>
+    <td class="header-top-right">PhpToolCase<br /><div class="header-top-right-subpackage"></div></td>
+  </tr>
+  <tr><td colspan="2" class="header-line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td colspan="2" class="header-menu">
+      
+                        
+                      		[ <a href="../classtrees_PhpToolCase.html" class="menu">class tree: PhpToolCase</a> ]
+		[ <a href="../elementindex_PhpToolCase.html" class="menu">index: PhpToolCase</a> ]
+            [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td colspan="2" class="header-line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="195" class="menu">
+		<div class="package-title">PhpToolCase</div>
+  <div class="package">
+	<div id="ric">
+					<p><a href="../ric_README.html">README</a></p>
+					<p><a href="../ric_CHANGELOG.html">CHANGELOG</a></p>
+					<p><a href="../ric_TODO.html">TODO</a></p>
+			</div>
+	</div>
+      <b>Packages:</b><br />
+  <div class="package">
+              <a href="../li_PhpToolCase.html">PhpToolCase</a><br />
+      	</div>
+      <br />
+		<b>Tutorials/Manuals:</b><br />
+  <div class="package">
+							<strong>Class-level:</strong>
+							<ul>
+	<li type="square"><a href="../PhpToolCase/tutorial_PtcDebug.cls.html">PtcDebug User Guide</a>
+</ul>
+
+							<ul>
+	<li type="square"><a href="../PhpToolCase/tutorial_PtcDb.cls.html">PtcDb User Guide</a>
+</ul>
+
+							<ul>
+	<li type="square"><a href="../PhpToolCase/tutorial_PtcForms.cls.html">PtcForms User Guide</a>
+</ul>
+
+							                       <!-- <b>Files:</b><br />
+        <div class="package">
+				<span style="padding-left: 1em;"><a href="../PhpToolCase/ProcedurePtcDb.html">PtcDb.php</a></span><br />
+			<span style="padding-left: 1em;"><a href="../PhpToolCase/ProcedurePtcDebug.html">PtcDebug.php</a></span><br />
+			<span style="padding-left: 1em;"><a href="../PhpToolCase/ProcedurePtcForms.html">PtcForms.php</a></span><br />
+	  </div>
+        // github problem with these links-->
+            <br />
+                  <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../PhpToolCase/PtcDb.html">PtcDb</a>    	 <br />
+	    		<a href="../PhpToolCase/PtcDebug.html">PtcDebug</a>    	 <br />
+	    		<a href="../PhpToolCase/PtcForms.html">PtcForms</a>    	 <br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="10%" align="left" valign="bottom"><a href=
+"../PhpToolCase/tutorial_PtcDb.cls.html">Prev</a></td>
+<td width="80%" align="center" valign="bottom"></td>
+<td width="10%" align="right" valign="bottom">Next</td>
+</tr>
+</table>
+<div><a name=""></a><div class="ref-title-box"><h1 class="ref-title">PtcForms User Guide</h1>
+		<h2 class="ref-purpose">Html Dynamic Forms Generator/Validator - VERSION 0.8.3</h2></div>
+	<h1 align="center">Table of Contents</h1>
+<ul>
+
+<a href="../PhpToolCase/tutorial_PtcForms.cls.html#intro">INTRODUCTION</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcForms.cls.html#getting_started">GETTING STARTED</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options">CLASS OPTIONS</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.form_method">form_method</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.form_action">form_action</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.form_width">form_width</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.add_class_validator">add_class_validator</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.labels_align">labels_align</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.labels_width">labels_width</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.style_elements">style_elements</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.style_labels">style_labels</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.style_tables">style_tables</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.spacer_height">spacer_height</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.keep_values">keep_values</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.print_form">print_form</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.start_tab">start_tab</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.err_msg_level">err_msg_level</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.default_category">default_category</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions">FIELD PARAMETERS</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldName">name</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldType">type</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldLabel">label</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldAttributes">attributes</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldLabelOptions">labelOptions</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldParentEl">parentEl</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldEvents">events</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValidate">validate</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValues">values</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValue">value</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addField">ADDING FIELDS EXAMPLES</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addField.add_input">Adding a Text Field</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addField.add_select">Adding a Select Field</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addField.add_checkboxgroup">Adding a Checkboxgroup</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addField.add_composite">Adding a Composite</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addField.add_spacer">Adding a Custom Field</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldAttributes">ADDING HTML ATTRIBUTES TO ELEMENTS</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldAttributes.add_field_attributes">Adding attributes to fields</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldAttributes.add_label_attributes">Adding attributes to label container</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldAttributes.add_container_attributes">Adding attributes to field container</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldAttributes.add_el_attributes">Extending the compiler with custom attributes</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcForms.cls.html#changeDefaultStyles">CHANGING DEFAULT STYLES APPLIED TO ELEMENTS</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#changeDefaultStyles.setInputStyle">Changing default styles for fields</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#changeDefaultStyles.setLabelStyle">Changing default styles for label containers</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcForms.cls.html#customTpls">MANIPULATING HTML TEMPLATES</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldValues">ADDING VALUES TO FIELDS</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldValues.add_value_string">Adding values as a string</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldValues.add_array_values">Adding values as an array (select,radiogroup,checkboxgroup)</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldValues.add_fields_values">Adding fields as an array of values (composite,fieldset)</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcForms.cls.html#usingBrackets">USING [BRACKETS] TO ADD PARAMETERS TO FIELD VALUES</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldEvents">ADDING FIELD EVENTS</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcForms.cls.html#render">RENDERING THE FORM</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldValidator">ADDING AND VALIDATING FIELDS WITH THE VALIDATOR ENGINE</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldValidator.add_validator">Adding Fields To The Validator</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldValidator.validate_form">Validating The Form (Server Side)</a><br />
+</ul>
+
+	<span><a name="intro"></a><h2 class="title">INTRODUCTION</h2><p>The dynamic html forms generator is an excellent tool that will help you build all kinds of html forms in just a few minutes.
+			It will make you forget about all the problems involved with fields alignment, layouts, and server-side validation. 
+			For client-side validation the wonderfull <a href="http://www.phptoolcase.com/guides/ptc-forms-guide.html">jquery validator plugin</a> can be used. 
+			This class is especially adviced to webdesigners and webmasters that are having troubles with html forms.</p>
+		<p>Main Features:
+			<ul><li>Fast and easy to use, for building and validating html forms</li>
+				<li>Completely flexible, can adapt to any web environment</li>
+				<li>Built in validator which supports custom methods</li> 
+				<li>Automatic labels and fields alignment</li>
+				<li>Html templates can be all manipulated</li>
+				<li>No additional css files are needed for the class to work</li>
+				<li>Uses PtcDebug class to debug the building process</li></ul></p></span>
+	<span><a name="getting_started"></a><h2 class="title">GETTING STARTED</h2><p>Add the following lines to load the class:
+			<ol><li><div class="src-line"><span class="src-comm">//&nbsp;initialize&nbsp;the&nbsp;class</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'PtcForms.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span>=<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../PhpToolCase/PtcForms.html">PtcForms</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p></span>
+	<span><a name="class_options"></a><h2 class="title">CLASS OPTIONS</h2><p>This is the full list of options available on intialization, stored in <a href="../PhpToolCase/PtcForms.html#var$_defaultOptions">$_defaultOptions</a> property:
+			<ol><li><div class="src-line"><span class="src-var">$options</span>=<span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'form_method'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'post'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;the&nbsp;form&nbsp;method&nbsp;to&nbsp;use</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'form_action'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'#'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;the&nbsp;form&nbsp;action&nbsp;url</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'form_width'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'500px'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;the&nbsp;width&nbsp;for&nbsp;the&nbsp;main&nbsp;container</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'add_class_validator'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">false</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;add&nbsp;validator&nbsp;classes&nbsp;to&nbsp;fields&nbsp;for&nbsp;use&nbsp;with&nbsp;jquery</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'labels_align'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'left'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;align&nbsp;labels&nbsp;globally(left,top,right)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'labels_width'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'40%'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;the&nbsp;width&nbsp;for&nbsp;labels&nbsp;as&nbsp;a&nbsp;percentage</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'style_elements'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;add&nbsp;default&nbsp;style&nbsp;to&nbsp;input&nbsp;elements&nbsp;to&nbsp;align&nbsp;properly</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'style_labels'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;add&nbsp;default&nbsp;style&nbsp;to&nbsp;label&nbsp;elements&nbsp;to&nbsp;align&nbsp;properly</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'style_tables'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;add&nbsp;default&nbsp;style&nbsp;to&nbsp;table&nbsp;elements&nbsp;to&nbsp;align&nbsp;properly</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'spacer_height'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'3px'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;height&nbsp;for&nbsp;the&nbsp;spacer&nbsp;between&nbsp;fields</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'keep_values'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;repopulate&nbsp;filled&nbsp;fields&nbsp;on&nbsp;form&nbsp;submission</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'print_form'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;print&nbsp;form&nbsp;to&nbsp;screen&nbsp;or&nbsp;return&nbsp;html&nbsp;only</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'start_tab'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">&quot;\t&quot;</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;format&nbsp;html&nbsp;code&nbsp;with&nbsp;tabs</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'err_msg_level'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">E_USER_WARNING</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;error&nbsp;messages&nbsp;level</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'debug_category'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'PtcForms'&nbsp;</span><span class="src-comm">//&nbsp;default&nbsp;category&nbsp;for&nbsp;the&nbsp;PtcDebug&nbsp;class</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;initialize&nbsp;the&nbsp;class</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'PtcForms.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span>=<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../PhpToolCase/PtcForms.html">PtcForms</a></span><span class="src-sym">(</span><span class="src-var">$options</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p>
+		<a name="class_options.form_method"></a><h3 class="title">form_method</h3><p>Use this option to set form method(post/get).</p>
+			<p><strong>Default value:</strong> post (string)</p><hr />
+		<a name="class_options.form_action"></a><h3 class="title">form_action</h3><p>This option can be used to set form action attribute. Ex: process-form.php</p>
+			<p><strong>Default value:</strong> # (string)</p><hr />
+		<a name="class_options.form_width"></a><h3 class="title">form_width</h3><p>Use this option to set the width of the form.</p>
+			<p><strong>Default value:</strong> 500px (string)</p><hr />
+		<a name="class_options.add_class_validator"></a><h3 class="title">add_class_validator</h3><p>This option adds the respective css classes to fields to validate client side with jquery and the <a href="http://www.phptoolcase.com/guides/ptc-forms-guide.html">ptcforms-validator.js</a> plugin. See <a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldValidator">ADDING AND VALIDATING FIELDS WITH THE VALIDATOR ENGINE</a> for details and usage.</p>
+			<p><strong>Default value:</strong> false (bool)</p><hr />
+		<a name="class_options.labels_align"></a><h3 class="title">labels_align</h3><p>This option can be used for the form layout, it will attempt to align the labels with the fields. Options are <strong>&quot;left&quot;</strong>,
+			<strong>&quot;right&quot;</strong>,<strong>&quot;top&quot;</strong> or <strong>&quot;none&quot;</strong> for no labels.</p>
+			<p><strong>Default value:</strong> left (string)</p><hr />
+		<a name="class_options.labels_width"></a><h3 class="title">labels_width</h3><p>Use &quot;labels_width&quot; to set the width for the labels. Always make sure that the form has the currect width, otherwise the result will not be as expected.
+			You can refer to <a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.form_width">form_width</a> for the form width option.</p>
+			<p><strong>Default value:</strong> 40% (string)</p><hr />
+		<a name="class_options.style_elements"></a><h3 class="title">style_elements</h3><p>This option can be used to stop adding styles to the input fields automatically, quite usefull if you want to use your own css. 
+				The default styles for the inputs are stored in the <a href="../PhpToolCase/PtcForms.html#var$_inputStyles">$_inputStyles</a> property, and can be manipulated with the <a href="../PhpToolCase/PtcForms.html#methodsetInputStyle">setInputStyle()</a> method.
+				see <a href="../PhpToolCase/tutorial_PtcForms.cls.html#changeDefaultStyles.setInputStyle">Changing default styles for fields</a> for a detailed usage.</p>
+			<p><strong>Default value:</strong> true (bool)
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;default&nbsp;input&nbsp;styles</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$_inputStyles</span>=<span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'radio'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'padding'</span>=&gt;<span class="src-str">'0px'</span><span class="src-sym">,</span><span class="src-str">'margin'</span>=&gt;<span class="src-str">'0px'</span><span class="src-sym">,</span><span class="src-str">'vertical-align'</span>=&gt;<span class="src-str">'middle'</span><span class="src-sym">,</span><span class="src-str">'width'</span>=&gt;<span class="src-str">'14px'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'input'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'margin'</span>=&gt;<span class="src-str">'0px'</span><span class="src-sym">,</span><span class="src-str">'padding'</span>=&gt;<span class="src-str">'3px'</span><span class="src-sym">,</span><span class="src-str">'border'</span>=&gt;<span class="src-str">'1px&nbsp;inset'</span><span class="src-sym">)</span><span class="src-sym">,</span><span class="src-comm">//padding:2px;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'button'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'margin'</span>=&gt;<span class="src-str">'0px'</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p><hr />
+		<a name="class_options.style_labels"></a><h3 class="title">style_labels</h3><p>This option can be used to stop adding styles to the label containers automatically, quite usefull if you want to use your own css. 
+				The default styles for the labels are stored in the <a href="../PhpToolCase/PtcForms.html#var$_labelStyles">$_labelStyles</a> property, and can be manipulated with the <a href="../PhpToolCase/PtcForms.html#methodsetLabelStyle">setLabelStyle()</a> method.
+				see <a href="../PhpToolCase/tutorial_PtcForms.cls.html#changeDefaultStyles.setLabelStyle">Changing default styles for label containers</a> for a detailed usage.</p>
+			<p><strong>Default value:</strong> true (bool)
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;default&nbsp;label&nbsp;container&nbsp;styles</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$_labelStyles</span>=<span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">/*&nbsp;Styles&nbsp;for&nbsp;input,&nbsp;select&nbsp;and&nbsp;textarea&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-num">1&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'left'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'float'</span>=&gt;<span class="src-str">'left'</span><span class="src-sym">,</span><span class="src-str">'margin'</span>=&gt;<span class="src-str">'2px&nbsp;0&nbsp;0&nbsp;0'</span><span class="src-sym">,</span><span class="src-str">'width'</span>=&gt;<span class="src-str">'{label_width}%'</span><span class="src-sym">)</span><span class="src-sym">,</span><span class="src-comm">//margin:1px&nbsp;0&nbsp;0&nbsp;0</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'right'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'float'</span>=&gt;<span class="src-str">'left'</span><span class="src-sym">,</span><span class="src-str">'margin'</span>=&gt;<span class="src-str">'1px&nbsp;3px&nbsp;0&nbsp;0'</span><span class="src-sym">,</span><span class="src-comm">//margin:0&nbsp;3px&nbsp;0&nbsp;0;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'text-align'</span>=&gt;<span class="src-str">'right'</span><span class="src-sym">,</span><span class="src-str">'width'</span>=&gt;<span class="src-str">'{label_width}%'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'top'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">/*&nbsp;Styles&nbsp;for&nbsp;&nbsp;checkbox&nbsp;and&nbsp;radio&nbsp;buttons&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-num">2&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'left'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'vertical-align'</span>=&gt;<span class="src-str">'middle'</span><span class="src-sym">,</span><span class="src-str">'border'</span>=&gt;<span class="src-str">'none'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'right'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'vertical-align'</span>=&gt;<span class="src-str">'middle'</span><span class="src-sym">,</span><span class="src-str">'border'</span>=&gt;<span class="src-str">'none'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'top'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">/*&nbsp;Styles&nbsp;for&nbsp;radio/checkbox&nbsp;group&nbsp;and&nbsp;composite&nbsp;fields&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-num">3&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'left'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'float'</span>=&gt;<span class="src-str">'left'</span><span class="src-sym">,</span><span class="src-str">'margin'</span>=&gt;<span class="src-str">'3px&nbsp;0&nbsp;0&nbsp;0'</span><span class="src-sym">,</span><span class="src-str">'width'</span>=&gt;<span class="src-str">'{label_width}%'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'right'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'float'</span>=&gt;<span class="src-str">'left'</span><span class="src-sym">,</span><span class="src-str">'margin'</span>=&gt;<span class="src-str">'1px&nbsp;3px&nbsp;0&nbsp;0'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'text-align'</span>=&gt;<span class="src-str">'right'</span><span class="src-sym">,</span><span class="src-str">'width'</span>=&gt;<span class="src-str">'{label_width}%'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'top'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">))</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p><hr />
+		<a name="class_options.style_tables"></a><h3 class="title">style_tables</h3><p>This option can be used to stop adding width to the tables automatically, quite usefull if you want to use your own css.</p>
+			<p><strong>Default value:</strong> true (bool)</p><hr />	
+		<a name="class_options.spacer_height"></a><h3 class="title">spacer_height</h3><p>The &quot;spacer_height&quot; option property can be used to change the height between fields.</p>
+			<p><strong>Default value:</strong> 3px (bool)</p><hr />	
+		<a name="class_options.keep_values"></a><h3 class="title">keep_values</h3><p>This options is used to load already inserted values in the fields if form was submitted. It could be usefull set to false, for a login form as inserted values will not be reproposed upon submission, as shown in the pctforms-ex1.php example file</p>
+			<p><strong>Default value:</strong> true (bool)</p><hr />	
+		<a name="class_options.print_form"></a><h3 class="title">print_form</h3><p>Prints the form or returns the output generated by the <a href="../PhpToolCase/PtcForms.html#methodrender">render()</a> method as a string if set to false.</p>
+			<p><strong>Default value:</strong> true (bool)</p><hr />	
+		<a name="class_options.start_tab"></a><h3 class="title">start_tab</h3><p>This option controls the start tab for the html output. If you would lneed to increase the offset add more tabs, ex: \t\t\t</p>
+			<p><strong>Default value:</strong> \t (string)</p><hr />	
+		<a name="class_options.err_msg_level"></a><h3 class="title">err_msg_level</h3><p>The &quot;err_msg_level&quot; is used to set the severity of the error for execution errors within the class itself. Use E_USER_NOTICE for a lower severity and E_USER_ERROR for a higher  severity</p>
+			<p><strong>Default value:</strong> E_USER_WARNING (const)</p><hr />
+		<a name="class_options.default_category"></a><h3 class="title">default_category</h3><p>The &quot;default_category&quot; is used for the PtcDebug class to set a category for the messages panel</p>
+			<p><strong>Default value:</strong> PtcForms (string)</p><hr /></span>	
+	<span><a name="paramsOptions"></a><h2 class="title">FIELD PARAMETERS</h2><p>The following paragraph will cover all possible parameters that can be passed to the <a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement()</a> method, and their usage.
+			<ol><li><div class="src-line"><span class="src-comm">//&nbsp;addding&nbsp;a&nbsp;text&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;mandatory,&nbsp;will&nbsp;throw&nbsp;a&nbsp;warning&nbsp;if&nbsp;not&nbsp;present</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'text'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;text&nbsp;is&nbsp;default&nbsp;if&nbsp;&nbsp;&quot;type&quot;&nbsp;is&nbsp;not&nbsp;present</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'label'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'LabelText'&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;the&nbsp;text&nbsp;for&nbsp;the&nbsp;label</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+			Here is a list of all possibile parameters that can be passed to  the <a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement()</a> method as array keys for the &quot;$params&quot; parameter:
+			<ol><li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldName">name</a>(mandatory)</li>
+				<li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldType">type</a></li>
+				<li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldLabel">label</a></li>
+				<li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldAttributes">attributes</a></li>
+				<li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldLabelOptions">labelOptions</a></li>
+				<li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldParentEl">parentEl</a></li>
+				<li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldEvents">events</a></li>
+				<li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValidate">validate</a></li>
+				<li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValues">values</a></li>
+				<li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValue">value</a></li></ol>
+			Some of these parameters can be added to field values like select, radio and checkbox groups, with <strong>&quot;[brackets]&quot;</strong>. 
+			Ex: attributes[]. See <a href="../PhpToolCase/tutorial_PtcForms.cls.html#usingBrackets">USING [BRACKETS] TO ADD PARAMETERS TO FIELD VALUES</a> for detailed usage.</p>
+		<p>The following paragraphs, will explain in details the usage of these parameters.</p>
+		<a name="paramsOptions.fieldName"></a><h3 class="title">name</h3><p>This parameter defines the field name and is mandatory, the class will throw a warning if not set, and the field will not be processed by the compiler.</p>
+			<p><strong>Type:</strong> string</p><hr />
+		<a name="paramsOptions.fieldType"></a><h3 class="title">type</h3><p>This parameter defines the field type. If not set, &quot;text&quot; will be used.</p>
+			<p>Possible field types:
+				<ol><li>text (default)</li>
+					<li>password</li>
+					<li>radio</li>
+					<li>checkbox</li>
+					<li>checkboxgroup</li>
+					<li>radiogroup</li>
+					<li>textarea</li>
+					<li>select</li>
+					<li>fieldset</li>
+					<li>composite (for complex field layouts)</li>
+					<li>custom (any html code can be passed as value)</li>
+					<li>submit</li></ol>
+				If a different <strong>&quot;type&quot;</strong> is used, the class will attempt to load the default options of the &quot;text&quot; input.</p>
+			<p><strong>Type:</strong> string</p><hr />
+		<a name="paramsOptions.fieldLabel"></a><h3 class="title">label</h3><p>Use this parameter to set the the text for the label of the field.</p>
+			<p><strong>Type:</strong> string</p><hr />
+		<a name="paramsOptions.fieldAttributes"></a><h3 class="title">attributes</h3><p>Adds html attributes to the field, all attributes are stored in <a href="../PhpToolCase/PtcForms.html#var$_elAttributes">_elAttributes</a> property. New attributes can be added with the <a href="../PhpToolCase/PtcForms.html#methodaddElAttribute">addElAttribute()</a> and 
+				<a href="../PhpToolCase/PtcForms.html#methodaddElAttributes">addElAttributes()</a> methods, see <a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldAttributes.add_el_attributes">Extending the compiler with custom attributes</a>.</p>
+			<p>See <a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldAttributes.add_field_attributes">Adding attributes to fields</a> for examples and detailed usage.</p>
+			<p><strong>Type:</strong> array</p><hr />
+		<a name="paramsOptions.fieldLabelOptions"></a><h3 class="title">labelOptions</h3><p>Adds html attributes to the label container, all attributes are stored in <a href="../PhpToolCase/PtcForms.html#var$_elAttributes">_elAttributes</a> property. New attributes can be added with the <a href="../PhpToolCase/PtcForms.html#methodaddElAttribute">addElAttribute()</a> and 
+				<a href="../PhpToolCase/PtcForms.html#methodaddElAttributes">addElAttributes()</a> methods, see <a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldAttributes.add_el_attributes">Extending the compiler with custom attributes</a>.</p>
+			<p>See <a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldAttributes.add_label_attributes">Adding attributes to label container</a> for examples and detailed usage.</p>
+			<p><strong>Type:</strong> array</p><hr />
+		<a name="paramsOptions.fieldParentEl"></a><h3 class="title">parentEl</h3><p>Adds html attributes to the parent container of the field, all attributes are stored in <a href="../PhpToolCase/PtcForms.html#var$_elAttributes">_elAttributes</a> property. New attributes can be added with the 
+				<a href="../PhpToolCase/PtcForms.html#methodaddElAttribute">addElAttribute()</a> and <a href="../PhpToolCase/PtcForms.html#methodaddElAttributes">addElAttributes()</a> methods, see <a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldAttributes.add_el_attributes">Extending the compiler with custom attributes</a>.</p>
+			<p>See <a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldAttributes.add_container_attributes">Adding attributes to field container</a> for examples and detailed usage.</p>
+			<p><strong>Type:</strong> array</p><hr />
+		<a name="paramsOptions.fieldEvents"></a><h3 class="title">events</h3><p>This parameter can be used to add javascipt events to the fields.</p>
+			<p>the following field types are supported:
+				<ol><li>text</li>
+					<li>password</li>
+					<li>textarea</li>
+					<li>submit</li>
+					<li>select</li>
+					<li>radio</li>
+					<li>checkbox</li>
+					<li>checkboxgroup (will be added to all values)</li>
+					<li>radiogroup (will be added to all values)</li></ol>
+				See <a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldEvents">ADDING FIELD EVENTS</a> for detailed usage.</p>
+			<p><strong>Type:</strong> array</p><hr />
+		<a name="paramsOptions.fieldValidate"></a><h3 class="title">validate</h3><p>Use this parameter to add the field to the validator engine.</p>
+			<p>These are the possible validator options:
+				<ol><li><strong>required</strong> - checks if field has a value</li>
+					<li><strong>email</strong> - checks if email is a valid format</li>
+					<li><strong>equalTo</strong> - checks if value is equal to another field specified in the value parameter</li>
+					<li><strong>number</strong> - checks if the value is numeric</li>
+					<li><strong>pattern</strong> - checks if the value matches a given regex pattern</li></ol>
+				Any other value will be interpreted as a custom function.</p>
+			<p>the following field types are supported:
+				<ol><li>text</li>
+					<li>password</li>
+					<li>textarea</li>
+					<li>submit</li>
+					<li>select</li>
+					<li>radio</li>
+					<li>checkbox</li>
+					<li>checkboxgroup (will be added to all values)</li>
+					<li>radiogroup (will be added to all values)</li></ol></p>
+			<p>see <a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldValidator.add_validator">Adding Fields To The Validator</a> for example usage.</p>
+			<p><strong>Type:</strong> array|string</p><hr />
+		<a name="paramsOptions.fieldValues"></a><h3 class="title">values</h3><p>The parameter <strong>&quot;values&quot;</strong> is used to add values for the following fields:
+				<ol><li>select</li>
+					<li>radiogroup</li>
+					<li>checkboxgroup</li>
+					<li>composite</li>
+					<li>fieldset</li></ol>
+				See <a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldValues.add_array_values">Adding values as an array (select,radiogroup,checkboxgroup)</a> for examples to add values for select,radiogroup and checkboxgroup.</p>
+			<p>See <a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldValues.add_fields_values">Adding fields as an array of values (composite,fieldset)</a> for examples to add values for composite and fieldset.</p>
+			<p><strong>Type:</strong> array</p><hr />
+		<a name="paramsOptions.fieldValue"></a><h3 class="title">value</h3><p>The parameter <strong>&quot;value&quot;</strong> can be used to add the value as a string for the following fields:
+				<ol><li>text</li>
+					<li>radio</li>
+					<li>checkbox</li>
+					<li>textarea</li>
+					<li>password</li>
+					<li>submit</li>
+					<li>custom (any html code can be passed as value)</li></ol>
+				See <a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldValues.add_value_string">Adding values as a string</a> for example usage.</p>
+			<p><strong>Type:</strong> string</p><hr /></span>
+	<span><a name="addField"></a><h2 class="title">ADDING FIELDS EXAMPLES</h2><p>The <a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement()</a> method is used to add form fields. Works with all input types, but some extra parameters can be passed aswell to create custom html.
+			The &quot;$params&quot; paramater is used to pass the configuration for the field to the method as an array. See <a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions">FIELD PARAMETERS</a> for all possibile parameters.</p>
+		<p>The following sections will try to demonstrate how we can add some of these fields.</p>
+		<a name="addField.add_input"></a><h3 class="title">Adding a Text Field</h3><p><ol><li><div class="src-line"><span class="src-comm">//&nbsp;addding&nbsp;a&nbsp;text&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;mandatory,&nbsp;will&nbsp;throw&nbsp;a&nbsp;warning&nbsp;if&nbsp;not&nbsp;present</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'text'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;text&nbsp;is&nbsp;default&nbsp;if&nbsp;&nbsp;&quot;type&quot;&nbsp;is&nbsp;not&nbsp;present</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'label'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'LabelText'&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;the&nbsp;text&nbsp;for&nbsp;the&nbsp;label</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+				The following fields can be created like shown in the example above as they do not require a &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValue">value</a>&quot;:
+				<ol><li>text</li>
+					<li>radio</li>
+					<li>checkbox</li>
+					<li>textarea</li>
+					<li>password</li>
+					<li>submit</li></ol>
+				The following fields require a &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValue">value</a>&quot;, or the class will throw a warning:
+				<ol><li>select</li>
+					<li>radiogroup</li>
+					<li>checkboxgroup</li>
+					<li>composite</li>
+					<li>fieldset</li>
+					<li>custom</li></ol></p><hr />
+		<a name="addField.add_select"></a><h3 class="title">Adding a Select Field</h3><p><ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;select&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$values</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">''</span>=&gt;<span class="src-str">'Choose'</span><span class="src-sym">,</span><span class="src-str">'enquiry'</span>=&gt;<span class="src-str">'Enquiry'</span><span class="src-sym">,</span><span class="src-str">'information'</span>=&gt;<span class="src-str">'Information'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'billing'</span>=&gt;<span class="src-str">'Billing'</span><span class="src-sym">,</span><span class="src-str">'other'</span>=&gt;<span class="src-str">'Other'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName1'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'select'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'label'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'LabelText'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'values'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$values&nbsp;</span><span class="src-comm">//&nbsp;adding&nbsp;previously&nbsp;created&nbsp;array&nbsp;with&nbsp;values</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+				To make an option selected you can use <strong>&quot;[brackets]&quot;</strong>, see <a href="../PhpToolCase/tutorial_PtcForms.cls.html#usingBrackets">USING [BRACKETS] TO ADD PARAMETERS TO FIELD VALUES</a>.</p><hr />
+		<a name="addField.add_checkboxgroup"></a><h3 class="title">Adding a Checkboxgroup</h3><p><ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;checkboxgroup</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'checkboxgroup'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName5'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'values'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'yes'</span>=&gt;<span class="src-str">'Yes&nbsp;!!!&nbsp;(please)'</span><span class="src-sym">,</span><span class="src-str">'no'</span>=&gt;<span class="src-str">'No&nbsp;(thank&nbsp;you)'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'attributes'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'cols'</span>=&gt;<span class="src-num">2</span><span class="src-sym">)&nbsp;</span><span class="src-comm">//&nbsp;display&nbsp;values&nbsp;inline</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+				the <strong>&quot;cols&quot;</strong> attribute controls how many columns the group will have. The default value is 1.</p>
+			<p>To make a checkbox checked you can use <strong>&quot;[brackets]&quot;</strong>, see <a href="../PhpToolCase/tutorial_PtcForms.cls.html#usingBrackets">USING [BRACKETS] TO ADD PARAMETERS TO FIELD VALUES</a>.</p><hr />
+		<a name="addField.add_composite"></a><h3 class="title">Adding a Composite</h3><p>Composite fields are used for complex layouts, as the can be nested inside each other.
+				This allows to have many fields inline for example, or a form with fields in 2 columns.
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;composite&nbsp;field&nbsp;for&nbsp;previously&nbsp;created&nbsp;fields</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName2'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'composite'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'values'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'fieldName'</span><span class="src-sym">,</span><span class="src-str">'fieldName1'</span><span class="src-sym">)&nbsp;</span><span class="src-comm">//&nbsp;previously&nbsp;created&nbsp;field&nbsp;names</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+				The following fields can be added like shown in the example above: fieldset, composite.
+				<p>the <strong>&quot;cols&quot;</strong> attribute controls how many columns the group will have. The default value is &quot;inline&quot;.</p></p><hr />
+		<a name="addField.add_spacer"></a><h3 class="title">Adding a Custom Field</h3><p>This is how we can add a custom field, in this case we will use the <a href="../PhpToolCase/PtcForms.html#methodaddSpacer">addSpacer()</a> method, but keep in mind that any html can be passed as &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValue">value</a>&quot; for this field type.
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;spacer</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'custom'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'spacer1'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'value'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddSpacer">addSpacer</a><span class="src-sym">(</span><span class="src-str">'3px'</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+				The custom field type will only accept the following parameters:
+				<ol><li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldName">name</a></li>
+					<li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldType">type</a></li>
+					<li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValue">value</a></li></ol>
+				Any other parameter will be dropped silently.</p><hr /></span>
+	<span><a name="addFieldAttributes"></a><h2 class="title">ADDING HTML ATTRIBUTES TO ELEMENTS</h2><p>This section will try to cover how to add attributes to fields, labels and containers. 
+			All Attributes are stored in <a href="../PhpToolCase/PtcForms.html#var$_elAttributes">_elAttributes</a> property. New attributes can be added with the <a href="../PhpToolCase/PtcForms.html#methodaddElAttribute">addElAttribute()</a> and <a href="../PhpToolCase/PtcForms.html#methodaddElAttributes">addElAttributes()</a> methods,
+			see <a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldAttributes.add_el_attributes">Extending the compiler with custom attributes</a>.
+			<ol><li><div class="src-line"><span class="src-comm">//&nbsp;these&nbsp;are&nbsp;the&nbsp;default&nbsp;elements&nbsp;attributes,&nbsp;more&nbsp;can&nbsp;be&nbsp;added&nbsp;with&nbsp;the&nbsp;addElAttributes()&nbsp;method</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$_elAttributes</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'class'</span><span class="src-sym">,</span><span class="src-str">'id'</span><span class="src-sym">,</span><span class="src-str">'style'</span><span class="src-sym">,</span><span class="src-str">'value'</span><span class="src-sym">,</span><span class="src-str">'maxlength'</span><span class="src-sym">,</span><span class="src-str">'size'</span><span class="src-sym">,</span><span class="src-str">'disabled'</span><span class="src-sym">,</span><span class="src-str">'checked'</span><span class="src-sym">,</span><span class="src-str">'target'</span><span class="src-sym">,</span><span class="src-str">'align'</span><span class="src-sym">,</span><span class="src-str">'events'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'title'</span><span class="src-sym">,</span><span class="src-str">'selected'</span><span class="src-sym">,</span><span class="src-str">'cols'</span><span class="src-sym">,</span><span class="src-str">'rows'</span><span class="src-sym">,</span><span class="src-str">'equalTo'</span><span class="src-sym">,</span><span class="src-str">'border'</span><span class="src-sym">,</span><span class="src-str">'pattern'</span><span class="src-sym">,</span><span class="src-str">'cellpadding'</span><span class="src-sym">,</span><span class="src-str">'cellspacing'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p>
+		<a name="addFieldAttributes.add_field_attributes"></a><h3 class="title">Adding attributes to fields</h3><p>The parameter &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldAttributes">attributes</a>&quot; is used to add html attributes to form fields.</p>
+			<p><ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;textarea&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'textarea'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName8'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'label'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'labelText'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;adding&nbsp;html&nbsp;attributes&nbsp;to&nbsp;the&nbsp;textarea,&nbsp;set&nbsp;style=&gt;false&nbsp;to&nbsp;remove&nbsp;default&nbsp;styles&nbsp;for&nbsp;1&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'attributes'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'id'</span>=&gt;<span class="src-str">'fieldID'</span><span class="src-sym">,</span><span class="src-str">'class'</span>=&gt;<span class="src-str">'some-class'</span><span class="src-sym">,</span><span class="src-str">'style'</span>=&gt;<span class="src-id">false</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+				To add attributes to values for select and raidio/checkbox groups we can use &quot;[brackets]&quot; like shown in the next example:
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;select&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$values</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">''</span>=&gt;<span class="src-str">'Choose'</span><span class="src-sym">,</span><span class="src-str">'enquiry'</span>=&gt;<span class="src-str">'Enquiry'</span><span class="src-sym">,</span><span class="src-str">'information'</span>=&gt;<span class="src-str">'Information'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'billing'</span>=&gt;<span class="src-str">'Billing'</span><span class="src-sym">,</span><span class="src-str">'other'</span>=&gt;<span class="src-str">'Other'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName10'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'select'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'label'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'LabelText'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'values'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$values</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'attributes[]'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'class'</span>=&gt;<span class="src-str">'someClass'</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><span class="src-comm">//&nbsp;will&nbsp;add&nbsp;the&nbsp;class&nbsp;to&nbsp;all&nbsp;select&nbsp;options</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'attributes[enquiry]'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'selected'</span>=&gt;<span class="src-num">1</span><span class="src-sym">)&nbsp;</span><span class="src-comm">//&nbsp;making&nbsp;1&nbsp;option&nbsp;selected</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+				See <a href="../PhpToolCase/tutorial_PtcForms.cls.html#usingBrackets">USING [BRACKETS] TO ADD PARAMETERS TO FIELD VALUES</a> for more details.</p><hr />
+		<a name="addFieldAttributes.add_label_attributes"></a><h3 class="title">Adding attributes to label container</h3><p>The parameter &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldLabelOptions">labelOptions</a>&quot; is used to add html attributes to the label container.
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;textarea&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'textarea'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName11'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'label'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'labelText'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;setting&nbsp;a&nbsp;different&nbsp;style&nbsp;and&nbsp;changing&nbsp;alignment&nbsp;for&nbsp;a&nbsp;label&nbsp;container</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'labelOptions'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'align'</span>=&gt;<span class="src-str">'top'</span><span class="src-sym">,</span><span class="src-str">'style'</span>=&gt;<span class="src-str">'margin:10px'</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+				To add attributes to label containers of the field values for radio/checkbox groups we can use &quot;[brackets]&quot; like shown in the next example:
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;radiogroup</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'radiogroup'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName12'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'values'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'yes'</span>=&gt;<span class="src-str">'Yes&nbsp;!!!&nbsp;(please)'</span><span class="src-sym">,</span><span class="src-str">'no'</span>=&gt;<span class="src-str">'No&nbsp;(thank&nbsp;you)'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'labelOptions'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'style'</span>=&gt;<span class="src-id">false</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><span class="src-comm">//&nbsp;removing&nbsp;default&nbsp;style&nbsp;for&nbsp;label&nbsp;container&nbsp;of&nbsp;the&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'labelOptions[]'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'align'</span>=&gt;<span class="src-str">'top'</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><span class="src-comm">//&nbsp;aligning&nbsp;labels&nbsp;of&nbsp;all&nbsp;values&nbsp;to&nbsp;the&nbsp;top&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'labelOptions[yes]'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'class'</span>=&gt;<span class="src-str">'some-class'</span><span class="src-sym">)&nbsp;</span><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;class&nbsp;to&nbsp;the&nbsp;label&nbsp;container&nbsp;of&nbsp;1&nbsp;value</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+				See <a href="../PhpToolCase/tutorial_PtcForms.cls.html#usingBrackets">USING [BRACKETS] TO ADD PARAMETERS TO FIELD VALUES</a> for more details.</p><hr />
+			<a name="addFieldAttributes.add_container_attributes"></a><h3 class="title">Adding attributes to field container</h3><p>The parameter &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldParentEl">parentEl</a>&quot; is used to add html attributes to the field container.
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;submit&nbsp;button</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'submit'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName13'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'value'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'Submit'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;value&nbsp;to&nbsp;the&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'parentEl'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'style'</span>=&gt;<span class="src-str">'text-align:right;'</span><span class="src-sym">)&nbsp;</span><span class="src-comm">//&nbsp;adding&nbsp;style&nbsp;to&nbsp;the&nbsp;parent&nbsp;container</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+				To add attributes to the parent containers of the field values for radio/checkbox groups we can use &quot;[brackets]&quot; like shown in the next example:
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;checkboxgroup</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'checkboxgroup'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName14'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'values'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'yes'</span>=&gt;<span class="src-str">'Yes&nbsp;!!!&nbsp;(please)'</span><span class="src-sym">,</span><span class="src-str">'no'</span>=&gt;<span class="src-str">'No&nbsp;(thank&nbsp;you)'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'parentEl[]'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'class'</span>=&gt;<span class="src-str">'some-class'</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;class&nbsp;to&nbsp;the&nbsp;parent&nbsp;container&nbsp;of&nbsp;all&nbsp;values</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'parentEl[yes]'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'id'</span>=&gt;<span class="src-str">'someID'</span><span class="src-sym">)&nbsp;</span><span class="src-comm">//&nbsp;adding&nbsp;an&nbsp;id&nbsp;to&nbsp;the&nbsp;parent&nbsp;container&nbsp;of&nbsp;1&nbsp;value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+				See <a href="../PhpToolCase/tutorial_PtcForms.cls.html#usingBrackets">USING [BRACKETS] TO ADD PARAMETERS TO FIELD VALUES</a> for more details.</p><hr />
+		<a name="addFieldAttributes.add_el_attributes"></a><h3 class="title">Extending the compiler with custom attributes</h3><p>The <a href="../PhpToolCase/PtcForms.html#methodaddElAttribute">addElAttribute()</a> and <a href="../PhpToolCase/PtcForms.html#methodaddElAttributes">addElAttributes()</a> methods are used to add more attributes to be compiled with the fields and containers.
+				The default attributes are stored in the <a href="../PhpToolCase/PtcForms.html#var$_elAttributes">_elAttributes</a> property.
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;an&nbsp;attribute&nbsp;to&nbsp;the&nbsp;the&nbsp;_elAttributes&nbsp;property</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><span class="src-id">AddElAttributes</span><span class="src-sym">(</span><span class="src-str">'default-value'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;adding&nbsp;an&nbsp;array&nbsp;of&nbsp;attributes</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><span class="src-id">AddElAttributes</span><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'default-value'</span><span class="src-sym">,</span><span class="src-str">'tabindex'</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol></p><hr /></span>
+	<span><a name="changeDefaultStyles"></a><h2 class="title">CHANGING DEFAULT STYLES APPLIED TO ELEMENTS</h2><p>The methods <a href="../PhpToolCase/PtcForms.html#methodsetInputStyle">setInputStyle()</a> and <a href="../PhpToolCase/PtcForms.html#methodsetLabelStyle">setLabelStyle()</a> can be used to manipulate the default styles for fields and label containers.
+			The following chapters will try to cover these methods with practical examples.</p>
+		<a name="changeDefaultStyles.setInputStyle"></a><h3 class="title">Changing default styles for fields</h3><p>The <a href="../PhpToolCase/PtcForms.html#methodsetInputStyle">setInputStyle()</a> method is used to change the default styles for the fields.
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;changing&nbsp;the&nbsp;default&nbsp;styles&nbsp;for&nbsp;radio/checkbox&nbsp;fields,&nbsp;removing&nbsp;&quot;vertical-align&quot;&nbsp;property</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodsetInputStyle">setInputStyle</a><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'margin'</span>=&gt;<span class="src-str">'0&nbsp;10px&nbsp;0&nbsp;0'</span><span class="src-sym">,</span><span class="src-str">'vertical-align'</span>=&gt;<span class="src-id">false</span><span class="src-sym">)</span><span class="src-sym">,</span><span class="src-str">'radio'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;changing&nbsp;the&nbsp;default&nbsp;styles&nbsp;for&nbsp;input&nbsp;fields</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodsetInputStyle">setInputStyle</a><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'padding'</span>=&gt;<span class="src-str">'3px'</span><span class="src-sym">,</span><span class="src-str">'border'</span>=&gt;<span class="src-str">'none'</span><span class="src-sym">)</span><span class="src-sym">,</span><span class="src-str">'input'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol>
+				The default styles are stored in the <a href="../PhpToolCase/PtcForms.html#var$_inputStyles">$_inputStyles</a> property.
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;default&nbsp;input&nbsp;styles</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$_inputStyles</span>=<span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'radio'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'padding'</span>=&gt;<span class="src-str">'0px'</span><span class="src-sym">,</span><span class="src-str">'margin'</span>=&gt;<span class="src-str">'0px'</span><span class="src-sym">,</span><span class="src-str">'vertical-align'</span>=&gt;<span class="src-str">'middle'</span><span class="src-sym">,</span><span class="src-str">'width'</span>=&gt;<span class="src-str">'14px'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'input'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'margin'</span>=&gt;<span class="src-str">'0px'</span><span class="src-sym">,</span><span class="src-str">'padding'</span>=&gt;<span class="src-str">'3px'</span><span class="src-sym">,</span><span class="src-str">'border'</span>=&gt;<span class="src-str">'1px&nbsp;inset'</span><span class="src-sym">)</span><span class="src-sym">,</span><span class="src-comm">//padding:2px;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'button'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'margin'</span>=&gt;<span class="src-str">'0px'</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p><hr />
+		<a name="changeDefaultStyles.setLabelStyle"></a><h3 class="title">Changing default styles for label containers</h3><p>The <a href="../PhpToolCase/PtcForms.html#methodsetLabelStyle">setLabelStyle()</a> method is used to change the default styles for the label containers.
+				The <strong>&quot;$type&quot;</strong> parameter is to control the alignment of the fields, if left empty,
+				the default &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.labels_align">labels_align</a>&quot; option will be used. 
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;changing&nbsp;the&nbsp;default&nbsp;styles&nbsp;for&nbsp;the&nbsp;label&nbsp;container&nbsp;&nbsp;for&nbsp;input,select&nbsp;and&nbsp;textarea</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodsetLabelStyle">setLabelStyle</a><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'float'</span>=&gt;<span class="src-id">false</span><span class="src-sym">,</span><span class="src-str">'color'</span>=&gt;<span class="src-str">'red'</span><span class="src-sym">)</span><span class="src-sym">,</span><span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;changing&nbsp;the&nbsp;default&nbsp;styles&nbsp;for&nbsp;the&nbsp;label&nbsp;container&nbsp;for&nbsp;radios&nbsp;and&nbsp;checkboxes&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodsetLabelStyle">setLabelStyle</a><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'padding'</span>=&gt;<span class="src-str">'5px'</span><span class="src-sym">,</span><span class="src-str">'vertical-align'</span>=&gt;<span class="src-id">false</span><span class="src-sym">)</span><span class="src-sym">,</span><span class="src-num">2</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;adding&nbsp;the&nbsp;$type&nbsp;parameter&nbsp;to&nbsp;change&nbsp;the&nbsp;default&nbsp;style&nbsp;for&nbsp;a&nbsp;radiogroup&nbsp;with&nbsp;labels&nbsp;aligned&nbsp;right</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodsetLabelStyle">setLabelStyle</a><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'padding'</span>=&gt;<span class="src-str">'3px'</span><span class="src-sym">,</span><span class="src-str">'border'</span>=&gt;<span class="src-str">'none'</span><span class="src-sym">)</span><span class="src-sym">,</span><span class="src-num">3</span><span class="src-sym">,</span><span class="src-str">'right'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol>
+				The default styles are stored in the <a href="../PhpToolCase/PtcForms.html#var$_labelStyles">$_labelStyles</a> property.
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;default&nbsp;label&nbsp;container&nbsp;styles</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$_labelStyles</span>=<span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">/*&nbsp;Styles&nbsp;for&nbsp;input,&nbsp;select&nbsp;and&nbsp;textarea&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-num">1&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'left'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'float'</span>=&gt;<span class="src-str">'left'</span><span class="src-sym">,</span><span class="src-str">'margin'</span>=&gt;<span class="src-str">'2px&nbsp;0&nbsp;0&nbsp;0'</span><span class="src-sym">,</span><span class="src-str">'width'</span>=&gt;<span class="src-str">'{label_width}%'</span><span class="src-sym">)</span><span class="src-sym">,</span><span class="src-comm">//margin:1px&nbsp;0&nbsp;0&nbsp;0</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'right'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'float'</span>=&gt;<span class="src-str">'left'</span><span class="src-sym">,</span><span class="src-str">'margin'</span>=&gt;<span class="src-str">'1px&nbsp;3px&nbsp;0&nbsp;0'</span><span class="src-sym">,</span><span class="src-comm">//margin:0&nbsp;3px&nbsp;0&nbsp;0;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'text-align'</span>=&gt;<span class="src-str">'right'</span><span class="src-sym">,</span><span class="src-str">'width'</span>=&gt;<span class="src-str">'{label_width}%'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'top'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">/*&nbsp;Styles&nbsp;for&nbsp;&nbsp;checkbox&nbsp;and&nbsp;radio&nbsp;buttons&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-num">2&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'left'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'vertical-align'</span>=&gt;<span class="src-str">'middle'</span><span class="src-sym">,</span><span class="src-str">'border'</span>=&gt;<span class="src-str">'none'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'right'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'vertical-align'</span>=&gt;<span class="src-str">'middle'</span><span class="src-sym">,</span><span class="src-str">'border'</span>=&gt;<span class="src-str">'none'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'top'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">/*&nbsp;Styles&nbsp;for&nbsp;radio/checkbox&nbsp;group&nbsp;and&nbsp;composite&nbsp;fields&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-num">3&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'left'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'float'</span>=&gt;<span class="src-str">'left'</span><span class="src-sym">,</span><span class="src-str">'margin'</span>=&gt;<span class="src-str">'3px&nbsp;0&nbsp;0&nbsp;0'</span><span class="src-sym">,</span><span class="src-str">'width'</span>=&gt;<span class="src-str">'{label_width}%'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'right'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'float'</span>=&gt;<span class="src-str">'left'</span><span class="src-sym">,</span><span class="src-str">'margin'</span>=&gt;<span class="src-str">'1px&nbsp;3px&nbsp;0&nbsp;0'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'text-align'</span>=&gt;<span class="src-str">'right'</span><span class="src-sym">,</span><span class="src-str">'width'</span>=&gt;<span class="src-str">'{label_width}%'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'top'</span>=&gt;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">))</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p><hr /></span>
+	<span><a name="customTpls"></a><h2 class="title">MANIPULATING HTML TEMPLATES</h2><p>The <a href="../PhpToolCase/PtcForms.html#methodcustomTpl">customTpl()</a> and <a href="../PhpToolCase/PtcForms.html#methodcustomTpls">customTpls()</a> methods can be used to manipulate the default html templates stored in the <a href="../PhpToolCase/PtcForms.html#var$_htmlTpls">_htmlTpls</a> property.
+			The following examples show how we can add an id to the main container holding the form, and replacing the spacer template to add &quot;hr&quot;.
+			<ol><li><div class="src-line"><span class="src-comm">//&nbsp;changing&nbsp;the&nbsp;default&nbsp;template&nbsp;for&nbsp;the&nbsp;form&nbsp;container&nbsp;to&nbsp;add&nbsp;an&nbsp;id</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$id</span>=<span class="src-str">'someID'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodcustomTpl">customTpl</a><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'main_container'</span>=&gt;<span class="src-str">'&lt;div&nbsp;style=&quot;width:{form_width}&quot;&nbsp;id='</span>.<span class="src-var">$id</span>.<span class="src-str">'&gt;{form}&lt;/div&gt;'</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;replacing&nbsp;the&nbsp;main&nbsp;spacer&nbsp;template&nbsp;to&nbsp;add&nbsp;&quot;&lt;hr&gt;&quot;&nbsp;instead&nbsp;of&nbsp;&quot;&lt;!--&nbsp;--&gt;&quot;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$width</span>=<span class="src-str">&quot;90%&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodcustomTpl">customTpl</a><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'spacer'</span>=&gt;<span class="src-str">'&lt;div&nbsp;style=&quot;clear:both;height:{spacerVal}&quot;&nbsp;{id}&gt;&lt;hr&nbsp;style=&quot;width:'</span>.<span class="src-var">$width</span>.<span class="src-str">';&quot;&gt;&lt;/div&gt;'</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+			The default templates for all html elements are stored in the <a href="../PhpToolCase/PtcForms.html#var$_htmlTpls">$_htmlTpls</a> property.
+			<ol><li><div class="src-line"><span class="src-comm">//&nbsp;html&nbsp;templates&nbsp;for&nbsp;all&nbsp;elements&nbsp;used&nbsp;by&nbsp;PtcForms&nbsp;component</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$_htmlTpls</span>=<span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'select_option'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'&lt;option&nbsp;{attributes}&gt;{label}&lt;/option&gt;'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'select'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'&lt;select&nbsp;name=&quot;{name}&quot;&nbsp;{attributes}&gt;{options}&lt;/select&gt;'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'textarea'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'&lt;textarea&nbsp;name=&quot;{name}&quot;&nbsp;{attributes}&gt;{value}&lt;/textarea&gt;'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'input'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'&lt;input&nbsp;type=&quot;{type}&quot;&nbsp;name=&quot;{name}&quot;&nbsp;{attributes}&gt;'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldset'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'&lt;fieldset&nbsp;{attributes}&gt;{label}{data}&nbsp;{start_tab}&lt;/fieldset&gt;'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'form'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'&lt;form&nbsp;{method}&nbsp;{action}&nbsp;{attributes}&gt;{fields}&lt;/form&gt;'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'spacer'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'&lt;div&nbsp;style=&quot;clear:both;height:{spacerVal}&quot;&nbsp;{id}&gt;&lt;!--&nbsp;--&gt;&lt;/div&gt;'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'label'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'&lt;label&nbsp;{for}&nbsp;{attributes}&gt;{label}&lt;/label&gt;'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'legend'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'&lt;legend&nbsp;{attributes}&gt;{label}&lt;/legend&gt;'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'span'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'&lt;span&nbsp;{attributes}&gt;{label}&lt;/span&gt;'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'td'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'&lt;td&nbsp;align=&quot;left&quot;&nbsp;valign=&quot;top&quot;&gt;'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'table'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'&lt;table&nbsp;{attributes}&gt;'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'field_container'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'&lt;div&nbsp;{attributes}&gt;{label}{field}&nbsp;{start_tab}&lt;/div&gt;'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'main_container'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'&lt;div&nbsp;style=&quot;width:{form_width}&quot;&gt;{form}&lt;/div&gt;'</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p></span>
+	<span><a name="addFieldValues"></a><h2 class="title">ADDING VALUES TO FIELDS</h2><p>The parameters &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValues">values</a>&quot; and &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValue">value</a>&quot; are used to add values to form fields. 
+			An array is passed for select,checkboxgroup,radiogroup,fieldset and composite fields. 
+			The rest of the fields use a string as value.</p>
+		<a name="addFieldValues.add_value_string"></a><h3 class="title">Adding values as a string</h3><p>The parameter &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValue">value</a>&quot; can be used to add a value as a string for the following fields:
+				<ol><li>text</li>
+					<li>radio</li>
+					<li>checkbox</li>
+					<li>textarea</li>
+					<li>password</li>
+					<li>submit</li>
+					<li>custom (any html code can be passed as value)</li></ol>
+				This is how we can add a value to a field as a string:
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;submit&nbsp;button</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'submit'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName3'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'value'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'Submit'&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;value&nbsp;to&nbsp;the&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+				The same result can be achieved with the &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldAttributes">attributes</a>&quot; parameter.
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;submit&nbsp;button</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'submit'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName4'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'attributes'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'value'</span>=&gt;<span class="src-str">'Submit'</span><span class="src-sym">)&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;same&nbsp;as&nbsp;the&nbsp;&quot;value&quot;&nbsp;parameter</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol></p><hr />
+		<a name="addFieldValues.add_array_values"></a><h3 class="title">Adding values as an array (select,radiogroup,checkboxgroup)</h3><p>The parameter &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValues">values</a>&quot; can be used to add an array of values for the following fields: 
+				<ol><li>select</li>
+					<li>radiogroup</li>
+					<li>checkboxgroup</li></ol>
+				The following examples demonstrate how values can be added as an array, with values as array keys and labels as array values:
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;select&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$values</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">''</span>=&gt;<span class="src-str">'Choose'</span><span class="src-sym">,</span><span class="src-str">'enquiry'</span>=&gt;<span class="src-str">'Enquiry'</span><span class="src-sym">,</span><span class="src-str">'information'</span>=&gt;<span class="src-str">'Information'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'billing'</span>=&gt;<span class="src-str">'Billing'</span><span class="src-sym">,</span><span class="src-str">'other'</span>=&gt;<span class="src-str">'Other'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName1'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'select'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'label'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'LabelText'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'values'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$values&nbsp;</span><span class="src-comm">//&nbsp;adding&nbsp;previously&nbsp;created&nbsp;array&nbsp;with&nbsp;values</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+				To add parameters to values &quot;[brackets]&quot; can be used, see <a href="../PhpToolCase/tutorial_PtcForms.cls.html#usingBrackets">USING [BRACKETS] TO ADD PARAMETERS TO FIELD VALUES</a> for more details.</p><hr />
+		<a name="addFieldValues.add_fields_values"></a><h3 class="title">Adding fields as an array of values (composite,fieldset)</h3><p>The parameter &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValues">values</a>&quot; can be used to add an array 
+				with previously created field names as values for the following fields: 
+				<ol><li>fieldset</li>
+					<li>composite</li></ol>
+				The following examples demostrate how values can be added as an array with the names of the previously created fields as values.
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;composite&nbsp;field&nbsp;for&nbsp;previously&nbsp;created&nbsp;fields</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName2'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'composite'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'values'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'fieldName'</span><span class="src-sym">,</span><span class="src-str">'fieldName1'</span><span class="src-sym">)&nbsp;</span><span class="src-comm">//&nbsp;previously&nbsp;created&nbsp;field&nbsp;names</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+				Composite fields can be nested to achieve complex layouts, but rememeber to always add the fields in the proper order or the class will not find them.</p><hr /></span>
+	<span><a name="usingBrackets"></a><h2 class="title">USING [BRACKETS] TO ADD PARAMETERS TO FIELD VALUES</h2><p>The following fields allow the use of <strong>&quot;[brackets]&quot;</strong> to add parameters to the values.
+			<ol><li>select</li>
+				<li>radiogroup</li>
+				<li>checkboxgroup</li></ol>
+			the select input only accepts brackets for the &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldAttributes">attributes</a>&quot; parameter.
+			<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;select&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$values</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">''</span>=&gt;<span class="src-str">'Choose'</span><span class="src-sym">,</span><span class="src-str">'enquiry'</span>=&gt;<span class="src-str">'Enquiry'</span><span class="src-sym">,</span><span class="src-str">'information'</span>=&gt;<span class="src-str">'Information'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'billing'</span>=&gt;<span class="src-str">'Billing'</span><span class="src-sym">,</span><span class="src-str">'other'</span>=&gt;<span class="src-str">'Other'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName6'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'select'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'label'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'LabelText'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'values'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$values</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'attributes[]'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'class'</span>=&gt;<span class="src-str">'someClass'</span><span class="src-sym">)&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;will&nbsp;add&nbsp;the&nbsp;class&nbsp;to&nbsp;all&nbsp;select&nbsp;options</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+			Radio/checkbox groups accept the following parameters with <strong>&quot;[brackets]&quot;</strong>:
+			<ol><li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldAttributes">attributes</a></li>
+				<li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldLabelOptions">labelOptions</a></li>
+				<li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldParentEl">parentEl</a></li>
+				<li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldEvents">events</a> (if field name is specified)</li>
+				<li><a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValidate">validate</a> (if field name is specified)</li></ol>
+			To interact with all values just use <strong>[]</strong>. To interact with only 1 value use the array key of the respective value like shown in the next example:
+			<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;radiogroup</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'radiogroup'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName7'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'values'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'yes'</span>=&gt;<span class="src-str">'Yes&nbsp;!!!&nbsp;(please)'</span><span class="src-sym">,</span><span class="src-str">'no'</span>=&gt;<span class="src-str">'No&nbsp;(thank&nbsp;you)'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'labelOptions[]'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'align'</span>=&gt;<span class="src-str">'top'</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><span class="src-comm">//&nbsp;aligning&nbsp;labels&nbsp;of&nbsp;all&nbsp;values&nbsp;to&nbsp;the&nbsp;top</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'attributes[yes]'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'checked'</span>=&gt;<span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><span class="src-comm">//&nbsp;making&nbsp;1&nbsp;value&nbsp;checked</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+			The only 2 exceptions are &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldEvents">events</a>&quot; and &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValidate">validate</a>&quot;
+			which will be added to all values also without <strong>&quot;[brackets]&quot;</strong>, as no validation or events can be attached to the main field.</p></span>
+	<span><a name="addFieldEvents"></a><h2 class="title">ADDING FIELD EVENTS</h2><p>The &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldEvents">events</a>&quot; parameter is used to attach javascript events to form fields.
+			<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;submit&nbsp;button</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'submit'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName15'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'events'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'onClick'</span>=&gt;<span class="src-str">'return&nbsp;false;'</span><span class="src-sym">)&nbsp;</span><span class="src-comm">//&nbsp;attaching&nbsp;js&nbsp;events&nbsp;to&nbsp;the&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+			radio/checkboxgroup will add js events to all field values.</p>
+		<p>To add js events to 1 value for radio/checkboxgroup use <strong>&quot;[brackets]&quot;</strong>, as shown in the next example:
+			<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;checkboxgroup</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'checkboxgroup'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName16'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'values'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'yes'</span>=&gt;<span class="src-str">'Yes&nbsp;!!!&nbsp;(please)'</span><span class="src-sym">,</span><span class="src-str">'no'</span>=&gt;<span class="src-str">'No&nbsp;(thank&nbsp;you)'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'events[yes]'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'onClick'</span>=&gt;<span class="src-str">'return&nbsp;false;'</span><span class="src-sym">)&nbsp;</span><span class="src-comm">//&nbsp;attaching&nbsp;js&nbsp;events&nbsp;to&nbsp;1&nbsp;field&nbsp;value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+			See <a href="../PhpToolCase/tutorial_PtcForms.cls.html#usingBrackets">USING [BRACKETS] TO ADD PARAMETERS TO FIELD VALUES</a> for more details.</p></span>
+	<span><a name="render"></a><h2 class="title">RENDERING THE FORM</h2><p>The <a href="../PhpToolCase/PtcForms.html#methodrender">render()</a> method is used to build and output the form.
+			The method accepts 2 argumets, &quot;$attributes&quot; and &quot;$events&quot; for the form.
+			<ol><li><div class="src-line"><span class="src-comm">//&nbsp;building&nbsp;and&nbsp;printing&nbsp;the&nbsp;form</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodrender">render</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;passing&nbsp;some&nbsp;attributes&nbsp;and&nbsp;events&nbsp;to&nbsp;the&nbsp;form</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$attributes</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'id'</span>=&gt;<span class="src-str">'formID'</span><span class="src-sym">,</span><span class="src-str">'class'</span>=&gt;<span class="src-str">'some-class'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$events</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'onSubmit'</span>=&gt;<span class="src-str">'return&nbsp;false;'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodrender">render</a><span class="src-sym">(</span><span class="src-var">$attributes</span><span class="src-sym">,</span><span class="src-var">$events</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol>
+			To only build the form and store the html inside a variable, we can set the <a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.print_form">print_form</a> option to false.
+			<ol><li><div class="src-line"><span class="src-comm">//&nbsp;initialize&nbsp;the&nbsp;class,&nbsp;but&nbsp;don't&nbsp;print&nbsp;the&nbsp;form</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'PtcForms.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span>=<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../PhpToolCase/PtcForms.html">PtcForms</a></span><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;print_form&quot;</span>=&gt;<span class="src-id">false</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol><ol><li><div class="src-line"><span class="src-comm">//&nbsp;storing&nbsp;the&nbsp;form&nbsp;inside&nbsp;a&nbsp;$var&nbsp;with&nbsp;&quot;print_form&quot;&nbsp;option&nbsp;set&nbsp;to&nbsp;false</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$var</span>=<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodrender">render</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p></span>
+	<span><a name="addFieldValidator"></a><h2 class="title">ADDING AND VALIDATING FIELDS WITH THE VALIDATOR ENGINE</h2><p>The following section will try to cover the validation process (server-side) of a form, by using the class built-in engine.
+				For validating client-side, you can use the <a href="http://www.phptoolcase.com/guides/ptc-forms-guide.html">ptcforms-validator.js</a> ui-plugin.</p>
+		<a name="addFieldValidator.add_validator"></a><h3 class="title">Adding Fields To The Validator</h3><p>The <a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValidate">validate</a> property adds the form fields to the validator engine.</p>
+			<p>If <a href="../PhpToolCase/tutorial_PtcForms.cls.html#class_options.add_class_validator">add_class_validator</a> option is set to true, validator will add the above options as a class attribute to the fields for jquery validator plugin 
+				<a href="http://www.phptoolcase.com/guides/ptc-forms-guide.html">ptcforms-validator.js</a>. &quot;pattern&quot; and &quot;equalTo&quot; will be added as attributes, as they are in the <a href="../PhpToolCase/PtcForms.html#var$_elAttributes">_elAttributes</a> property..</p>
+			<p>These are the possible validator options:
+				<ol><li><strong>required</strong> - checks if field has a value</li>
+					<li><strong>email</strong> - checks if email is a valid format</li>
+					<li><strong>equalTo</strong> - checks if value is equal to another field specified in the value parameter</li>
+					<li><strong>number</strong> - checks if the value is numeric</li>
+					<li><strong>pattern</strong> - checks if the value matches a given regex pattern</li></ol>
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;addding&nbsp;a&nbsp;password&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'passwdField'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'password'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'label'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'LabelText'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'validate'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'required'&nbsp;</span><span class="src-comm">//&nbsp;adding&nbsp;required&nbsp;for&nbsp;this&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;addding&nbsp;1&nbsp;more&nbsp;password&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'passwdField1'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'password'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'label'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'LabelText'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'validate'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'required'</span><span class="src-sym">,</span><span class="src-str">'equalTo'</span>=&gt;<span class="src-str">'passwdField'</span><span class="src-sym">)&nbsp;</span><span class="src-comm">//&nbsp;adding&nbsp;multiple&nbsp;validators&nbsp;for&nbsp;this&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+				Any other value will be interpreted as a custom function.
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;some&nbsp;custom&nbsp;function&nbsp;that&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;validator(taken&nbsp;from&nbsp;ptcforms-ex1.php)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">some_func</span><span class="src-sym">(</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;do&nbsp;something&nbsp;with&nbsp;$_POST&nbsp;or&nbsp;$_GET&nbsp;arrays&nbsp;and&nbsp;return&nbsp;true&nbsp;or&nbsp;false</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;text&nbsp;field</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName17'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'text'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'label'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'LabelText'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'validate'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'some_func'</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+				Radio/checkbox groups will add validation to all field values, to add validation to 1 value for radio/checkboxgroup use <strong>&quot;[brackets]&quot;</strong>:
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;checkboxgroup</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'checkboxgroup'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'fieldName16'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'values'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'yes'</span>=&gt;<span class="src-str">'Yes&nbsp;!!!&nbsp;(please)'</span><span class="src-sym">,</span><span class="src-str">'no'</span>=&gt;<span class="src-str">'No&nbsp;(thank&nbsp;you)'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'validate[yes]'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'required'&nbsp;</span><span class="src-comm">//&nbsp;adding&nbsp;validation&nbsp;to&nbsp;1&nbsp;checkbox&nbsp;only&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol>
+				See <a href="../PhpToolCase/tutorial_PtcForms.cls.html#usingBrackets">USING [BRACKETS] TO ADD PARAMETERS TO FIELD VALUES</a> for more details.</p><hr />
+		<a name="addFieldValidator.validate_form"></a><h3 class="title">Validating The Form (Server Side)</h3><p>The <a href="../PhpToolCase/PtcForms.html#methodvalidate">validate()</a> method validates the form fields defined with the &quot;<a href="../PhpToolCase/tutorial_PtcForms.cls.html#paramsOptions.fieldValidate">validate</a>&quot; parameter, 
+				and returns an array with isValid(bool) and errors(array) as array keys.
+				<ol><li><div class="src-line"><span class="src-comm">//&nbsp;adding&nbsp;a&nbsp;submit&nbsp;button</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodaddElement">addElement</a><span class="src-sym">(</span><span class="src-key">array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'name'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'lg_login'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'type'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'submit'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'value'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'Login'</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$err_msg</span>=<span class="src-str">''</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-sym">@</span><span class="src-var">$_POST</span><span class="src-sym">[</span><span class="src-str">'lg_login'</span><span class="src-sym">]</span><span class="src-sym">)&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;check&nbsp;if&nbsp;the&nbsp;form&nbsp;was&nbsp;sent</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">/*&nbsp;VALIDATE&nbsp;THE&nbsp;FORM&nbsp;SERVER&nbsp;SIDE&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$validate</span>=<span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodvalidate">validate</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-sym">!</span><span class="src-var">$validate</span><span class="src-sym">[</span><span class="src-str">'isValid'</span><span class="src-sym">]</span><span class="src-sym">)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;returns&nbsp;a&nbsp;bool(true/false)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$err_msg</span>=<span class="src-str">'&lt;div&nbsp;class=&quot;errMsg&quot;&nbsp;style=&quot;text-align:center;width:'</span>.<span class="src-var">$options</span><span class="src-sym">[</span><span class="src-str">'form_width'</span><span class="src-sym">]</span>.<span class="src-str">'&quot;&gt;</span></div></li>
+<li><div class="src-line"><span class="src-str">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wrong&nbsp;user&nbsp;ID&nbsp;or&nbsp;password!&lt;/div&gt;&lt;br&gt;'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+</ol>
+				For the validator to work, remember to always call the <a href="../PhpToolCase/PtcForms.html#methodvalidate">validate()</a> method after building the fields, otherwise the validator will not be aware of the form fields.
+				To get around this problem, you can try to run the following methods against the $_POST or $_GET arrays:
+				<ol><li><a href="../PhpToolCase/PtcForms.html#methodvalidateEmail">validateEmail()</a></li>
+					<li><a href="../PhpToolCase/PtcForms.html#methodvalidateEqualTo">validateEqualTo()</a></li>
+					<li><a href="../PhpToolCase/PtcForms.html#methodvalidateNumber">validateNumber()</a></li>
+					<li><a href="../PhpToolCase/PtcForms.html#methodvalidatePattern">validatePattern()</a></li>
+					<li><a href="../PhpToolCase/PtcForms.html#methodvalidateRequired">validateRequired()</a></li></ol>
+				This example will try to demonstrate the possibility of using these methods separately:
+				<ol><li><div class="src-line"><span class="src-var">$err_msg</span>=<span class="src-str">''</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-sym">@</span><span class="src-var">$_POST</span><span class="src-sym">[</span><span class="src-str">'lg_login'</span><span class="src-sym">]</span><span class="src-sym">)&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;check&nbsp;if&nbsp;the&nbsp;form&nbsp;was&nbsp;sent</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-sym">!</span><span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodvalidateNumber">validateNumber</a><span class="src-sym">(</span><span class="src-str">'someFieldName'</span><span class="src-sym">,</span><span class="src-var">$_POST</span><span class="src-sym">))&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;check&nbsp;if&nbsp;value&nbsp;is&nbsp;numeric</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;form&nbsp;is&nbsp;not&nbsp;valid</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">else&nbsp;</span><span class="src-key">if</span><span class="src-sym">(</span><span class="src-sym">!</span><span class="src-var">$form</span><span class="src-sym">-&gt;</span><a href="../PhpToolCase/PtcForms.html#methodvalidateEmail">validateEmail</a><span class="src-sym">(</span><span class="src-str">'otherFieldName'</span><span class="src-sym">,</span><span class="src-var">$_POST</span><span class="src-sym">))&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;check&nbsp;if&nbsp;value&nbsp;is&nbsp;an&nbsp;email</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;form&nbsp;is&nbsp;not&nbsp;valid</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">else</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;form&nbsp;is&nbsp;valid</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+</ol></p><hr /></span></div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="33%" align="left" valign="top"><a href="../PhpToolCase/tutorial_PtcDb.cls.html">Prev</a></td>
+<td width="34%" align="center" valign="top">&nbsp;</td>
+<td width="33%" align="right" valign="top">Next</td>
+</tr>
+
+<tr>
+<td width="33%" align="left" valign="top">PtcDb User Guide</td>
+<td width="34%" align="center" valign="top"></td>
+<td width="33%" align="right" valign="top"></td>
+</tr>
+</table>
+        <div class="credit">
+		    <hr class="separator" />
+		    Documentation generated on Fri, 30 Aug 2013 15:28:55 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+<!-- Start of StatCounter Code for Default Guide -->
+									<script type="text/javascript">
+									var sc_project=7779914; 
+									var sc_invisible=1; 
+									var sc_security="4a86be8b"; 
+									</script>
+									<script type="text/javascript"
+									src="http://www.statcounter.com/counter/counter.js"></script>
+									<noscript><div class="statcounter"><a title="tumblr page
+									counter" href="http://statcounter.com/tumblr/"
+									target="_blank"><img class="statcounter"
+									src="http://c.statcounter.com/7779914/0/4a86be8b/1/"
+									alt="tumblr page counter"></a></div></noscript>
+									<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>

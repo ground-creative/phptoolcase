@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>PtcForms User Guide</title>
+	<link rel="stylesheet" type="text/css" href="../media/style.css">
+	<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+	<td class="header-top-left"><!--<img src="../media/logo.png" border="0" alt="phpDocumentor " />-->&nbsp;</td>
+    <td class="header-top-right">PhpToolCase<br /><div class="header-top-right-subpackage"></div></td>
+  </tr>
+  <tr><td colspan="2" class="header-line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td colspan="2" class="header-menu">
+      
+                        
+                      		[ <a href="../classtrees_PhpToolCase.html" class="menu">class tree: PhpToolCase</a> ]
+		[ <a href="../elementindex_PhpToolCase.html" class="menu">index: PhpToolCase</a> ]
+            [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td colspan="2" class="header-line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="195" class="menu">
+		<div class="package-title">PhpToolCase</div>
+  <div class="package">
+	<div id="ric">
+					<p><a href="../ric_README.html">README</a></p>
+					<p><a href="../ric_CHANGELOG.html">CHANGELOG</a></p>
+					<p><a href="../ric_TODO.html">TODO</a></p>
+			</div>
+	</div>
+      <b>Packages:</b><br />
+  <div class="package">
+              <a href="../li_PhpToolCase.html">PhpToolCase</a><br />
+      	</div>
+      <br />
+		<b>Tutorials/Manuals:</b><br />
+  <div class="package">
+							<strong>Class-level:</strong>
+							<ul>
+	<li type="square"><a href="../PhpToolCase/tutorial_PtcDebug.cls.html">PtcDebug User Guide</a>
+</ul>
+
+							<ul>
+	<li type="square"><a href="../PhpToolCase/tutorial_PtcDb.cls.html">PtcDb User Guide</a>
+</ul>
+
+							<ul>
+	<li type="square"><a href="../PhpToolCase/tutorial_PtcForms.cls.html">PtcForms User Guide</a>
+</ul>
+
+							                       <!-- <b>Files:</b><br />
+        <div class="package">
+				<span style="padding-left: 1em;"><a href="../PhpToolCase/ProcedurePtcDb.html">PtcDb.php</a></span><br />
+			<span style="padding-left: 1em;"><a href="../PhpToolCase/ProcedurePtcDebug.html">PtcDebug.php</a></span><br />
+			<span style="padding-left: 1em;"><a href="../PhpToolCase/ProcedurePtcForms.html">PtcForms.php</a></span><br />
+	  </div>
+        // github problem with these links-->
+            <br />
+                  <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../PhpToolCase/PtcDb.html">PtcDb</a>    	 <br />
+	    		<a href="../PhpToolCase/PtcDebug.html">PtcDebug</a>    	 <br />
+	    		<a href="../PhpToolCase/PtcForms.html">PtcForms</a>    	 <br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="10%" align="left" valign="bottom"><a href=
+"../PhpToolCase/tutorial_PtcDb.cls.html">Prev</a></td>
+<td width="80%" align="center" valign="bottom"></td>
+<td width="10%" align="right" valign="bottom">Next</td>
+</tr>
+</table>
+<div><a name=""></a><div class="ref-title-box"><h1 class="ref-title">PtcForms User Guide</h1>
+		<h2 class="ref-purpose">Html Dynamic Forms Generator - VERSION 0.9</h2></div>
+	<h1 align="center">Table of Contents</h1>
+<ul>
+
+<a href="../PhpToolCase/tutorial_PtcForms.cls.html#intro">Introduction</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcForms.cls.html#getting_started">Getting Started</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addField">AddField</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcForms.cls.html#addFieldLabel">AddFieldLabel</a><br />
+</ul>
+
+	<span><a name="intro"></a><h2 class="title">Introduction</h2><p>The goal of this class is to ease the process of parsing and manipulating data with mysql queries.Methods from this class allow to access mysql tables with just 2 or 3 lines of code.</p>
+		<p>Main Features:
+			<ul><li>Fast and clean programming for mysql queries</li>
+				<li>Stores references of queries for later use</li>
+				<li>Implements mysql_real_escape_string in every query(to prevent sql injection)</li> 
+				<li>Uses the PtcDebug class for logging all queries</li></ul></p></span>
+	<span><a name="getting_started"></a><h2 class="title">Getting Started</h2><p><ol><li><div class="src-line"><span class="src-comm">/*if(isset($_COOKIE['cookname'])&nbsp;&amp;&amp;&nbsp;isset($_COOKIE['cookpass']))</span></div></li>
+<li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;{</span></div></li>
+<li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if($valid_login=chek_login($_COOKIE['cookname'],$_COOKIE['cookpass']))</span></div></li>
+<li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span></div></li>
+<li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$_SESSION['loggedIn']=true;</span></div></li>
+<li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span></div></li>
+<li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;}</span></div></li>
+<li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;if(@$_SESSION['loggedIn']==true){&nbsp;header('Location:&nbsp;'.$redirect_page);&nbsp;exit();&nbsp;}*/</span></div></li>
+</ol></p></span>
+	<span><a name="addField"></a><h2 class="title">AddField</h2><p>The <a href="../PhpToolCase/PtcForms.html#methodaddField">addField()</a> method works with all input types, but some extra paramaters can be passed aswell to create custom html.
+			<ol><li><div class="src-line">echo<span class="src-str">'&lt;html&gt;&lt;head&gt;'</span><span class="src-sym">;</span></div></li>
+</ol><ol><li><div class="src-line"><span class="src-comm">#&nbsp;adding&nbsp;some&nbsp;options&nbsp;for&nbsp;the&nbsp;example</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$options</span>=<span class="src-key">array</span></div></li>
+</ol><ol><li><div class="src-line"><span class="src-str">&quot;keep_values&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">false</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">&quot;labels_align&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">&quot;right&quot;</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">&quot;form_width&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">&quot;400px&quot;</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">&quot;spacer_height&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">&quot;10px;&quot;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;initialize&nbsp;the&nbsp;class</span></div></li>
+</ol></p></span>
+	<span><a name="addFieldLabel"></a><h2 class="title">AddFieldLabel</h2><p>The <a href="../PhpToolCase/PtcForms.html#methodaddFieldLabel">addFieldLabel()</a> method adds a label to the field specified by the $fieldName param.
+			<ol><li><div class="src-line">echo<span class="src-str">'&lt;html&gt;&lt;head&gt;'</span><span class="src-sym">;</span></div></li>
+</ol></p></span></div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="33%" align="left" valign="top"><a href="../PhpToolCase/tutorial_PtcDb.cls.html">Prev</a></td>
+<td width="34%" align="center" valign="top">&nbsp;</td>
+<td width="33%" align="right" valign="top">Next</td>
+</tr>
+
+<tr>
+<td width="33%" align="left" valign="top">PtcDb User Guide</td>
+<td width="34%" align="center" valign="top"></td>
+<td width="33%" align="right" valign="top"></td>
+</tr>
+</table>
+        <div class="credit">
+		    <hr class="separator" />
+		    Documentation generated on Sun, 27 Jan 2013 18:30:11 +0100 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

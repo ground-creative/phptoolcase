@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>CHANGELOG</title>
+	<link rel="stylesheet" type="text/css" href="media/style.css">
+	<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+	<td class="header-top-left"><!--<img src="media/logo.png" border="0" alt="phpDocumentor " />-->&nbsp;</td>
+    <td class="header-top-right">PhpToolCase<br /><div class="header-top-right-subpackage"></div></td>
+  </tr>
+  <tr><td colspan="2" class="header-line"><img src="media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td colspan="2" class="header-menu">
+      
+                        
+                      		[ <a href="classtrees_PhpToolCase.html" class="menu">class tree: PhpToolCase</a> ]
+		[ <a href="elementindex_PhpToolCase.html" class="menu">index: PhpToolCase</a> ]
+            [ <a href="elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td colspan="2" class="header-line"><img src="media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="195" class="menu">
+		<div class="package-title">PhpToolCase</div>
+  <div class="package">
+	<div id="ric">
+					<p><a href="ric_README.html">README</a></p>
+					<p><a href="ric_CHANGELOG.html">CHANGELOG</a></p>
+					<p><a href="ric_TODO.html">TODO</a></p>
+			</div>
+	</div>
+      <b>Packages:</b><br />
+  <div class="package">
+              <a href="li_PhpToolCase.html">PhpToolCase</a><br />
+      	</div>
+      <br />
+                        <br />
+                      </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1 align="center">CHANGELOG</h1>
+<pre>
+ 
+##########################################################
+
+PhpToolCase Version 0.8.1 open source project
+
+A powerfull set of tools to speed up the process of coding
+
+##########################################################
+
+== BACKWARD COMPATIILITY ========================================
+
+Version 0.8.1 is fully compatible with previous version(0.7)
+
+== CHANGELOG ===================================
+
+
+- Version 0.8.1
+
+	PtcDb.php:
+
+		-	changed the way the buffer log behaves to add the result.
+
+	PtcDebug.php:
+	
+		-	changed the _debugTrace method to evolve the backtrace php 
+		-	changecd the way add to buffer behaves to add result for sql queries
+		
+		
+- Version 0.8.b
+
+	PtcDebug.php:
+	
+		-	changed the _debugTrace method to evolve the backtrace php 
+		-	added remove class methods
+		-	added remove require_once, include and require, 
+		-	added check which class has the method
+		-	added js to open close &lt;pre&gt;&lt;/pre&gt; tags
+		
+	PtcDb.php:
+
+		-	removed the _tracePhp, the function and class param from the debug buffer, 
+			the class should now be able to send a correct debug message without it.
+
+
+- Version 0.7
+
+	PtcDb.php:
+	
+	-	removed xmlBuilder() method as it does not belong to the mysql class
+	
+	PtcDebug.php:
+	
+	-	added code to parse $_GET from referer, to be able to debug from ajax calls
+	
+	-	changed the debugLoader function and made all the vars empty as default
+	
+	-	renamed startDebug to debugLoader and the function to callDebug aswell
+	
+
+- Version 0.6
+
+	PtcDb.php:
+	
+	-	added static method selfInstance() to autoinitialize the class
+		
+	PtcDebug.php:
+
+	-	removed the __cunstructor and changed it for a self initialized instance &quot;startDebug()&quot;
+	
+	-	changed the debugLoader function and made all the vars to be passed empty as default
+	
+	-	renamed startDebug to debugLoader and the function to callDebug
+	
+	-	added $_SESSION['debugStarted'] to check  if debugLoader() has already been called
+	
+	- 	readded the __constructor to call $this-&gt;debugLoader()
+
+
+
+
+
+</pre>
+        <div class="credit">
+		    <hr class="separator" />
+		    Documentation generated on Wed, 06 Mar 2013 23:45:43 +0100 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

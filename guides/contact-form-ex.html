@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- JQUERY-UI CSS //-->
+	<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
+	<!-- Jquery CORE //-->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> 
+	<!-- JQUERY-UI CORE //-->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+	<!-- VALIDATOR AND TOOLTIP PLUGIN FOR CLIENT SIDE VALIDATION //-->
+	<link type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.0.0/jquery.qtip.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.0.0/jquery.qtip.min.js"></script>
+	<script type="text/javascript" src="http://phptoolcase.com/js/validator.js"></script>
+	<script type="text/javascript" src="http://phptoolcase.com/js/ptc-forms-validator.js"></script>
+	<!-- PLUGIN TO STYLE FORM FIELDS AUTOMATICALLY WITH JQUERY-UI //-->
+	<script type="text/javascript" src="http://phptoolcase.com/js/ptc-forms-ui.js"></script>
+	<script>
+		$(document).ready(function()
+		{
+			$("form").form();	// add ui styles
+			$("form").validate();	// validate client side
+			if($(".errMsg").text())	// add ui to error msgs
+			{
+				$(".errMsg").html('<span class="ui-state-error-text">'+$(".errMsg").text()+'</span>').
+															addClass("ui-state-error ui-corner-all");
+			}
+			/* Form submission has been disabled for the example,.
+			*  Download full code from repository for server side validation and form submission
+			*/
+			$("form").submit(function(){return false;});
+		});
+	</script>
+	<style>
+		body{font:normal .85em "trebuchet ms",arial,sans-serif;color:#555;}
+		input[type=text], select, textarea{width:220px;}
+		.errMsg{color:red;}
+	</style></head><body><div style="text-align:center;width:520px"><h1>Contact Form</h1></div>
+		<div style="width:400px">
+		<form method="post" action="#" id="ptc-gen1">
+			<div id="ptc-gen5">
+				<div style="float:left;margin:1px 3px 0 0;text-align:right;width:40%;" id="ptc-gen3"><label for="ptc-gen4">Firstname:*</label></div>
+				<div id="ptc-gen2"><input type="text" name="ct_firstname" class="required" id="ptc-gen4" style="margin:0px;padding:3px;border:1px inset"></div>
+			</div>
+			<div style="clear:both;height:10px" id="ptc-gen6"><!-- --></div>
+			<div id="ptc-gen10">
+				<div style="float:left;margin:1px 3px 0 0;text-align:right;width:40%;" id="ptc-gen8"><label for="ptc-gen9">Lastname:*</label></div>
+				<div id="ptc-gen7"><input type="text" name="ct_lastname" class="required" id="ptc-gen9" style="margin:0px;padding:3px;border:1px inset"></div>
+			</div>
+			<div style="clear:both;height:10px" id="ptc-gen11"><!-- --></div>
+			<div id="ptc-gen15">
+				<div style="float:left;margin:1px 3px 0 0;text-align:right;width:40%;" id="ptc-gen13"><label for="ptc-gen14">Your email:*</label></div>
+				<div id="ptc-gen12"><input type="text" name="ct_email" class="required email" id="ptc-gen14" style="margin:0px;padding:3px;border:1px inset"></div>
+			</div>
+			<div style="clear:both;height:10px" id="ptc-gen16"><!-- --></div>
+			<div id="ptc-gen20">
+				<div style="float:left;margin:1px 3px 0 0;text-align:right;width:40%;" id="ptc-gen18"><label for="ptc-gen19">Your phone:*</label></div>
+				<div id="ptc-gen17"><input type="text" name="ct_phone" class="required" id="ptc-gen19" style="margin:0px;padding:3px;border:1px inset"></div>
+			</div>
+			<div style="clear:both;height:10px" id="ptc-gen21"><!-- --></div>
+			<div id="ptc-gen25">
+				<div style="float:left;margin:1px 3px 0 0;text-align:right;width:40%;" id="ptc-gen23"><label for="ptc-gen24">Contact reason:*</label></div>
+				<div id="ptc-gen22">
+					<select name="ct_reason" class="required" id="ptc-gen24" style="margin:0px;padding:3px;border:1px inset">
+						<option value="">Choose</option>
+						<option value="enquiry">Enquiry</option>
+						<option value="information">Information</option>
+						<option value="billing">Billing</option>
+						<option value="other">Other</option>
+					</select>
+				</div>
+			</div>
+			<div style="clear:both;height:10px" id="ptc-gen26"><!-- --></div>
+			<div id="ptc-gen35">
+				<div style="float:left;margin:1px 3px 0 0;text-align:right;width:40%;" id="ptc-gen33"><label for="ptc-gen34">Write a message:*</label></div>
+				<div id="ptc-gen32"><textarea name="ct_message" class="required" id="ptc-gen34" style="margin:0px;padding:3px;border:1px inset" rows="7"></textarea></div>
+			</div>
+			<div style="clear:both;height:10px" id="ptc-gen36"><!-- --></div>
+			<div id="ptc-gen38" style="text-align:right;">
+				<input type="submit" name="ct_contact_me" id="ptc-gen37" style="margin:0px;" value="Submit">
+			</div>
+			<div style="clear:both;height:10px" id="ptc-gen39"><!-- --></div>
+		</form>
+	</div>
+</body></html>

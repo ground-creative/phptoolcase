@@ -311,7 +311,7 @@ ul#menu li a:hover
   margin: 0;
   font: normal 140% 'Yanone Kaffeesatz', sans-serif;}
  
-table
+/*table
 { margin: 10px 0 30px 0;}
 
 table tr th, table tr td
@@ -323,7 +323,7 @@ table tr th, table tr td
 table tr td
 { background: #FBFBFB;
   color: #111;
-  border-top: 1px solid #FFF;}
+  border-top: 1px solid #FFF;}*/
 .code{
 color:black;
 }

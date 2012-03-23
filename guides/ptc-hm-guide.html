@@ -9,21 +9,30 @@
 									<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine&amp;v1" />
 									<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />
 									<link rel="stylesheet" type="text/css" href="http://phptoolcase.com/style/style.css" />
+									<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+									<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> 
+									<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+									<script type="text/javascript">
+										function openLogin(url){$("#exampleDiv").load(url).dialog({modal:true,width:600,height:320});} 
+										function openContact(url){$("#exampleDiv").load(url).dialog({modal:true,width:580,height:550});} 
+										function openReg(url){$("#exampleDiv").load(url).dialog({modal:true,width:550,height:550});} 
+									</script>
 </head>
 <body>
 	<div id="main">
 		<div id="header">
 									<div id="logo">
-										<h1>PhpToolCase</h1>
+										<h1><a href="http://phptoolcase.com/index.html"><img src="http://phptoolcase.com/images/logo.gif" height="70px"></a></h1>
 										<div class="slogan">A powerfull open source set of tools!</div>
 									</div>
 									<div id="menubar">
 										<ul id="menu">
-											<li id="index"><a href="http://phptoolcase.com/index.html">Home</a></li>
-											<li id="documentation"><a href="http://phptoolcase.com/documentation.html">Documentation</a></li>
-											<li id="contact"><a href="http://phptoolcase.com/contact.html">Contact</a></li>
-											<li id="about"><a href="http://phptoolcase.com/about.html">About</a></li>
-											<li id="faq"><a href="http://phptoolcase.com/faq.html">FAQ</a></li>
+											<li id="index"><a href="http://phptoolcase.com/index.html">HOME</a></li>
+											<li id="download"><a href="http://phptoolcase.com/download.html">DOWNLOAD</a></li>
+											<li id="documentation"><a href="http://phptoolcase.com/documentation.html">USER GUIDES</a></li>
+											<li id="contact"><a href="http://phptoolcase.com/contact.html">CONTACT</a></li>
+											<li id="about"><a href="http://phptoolcase.com/about.html">ABOUT</a></li>
+											<!--<li id="faq"><a href="http://phptoolcase.com/faq.html">FAQ</a></li>-->
 										</ul>
 									</div>
 								</div>
@@ -31,42 +40,48 @@
 			<div id="sidebar_container">
 										<img class="paperclip" src="http://phptoolcase.com/images/paperclip.png" alt="paperclip" />
 										<div class="sidebar">
-											<h3>Latest News</h3>
-											<h4>Website Goes Live</h4>
-											<h5>20 March 2012</h5>
+											<h1>Latest News</h1>
+											<h4>New Version Released(0.8.3)</h4>
+											<h5>August 30 2013</h5>
 											<p>
-												We have just launched our new website. Take a look around, and<a href="mail:carlo@salapc.com"> let us know</a> what you think.<br />
+												A new version of the library is available, view <a href="https://github.com/ifsale/PhpToolCase/blob/master/CHANGELOG" target="_blank">changelog</a> for changes. Use the quick links section or browse the <a href="https://github.com/ifsale/PhpToolCase/tree/master" target="_blank">repository</a>.
 											</p>
-											<hr><br>
-											<h4>New Library Released(Version 0.7)</h4>
-											<h5>20 March 2012</h5>
+											<h4>Beta Version Released(0.8.2b)</h4>
+											<h5>August 30 2013</h5>
 											<p>
-												The new version of the library has been realesed, files can be found in the <a href="https://github.com/ifsale/PhpToolCase" target="_blank">repository</a>.
+													A new beta has been realeased, view <a href="https://github.com/ifsale/PhpToolCase/blob/beta/CHANGELOG" target="_blank">changelog</a> for changes. Use the quick links section or browse the <a href="https://github.com/ifsale/PhpToolCase/tree/beta" target="_blank">repository</a>.
 											</p>
 										</div>
 										<img class="paperclip" src="http://phptoolcase.com/images/paperclip.png" alt="paperclip" />
 										<div class="sidebar">
-											<h3>Quick Links</h3>
-											<h2>Downloads</h2>
-											<h4>Latest Version 0.7</h4>
+											<h1>Quick Links</h1>
+											<a href="http://phptoolcase.com/download.html"><h2>Download Library</h2></a>
+											<h4>Latest Stable Version(0.8.3)</h4>
 											<ul>
 												<li><a href="https://github.com/ifsale/PhpToolCase/tarball/master" target="_blank">Download Tarball</a></li>
 												<li><a href="https://github.com/ifsale/PhpToolCase/zipball/master" target="_blank">Download Zip File</a></li>
 												<li><a href="https://github.com/ifsale/PhpToolCase" target="_blank">Browse Repository</a></li>
 											</ul>
-											<h2>User Guides</h2>
+											<h4>Beta Version (0.8.2b)</h4>
+											<ul>
+												<li><a href="https://github.com/ifsale/PhpToolCase/tarball/beta" target="_blank">Download Tarball</a></li>
+												<li><a href="https://github.com/ifsale/PhpToolCase/zipball/beta" target="_blank">Download Zip File</a></li>
+												<li><a href="https://github.com/ifsale/PhpToolCase/tree/beta" target="_blank">Browse Repository</a></li>
+											</ul>
+											<a href="http://phptoolcase.com/documentation.html"><h2>User Guides</h2></a>
 											<ul>
 												<li><a href="http://phptoolcase.com/guides/ptc-debug-guide.html">Debugger & Logger</a></li>
 												<li><a href="http://phptoolcase.com/guides/ptc-db-guide.html">Mysql Helper</a></li>
-												<li>Dynamic Forms(<b>Available Soon</b>)</li>
+												<li><a href="http://phptoolcase.com/guides/ptc-forms-guide.html">Dynamic Forms Generator</a></li>
 												<li>OBJ Controller(<b>Available Soon</b>)</li>
 											</ul>
 											<h2>Usefull</h2>
 											<ul>
-												<li><a href="http://phptoolcase.com/api/0.7/ric_CHANGELOG.html" target="_blank">Changelog</a></li>
-												<li><a href="http://phptoolcase.com/api/0.7/ric_TODO.html" target="_blank">To Do</a></li>
+												<li><a href="http://phptoolcase.com/api/0.8.3/ric_CHANGELOG.html" target="_blank">Changelog</a></li>
+												<li><a href="http://phptoolcase.com/api/0.8.3/ric_TODO.html" target="_blank">To Do</a></li>
 												<li><a href="https://github.com/ifsale/PhpToolCase/issues" target="_blank">Bug Tracker</a></li>
 												<li><a href="https://chrome.google.com/webstore/detail/nfhmhhlpfleoednkpnnnkolmclajemef" target="_blank">PhpConsole(Chrome Extension)</a></li>
+												<li><a href="http://phptoolcase.com/hosted-scripts.html">Hosted Scripts</a></li>
 											</ul>
 										</div>
 									</div>
@@ -81,7 +96,7 @@
 											<a href="http://phptoolcase.com/contact.html">Contact</a> | 
 											<a href="http://phptoolcase.com/about.html">About</a>
 										</p>
-										<p style="font-size:12px;">PhpToolCase &copy;2012</p>					
+										<p style="font-size:12px;">PhpToolCase &copy;2013</p>					
 									<!--<script>
 										var filename=location.pathname.substr(location.pathname.lastIndexOf("/")+1,location.pathname.length);
 										console.log("the file name",filename);

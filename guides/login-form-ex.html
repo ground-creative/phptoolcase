@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- JQUERY-UI CSS //-->
+	<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+	<!-- Jquery CORE //-->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> 
+	<!-- JQUERY-UI CORE //-->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+	<!-- VALIDATOR AND TOOLTIP PLUGIN FOR CLIENT SIDE VALIDATION //-->
+	<link type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.0.0/jquery.qtip.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.0.0/jquery.qtip.min.js"></script>
+	<script type="text/javascript" src="http://phptoolcase.com/js/validator.js"></script>
+	<script type="text/javascript" src="http://phptoolcase.com/js/ptc-forms-validator.js"></script>
+	<!-- PLUGIN TO STYLE FORM FIELDS AUTOMATICALLY WITH JQUERY-UI //-->
+	<script type="text/javascript" src="http://phptoolcase.com/js/ptc-forms-ui.js"></script>
+	<script>
+		$(document).ready(function()
+		{
+			$("form").form();	// add ui styles
+			$("form").validate();	// validate client side
+			if($(".errMsg").text())	// add ui to error msgs
+			{
+				$(".errMsg").html('<span class="ui-state-error-text">'+$(".errMsg").text()+'</span>').
+															addClass("ui-state-error ui-corner-all");
+			}
+			/* Form submission has been disabled for the example,.
+			*  Download full code from repository for server side validation and form submission
+			*/
+			$("form").submit(function(){return false;});
+		});
+	</script>
+	<style>
+		body{font:normal .85em "trebuchet ms",arial,sans-serif;color:#555;}
+		#loginForm input[type=text], input[type=password]{width:237px;}
+		.errMsg{color:red;}
+	</style>
+</head>
+<body>
+	<div style="text-align:center;width:410px"><h1>Login Form</h1></div>
+	<div style="width:410px">
+		<form method="post" action="#" id="loginForm">
+			<div id="ptc-gen4">
+				<div style="float:left;width:40%;margin:0 3px 0 0;text-align:right" id="ptc-gen2"><label for="ptc-gen3">Username:</label></div>
+				<div id="ptc-gen1"><input type="text" name="lg_username" class="required" id="ptc-gen3" style="margin:0;padding:2px;"></div>
+			</div>
+			<div style="clear:both;height:10px;" id="ptc-gen5"><!-- --></div>
+			<div id="ptc-gen9">
+				<div style="float:left;width:40%;margin:0 3px 0 0;text-align:right" id="ptc-gen7"><label for="ptc-gen8">Password:</label></div>
+				<div id="ptc-gen6"><input type="password" name="lg_password" class="required check_login" id="ptc-gen8" style="margin:0;padding:2px;"></div>
+			</div>
+			<div style="clear:both;height:10px;" id="ptc-gen10"><!-- --></div>
+			<div id="ptc-gen21">
+				<div>
+					<table id="ptc-gen11" style="width:265px;float:right;" cellpadding="0" cellspacing="0">
+						<tr>
+							<td align="left" valign="top">
+								<div id="ptc-gen15" style="text-align:right;">
+									<input type="checkbox" name="lg_keep_login" id="ptc-gen14" style="padding:0;margin:0;vertical-align:middle;width:14px;">
+									<span style="vertical-align:middle;" id="ptc-gen13"><label for="ptc-gen14">Remember me</label></span>
+								</div>
+								<div style="clear:both;height:0px" id="ptc-gen16"><!-- --></div>
+							</td>
+							<td align="left" valign="top">
+								<div id="ptc-gen18" style="text-align:right;margin-right:5px;">
+									<input type="submit" name="lg_login" id="ptc-gen17" style="margin:0;" value="login">
+								</div>
+								<div style="clear:both;height:0px" id="ptc-gen19"><!-- --></div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div style="clear:both;height:10px;" id="ptc-gen22"><!-- --></div>
+		</form>
+	</div>
+</body>
+</html>

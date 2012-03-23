@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>PtcDebug User Guide</title>
+	<link rel="stylesheet" type="text/css" href="../media/style.css">
+	<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+	<td class="header-top-left"><!--<img src="../media/logo.png" border="0" alt="phpDocumentor " />-->&nbsp;</td>
+    <td class="header-top-right">PhpToolCase<br /><div class="header-top-right-subpackage"></div></td>
+  </tr>
+  <tr><td colspan="2" class="header-line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td colspan="2" class="header-menu">
+      
+                        
+                      		[ <a href="../classtrees_PhpToolCase.html" class="menu">class tree: PhpToolCase</a> ]
+		[ <a href="../elementindex_PhpToolCase.html" class="menu">index: PhpToolCase</a> ]
+            [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td colspan="2" class="header-line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="195" class="menu">
+		<div class="package-title">PhpToolCase</div>
+  <div class="package">
+	<div id="ric">
+					<p><a href="../ric_README.html">README</a></p>
+					<p><a href="../ric_CHANGELOG.html">CHANGELOG</a></p>
+					<p><a href="../ric_TODO.html">TODO</a></p>
+			</div>
+	</div>
+      <b>Packages:</b><br />
+  <div class="package">
+              <a href="../li_PhpToolCase.html">PhpToolCase</a><br />
+      	</div>
+      <br />
+		<b>Tutorials/Manuals:</b><br />
+  <div class="package">
+							<strong>Class-level:</strong>
+							<ul>
+	<li type="square"><a href="../PhpToolCase/tutorial_PtcDebug.cls.html">PtcDebug User Guide</a>
+</ul>
+
+							<ul>
+	<li type="square"><a href="../PhpToolCase/tutorial_PtcDb.cls.html">PtcDb User Guide</a>
+</ul>
+
+							<ul>
+	<li type="square"><a href="../PhpToolCase/tutorial_PtcForms.cls.html">PtcForms User Guide</a>
+</ul>
+
+							                       <!-- <b>Files:</b><br />
+        <div class="package">
+				<span style="padding-left: 1em;"><a href="../PhpToolCase/ProcedurePtcDb.html">PtcDb.php</a></span><br />
+			<span style="padding-left: 1em;"><a href="../PhpToolCase/ProcedurePtcDebug.html">PtcDebug.php</a></span><br />
+			<span style="padding-left: 1em;"><a href="../PhpToolCase/ProcedurePtcForms.html">PtcForms.php</a></span><br />
+	  </div>
+        // github problem with these links-->
+            <br />
+                  <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../PhpToolCase/PtcDb.html">PtcDb</a>    	 <br />
+	    		<a href="../PhpToolCase/PtcDebug.html">PtcDebug</a>    	 <br />
+	    		<a href="../PhpToolCase/PtcForms.html">PtcForms</a>    	 <br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="10%" align="left" valign="bottom">Prev</td>
+<td width="80%" align="center" valign="bottom"></td>
+<td width="10%" align="right" valign="bottom"><a href=
+"../PhpToolCase/tutorial_PtcDb.cls.html">Next</a></td>
+</tr>
+</table>
+<div><a name=""></a><div class="ref-title-box"><h1 class="ref-title">PtcDebug User Guide</h1>
+		<h2 class="ref-purpose">DEBUGGER AND LOGGER - VERSION 0.8.3</h2></div>
+	<h1 align="center">Table of Contents</h1>
+<ul>
+
+<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#intro">INTRODUCTION</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#debugLoader">GETTING STARTED</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions">CLASS OPTIONS</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.url_key">url_key</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.url_pass">url_pass</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.replace_error_handler">replace_error_handler</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.check_referer">check_referer</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.die_on_error">die_on_error</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.debug_console">debug_console</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.allowed_ips">allowed_ips</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.session_start">session_start</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.show_interface">show_interface</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.enable_inspector">enable_inspector</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.declare_ticks">declare_ticks</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.set_time_limit">set_time_limit</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.memory_limit">memory_limit</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.show_messages">show_messages</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.show_globals">show_globals</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.show_sql">show_sql</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.trace_depth">trace_depth</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.max_dump_depth">max_dump_depth</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.default_category">default_category</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#logging">LOGGING DATA</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#logging.log_msg">Logging messages</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#logging.log_sql">Logging sql queries</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#stopTimer">EXECUTION TIMING</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#stopTimer.timing_code">Timing php code</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#stopTimer.timing_queries">Timing sql queries</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#setErrorHandler">REPLACING ERROR HANDLER</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#watchVar">INSPECTING VARIABLE CHANGES</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#fileInspector">INSPECTING SOURCE CODE</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#addToLog">ADDING DATA TO THE LOG</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#hidePanels">HIDING PANELS</a><br />
+
+<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#setup_examples">TYPICAL SETUP EXAMPLES</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#setup_examples.develop_setup">Setup for development</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#setup_examples.develop_setup">Production environment</a><br />
+
+&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#setup_examples.ajaxDebug_setup">Ajax debugging (chrome only)</a><br />
+</ul>
+
+	<span><a name="intro"></a><h2 class="title">INTRODUCTION</h2><p>The goal of this class is to ease the process of debugging php scripts. 
+			The class uses a floating panel at the top right of the page. 
+			There are also a couple of features that can fix security issues with the php default error handler. 
+			All class properties and methods are static because it's required to let them work on script shutdown when FATAL error occurs.</p>
+		<p>Main Features:
+			<ul><li>Show globals vars ($GLOBALS, $_POST, $_GET, $_COOKIE ...)</li>
+				<li>Show php version and loaded extensions</li>
+				<li>Replace php built in error handler</li>
+				<li>Log sql queries</li>
+				<li>Catch exceptions</li>
+				<li>Inspect variables for changes</li>
+				<li>File inspector to view source code</li>
+				<li>Monitor execution time</li>
+				<li>Dump of all types of variable</li>
+				<li>Send messages to js console for ajax scripts (Chrome only)</li></ul></p></span>
+	<span><a name="debugLoader"></a><h2 class="title">GETTING STARTED</h2><p>The class works right out of the box by calling the method <a href="../PhpToolCase/PtcDebug.html#methodload">PtcDebug::load()</a>.
+			<ol><li><div class="src-line"><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'PtcDebug.php'</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;include&nbsp;the&nbsp;PtcDebug&nbsp;class</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$_GET</span><span class="src-sym">[</span><span class="src-str">'debug'</span><span class="src-sym">]</span>=<span class="src-id">true</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;turn&nbsp;on&nbsp;the&nbsp;debug</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../PhpToolCase/PtcDebug.html">PtcDebug</a></span><span class="src-sym">::</span><a href="../PhpToolCase/PtcDebug.html#methodload">load</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;initialize&nbsp;the&nbsp;class</span></div></li>
+</ol></p></span>
+	<span><a name="_defaultOptions"></a><h2 class="title">CLASS OPTIONS</h2><p>This is the full list of options available on intialization, stored in <a href="../PhpToolCase/PtcDebug.html#var$_defaultOptions">PtcDebug::$_defaultOptions</a> property:
+			<ol><li><div class="src-line"><span class="src-var">$options</span>=<span class="src-key">array&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;add&nbsp;some&nbsp;options&nbsp;before&nbsp;class&nbsp;initialization</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'url_key'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'debug'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;the&nbsp;key&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;url&nbsp;to&nbsp;turn&nbsp;on&nbsp;debug</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'url_pass'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'true'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;the&nbsp;pass&nbsp;to&nbsp;turn&nbsp;on&nbsp;debug</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'replace_error_handler'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;replace&nbsp;default&nbsp;php&nbsp;error&nbsp;handler</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'error_reporting'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;<span class="src-id">E_ALL</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;error&nbsp;reporting&nbsp;flag</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'catch_exceptions'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;sets&nbsp;exception&nbsp;handler&nbsp;to&nbsp;be&nbsp;this&nbsp;class&nbsp;method</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'check_referer'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;<span class="src-id">false</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;check&nbsp;referer&nbsp;for&nbsp;key&nbsp;and&nbsp;pass(good&nbsp;for&nbsp;ajax&nbsp;debugging)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'die_on_error'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;die&nbsp;if&nbsp;fatal&nbsp;error&nbsp;occurs(with&nbsp;this&nbsp;class&nbsp;error&nbsp;handler)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'debug_console'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">false</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;only&nbsp;for&nbsp;Chrome,show&nbsp;messages&nbsp;in&nbsp;console(phpConsole&nbsp;needed)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'allowed_ips'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">null</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;restrict&nbsp;access&nbsp;with&nbsp;ip's</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'session_start'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">false</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;start&nbsp;session&nbsp;for&nbsp;persistent&nbsp;debugging</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'show_interface'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;show&nbsp;the&nbsp;interface(false&nbsp;to&nbsp;debug&nbsp;in&nbsp;console&nbsp;only)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'enable_inspector'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;enable&nbsp;variables&nbsp;inspector,&nbsp;use&nbsp;declare(ticks=n);&nbsp;in&nbsp;code&nbsp;block</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'declare_ticks'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;<span class="src-id">false</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;declare&nbsp;ticks&nbsp;globally&nbsp;with&nbsp;value&nbsp;of&nbsp;1</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'set_time_limit'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">null</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;set&nbsp;php&nbsp;execution&nbsp;time&nbsp;limit</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'memory_limit'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">null</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;set&nbsp;php&nbsp;memory&nbsp;size&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'show_messages'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;show&nbsp;messages&nbsp;panel</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'show_globals'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;show&nbsp;global&nbsp;variables&nbsp;in&nbsp;vars&nbsp;panel</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'show_sql'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;show&nbsp;sql&nbsp;panel</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'trace_depth'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-num">10</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;maximum&nbsp;depth&nbsp;for&nbsp;the&nbsp;backtrace</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'max_dump_depth'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-num">6</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;maximum&nbsp;depth&nbsp;for&nbsp;the&nbsp;dump&nbsp;function&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'default_category'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'General'</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../PhpToolCase/PtcDebug.html">PtcDebug</a></span><span class="src-sym">::</span><a href="../PhpToolCase/PtcDebug.html#methodload">load</a><span class="src-sym">(</span><span class="src-var">$options</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;initialize&nbsp;the&nbsp;class</span></div></li>
+</ol>
+			The next chapters will explain in details the usage of these options.</p>
+		<a name="_defaultOptions.url_key"></a><h3 class="title">url_key</h3><p>To show the interface we use a <strong>&quot;$_GET&quot;</strong> parameter in the url (see <a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.url_pass">url_pass</a>), 
+				and to turn it off the same parameter + &quot;_off&quot; is used. The default key is <strong>&quot;debug&quot;</strong> and should be changed to something else!</p>
+			<p><strong>Default value:</strong> debug (string)</p><hr />
+		<a name="_defaultOptions.url_pass"></a><h3 class="title">url_pass</h3><p>The value to pass in the url (see <a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.url_key">url_key</a>), the default value is <strong>&quot;true&quot;</strong> 
+				and should be changed to something else!</p>
+			<p><strong>Default value:</strong> true (string)</p><hr />
+		<a name="_defaultOptions.replace_error_handler"></a><h3 class="title">replace_error_handler</h3><p>Replaces the default php error handler to show php errors in the debug messages panel.</p>
+			<p><strong>Default value:</strong> true (bool)</p><hr />
+		<a name="_defaultOptions.check_referer"></a><h3 class="title">check_referer</h3><p>This option, if set to <strong>&quot;true&quot;</strong>, will check for the <strong>&quot;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.url_key">url_key</a>&quot;</strong> and 
+				<strong>&quot;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.url_pass">url_pass</a>&quot;</strong> with the referer if any. This is quite usefull to debug ajax scripts with the 
+				<strong>&quot;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.show_interface">show_interface</a>&quot;</strong> option set to <strong>&quot;false&quot;</strong>, 
+				and the <a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.debug_console">debug_console</a> set to <strong>&quot;true&quot;</strong>.</p>
+			<p>See <a href="../PhpToolCase/tutorial_PtcDebug.cls.html#setup_examples.ajaxDebug_setup">Ajax debugging (chrome only)</a> for more information on this setup.</p>
+			<p><strong>Default value:</strong> false (bool)</p><hr />
+		<a name="_defaultOptions.die_on_error"></a><h3 class="title">die_on_error</h3><p>Set this option to false to continue if fatal error occurs, keep in mind that this will only work with the
+				<strong>&quot;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.replace_error_handler">replace_error_handler</a>&quot;</strong> option set to <strong>&quot;true&quot;</strong>.</p>
+			<p><strong>Default value:</strong> true (bool)</p><hr />
+		<a name="_defaultOptions.debug_console"></a><h3 class="title">debug_console</h3><p>Only for Chrome,with phpConsole class installed.This feature is usefull to to debug ajax scripts.</p>
+			<p>See <a href="../PhpToolCase/tutorial_PtcDebug.cls.html#setup_examples.ajaxDebug_setup">Ajax debugging (chrome only)</a> for more information and detailed usage.</p>
+			<p><strong>Default value:</strong> false (bool)</p><hr />
+		<a name="_defaultOptions.allowed_ips"></a><h3 class="title">allowed_ips</h3><p>To restrict access use this option to pass an ip or an array of ip's, 
+				and only the allowed ip's will be able to turn on/off the debug interface. It is advised to use this option under production environment.</p>
+			<p><strong>Default value:</strong> null (string|array)</p><hr />
+		<a name="_defaultOptions.session_start"></a><h3 class="title">session_start</h3><p>For persistent debugging, set this option to true, and the class will try to store the <strong>&quot;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.url_key">url_key</a>&quot;</strong> 
+				and <strong>&quot;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.url_pass">url_pass</a>&quot;</strong> in a <strong>&quot;$_SESSION&quot;</strong> var. 
+				You will need to use <strong>&quot;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.url_key">url_key</a>&quot;+_off</strong> to hide the interface. 
+				While this is a good option to navigate an application, it will not work if the class is not initialized at very start of the application. 
+				see session_start() function for more information.</p>
+			<p><strong>Default value:</strong> false (bool)</p><hr />
+		<a name="_defaultOptions.show_interface"></a><h3 class="title">show_interface</h3><p>This option, if set to <strong>&quot;false&quot;</strong>, does not show the floating panel. It is usefull to send messages to console only with the option  
+				<strong>&quot;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.debug_console">debug_console</a>&quot;</strong> set to <strong>&quot;true&quot;</strong>.</p>
+			<p>See <a href="../PhpToolCase/tutorial_PtcDebug.cls.html#setup_examples.ajaxDebug_setup">Ajax debugging (chrome only)</a> for more details over this setup.</p>
+			<p><strong>Default value:</strong> true (bool)</p><hr />
+		<a name="_defaultOptions.enable_inspector"></a><h3 class="title">enable_inspector</h3><p>This option, enables the variable inspector, which can be used to watch if a given variable has changed.
+				Remember to declare ticks in a code block or use the option <strong>&quot;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.declare_ticks">declare_ticks</a>&quot;</strong>.</p>
+			<p>See <a href="../PhpToolCase/tutorial_PtcDebug.cls.html#watchVar">INSPECTING VARIABLE CHANGES</a> for examples.</p>
+			<p><strong>Default value:</strong> true (bool)</p><hr />
+		<a name="_defaultOptions.declare_ticks"></a><h3 class="title">declare_ticks</h3><p>If the option <strong>&quot;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.enable_inspector">enable_inspector</a>&quot;</strong> is set to <strong>&quot;true&quot;</strong>, 
+				this option can be used  to declare ticks globally. Keep in mind that it is adviced to declare ticks inside a code block, as the backtrace might not be as precise.</p>
+				<p>See <a href="../PhpToolCase/tutorial_PtcDebug.cls.html#watchVar">INSPECTING VARIABLE CHANGES</a> for example usage.</p>
+			<p><strong>Default value:</strong> false (bool)</p><hr />
+		<a name="_defaultOptions.set_time_limit"></a><h3 class="title">set_time_limit</h3><p>Sets the php global execution time limit.</p>	
+			<p><strong>Default value:</strong> null (float)</p><hr />
+		<a name="_defaultOptions.memory_limit"></a><h3 class="title">memory_limit</h3><p>Sets memory limit for php.</p>
+			<p><strong>Default value:</strong> null (float)</p><hr />		
+		<a name="_defaultOptions.show_messages"></a><h3 class="title">show_messages</h3><p>Controls if the messages panel will be shown, if set to <strong>&quot;false&quot;</strong> the interface will not show this panel and will be faster to load.</p>
+			<p>This option can be turned on and off with the <strong>&quot;$_GET&quot;</strong> parameter <strong>&quot;hidepanels&quot;</strong> in the url,
+				see <a href="../PhpToolCase/tutorial_PtcDebug.cls.html#hidePanels">HIDING PANELS</a> for more information about this option.</p>
+			<p><strong>Default value:</strong> true (bool)</p><hr />		
+		<a name="_defaultOptions.show_globals"></a><h3 class="title">show_globals</h3><p>Controls if the <strong>&quot;$GLOBALS&quot;</strong> variable will be shown in the vars panel, 
+				if set to <strong>&quot;false&quot;</strong> the interface will not show the <strong>&quot;$GLOBALS&quot;</strong> and will be faster to load.</p>
+			<p>This option can be turned on and off with the <strong>&quot;$_GET&quot;</strong> parameter <strong>&quot;hidepanels&quot;</strong> in the url,
+				see <a href="../PhpToolCase/tutorial_PtcDebug.cls.html#hidePanels">HIDING PANELS</a> for more information about this option.</p>
+			<p><strong>Default value:</strong> true (bool)</p><hr />		
+		<a name="_defaultOptions.show_sql"></a><h3 class="title">show_sql</h3><p>This option, controls if the sql panel will be shown in the sql panel, 
+				if set to <strong>&quot;false&quot;</strong> the interface will not show this panel and will be faster to load.</p>
+			<p>This option can be turned on and off with the <strong>&quot;$_GET&quot;</strong> parameter <strong>&quot;hidepanels&quot;</strong> in the url,
+				see <a href="../PhpToolCase/tutorial_PtcDebug.cls.html#hidePanels">HIDING PANELS</a> for more information about this option.</p>
+			<p><strong>Default value:</strong> true (bool)</p><hr />
+		<a name="_defaultOptions.trace_depth"></a><h3 class="title">trace_depth</h3><p>This option sets a depth limit for the backtrace. Increase it if you think that the backtrace is leaving out files.</p>
+			<p><strong>Default value:</strong> 10 (float)</p><hr />
+		<a name="_defaultOptions.max_dump_depth"></a><h3 class="title">max_dump_depth</h3><p>This option sets the maximum depth when dumping variables to prevent recursion. If maximum depth is reached, 
+				the message <strong>&quot;**MAX DEPTH REACHED** &quot;</strong> will be shown. Increase it if you need a higher depth.</p>
+			<p><strong>Default value:</strong> 6 (float)</p><hr />
+		<a name="_defaultOptions.default_category"></a><h3 class="title">default_category</h3><p>The default category for the log/sql messages.</p>
+			<p><strong>Default value:</strong> General (string)</p><hr /></span>
+	<span><a name="logging"></a><h2 class="title">LOGGING DATA</h2><p>The following sections will explain how the messages and sql panel work.</p>
+		<a name="logging.log_msg"></a><h3 class="title">Logging messages</h3><p>To send data to the messages panel is quite simple, just use the <a href="../PhpToolCase/ProcedurePtcDebug.html#functionlog_msg">log_msg()</a> function.
+				<ol><li><div class="src-line"><span class="src-comm">/*&nbsp;LOGGING&nbsp;A&nbsp;MESSAGE&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/ProcedurePtcDebug.html#functionlog_msg">log_msg</a><span class="src-sym">(</span><span class="src-str">'just&nbsp;a&nbsp;message'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">/*&nbsp;LOGGING&nbsp;A&nbsp;VARIABLE&nbsp;WITH&nbsp;A&nbsp;STATEMENT&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$var</span>=<span class="src-str">'something'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/ProcedurePtcDebug.html#functionlog_msg">log_msg</a><span class="src-sym">(</span><span class="src-var">$var</span><span class="src-sym">,</span><span class="src-str">'testing&nbsp;a&nbsp;variable'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">/*&nbsp;LOGGING&nbsp;AN&nbsp;ARRAY&nbsp;TO&nbsp;THE&nbsp;MESSAGE&nbsp;PANEL&nbsp;WITH&nbsp;A&nbsp;DIFFERENT&nbsp;CATEGORY&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$array</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'key'</span>=&gt;<span class="src-str">'value'</span><span class="src-sym">,</span><span class="src-str">'key1'</span>=&gt;<span class="src-str">'value1'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/ProcedurePtcDebug.html#functionlog_msg">log_msg</a><span class="src-sym">(</span><span class="src-var">$array</span><span class="src-sym">,</span><span class="src-str">'testing&nbsp;an&nbsp;array'</span><span class="src-sym">,</span><span class="src-str">'new&nbsp;category'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p><hr />
+		<a name="logging.log_sql"></a><h3 class="title">Logging sql queries</h3><p>To log sql queries use the <a href="../PhpToolCase/ProcedurePtcDebug.html#functionlog_sql">log_sql()</a> function:
+				<ol><li><div class="src-line"><span class="src-comm">/*&nbsp;LOGGING&nbsp;SQL&nbsp;QUERIES&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$sql</span>=<span class="src-str">'select&nbsp;from&nbsp;where&nbsp;something'</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;some&nbsp;sql&nbsp;query,&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;reference</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/ProcedurePtcDebug.html#functionlog_sql">log_sql</a><span class="src-sym">(</span><span class="src-str">''</span><span class="src-sym">,</span><span class="src-var">$sql</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;leaving&nbsp;the&nbsp;first&nbsp;parameter&nbsp;empty,&nbsp;can&nbsp;be&nbsp;added&nbsp;later&nbsp;with&nbsp;the&nbsp;query&nbsp;result</span></div></li>
+</ol></p><hr /></span>
+	<span><a name="stopTimer"></a><h2 class="title">EXECUTION TIMING</h2><p>The class allows to time execution for php code and sql queries. The following sections will give examples on how this can be done.</p>
+		<a name="stopTimer.timing_code"></a><h3 class="title">Timing php code</h3><p>To check how long things take to execute you can use the <a href="../PhpToolCase/ProcedurePtcDebug.html#functionstop_timer">stop_timer()</a> function:
+				<ol><li><div class="src-line"><span class="src-comm">/*&nbsp;TIMING&nbsp;A&nbsp;LOOP&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/ProcedurePtcDebug.html#functionlog_msg">log_msg</a><span class="src-sym">(</span><span class="src-str">''</span><span class="src-sym">,</span><span class="src-str">'timing&nbsp;a&nbsp;loop'</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;leaving&nbsp;the&nbsp;first&nbsp;parameter&nbsp;empty</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">for</span><span class="src-sym">(</span><span class="src-var">$i</span>=<span class="src-num">0</span><span class="src-sym">;</span><span class="src-var">$i</span>&lt;<span class="src-num">100</span><span class="src-sym">;</span><span class="src-var">$i</span>++<span class="src-sym">)</span><span class="src-sym">{&nbsp;</span><span class="src-sym">@</span><span class="src-var">$a</span><span class="src-sym">[</span><span class="src-sym">]</span>=<span class="src-var">$i</span><span class="src-sym">;&nbsp;</span><span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/ProcedurePtcDebug.html#functionstop_timer">stop_timer</a><span class="src-sym">(</span><span class="src-str">'timing&nbsp;a&nbsp;loop'</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;using&nbsp;the&nbsp;reference&nbsp;to&nbsp;attach&nbsp;the&nbsp;execution&nbsp;time&nbsp;to&nbsp;the&nbsp;buffer</span></div></li>
+</ol> 
+				To attach the result of the loop to the message, use the <a href="../PhpToolCase/ProcedurePtcDebug.html#functionadd_to_log">add_to_log()</a> function:
+				<ol><li><div class="src-line"><span class="src-comm">/*&nbsp;ATTACHING&nbsp;THE&nbsp;RESULT&nbsp;OF&nbsp;THE&nbsp;LOOP&nbsp;TO&nbsp;THE&nbsp;MESSAGE&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/ProcedurePtcDebug.html#functionadd_to_log">add_to_log</a><span class="src-sym">(</span><span class="src-str">'timing&nbsp;a&nbsp;loop'</span><span class="src-sym">,</span><span class="src-var">$a</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol> 
+				See <a href="../PhpToolCase/tutorial_PtcDebug.cls.html#addToLog">ADDING DATA TO THE LOG</a> for details over the <a href="../PhpToolCase/ProcedurePtcDebug.html#functionadd_to_log">add_to_log</a> function.</p><hr />
+		<a name="stopTimer.timing_queries"></a><h3 class="title">Timing sql queries</h3><p>To check how long a query takes to execute you can use the <a href="../PhpToolCase/ProcedurePtcDebug.html#functionstop_timer">stop_timer()</a> function.
+				<ol><li><div class="src-line"><span class="src-comm">/*&nbsp;LOGGING&nbsp;SQL&nbsp;QUERIES&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$sql</span>=<span class="src-str">'select&nbsp;from&nbsp;where&nbsp;something'</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;some&nbsp;sql&nbsp;query,&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;reference</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/ProcedurePtcDebug.html#functionlog_sql">log_sql</a><span class="src-sym">(</span><span class="src-str">''</span><span class="src-sym">,</span><span class="src-var">$sql</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;leaving&nbsp;the&nbsp;first&nbsp;parameter&nbsp;empty,&nbsp;can&nbsp;be&nbsp;added&nbsp;later&nbsp;with&nbsp;the&nbsp;query&nbsp;result</span></div></li>
+</ol><ol><li><div class="src-line"><span class="src-var">$sql_result</span>=<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'key'</span>=&gt;<span class="src-str">'value'</span><span class="src-sym">,</span><span class="src-str">'key1'</span>=&gt;<span class="src-str">'value1'</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;this&nbsp;should&nbsp;be&nbsp;the&nbsp;sql&nbsp;result&nbsp;of&nbsp;the&nbsp;sql&nbsp;query</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">/*&nbsp;TIMING&nbsp;THE&nbsp;QUERY&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/ProcedurePtcDebug.html#functionstop_timer">stop_timer</a><span class="src-sym">(</span><span class="src-var">$sql</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;stop&nbsp;timer,&nbsp;the&nbsp;query&nbsp;is&nbsp;used&nbsp;as&nbsp;reference</span></div></li>
+</ol>
+				To attach the result of the query to the message, use the <a href="../PhpToolCase/ProcedurePtcDebug.html#functionadd_to_log">add_to_log()</a> function:
+				<ol><li><div class="src-line"><span class="src-comm">/*&nbsp;ATTACHING&nbsp;THE&nbsp;QUERY&nbsp;RESULT&nbsp;TO&nbsp;THE&nbsp;MESSAGE&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/ProcedurePtcDebug.html#functionadd_to_log">add_to_log</a><span class="src-sym">(</span><span class="src-var">$sql</span><span class="src-sym">,</span><span class="src-var">$sql_result</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;attaching&nbsp;the&nbsp;result&nbsp;to&nbsp;the&nbsp;message&nbsp;based&nbsp;on&nbsp;the&nbsp;reference</span></div></li>
+</ol> 
+				See <a href="../PhpToolCase/tutorial_PtcDebug.cls.html#addToLog">ADDING DATA TO THE LOG</a> for details over the <a href="../PhpToolCase/ProcedurePtcDebug.html#functionadd_to_log">add_to_log</a> function.</p><hr /></span>
+	<span><a name="setErrorHandler"></a><h2 class="title">REPLACING ERROR HANDLER</h2><p>The method setErrorHandler() is used to force the replacement of the built in php error handler even if the debug panel is not shown 
+			(see <a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.replace_error_handler">replace_error_handler</a>).
+			This is usefull for production environment, for the simple reason that if an error occurs the user will not see information about the error.
+			This method could also be used with the parameter set to <strong>&quot;false&quot;</strong>, so that if fatal error occurs, script execution will still continue.
+			Keep in mind that if you expect the script to die on error, this parameter should be left set to <strong>&quot;true&quot;</strong> 
+			(see <a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.die_on_error">die_on_error</a>).
+			<ol><li><div class="src-line"><span class="src-comm">//&nbsp;replace&nbsp;php&nbsp;built&nbsp;in&nbsp;error&nbsp;handler</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../PhpToolCase/PtcDebug.html">PtcDebug</a></span><span class="src-sym">::</span><a href="../PhpToolCase/PtcDebug.html#methodsetErrorHandler">setErrorHandler</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;replace&nbsp;php&nbsp;built&nbsp;in&nbsp;error&nbsp;handler&nbsp;and&nbsp;continue&nbsp;execution&nbsp;if&nbsp;fatal&nbsp;error&nbsp;occurs</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../PhpToolCase/PtcDebug.html">PtcDebug</a></span><span class="src-sym">::</span><a href="../PhpToolCase/PtcDebug.html#methodsetErrorHandler">setErrorHandler</a><span class="src-sym">(</span><span class="src-id">false</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p></span>
+	<span><a name="watchVar"></a><h2 class="title">INSPECTING VARIABLE CHANGES</h2><p>To check if a given variable has changed, the function <a href="../PhpToolCase/ProcedurePtcDebug.html#functionwatch_var">watch_var()</a> with the option 
+			<strong>&quot;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.enable_inspector">enable_inspector</a>&quot;</strong> set to <strong>&quot;true&quot;</strong> can be used:
+			<ol><li><div class="src-line"><span class="src-comm">/*&nbsp;WATCHING&nbsp;A&nbsp;VARIABLE&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">declare</span><span class="src-sym">(</span><span class="src-id">ticks</span>=<span class="src-num">1</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$var</span>=<span class="src-str">'some&nbsp;test'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../PhpToolCase/ProcedurePtcDebug.html#functionwatch_var">watch_var</a><span class="src-sym">(</span><span class="src-str">'var'</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;passing&nbsp;the&nbsp;variable&nbsp;without&nbsp;the&nbsp;&quot;$&quot;&nbsp;symbol</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$var</span>=<span class="src-str">'some&nbsp;new&nbsp;value'</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;the&nbsp;variable&nbsp;changed</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+</ol> 
+			For the backtrace to work, the variable must be inside the declare(ticks=n) code block. 
+			As an alternative you can use the option <strong>&quot;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.declare_ticks">declare_ticks</a>&quot;</strong> and the class will declare ticks globally, 
+			but keep in mind that the backtrace might not be as precise.</p></span>
+	<span><a name="fileInspector"></a><h2 class="title">INSPECTING SOURCE CODE</h2><p>The file inspector can be used to inspect source code. This option is automatically available if session_start() is used,
+			the file names in the panels will have an anchor that will open a popup window with the content of the file and the highlighted line of code if any.</p></span>
+	<span><a name="addToLog"></a><h2 class="title">ADDING DATA TO THE LOG</h2><p>Data can be attached to a message after <a href="../PhpToolCase/ProcedurePtcDebug.html#functionlog_msg">log_msg()</a> and <a href="../PhpToolCase/ProcedurePtcDebug.html#functionlog_sql">log_sql()</a> functions are called, with the <a href="../PhpToolCase/ProcedurePtcDebug.html#functionadd_to_log">add_to_log()</a> function.
+			This is quite usefull if you are timing the execution of some code or a database query. The parameter <strong>&quot;$reference&quot;</strong> is the equivalent 
+			of the <strong>&quot;$statement&quot;</strong> parameter for the <a href="../PhpToolCase/ProcedurePtcDebug.html#functionlog_msg">log_msg()</a> or <a href="../PhpToolCase/ProcedurePtcDebug.html#functionlog_sql">log_sql()</a> functions which should be called before <a href="../PhpToolCase/ProcedurePtcDebug.html#functionadd_to_log">add_to_log()</a>.</p>
+		<p>See <a href="../PhpToolCase/tutorial_PtcDebug.cls.html#stopTimer">EXECUTION TIMING</a> for practical examples.</p></span>
+	<span><a name="hidePanels"></a><h2 class="title">HIDING PANELS</h2><p>To load the interface faster, panels that are not required can be hidden. This can be done either by using the options available on initialization 
+			<strong>(see &quot;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.show_messages">show_messages</a>&quot;,&quot;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.show_globals">show_globals</a>&quot;,&quot;<a href="../PhpToolCase/tutorial_PtcDebug.cls.html#_defaultOptions.show_sql">show_sql</a>&quot;)</strong> 
+			or by sending the <strong>&quot;$_GET&quot;</strong> parameter <strong>&quot;hidepanels&quot;</strong> in the url:</p>
+		<p>These are all the possibile options for the <strong>&quot;hidepanels&quot;</strong> parameter:
+			<ol><li>sql</li>
+					<li>globals</li>
+					<li>msg</li>
+					<li>all (uses all options above)</li>
+					<li>none (shows all panels)</li></ol>
+			This parameter accepts multiple values separated by coma, Ex: sql,globals.</p></span>
+	<span><a name="setup_examples"></a><h2 class="title">TYPICAL SETUP EXAMPLES</h2><p>The following sections will demonstrate 3 different setup examples depending on the circumstances.</p>
+		<a name="setup_examples.develop_setup"></a><h3 class="title">Setup for development</h3><p>This example,demostrates how to configure and load the interface under testing environment:
+				<ol><li><div class="src-line"><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'PtcDebug.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$_GET</span><span class="src-sym">[</span><span class="src-str">'debug'</span><span class="src-sym">]</span>=<span class="src-id">true</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;turn&nbsp;on&nbsp;the&nbsp;debug</span></div></li>
+<li><div class="src-line"><span class="src-comm">//$_GET['debugOff']=true;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;turn&nbsp;off&nbsp;debug</span></div></li>
+<li><div class="src-line"><span class="src-var">$debug_options</span>=<span class="src-key">array</span></div></li>
+<li><div class="src-line"><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'session_start'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line"><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-id"><a href="../PhpToolCase/PtcDebug.html">PtcDebug</a></span><span class="src-sym">::</span><a href="../PhpToolCase/PtcDebug.html#methodload">load</a><span class="src-sym">(</span><span class="src-var">$debug_options</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p><hr />
+		<a name="setup_examples.develop_setup"></a><h3 class="title">Production environment</h3><p>This example,demostrates how to configure and load the interface under production environment:
+				<ol><li><div class="src-line"><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'PtcDebug.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-comm">//&nbsp;replace&nbsp;php&nbsp;built&nbsp;in&nbsp;error&nbsp;handler&nbsp;and&nbsp;continue&nbsp;execution&nbsp;if&nbsp;fatal&nbsp;error&nbsp;occurs</span></div></li>
+<li><div class="src-line"><span class="src-id"><a href="../PhpToolCase/PtcDebug.html">PtcDebug</a></span><span class="src-sym">::</span><a href="../PhpToolCase/PtcDebug.html#methodsetErrorHandler">setErrorHandler</a><span class="src-sym">(</span><span class="src-id">false</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$debug_options</span>=<span class="src-key">array</span></div></li>
+<li><div class="src-line"><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'url_key'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'someKey'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'url_pass'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'somePass'</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;use&nbsp;a&nbsp;complicated&nbsp;string!</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'replace_error_handler'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">false</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;has&nbsp;been&nbsp;replaced&nbsp;already</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'allowed_ips'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-num">1.2.3.4</span><span class="src-sym">,</span><span class="src-num">2.3.4.5</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;array&nbsp;of&nbsp;ip's</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'show_interface'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span></div></li>
+<li><div class="src-line"><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-id"><a href="../PhpToolCase/PtcDebug.html">PtcDebug</a></span><span class="src-sym">::</span><a href="../PhpToolCase/PtcDebug.html#methodload">load</a><span class="src-sym">(</span><span class="src-var">$debug_options</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p><hr />
+		<a name="setup_examples.ajaxDebug_setup"></a><h3 class="title">Ajax debugging (chrome only)</h3><p>This example,demostrates how to configure and show the buffer messages in the Chrome browser console. Particularly usefull to debug ajax
+				scripts. Keep in mind that this setup needs phpConsole class and the Chorome extension installed to work. Make sure you have downloaded the <a href="https://github.com/ifsale/PhpToolCase/tree/master/PhpConsole">phpConsole class</a> from the repository, and install the <a href="https://chrome.google.com/webstore/detail/nfhmhhlpfleoednkpnnnkolmclajemef">Chrome browser extension</a> before starting to use this class to send messages to the console.
+				<ol><li><div class="src-line"><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'PtcDebug.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$debug_options</span>=<span class="src-key">array</span></div></li>
+<li><div class="src-line"><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'replace_error_handler'&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;replace&nbsp;error&nbsp;handler</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'die_on_error'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">false</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;continue&nbsp;if&nbsp;fatal&nbsp;error</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'debug_console'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;send&nbsp;buffer&nbsp;to&nbsp;js&nbsp;console</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'check_referer'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;check&nbsp;if&nbsp;referer&nbsp;has&nbsp;key&nbsp;and&nbsp;pass.</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'show_interface'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">false&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;don't&nbsp;show&nbsp;interface,&nbsp;only&nbsp;console</span></div></li>
+<li><div class="src-line"><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-id"><a href="../PhpToolCase/PtcDebug.html">PtcDebug</a></span><span class="src-sym">::</span><a href="../PhpToolCase/PtcDebug.html#methodload">load</a><span class="src-sym">(</span><span class="src-var">$debug_options</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p><hr /></span></div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="33%" align="left" valign="top">Prev</td>
+<td width="34%" align="center" valign="top">&nbsp;</td>
+<td width="33%" align="right" valign="top"><a href=
+"../PhpToolCase/tutorial_PtcDb.cls.html">Next</a></td>
+</tr>
+
+<tr>
+<td width="33%" align="left" valign="top"></td>
+<td width="34%" align="center" valign="top"></td>
+<td width="33%" align="right" valign="top">PtcDb User Guide</td>
+</tr>
+</table>
+        <div class="credit">
+		    <hr class="separator" />
+		    Documentation generated on Fri, 30 Aug 2013 15:28:52 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+<!-- Start of StatCounter Code for Default Guide -->
+									<script type="text/javascript">
+									var sc_project=7779914; 
+									var sc_invisible=1; 
+									var sc_security="4a86be8b"; 
+									</script>
+									<script type="text/javascript"
+									src="http://www.statcounter.com/counter/counter.js"></script>
+									<noscript><div class="statcounter"><a title="tumblr page
+									counter" href="http://statcounter.com/tumblr/"
+									target="_blank"><img class="statcounter"
+									src="http://c.statcounter.com/7779914/0/4a86be8b/1/"
+									alt="tumblr page counter"></a></div></noscript>
+									<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
