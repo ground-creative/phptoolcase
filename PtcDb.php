@@ -1,6 +1,6 @@
 <?php
 	/**
-	* MYSQL PARSING AND MANIPULATING CLASS 
+	* MYSQL QUERY HELPER CLASS 
 	* PHP version 5
 	* @category 	Framework
 	* @package  	PhpToolCase
