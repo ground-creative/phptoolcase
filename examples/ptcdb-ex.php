@@ -1,11 +1,11 @@
 <?
 	#### db details needed for the example to work ##########
-	$db['host']="localhost";
-	$db['user']="irony";
-	$db['pass']="hunter001";
-	$db['database']="test_ptcdb";
+	$db['host']="localhost";				# mysql host
+	$db['user']="mysql user";			# mysql user
+	$db['pass']="mysql pass";			# mysql pass
+	$db['database']="database name";	# mysql database name
 	#########################################
-	
+
 	# initialize the class
 	require_once('../PtcDb.php');
 	$ptc=new PtcDb();			
