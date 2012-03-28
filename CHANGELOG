@@ -1,15 +1,45 @@
 
 ##########################################################
 
-PhpToolCase Version 0.7 open source project
+PhpToolCase Version 0.8.1 open source project
 
 A powerfull set of tools to speed up the process of coding
 
 ##########################################################
 
+== BACKWARD COMPATIILITY ========================================
 
+Version 0.8.1 is fully compatible with previous version(0.7)
 
 == CHANGELOG ===================================
+
+
+- Version 0.8.1
+
+	PtcDb.php:
+
+		-	changed the way the buffer log behaves to add the result.
+
+	PtcDebug.php:
+	
+		-	changed the _debugTrace method to evolve the backtrace php 
+		-	changecd the way add to buffer behaves to add result for sql queries
+		
+		
+- Version 0.8.b
+
+	PtcDebug.php:
+	
+		-	changed the _debugTrace method to evolve the backtrace php 
+		-	added remove class methods
+		-	added remove require_once, include and require, 
+		-	added check which class has the method
+		-	added js to open close <pre></pre> tags
+		
+	PtcDb.php:
+
+		-	removed the _tracePhp, the function and class param from the debug buffer, 
+			the class should now be able to send a correct debug message without it.
 
 
 - Version 0.7

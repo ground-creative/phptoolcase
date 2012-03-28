@@ -18,7 +18,7 @@
 	
 	PtcDebug::debugLoader($options);
 
-	PtcDebug::bufferLog('debug self initialized ','this is the result msg');
+	PtcDebug::log('debug self initialized ','this is the result msg');
 
 	trigger_error("the rorrss",E_USER_NOTICE);
 	
@@ -26,13 +26,13 @@
 	
 	trigger_error("the rorrss333333333333333",E_USER_ERROR);
 	
-	PtcDebug::bufferLog(32,'some statement');	
+	PtcDebug::log('32','some statement');	
 	PtcDebug::stopTimer();
 	
-	PtcDebug::bufferSql("select from where something",'some other statement');
+	PtcDebug::logSql("select from where something",'some other statement');
 	PtcDebug::stopTimer();
 	
-	PtcDebug::bufferLog(array("dasd"=>"dasdsa","daasd"=>"23333333"),'some other statement');
+	PtcDebug::log(array("dasd"=>"dasdsa","daasd"=>"23333333"),'some other statement');
 	
 	function ddas()
 	{
