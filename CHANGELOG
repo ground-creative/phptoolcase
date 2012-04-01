@@ -1,50 +1,28 @@
-
 ##########################################################
 
-PhpToolCase Version 0.7 open source project
+PhpToolCase Version 0.8.b open source project
 
 A powerfull set of tools to speed up the process of coding
 
 ##########################################################
 
 
+== BACKWARD COMPATIILITY ========================================
 
-== CHANGELOG ===================================
+Version 0.8.b is fully compatible with previous version
 
-
-- Version 0.7
-
-	PtcDb.php:
-	
-	-	removed xmlBuilder() method as it does not belong to the mysql class
-	
-	PtcDebug.php:
-	
-	-	added code to parse $_GET from referer, to be able to debug from ajax calls
-	
-	-	changed the debugLoader function and made all the vars empty as default
-	
-	-	renamed startDebug to debugLoader and the function to callDebug aswell
-	
-
-- Version 0.6
-
-	PtcDb.php:
-	
-	-	added static method selfInstance() to autoinitialize the class
-		
-	PtcDebug.php:
-
-	-	removed the __cunstructor and changed it for a self initialized instance "startDebug()"
-	
-	-	changed the debugLoader function and made all the vars to be passed empty as default
-	
-	-	renamed startDebug to debugLoader and the function to callDebug
-	
-	-	added $_SESSION['debugStarted'] to check  if debugLoader() has already been called
-	
-	- 	readded the __constructor to call $this->debugLoader()
+== CHANGELOG (FROM VERSION 0.7)===================================
 
 
+PtcDebug:
 
+	-	changed the _debugTrace method to evolve the backtrace php 
+	-	added remove class methods
+	-	added remove require_once and include and require, 
+	-	added check which class has the method
+	-	added js to open close <pre></pre> tags
+	
+PtcDb:
 
+	-	removed the _tracePhp, the function and class param from the debug buffer, 
+		the class should now be able to send a correct debug message without it.
