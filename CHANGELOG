@@ -12,7 +12,7 @@ A powerfull set of tools to speed up the process of coding
 == CHANGELOG ===================================
 
 
-- Version 0.5
+- Version 0.7
 
 	PtcDb.php:
 	
@@ -26,10 +26,8 @@ A powerfull set of tools to speed up the process of coding
 	
 	-	renamed startDebug to debugLoader and the function to callDebug aswell
 	
-	- 	readded the __constructor to call $this->debugLoader()
 
-
-- Version 0.4
+- Version 0.6
 
 	PtcDb.php:
 	

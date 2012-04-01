@@ -1,6 +1,10 @@
 <?
 	//session_start();				# start session for persistent debugging
-
+	
+	$_GET['debug']=true;       		# turn on the debug
+	
+	//$_GET['debugOff']=true;    		# turn off debug
+	
 	require_once('../PtcDebug.php');	# include the PtcDebug class
 	
 	$options=array
@@ -29,8 +33,6 @@
 	PtcDebug::stopTimer();
 	
 	PtcDebug::bufferLog(array("dasd"=>"dasdsa","daasd"=>"23333333"),'some other statement');
-	
-	test();
 	
 	function ddas()
 	{
