@@ -4,7 +4,7 @@
 	* PHP version 5
 	* @category 	Framework
 	* @package  	PhpToolCase
-	* @version	0.7
+	* @version	0.8.b
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
@@ -44,21 +44,20 @@
 		{
 			if(class_exists('PtcDebug',true))	# debug
 			{ 
-				PtcDebug::bufferSql($dbUser."@".$dbHost."[".$dbName."]",
-								"connecting to ",__FUNCTION__,__CLASS__);
+				PtcDebug::bufferSql($dbUser."@".$dbHost."[".$dbName."]","Connecting to");
 			}
 			$this->dbLink=@mysql_connect($dbHost,$dbUser,$dbPass) or 
-				trigger_error('Reference '.$ref.' Mysql Error: '.mysql_error(),E_USER_ERROR);
+				trigger_error('Mysql Error: '.mysql_error(),E_USER_ERROR);
 			if(class_exists('PtcDebug',true)){ PtcDebug::stopTimer(); }
 			if($dbName)
 			{ 
 				@mysql_select_db($dbName) or 
-					trigger_error('Reference '.$ref.' Mysql Error: '.mysql_error(),E_USER_ERROR);
+					trigger_error(' Mysql Error: '.mysql_error(),E_USER_ERROR);
 			}
 			if($dbCharset)
 			{ 
 				@mysql_query("SET NAMES '".$dbCharset."'",$this->dbLink) or 
-					trigger_error('Reference '.$ref.' Mysql Error: '.mysql_error(),E_USER_ERROR);
+					trigger_error(' Mysql Error: '.mysql_error(),E_USER_ERROR);
 			}
 		}
 		/**
@@ -70,13 +69,9 @@
 		*/
 		public function sqlToArray($sql,$ref=0)
 		{
-			if(class_exists('PtcDebug',true))	# debug
-			{ 
-				$php_trace=$this->_tracePhp();
-				PtcDebug::bufferSql('ref '.$ref.' '.$sql,'',@$php_trace['function'],__CLASS__); 
-			}
+			if(class_exists('PtcDebug',true)){ PtcDebug::bufferSql('- REF '.$ref.' - '.$sql,''); }# debug
 			$this->queryResults[$ref]=@mysql_query($sql) or 
-				trigger_error('Reference '.$ref.' Mysql Error: '.mysql_error(),E_USER_ERROR);
+				trigger_error('- REF '.$ref.' - Mysql Error: '.mysql_error(),E_USER_ERROR);
 			if(class_exists('PtcDebug',true)){ PtcDebug::stopTimer(); }# debug
 			while($row=@mysql_fetch_array($this->queryResults[$ref],$this->mySqlFlag)){ $result[]=$row; } 
 			return (@$result) ? $result : null;
@@ -90,13 +85,9 @@
 		*/
 		public function executeSql($sql,$ref=0)
 		{
-			if(class_exists('PtcDebug',true))	# debug
-			{ 
-				$php_trace=$this->_tracePhp();
-				PtcDebug::bufferSql('ref '.$ref.' '.$sql,'',@$php_trace['function'],__CLASS__); 
-			}
+			if(class_exists('PtcDebug',true)){ PtcDebug::bufferSql('- REF '.$ref.' - '.$sql); }# debug
 			$this->queryResults[$ref]=@mysql_query($sql) or
-				trigger_error('Reference '.$ref.' Mysql Error: '.mysql_error(),E_USER_ERROR);
+				trigger_error('- REF '.$ref.' - Mysql Error: '.mysql_error(),E_USER_ERROR);
 			if(class_exists('PtcDebug',true)){ PtcDebug::stopTimer(); }# debug
 			return  $this->queryResults[$ref];
 		}
@@ -176,10 +167,7 @@
 		public function lastId()
 		{ 
 			$last_id=@mysql_insert_id() or trigger_error('Mysql Error: '.mysql_error(),E_USER_ERROR); 
-			if(class_exists('PtcDebug',true))	# debug
-			{
-				PtcDebug::bufferSql($last_id,"sql last inserted id ",__FUNCTION__,__CLASS__); 
-			}
+			if(class_exists('PtcDebug',true)){ PtcDebug::bufferSql($last_id,"Sql last inserted id"); }# debug
 			return $last_id; 
 		} 
 		/**
@@ -218,15 +206,12 @@
 		**/
 		public function countRows($ref=0)
 		{
-			if(class_exists('PtcDebug',true))	# debug
-			{ 
-				PtcDebug::bufferSql('','',__FUNCTION__,__CLASS__);
-			}
+			if(class_exists('PtcDebug',true)){ PtcDebug::bufferSql(''); }	# debug
 			$result=mysql_num_rows($this->queryResults[$ref]); 
 			if(class_exists('PtcDebug',true))	# debug
 			{ 
 				PtcDebug::stopTimer(); 
-				PtcDebug::addToBuffer('ref '.$ref.' number of rows: '.$result);	# attach result to buffer
+				PtcDebug::addToBuffer('- REF '.$ref.' - number of rows: '.$result);	# attach result to buffer
 			}
 			return $result;
 		}
@@ -239,13 +224,10 @@
 		{
 			if(!$dbLink){ $dbLink=$this->dbLink; }
 			$sql_ref=@mysql_query("SELECT DATABASE()",$dbLink) or 
-				trigger_error('Reference '.$ref.' Mysql Error: '.mysql_error(),E_USER_ERROR);
+				trigger_error('Mysql Error: '.mysql_error(),E_USER_ERROR);
 			$connection=@mysql_result($sql_ref,0) or
-				trigger_error('Reference '.$ref.' Mysql Error: '.mysql_error(),E_USER_ERROR);
-			if(class_exists('PtcDebug',true))	# debug
-			{ 
-				PtcDebug::bufferSql($connection,"closing connection to ",__FUNCTION__,__CLASS__);
-			}
+				trigger_error('Mysql Error: '.mysql_error(),E_USER_ERROR);
+			if(class_exists('PtcDebug',true)){ PtcDebug::bufferSql($connection,"closing connection to"); }
 			@mysql_close($dbLink) or trigger_error('Mysql Error: '.mysql_error(),E_USER_ERROR);
 			if(class_exists('PtcDebug',true)){ PtcDebug::stopTimer(); }# debug
 		}
@@ -287,15 +269,6 @@
 				else{ $query_fields="`id` = '".$this->_cleanQuery($fields)."'"; }
 			}
 			return ($query_fields) ? " WHERE ".$query_fields :  "";
-		}
-		/*
-		* Trace php for debugging
-		*/
-		protected function _tracePhp()
-		{
-			$raw_trace=@debug_backtrace();
-			//PtcDebug::bufferLog($raw_trace);
-			return $php_trace=@end($raw_trace);
 		}
  	}
 ?>
