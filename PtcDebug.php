@@ -6,7 +6,7 @@
 	* PHP version 5
 	* @category 	Framework
 	* @package  	PhpToolCase
-	* @version	0.7
+	* @version	0.8.b
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
@@ -259,7 +259,9 @@
 						{ 
 							$html_string=@print_r($html_string,true);
 							$html_string=self::_cleanBuffer($html_string);
-							$html_string="<pre>".$html_string."</pre>";
+							$id="ptc-debug-".rand();
+							$html_string='<a href="#" onclick="showArray(\''.$id.'\',this);return false;">
+							Show Data</a><pre style="display:none" id="'.$id.'">'.$html_string.'</pre>';
 						}
 						else
 						{ 
@@ -270,8 +272,8 @@
 						$buffer['errstr']=($statement) ? $statement." ".$html_string : $html_string;
 						$buffer['errline']=$php_trace['line'];
 						$buffer['errfile']=$php_trace['file'];
-						$buffer['function']=(!$function) ? $php_trace['function'] : $function;
-						$buffer['class']=(!$class) ? $php_trace['class'] : $class;
+						$buffer['function']=(!$function) ? @$php_trace['function'] : $function;
+						$buffer['class']=(!$class) ? @$php_trace['class'] : $class;
 					}
 					@self::$_buffer[]=$buffer;
 				}
@@ -291,7 +293,7 @@
 						$debug_console=($statement) ? $statement." ".$console_string : $console_string;
 						$console_type=$type."[".@end(@explode("/",$buffer['errfile'])).":";
 						$console_type.=$buffer['errline']."]";
-						debug($debug_console,$console_type); 
+						debug($debug_console,$console_type);
 					} 
 				}
 			}	
@@ -313,16 +315,45 @@
 			}
 		}
 		/**
-		* Trace php
+		* Trace php as best as we can
 		*/
 		protected static function _debugTrace()
-		{
+		{										
 			$raw_trace=debug_backtrace();
-			$php_trace=end($raw_trace);
-			@$php_trace['class']=(@$php_trace['class']==__CLASS__) ? null : @$php_trace['class'];
-			$thisMethods=get_class_methods(__CLASS__);
-			$php_trace['function']=(in_array($php_trace['function'],$thisMethods)) ? null : 
-															$php_trace['function'];
+			$this_methods=get_class_methods(__CLASS__);
+			unset($this_methods[$key=array_search('debugLoader',$this_methods)]);
+			unset($this_methods[$key=array_search('bufferSql',$this_methods)]);
+			unset($this_methods[$key=array_search('bufferLog',$this_methods)]);
+			$classes=array();
+			foreach($raw_trace as $k=>$arrV)
+			{	
+				$classes[]=@$arrV['class'];
+				if(@in_array(@$arrV['function'],self::$_excludeTrace)/*exclude some functions*/ || 
+					@in_array(@$arrV['function'],$this_methods)/*exclude this class methods*/ || 
+						 @preg_match("|__|",@$arrV['function'])/*exclude all magic methods*/)
+				{
+					unset($raw_trace[$k]); 
+				}
+			}
+			$raw_trace=@array_values($raw_trace);
+			$php_trace=@end($raw_trace);
+			$classes=@array_filter($classes);
+			$classes=@array_unique($classes);
+			if(@$classes)	# try to find which class called the method
+			{
+				foreach($classes as $class_name)
+				{
+					if(@in_array(@$php_trace['function'],$class_methods=@get_class_methods($class_name)))
+					{
+						$php_trace['class']=$class_name;
+					}
+				}
+			}		
+			if(@$php_trace['class']=="PtcDebug" &&  @$php_trace['function']!="debugLoader")
+			{
+				$php_trace['class']=null;
+				$php_trace['function']=null;
+			}
 			return $php_trace;
 		}
 		/**
@@ -393,28 +424,36 @@
 		}
 		/**
 		* Check message types
-		* @param	string|numeric		(php standards)
+		* @param	string|numeric		php standards
 		*/
 		protected static function _msgType($msg=NULL)
 		{
 			switch($msg)
 			{
-				case E_NOTICE:
-				case E_USER_NOTICE:
+				case @E_NOTICE:
+				case @E_USER_NOTICE:
+				case @E_DEPRECATED:
+				case @E_USER_DEPRECATED:
+				case @E_STRICT:
 					return "Php Notice";
 				break;
-				case E_WARNING:
-				case E_USER_WARNING:
+				case @E_WARNING:
+				case @E_USER_WARNING:
+				case @E_CORE_WARNING:
+				case @E_COMPILE_WARNING:
 					return "Php Warning";
 				break;
-				case E_ERROR:
-				case E_RECOVERABLE_ERROR:
-				case E_USER_ERROR:
+				case @E_ERROR:
+				case @E_RECOVERABLE_ERROR:
+				case @E_USER_ERROR:
+				case @E_CORE_ERROR:
+				case @E_COMPILE_ERROR:
 					return "Php Error";
 				break;
 				default:return "Message";break;
 			}
 		}
+
 		/**
 		* Build the html log and sql tables
 		* @param	string	$type	sql|log
@@ -666,6 +705,19 @@
 							element.display=\'none\'; 
 						}
 					};
+					function showArray(elId,linkEl)
+					{
+						if(document.getElementById(elId).style.display=="none")
+						{ 	
+							linkEl.innerHTML="Hide Data";
+							document.getElementById(elId).style.display=\'\'; 
+						}
+						else
+						{ 
+							linkEl.innerHTML="Show Data";
+							document.getElementById(elId).style.display=\'none\'; 
+						}
+					};
 					window.onload=function() 
 					{
 						var div=document.getElementById("statusBar");
@@ -747,6 +799,11 @@
 		* @see stopTimer()
 		*/
 		private static $_endTime=null;
+		/**
+		* Exclude functions in this array from the backtrace
+		* @var	array
+		*/
+		private static $_excludeTrace=array("require","require_once","include");
 		/**
 		* Remove html entities from the buffer
 		* @param	string	$var		some string
