@@ -2,8 +2,8 @@
 UI-PLUGINS FOR PTCFORMS COMPONENT:
 
 
-- ptc-forms-ui-.js				Plugin to add jquery-ui styles to form fields 
-- ptc-forms-validator.js			Plugin to validate form with jquery validator
+- ptc-forms-ui-.js			Plugin to add jquery-ui styles to form fields 
+- ptc-forms-validator.js		Plugin to validate form with jquery validator
 
 
 **If you wish to use one of these plugins, you will need to add the following lines to the header of your page:
