@@ -1,4 +1,4 @@
-<?php
+<?php 
 	/**
 	* MYSQL QUERY HELPER CLASS 
 	* PHP version 5
