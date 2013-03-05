@@ -1,6 +1,6 @@
 
 EXAMPLE FILES FOR ALL LIBRARY COMPONENTS:
-
+ 
 
 - ptcdebug-ex.php				debugger & logger examples file
 - ptcdb-ex.php					mysql query helper examples file
