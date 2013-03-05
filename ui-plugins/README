@@ -1,0 +1,31 @@
+
+UI-PLUGINS FOR PTCFORMS COMPONENT:
+
+
+- ptc-forms-ui-.js				Plugin to add jquery-ui styles to form fields 
+- ptc-forms-validator.js			Plugin to validate form with jquery validator
+
+
+**If you wish to use one of these plugins, you will need to add the following lines to the header of your page:
+
+
+Jquery-ui core files:
+<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css" rel="stylesheet" /> 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+
+For the validator plugin download ptcforms-validator.js and add this code to the header of the page:
+<link type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.0.0/jquery.qtip.min.css" rel="stylesheet" />
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.0.0/jquery.qtip.min.js"></script> 
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="ptc-forms-validator.js"></script>
+
+To call the validator with a form, use this inside the document ready tags:
+$("form").validate();
+
+For the ui-form plugin download ptc-forms-ui.js and add this code to the header of the page:
+<script src="ptc-forms-ui.js" type="text/javascript"></script>
+
+Use this inside the document ready tags to apply styles to a form:
+$("form").form();
+
