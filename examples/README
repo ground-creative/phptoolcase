@@ -2,7 +2,6 @@
 EXAMPLE FILES FOR ALL LIBRARY COMPONENTS:
 
 
-
 - ptcdebug-ex.php				debugger & logger examples file
 - ptcdb-ex.php					mysql query helper examples file
 - ptcforms-ex1.php				Dynamic Forms login form example file
