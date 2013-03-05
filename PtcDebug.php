@@ -1,4 +1,4 @@
-<?php
+<?php 
 	/**
 	* DEBUGGER & LOGGER CLASS
 	* <br>All class properties and methods are static because it's required 
