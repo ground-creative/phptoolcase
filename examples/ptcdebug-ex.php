@@ -1,4 +1,5 @@
 <?
+
 	//session_start();				# start session for persistent debugging
 	
 	$_GET['debug']=true;       		# turn on the debug
