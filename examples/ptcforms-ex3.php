@@ -14,7 +14,7 @@
 	require_once('../PtcForms.php');
 	$ptc=new PtcForms($options);
 	
-	echo'<html><head>';
+	echo'<!DOCTYPE html><html><head>';
 		
 	/* (OPTIONAL) INCLUDE JS FOR JQUERY VALIDATOR AND STYLES */
 	//require_once("ptcforms-ui-plugins.php");
