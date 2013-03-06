@@ -14,6 +14,10 @@
 	class PtcDebug
 	{
 		/**
+		* Alias of {@link PtcDebug::debugLoader()}
+		*/
+		public function load($options=null){ self::debugLoader($options); }
+		/**
 		* Alias of {@link PtcDebug::bufferLog()}
 		*/
 		public static function log($string,$statement=null,$function=null,$class=null)
