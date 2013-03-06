@@ -16,7 +16,7 @@
 	
 	PtcDebug::setErrorHandler($options['die_on_error']);# set error handler to be the debug class
 	
-	PtcDebug::debugLoader($options);
+	PtcDebug::load($options);
 
 	PtcDebug::log('debug self initialized ','this is the result msg');
 
