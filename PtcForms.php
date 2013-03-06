@@ -106,7 +106,7 @@
 		/**
 		* Alias of {@link render()}
 		*/
-		public function renderForm($attributes=array(),$events=array()){ $this->render($attributes,$events); }
+		public function renderForm($attributes=array(),$events=array()){ return $this->render($attributes,$events); }
 		/**
 		* Alias of {@link validate()}
 		*/
