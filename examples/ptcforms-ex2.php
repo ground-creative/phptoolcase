@@ -5,21 +5,21 @@
 	*/
 
 	### PARAMATERS FOR THE EXAMPLE ################
-	$email_address="me@example.com"; 
-	$mail_subject="TEST CONTACT FORM";
+	$email_address='me@example.com'; 
+	$mail_subject='TEST CONTACT FORM';
 	#########################################
 
 	/* INITIALIZE THE CLASS WITH SOME OPTIONS */
 	$options=array
 	(
-		"add_class_validator"	=>	true,
-		"form_width"			=>	"400px",
-		"labels_align"			=>	"right",
-		"spacer_height"		=>	"10px",
+		'add_class_validator'	=>	true,
+		'form_width'			=>	'400px',
+		'labels_align'			=>	'right',
+		'spacer_height'		=>	'10px',
 	);
 	
 	require_once('../PtcForms.php');
-	$ptc=new PtcForms($options);
+	$form=new PtcForms($options);
 	
 	echo '<!DOCTYPE html><html><head>';
 	
@@ -34,52 +34,77 @@
 	</style>';
 	
 	/* ADDING A TEXT FIELD */
-	$ptc->addField('text','ct_firstname');
-	$ptc->addFieldLabel('ct_firstname','Firstname:*');
-	$ptc->addFieldValidator('ct_firstname','required');
+	$form->addElement(array
+	(
+		'name'	=>		'ct_firstname',
+		'label'	=>		'Firstname:*',
+		'validate'	=>		'required'
+	));
 
 	/* ADDING A TEXT FIELD */
-	$ptc->addField('text','ct_lastname');
-	$ptc->addFieldLabel('ct_lastname','Lastname:*');
-	$ptc->addFieldValidator('ct_lastname','required');
+	$form->addElement(array
+	(
+		'name'	=>		'ct_lastname',
+		'label'	=>		'Lastname:*',
+		'validate'	=>		'required'
+	));
 	
 	/* ADDING A TEXT FIELD */
-	$ptc->addField('text','ct_email');
-	$ptc->addFieldLabel('ct_email','Your email:*');
-	$ptc->addFieldValidator('ct_email',array('required','email'));
+	$form->addElement(array
+	(
+		'name'	=>		'ct_email',
+		'label'	=>		'Your email:*',
+		'validate'	=>		array('required','email')
+	));
 	
 	/* ADDING A TEXT FIELD */
-	$ptc->addField('text','ct_phone');
-	$ptc->addFieldLabel('ct_phone','Your phone:*');
-	$ptc->addFieldValidator('ct_phone','required');
+	$form->addElement(array
+	(
+		'name'	=>		'ct_phone',
+		'label'	=>		'Your phone:*',
+		'validate'	=>		'required'
+	));
 	
 	/* ADDING A SELECT FIELD */
-	$ptc->addField('select','ct_reason');
-	$ptc->addFieldLabel('ct_reason','Contact reason:*');
-	$ptc->addFieldValues('ct_reason',array(""=>"Choose","enquiry"=>"Enquiry",
-				"information"=>"Information","billing"=>"Billing","other"=>"Other"));
-	$ptc->addFieldValidator('ct_reason','required');
+	$values=array(''=>'Choose','enquiry'=>'Enquiry','information'=>'Information',
+										'billing'=>'Billing','other'=>'Other');
+	$form->addElement(array
+	(
+		'type'	=>	'select',
+		'name'	=>	'ct_reason',
+		'label'	=>	'Contact reason:*',
+		'values'	=>	$values,
+		'validate'	=>	'required'
+	));
 	
 	/* ADDING A TEXTAREA FIELD */
-	$ptc->addField('textarea','ct_message');
-	$ptc->addFieldLabel('ct_message','Write a message:*');
-	$ptc->addFieldAttributes('ct_message',array("rows"=>"7"));
-	$ptc->addFieldValidator('ct_message','required');
+	$form->addElement(array
+	(
+		'type'		=>		'textarea',
+		'name'		=>		'ct_message',
+		'label'		=>		'Write message:*',
+		'attributes'	=>		array('rows'=>7),
+		'validate'		=>		'required'
+	));
 	
 	/* ADDING A SUBMIT BUTTON */
-	$ptc->addField('submit','ct_contact_me');
-	$ptc->addFieldValue('ct_contact_me','Submit');
-	$ptc->fieldParentEl('ct_contact_me',array("style"=>"text-align:right;"));
+	$form->addElement(array
+	(
+		'type'		=>	'submit',
+		'name'		=>	'ct_contact_me',
+		'value'		=>	'Submit',
+		'parentEl'		=>	array('style'=>'text-align:right;')
+	));
 
-	$err_msg="";
+	$err_msg='';
 	$sent=false;
 	if(isset($_POST['ct_contact_me']))
 	{
-		$validate=$ptc->validate();	# validate the form
+		$validate=$form->validate();	// validate the form
 		if(!$validate['isValid'])
 		{
 			$err_msg='<div class="errMsg" style="text-align:center;width:'.$options['form_width'].'">
-										Something went wrong. Please review the form!</div><br>';
+									Something went wrong. Please review the form!</div><br>';
 		}
 		else	/* form is valid, let's build the email and send it */
 		{	
@@ -103,7 +128,7 @@
 		echo $err_msg;
 		
 		/* FINALLY RENDER THE FORM */
-		$test=$ptc->render();
+		$test=$form->render();
 	}
 	echo'</body></html>';
 ?>
