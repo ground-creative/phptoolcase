@@ -7,12 +7,12 @@
 	/* INITIALIZE THE CLASS WITH SOME OPTIONS */	
 	$options=array
 	(
-		"add_class_validator"	=>	true,
-		"form_width"			=>	"500px",
-		"spacer_height"		=>	"10px;",
+		'add_class_validator'	=>	true,
+		'form_width'			=>	'500px',
+		'spacer_height'		=>	'10px;',
 	);
 	require_once('../PtcForms.php');
-	$ptc=new PtcForms($options);
+	$form=new PtcForms($options);
 	
 	echo'<!DOCTYPE html><html><head>';
 		
@@ -27,68 +27,107 @@
 		</style>';
 
 	/* ADDING A SPACER */
-	$ptc->addField("custom","spacer1");
-	$ptc->addFieldValue("spacer1",$ptc->addSpacer("3px"));
+	$form->addElement(array
+	(
+		'type'	=>		'custom',
+		'name'	=>		'spacer1',
+		'value'	=>		$form->addSpacer('3px')
+	));
 
 	/* ADDING A TEXT FIELD */
-	$ptc->addField("text","reg_name");
-	$ptc->addFieldLabel("reg_name","Username:*");
-	$ptc->addFieldValidator("reg_name","required");
+	$form->addElement(array
+	(
+		'name'	=>		'reg_name',
+		'label'	=>		'Username:*',
+		'validate'	=>		'required'
+	));
 	
 	/* ADDING A PASSWORD FIELD */
-	$ptc->addField("password","reg_password");
-	$ptc->addFieldLabel("reg_password","Password:*");
-	$ptc->addFieldValidator("reg_password","required");
+	$form->addElement(array
+	(
+		'type'	=>		'password',
+		'name'	=>		'reg_password',
+		'label'	=>		'Password:*',
+		'validate'	=>		'required'
+	));
 	
 	/* ADDING A PASSWORD FIELD */
-	$ptc->addField("password","reg_password1");
-	$ptc->addFieldLabel("reg_password1","Confirm Password:*");
-	$ptc->addFieldValidator("reg_password1",array("required","equalTo"=>"reg_password"));
+	$form->addElement(array
+	(
+		'type'	=>		'password',
+		'name'	=>		'reg_password1',
+		'label'	=>		'Confirm Password:*',
+		'validate'	=>		array('required','equalTo'=>'reg_password')
+	));
 	
 	/* ADDING A TEXT FIELD */
-	$ptc->addField("text","reg_email");
-	$ptc->addFieldLabel("reg_email","Email Address:*");
-	$ptc->addFieldValidator("reg_email",array("required","email"));
+	$form->addElement(array
+	(
+		'type'	=>		'text',
+		'name'	=>		'reg_email',
+		'label'	=>		'Email Address:*',
+		'validate'	=>		array("required","email")
+	));
 	
 	/* ADDING A FIELDSET AS CONTAINER FOR THE PREVIOUS FIELDS */
-	$ptc->addField("fieldset","reg_fieldset");
-	$ptc->addFieldLabel("reg_fieldset","User Registration Form");
-	$ptc->addFieldValues("reg_fieldset",array("spacer1","reg_name","reg_password","reg_password1","reg_email"));
-	$ptc->addFieldAttributes("reg_fieldset",array("style"=>"padding:10px;"));
+	$form->addElement(array
+	(
+		'type'		=>		'fieldset',
+		'name'		=>		'reg_fieldset',
+		'label'		=>		'User Registration Form',
+		'values'		=>		array('spacer1','reg_name','reg_password','reg_password1','reg_email'),
+		'attributes'	=>		array('style'=>'padding:10px;')
+	));
 	
 	/* ADDING A RADIOGROUP */
-	$ptc->addField("radiogroup","reg_newsletter");
-	$ptc->addFieldValues("reg_newsletter",array("yes"=>"Yes !!! (please)","no"=>"No (thank you)"));
-	$ptc->addValuesParams("reg_newsletter","labelOptions",array("align"=>"right"));
-	$ptc->addFieldValidator("reg_newsletter","required");
-	$ptc->addFieldAttributes("reg_newsletter=>yes",array("checked"=>true));
+	$form->addElement(array
+	(
+		'type'			=>		'radiogroup',
+		'name'			=>		'reg_newsletter',
+		'values'			=>		array('yes'=>'Yes !!! (please)','no'=>'No (thank you)'),
+		'labelOptions[]'	=>		array('align'=>'right'),	// align labels right
+		'attributes[yes]'	=>		array('checked'=>true),	// set 1 value checked
+		'validate'			=>		'required'
+	));
 	
 	/* ADDING A SPACER */
-	$ptc->addField("custom","spacer2");
-	$ptc->addFieldValue("spacer2",$ptc->addSpacer("1px"));
+	$form->addElement(array
+	(
+		'type'	=>		'custom',
+		'name'	=>		'spacer2',
+		'value'	=>		$form->addSpacer('1px')
+	));
 	
 	/* ADDING A FIELDSET AS CONTAINER FOR THE PREVIOUS FIELDS */
-	$ptc->addField("fieldset","reg_fieldset1");
-	$ptc->addFieldLabel("reg_fieldset1","Signup for our newsletter");
-	$ptc->addFieldValues("reg_fieldset1",array("spacer2","reg_newsletter"));
-	$ptc->addFieldAttributes("reg_fieldset1",array("style"=>"padding:10px;"));
+	$form->addElement(array
+	(
+		'type'		=>		'fieldset',
+		'name'		=>		'reg_fieldset1',
+		'label'		=>		'Signup for our newsletter',
+		'values'		=>		array('spacer2','reg_newsletter'),
+		'attributes'	=>		array('style'=>'padding:10px;')
+	));
 	
 	/* ADDING A SUBMIT BUTTON */
-	$ptc->addField("submit","reg_send");
-	$ptc->addFieldValue("reg_send","Register");
-	$ptc->fieldParentEl("reg_send",array("style"=>"text-align:right"));
+	$form->addElement(array
+	(
+		'type'		=>	'submit',
+		'name'		=>	'reg_send',
+		'value'		=>	'Register',
+		'parentEl'		=>	array('style'=>'text-align:right;')
+	));
 	
 	echo'</head><body>
 	<div id="switcher"></div>';
 	$ok=false;
-        $err_msg="";
+        $err_msg='';
 	if(isset($_POST['reg_send']))
 	{
-		$validate=$ptc->validate();	# validate the form with php
+		$validate=$form->validate();	// validate the form with php
 		if(!$validate['isValid'])
 		{
 			$err_msg='<div class="errMsg" style="text-align:center;width:'.$options['form_width'].'">
-										Something went wrong. Please review the form!</div><br>';
+									Something went wrong. Please review the form!</div><br>';
 		}
 		else	/* register new user we could use a sql query here */
 		{
@@ -100,7 +139,7 @@
 	{ 
 		echo '<div><h1>New User Registration</h1></div>';
 		echo $err_msg;
-		$ptc->render();
+		$form->render();
 	}
 	echo'</body></html>';
 ?>
