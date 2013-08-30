@@ -5,9 +5,9 @@
 	*/
 
 	### PARAMATERS FOR THE EXAMPLE ###############
-	$redirect_page="http://www.google.com/"; 	# the landing page if login was successfull
-	$user="test";							# login username
-	$pass=md5("test1");					# login password
+	$redirect_page="http://www.google.com/"; 	// the landing page if login was successfull
+	$user="test";							// login username
+	$pass=md5("test1");					// login password
 	#########################################
 	
 	@session_start();
@@ -17,7 +17,7 @@
 	{
 		$_POST['lg_username']=$_COOKIE['cookname'];
 		$_POST['lg_password']=$_COOKIE['cookpass'];
-		if($valid_login=chek_login()){ $_SESSION['loggedIn']=true; }
+		if($valid_login=check_login()){ $_SESSION['loggedIn']=true; }
 	}
 	if(@$_SESSION['loggedIn']){ header('Location: '.$redirect_page); exit(); }
 
@@ -26,14 +26,14 @@
 	/* INITIALIZE THE CLASS WITH SOME OPTIONS */
 	$options=array
 	(
-		"add_class_validator"	=>	true,	# adding js validation
-		"keep_values"			=>	false,	# remove posted values from the inputs
-		"labels_align"			=>	"right",	# align labels right
-		"form_width"			=>	"410px",	# form width in pixels
-		"spacer_height"		=>	"10px;"	# spacer height between fields
+		'add_class_validator'	=>	true,	// adding js validation
+		'keep_values'			=>	false,	// remove posted values from the inputs
+		'labels_align'			=>	'right',	// align labels right
+		'form_width'			=>	'415px',	// form width in pixels
+		'spacer_height'		=>	'10px;'	// spacer height between fields
 	);
 	require_once('../PtcForms.php');
-	$ptc=new PtcForms($options);
+	$form=new PtcForms($options);
 	
 	echo'<!DOCTYPE html><html><head>';
 	
@@ -48,39 +48,59 @@
 		</style>';
 	
 	/* ADDING A TEXT FIELD */
-	$ptc->addField('text','lg_username');	
-	$ptc->addFieldLabel('lg_username','Username:');
-	$ptc->addFieldValidator('lg_username','required');
+	$form->addElement(array
+	(
+		'name'	=>	'lg_username',
+		'label'	=>	'Username:',
+		'validate'	=>	'required'
+	));
 	
 	/* ADDING A PASSWORD FIELD */
-	$ptc->addField('password','lg_password');	
-	$ptc->addFieldLabel('lg_password','Password:');
-	$ptc->addFieldValidator('lg_password',array('required',"custom"=>"check_login"));
+	$form->addElement(array
+	(
+		'type'	=>	'password',
+		'name'	=>	'lg_password',
+		'label'	=>	'Password:',
+		'validate'	=>	array('required','check_login')
+	));
 	
 	/* ADDING A CHECKBOX */
-	$ptc->addField("checkbox","lg_keep_login");
-	$ptc->addFieldLabel("lg_keep_login","Remember me");
-	$ptc->fieldParentEl('lg_keep_login',array("style"=>"text-align:right;"));
-	if(isset($_POST['lg_keep_login'])){ $ptc->addFieldAttributes("lg_keep_login",array("checked"=>true)); }
+	$checkbox=array
+	(
+		'type'	=>	'checkbox',
+		'name'	=>	'lg_keep_login',
+		'label'	=>	'Remember me',
+		'parentEl'	=>	array('style'=>'text-align:right;')
+	);
+	/* ADDING CHECKED AS ATTRIBUTE IF FORM WAS SENT */
+	if(isset($_POST['lg_keep_login'])){ $checkbox['attributes']=array('checked'=>true); }
+	$form->addElement($checkbox);
 
 	/* ADDING A SUBMIT BUTTON */
-	$ptc->addField("submit","lg_login");	
-	$ptc->addFieldValue('lg_login','Login');
-	$ptc->fieldParentEl('lg_login',array("style"=>"text-align:right;margin-right:5px;"));
-	$ptc->addFieldAttributes('lg_login',array("style"=>false));	# remove default style for this field only
+	$form->addElement(array
+	(
+		'type'		=>	'submit',
+		'name'		=>	'lg_login',
+		'value'		=>	'Login',
+		'parentEl'		=>	array('style'=>'text-align:right;margin-right:5px;'),
+		'attributes'	=>	array('style'=>false) // remove default style for this field only
+	));
 	
 	/* COMPOSITE FOR CUSTOM LAYOUTS */
-	$ptc->addField('composite','lg_login_box');
-	$ptc->addFieldValues('lg_login_box',array("lg_keep_login",'lg_login'));	# add previously created fields
-	$fld_style=array("style"=>"width:265px;float:right;");
-	$ptc->addFieldAttributes('lg_login_box',$fld_style);	# add some style attributes
+	$form->addElement(array
+	(
+		'type'		=>	'composite',
+		'name'		=>	'lg_login_box',
+		'values'		=>	array('lg_keep_login','lg_login'),		 // add previously created fields
+		'attributes'	=>	array('style'=>'width:265px;float:right;') 	// add some style attributes
+	));
 		
-	$err_msg="";
+	$err_msg='';
 	if(@$_POST['lg_login'])
 	{
 		/* VALIDATE THE FORM SERVER SIDE */
-		$validate=$ptc->validate();	
-		if(!$validate['isValid'])			# returns a bool(true/false)
+		$validate=$form->validate();	
+		if(!$validate['isValid'])			// returns a bool(true/false)
 		{
 			$err_msg='<div class="errMsg" style="text-align:center;width:'.$options['form_width'].'">
 														Wrong user ID or password!</div><br>';
@@ -88,7 +108,7 @@
 		else
 		{
 		        $_SESSION['loggedIn']=true;
-			if(@$_POST['lg_keep_login'])	# working with the remember me option
+			if(@$_POST['lg_keep_login'])	// working with the remember me option
 			{
 				setcookie("cookname",$user,time()+60*60*24*100, "/");
 				setcookie("cookpass",$pass,time()+60*60*24*100, "/");
@@ -101,7 +121,7 @@
 	echo $err_msg;
 	
 	/* FINALLY RENDER THE FORM */
-	$ptc->render(array("id"=>"loginForm"));	
+	$form->render(array('id'=>'loginForm'));	
 	
 	echo'</body></html>';
 	
@@ -114,13 +134,14 @@
 		###########################################################
 	}
 	
-	# USE THIS FUNCTION IN THE HEADER OF THE PAGES IN THE PROTECTED AREA
-	# TO CHECK IF USER HAS ACCESS
+	/* USE THIS FUNCTION IN THE HEADER OF THE PAGES IN THE PROTECTED AREA 
+	*  TO CHECK IF USER HAS ACCESS
+	*/
 	/*function check_user()
 	{
 		if(!@$_SESSION['loggedIn'])
 		{ 
-			header('Location: login.php'); 		# replace login.php with the full path to the login page
+			header('Location: login.php'); 		// replace login.php with the full path to the login page
 			exit(); 
 		}
 	}*/
