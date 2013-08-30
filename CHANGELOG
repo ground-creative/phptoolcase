@@ -1,45 +1,160 @@
  
 ##########################################################
 
-PhpToolCase Version 0.8.1 open source project
+PhpToolCase Version 0.8.3 open source project
 
 A powerfull set of tools to speed up the process of coding
 
 ##########################################################
 
-== BACKWARD COMPATIILITY ========================================
+== BACKWARD COMPATIILITY (ATTENTION)!!!!! ==================
 
-Version 0.8.1 is fully compatible with previous version(0.7)
+VERSION 0.8.3 IS NOT COMPATIBLE WITH VERSIONS PRIOR TO 0.8.2.B !!!!!!
+
+IF YOU ARE PLANNING TO UPGRADE PLEASE DOWNLOAD VERSION 0.8.2B 
+AS IT WILL NOT BREAK YOUR CODE, AND WILL GIVE YOU TIME TO UPGRADE.
+
 
 == CHANGELOG ===================================
 
+
+- Version 0.8.3:
+
+	PtcForms.php:
+	
+	-	the following methods have been removed:
+	
+		-	addField
+		-	addFieldValue
+		-	addFieldValues
+		-	addFieldEvent
+		-	addFieldEvents
+		-	removeField
+		-	addFieldLabel
+		-	addLabelOptions
+		-	addFieldValidator
+		-	addFieldAttributes
+		-	fieldParentEl
+		-	renderForm
+		-	validateForm
+		-	addValuesParams
+		
+			the add element method can be used as a replacement for all these methods
+
+	PtcDebug:
+	
+	-	the following methods have been removed:
+	
+		-	debugLoader
+		-	log
+		-	logSql
+
+- Version 0.8.2b
+
+	PtcForms.php:
+	
+	-	added the addElement method which makes it a lot easier to add fields to the form	
+	- 	the following methods have been marked as deprecated:
+		
+		-	addField
+		-	addFieldValue
+		-	addFieldValues
+		-	addFieldEvent
+		-	addFieldEvents
+		-	removeField
+		-	addFieldLabel
+		-	addLabelOptions
+		-	addFieldValidator
+		-	addFieldAttributes
+		-	fieldParentEl
+		-	renderForm
+		-	validateForm
+		-	addValuesParams
+		
+			all these methods have been replaced with the addElement method which makes it 
+			a lot easier to add fields to the object they will be removed in the next realese,
+			therefore the code should be updated to use addElement method instead
+	
+	-	changed how the messages are sent to the class and added a category option for the messages panel		
+	-	removed the "custom" parameter for the validator, as it used by default if the method is not found		
+	-	added a data checker to  _buildTableData method so that the table will not be built if no data is found		
+	-	changed _addClassValidator method , how the code for "equalTo" and radio/checkboxgroup 
+
+	PtcDebug.php:
+
+	-	added the static method load() to load the interface
+	-	the following methods have been marked as deprecated:
+	
+		-	debugLoader
+		-	log
+		-	logSql
+		
+			these methods will be removed in the next version release
+		
+	-	changed the parameter $dieIfFatal to $dieOnFatal for the setErrorHandler method
+	-	added the method watch_var to watch for variable changes
+	-	added the declare ticks option and the register_ticks(watchCallback) function
+	-	added an exception handler
+	-	changed the buffer to use the statement as a reference to be able to attach data
+	-	added the addToBuffer method to attach data to an array inside the buffer
+	-	added the highlightFile method to inspect source code inside a popup window
+	-	added the following option on initilization:
+		
+		-	default category
+		-	max_dump_depth
+		-	trace_depth
+		-	show_sql
+		-	show_globals
+		-	show_messages
+		-	memory_limit
+		-	set_time_limit
+		-	declare_ticks
+		-	enable_inspector
+		
+			refer to the manual for details and usage for these options
+	
+	-	added the _doDump and _formatVar methods to properly format a given variable to be more friendly to read
+	-	added the following functions as alias for their respective methods (it's shorter to type):
+	
+		-	lo_msg 					(PtcDebug::bufferLog)
+		-	log_sql 					(PtcDebug::bufferSql)
+		-	stop_timer				(PtcDebug::stopTimer)
+		-	watch_var				(PtcDebug::watch)
+		-	add_to_log				(PtcDebug::addToLog)
+	
+	PtcDb.php:
+	
+	-	removed the method selfInstance
+	-	replaced the methods bufferLog and bufferSql with the respective new function, log_msg and log_sql
+		and removed the __FUNCTION__ and __CLASS__ parameters
+	-	removed the _tracePhp method used by the PtcDebug class, as it is not needed anymore
 
 - Version 0.8.1
 
 	PtcDb.php:
 
-		-	changed the way the buffer log behaves to add the result.
+	-	changed the way the buffer log behaves to add the result.
 
 	PtcDebug.php:
 	
-		-	changed the _debugTrace method to evolve the backtrace php 
-		-	changecd the way add to buffer behaves to add result for sql queries
+	-	changed the _debugTrace method to evolve the backtrace php 
+	-	changecd the way add to buffer behaves to add result for sql queries
 		
 		
 - Version 0.8.b
 
 	PtcDebug.php:
 	
-		-	changed the _debugTrace method to evolve the backtrace php 
-		-	added remove class methods
-		-	added remove require_once, include and require, 
-		-	added check which class has the method
-		-	added js to open close <pre></pre> tags
+	-	changed the _debugTrace method to evolve the backtrace php 
+	-	added remove class methods
+	-	added remove require_once, include and require, 
+	-	added check which class has the method
+	-	added js to open close <pre></pre> tags
 		
 	PtcDb.php:
 
-		-	removed the _tracePhp, the function and class param from the debug buffer, 
-			the class should now be able to send a correct debug message without it.
+	-	removed the _tracePhp, the function and class param from the debug buffer, 
+		the class should now be able to send a correct debug message without it.
 
 
 - Version 0.7
@@ -50,10 +165,8 @@ Version 0.8.1 is fully compatible with previous version(0.7)
 	
 	PtcDebug.php:
 	
-	-	added code to parse $_GET from referer, to be able to debug from ajax calls
-	
+	-	added code to parse $_GET from referer, to be able to debug from ajax calls	
 	-	changed the debugLoader function and made all the vars empty as default
-	
 	-	renamed startDebug to debugLoader and the function to callDebug aswell
 	
 
@@ -66,15 +179,8 @@ Version 0.8.1 is fully compatible with previous version(0.7)
 	PtcDebug.php:
 
 	-	removed the __cunstructor and changed it for a self initialized instance "startDebug()"
-	
 	-	changed the debugLoader function and made all the vars to be passed empty as default
-	
 	-	renamed startDebug to debugLoader and the function to callDebug
-	
 	-	added $_SESSION['debugStarted'] to check  if debugLoader() has already been called
-	
 	- 	readded the __constructor to call $this->debugLoader()
-
-
-
 
