@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+	<title>PhpToolCase - Object Relational Mapping Quick Guide</title>
+	<meta property="og:url" content="http://phptoolcase.com/guides/ptc-orm-guide.html" /> 
+	<meta property="og:image" content="http://phptoolcase.com/images/orm1.jpeg" /> 
+	<meta property="og:title" content="PhpToolCase - Object Relational Mapping" />
+	<meta property="og:description" content="A php class that can map database table columns to an object. For beginners and advanced php programmers." />
+	<meta property="og:site_name" content="PhpToolCase" />
+	<meta property="fb:admins" content="100000924353806" />
+	<meta name="description" content="A php class that can map database table columns to an object. For beginners and advanced php programmers." />
+	<meta name="keywords" content="object relational mapping, php queries, pdo wrapper" />
+	<link rel="shortcut icon" href="http://phptoolcase.com/images/favicon.ico">
+									<meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+									<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine&amp;v1" />
+									<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />
+									<link rel="stylesheet" type="text/css" href="http://phptoolcase.com/style/style.css" />
+									<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+									<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> 
+									<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+									<script type="text/javascript">
+										function openLogin(url){$("#exampleDiv").load(url).dialog({modal:true,width:600,height:320});} 
+										function openContact(url){$("#exampleDiv").load(url).dialog({modal:true,width:580,height:550});} 
+										function openReg(url){$("#exampleDiv").load(url).dialog({modal:true,width:550,height:550});} 
+									</script>
+</head>
+<body>
+	<div id="fb-root"></div>
+									<script>(function(d, s, id) {
+									  var js, fjs = d.getElementsByTagName(s)[0];
+									  if (d.getElementById(id)) return;
+									  js = d.createElement(s); js.id = id;
+									  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=137413682949169";
+									  fjs.parentNode.insertBefore(js, fjs);
+									}(document, 'script', 'facebook-jssdk'));</script>
+	<div id="main">
+		<div id="header">
+									<div id="logo">
+										<h1><a href="http://phptoolcase.com/index.html"><img src="http://phptoolcase.com/images/logo.gif" height="70px"></a></h1>
+										<div class="slogan">A powerfull open source set of tools!</div>
+										<div class="slogan">
+											
+			<div class="fb-like" data-width="450" data-action="like" data-show-faces="false" data-send="false" data-layout="button_count"></div>
+			<a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<div style="float:right;margin-top:4px;">&nbsp;<div class="g-plusone" data-size="tall" data-annotation="none"></div></div>
+										</div>
+									</div>
+									<div id="menubar">
+										<ul id="menu">
+											<li id="index"><a href="http://phptoolcase.com" title="Homepage">HOME</a></li>
+											<li id="news"><a href="http://phptoolcase.com/news.html" title="Contact developer">NEWS</a></li>
+											<li id="download"><a href="http://phptoolcase.com/download.html" title="Download phptoolcase components">DOWNLOAD</a></li>
+											<li id="documentation" class="current radius"><a href="http://phptoolcase.com/documentation.html" title="Quick user guides and API documentation">USER GUIDES</a></li>
+											<!-- <li id="hosted-scripts"><a href="http://phptoolcase.com/hosted-scripts.html" title="Miscellaneous scripts">HOSTED SCRIPTS</a></li> -->
+											<li id="contact"><a href="http://phptoolcase.com/contact.html" title="Contact developer">CONTACT</a></li>
+											<li id="about"><a href="http://phptoolcase.com/about.html" title="About the PhpToolCase library">ABOUT</a></li>
+											<!--<li id="faq"><a href="http://phptoolcase.com/faq.html">FAQ</a></li>-->
+										</ul>
+									</div>
+								</div>
+		<div id="site_content">
+			<div id="sidebar_container">
+										<img class="paperclip" src="http://phptoolcase.com/images/paperclip.png" alt="paperclip" />
+										<div class="sidebar">
+											<h1>Quick Links</h1>
+											<a href="http://phptoolcase.com/documentation.html">
+												<h2>
+													<img src="http://phptoolcase.com/images/docu4.png" style="margin-right:5px;float:left;height:25px;">
+													User Guides
+												</h2>
+											</a>
+											<ul>
+												<li><a href="http://phptoolcase.com/guides/ptc-db-guide.html">Connection Manager</a></li>
+												<li><a href="http://phptoolcase.com/guides/ptc-qb-guide.html">Query Builder</a></li>
+												<li><a href="http://phptoolcase.com/guides/ptc-orm-guide.html">ORM component</a></li>
+												<li><a href="http://phptoolcase.com/guides/ptc-dispatcher-guide.html">Event Dispatcher</a></li>
+												<li><a href="http://phptoolcase.com/guides/ptc-hm-guide.html">Autoloader / HandyMan</a></li>
+												<li><a href="http://phptoolcase.com/guides/ptc-debug-guide.html">Debugger & Logger</a></li>
+												<li><a href="http://phptoolcase.com/guides/ptc-forms-guide.html">Dynamic Forms Generator</a></li>
+												<!-- <li><a href="http://phptoolcase.com/guides/ptc-helpers-guide.html">Library Helpers</a></li> -->
+												<li><a href="https://github.com/ifsale/PhpToolCase/wiki" target="_blank">Wiki Pages</a></li>
+											</ul>
+											<a href="http://phptoolcase.com/download.html">
+												<h2>
+													<img src="http://phptoolcase.com/images/download.jpg" style="margin-right:5px;float:left;height:25px;">
+													Download Library
+												</h2>
+											</a>
+											<h4>Latest Stable Version(0.9.2)</h4>
+											<ul>
+												<li><a href="https://github.com/ifsale/PhpToolCase/tarball/master" target="_blank">Download Tarball</a></li>
+												<li><a href="https://github.com/ifsale/PhpToolCase/zipball/master" target="_blank">Download Zip File</a></li>
+												<li><a href="https://github.com/ifsale/PhpToolCase" target="_blank">Browse Repository</a></li>
+											</ul>
+											<h4>Beta Version (0.9.3b)</h4>
+											<ul>
+												<li><a href="https://github.com/ifsale/PhpToolCase/tarball/beta" target="_blank">Download Tarball</a></li>
+												<li><a href="https://github.com/ifsale/PhpToolCase/zipball/beta" target="_blank">Download Zip File</a></li>
+												<li><a href="https://github.com/ifsale/PhpToolCase/tree/beta" target="_blank">Browse Repository</a></li>
+											</ul>
+											<h2>Usefull</h2>
+											<ul>
+												<li><a href="https://github.com/ifsale/PhpToolCase/blob/master/CHANGELOG" target="_blank">Changelog</a></li>
+												<li><a href="https://github.com/ifsale/PhpToolCase/blob/master/TODO" target="_blank">To Do</a></li>
+												<li><a href="https://github.com/ifsale/PhpToolCase/issues" target="_blank">Bug Tracker</a></li>
+												<li><a href="https://chrome.google.com/webstore/detail/nfhmhhlpfleoednkpnnnkolmclajemef" target="_blank">PhpConsole(Chrome Extension)</a></li>
+												<li><a href="http://wordpress.org/plugins/debugger-logger/" target="_blank">PtcDebug Wordpress Plugin</a></li>
+												<li><a href="http://phptoolcase.com/hosted-scripts.html">Hosted Scripts Section</a></li>
+											</ul>
+										</div>
+										<img class="paperclip" src="http://phptoolcase.com/images/paperclip.png" alt="paperclip" />
+										<div class="sidebar">
+											<h1>Contribute</h1>
+											<h2>GitHub<img src="http://phptoolcase.com/images/github.ico" style="float:left;margin-right:5px;margin-top:2px;height:22px;"></h2>
+											<p>Fork the repository and use it as a base for your PHP project!</p>
+											<div style="diplay:inline-block;">
+												<iframe src="http://ghbtns.com/github-btn.html?user=ifsale&repo=PhpToolCase&type=watch&count=true"
+  allowtransparency="true" frameborder="0" scrolling="0" width="80" height="20"></iframe>
+												<iframe src="http://ghbtns.com/github-btn.html?user=ifsale&repo=PhpToolCase&type=fork&count=true"
+  allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
+											</div>
+											<br>
+											<h2>Make a Donation</h2>
+											<p>Make a donation to support and help the library to grow.</p>
+											<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="Donate" style="margin-left:50px;">
+<img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+										</div>
+									</div>
+			<div id="content">
+				<a href="http://phptoolcase.com/documentation.html">Guides</a> > <span style="color:#F14E23;font-weight:bold;">Object Relational Mapping</span>
+				<h1><img src="http://phptoolcase.com/images/orm1.jpeg" width="110" height="110" style="margin:10px 20px 0 0;">Introducing The ORM Component</h1>
+				<p>
+					The <b>Object Relational Mapping</b> Component is a great and elegant tool for retrieving and manipulating database tables data with just a couple of lines of code. The class can be used with the <a href="http://phptoolcase.com/guides/ptc-dispatcher-guide.html">PtcEvent</a> component to add event listeners to queries. This class can also be used to call methods from the <a href="http://phptoolcase.com/guides/ptc-qb-guide.html">PtcQueryBuilder</a> component directly. Retrieved rows can be converted to arrays or json arrays. The <b>PtcMapper</b> can also use shortcut methods to retrieve / update single column values. 
+				</p>
+				<h2>Main Features:</h2>
+				<ul>
+					<li>Simple syntax to manipulate and insert rows</li>
+					<li>Uses shortcuts to retrieve / update single column value</li>
+					<li>Can be used with <a href="http://phptoolcase.com/guides/ptc-dispatcher-guide.html">PtcEvent</a> component to add event listeners to queries</li>
+					<li>Uses the <a href="http://phptoolcase.com/guides/ptc-qb-guide.html">PtcQueryBuilder</a> class to handle all queries</li>
+					<li>Retrieved records can be easily converted to json arrays</li>
+					<li>Can use any connection configured with the <a href="http://phptoolcase.com/guides/ptc-db-guide.html">PtcDb</a> class</a></li>
+				</ul>
+				<i>** This component depends on the <a href="http://phptoolcase.com/guides/ptc-db-guide.html">PtcDb</a> and the 
+				<a href="http://phptoolcase.com/guides/ptc-qb-guide.html">PtcQueryBuilder</a> components, therefore it is not stand-alone.</i>
+				<br><br>
+				<h2>Getting Started</h2>
+				<p>
+					To start using the <b>Object Relational Mapping</b> component, alll we need to do is include the file <a href="https://github.com/ifsale/PhpToolCase/blob/master/PtcMapper.php" target="_blank">PtcMapper.php</a> and create an extended class:
+					<ol class="code">
+						<li><div class="src-line"><span class="src-comm">// the database table name will be the class name</span></div></li>
+						<li>
+							<div class="src-line">
+								<span class="src-id">class </span><span class="src-id"><a href="#">MY_Table</a> </span><span class="src-id">extends </span><span class="src-id"><a href="#">PtcMapper</a></span><div>
+						</li>
+						<li>
+							<div class="src-line"><span class="src-sym">{</span></div>
+						</li>
+						<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+						<li>
+							<div class="src-line"><span class="src-sym">}</span></div>
+						</li>
+					</ol>
+					The <b>PtcMapper</b> will use the class name as the database table name in lowercase letters.
+					<br>
+					Now that we have extended the component, we can start inserting and updating records for the table:
+					<ol class="code">
+						<li><div class="src-line"><span class="src-comm">// getting record by id</span></div></li>
+						<li>
+							<div class="src-line"><span class="src-var"><a href="#">$row</a></span> = <span class="src-id"><a href="#">MY_Table</a></span><span class="src-sym">::</span><span class="src-id">find</span><span class="src-sym">(</span><span class="src-str"> 1 </span><span class="src-sym">);</span></div>
+						</li>
+						<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+						<li>
+							<div class="src-line"><span class="src-var">print</span> <span class="src-var"><a href="#">$row</a></span><span class="src-sym">-></span><span class="src-var">some_column</span><span class="src-sym">;</span></div>
+						</li>
+						<li>
+							<div class="src-line"><span class="src-var">print</span> <span class="src-var"><a href="#">$row</a></span><span class="src-sym">-></span><span class="src-var">some_other_column</span><span class="src-sym">;</span></div>
+						</li>
+					
+					</ol>
+					That should get you started with the <b>ORM</b> component.
+					<br>
+					For a complete list of options and examples read the 
+					<a href="http://phptoolcase.com/api/0.9.2/object_relational_mapping.html" target="_blank">full user guide</a>.
+				</p>
+				<br>
+				<div><i>**If you like this class, help the project to grow by rating or writing a review at one of the following sites:</i></div>
+				<div>
+					<!--<a href="http://www.phpclasses.org/package/7962-PHP-Generate-and-validate-HTML-forms-dynamically.html" target="_blank"title="Rate our script at Phpclasses.org">
+						<img src="http://files.phpclasses.org/graphics/phpclasses/logo-phpclasses.png" style="width:120px;padding:10px 10px 0 0">
+					</a> -->
+					<a href="https://sourceforge.net/projects/phptoolcase/reviews?source=navbar" target="_blank" title="Rate our script at Sourceforce">
+						<img src="http://www.userlogos.org/files/logos/jumpordie/sourceforge-2.png" style="height:60px;vertical-align:top;padding:0px 10px 0 0">
+					</a>
+					<!--<a href="http://www.hotscripts.com/rate/143546/?RID=N900660" title="Rate our Script at Hot Scripts" target="_blank" style="width: 88px; height: 31px;">
+						<img src="http://cdn.hotscripts.com/img/widgets/btn_88x31-2.gif" alt="Vote for us on Hot Scripts" style="border: 0;height: 31px;vertical-align:top;margin-top:5px;padding:10px 10px 0 0" />
+					</a> -->
+				</div>
+				<br>
+				<p align="center" style="margin-left:250px;"><a href="#" onclick="window.scrollTo(0,0); return false">&uArr;Back to Top&uArr;</a></p>
+			</div>
+		</div>
+		<div id="footer">
+										<p>
+											<a href="http://phptoolcase.com/index.html" title="Homepage">Home</a> | 
+											<a href="http://phptoolcase.com/documentation.html"  title="Quick user guides and API documentation">Documentation</a> | 
+											<a href="http://phptoolcase.com/contact.html" title="Contact developer">Contact</a> | 
+											<a href="http://phptoolcase.com/about.html" title="About the PhpToolCase library">About</a>
+										</p>
+										<p style="font-size:12px;">PhpToolCase &copy;2012-2014</p>					
+									<!--<script>
+										var filename=location.pathname.substr(location.pathname.lastIndexOf("/")+1,location.pathname.length);
+										console.log("the file name",filename);
+										var main_files=new Array("documentation.html","index.html","about.html","contact.html","faq.html");
+										if(!filename){document.getElementById("index").classList.add('current');}
+										else
+										{
+											for(var i=0;i<main_files.length;i++)
+											{
+												if(main_files[i]==filename){document.getElementById(main_files[i].replace(".html","")).classList.add('current');}
+											};
+										}
+									</script>//-->
+									<!-- Start of StatCounter Code for Default Guide -->
+									<script type="text/javascript">
+									var sc_project=7779914; 
+									var sc_invisible=1; 
+									var sc_security="4a86be8b"; 
+									</script>
+									<script type="text/javascript"
+									src="http://www.statcounter.com/counter/counter.js"></script>
+									<noscript><div class="statcounter"><a title="tumblr page
+									counter" href="http://statcounter.com/tumblr/"
+									target="_blank"><img class="statcounter"
+									src="http://c.statcounter.com/7779914/0/4a86be8b/1/"
+									alt="tumblr page counter"></a></div></noscript>
+									<!-- End of StatCounter Code for Default Guide -->
+	</div>
+</body>
+</html>

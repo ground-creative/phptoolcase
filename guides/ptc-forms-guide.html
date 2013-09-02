@@ -1,9 +1,15 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:fb="http://ogp.me/ns/fb#">
 <head>
-	<title>PhpToolCase - Dynamic Forms User Guide</title>
-	<meta name="description" content="website description" />
-	<meta name="keywords" content="website keywords, website keywords" />
+	<title>PhpToolCase - HTML Dynamic Forms User Guide</title>
+	<meta property="og:url" content="http://phptoolcase.com/guides/ptc-forms-guide.html" /> 
+	<meta property="og:image" content="http://phptoolcase.com/images/html-code.gif" /> 
+	<meta property="og:title" content="PhpToolCase - Dynamic Forms Generator/Validator" />
+	<meta property="og:description" content="A object oriented form generator and validator, with multiple layout capabilities. It will make you forget about all problems involved with HTML forms!" />
+	<meta property="og:site_name" content="PhpToolCase" />
+	<meta property="fb:admins" content="100000924353806" />
+	<meta name="description" content="A object oriented form generator and validator, with multiple layout capabilities. It will make you forget about all problems involved with HTML forms!" />
+	<meta name="keywords" content="html forms generator, php dynamic forms, form validator, object oriented form builder, php form generator" />
 	<link rel="shortcut icon" href="http://phptoolcase.com/images/favicon.ico">
 									<meta http-equiv="content-type" content="text/html; charset=windows-1252" />
 									<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine&amp;v1" />
@@ -19,19 +25,37 @@
 									</script>
 </head>
 <body>
+	<div id="fb-root"></div>
+									<script>(function(d, s, id) {
+									  var js, fjs = d.getElementsByTagName(s)[0];
+									  if (d.getElementById(id)) return;
+									  js = d.createElement(s); js.id = id;
+									  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=137413682949169";
+									  fjs.parentNode.insertBefore(js, fjs);
+									}(document, 'script', 'facebook-jssdk'));</script>
 	<div id="main">
 		<div id="header">
 									<div id="logo">
 										<h1><a href="http://phptoolcase.com/index.html"><img src="http://phptoolcase.com/images/logo.gif" height="70px"></a></h1>
 										<div class="slogan">A powerfull open source set of tools!</div>
+										<div class="slogan">
+											
+			<div class="fb-like" data-width="450" data-action="like" data-show-faces="false" data-send="false" data-layout="button_count"></div>
+			<a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<div style="float:right;margin-top:4px;">&nbsp;<div class="g-plusone" data-size="tall" data-annotation="none"></div></div>
+										</div>
 									</div>
 									<div id="menubar">
 										<ul id="menu">
-											<li id="index"><a href="http://phptoolcase.com/index.html">HOME</a></li>
-											<li id="download"><a href="http://phptoolcase.com/download.html">DOWNLOAD</a></li>
-											<li id="documentation"><a href="http://phptoolcase.com/documentation.html">USER GUIDES</a></li>
-											<li id="contact"><a href="http://phptoolcase.com/contact.html">CONTACT</a></li>
-											<li id="about"><a href="http://phptoolcase.com/about.html">ABOUT</a></li>
+											<li id="index"><a href="http://phptoolcase.com" title="Homepage">HOME</a></li>
+											<li id="news"><a href="http://phptoolcase.com/news.html" title="Contact developer">NEWS</a></li>
+											<li id="download"><a href="http://phptoolcase.com/download.html" title="Download phptoolcase components">DOWNLOAD</a></li>
+											<li id="documentation" class="current radius"><a href="http://phptoolcase.com/documentation.html" title="Quick user guides and API documentation">USER GUIDES</a></li>
+											<!-- <li id="hosted-scripts"><a href="http://phptoolcase.com/hosted-scripts.html" title="Miscellaneous scripts">HOSTED SCRIPTS</a></li> -->
+											<li id="contact"><a href="http://phptoolcase.com/contact.html" title="Contact developer">CONTACT</a></li>
+											<li id="about"><a href="http://phptoolcase.com/about.html" title="About the PhpToolCase library">ABOUT</a></li>
 											<!--<li id="faq"><a href="http://phptoolcase.com/faq.html">FAQ</a></li>-->
 										</ul>
 									</div>
@@ -40,52 +64,78 @@
 			<div id="sidebar_container">
 										<img class="paperclip" src="http://phptoolcase.com/images/paperclip.png" alt="paperclip" />
 										<div class="sidebar">
-											<h1>Latest News</h1>
-											<h4>New Version Released(0.8.3)</h4>
-											<h5>August 30 2013</h5>
-											<p>
-												A new version of the library is available, view <a href="https://github.com/ifsale/PhpToolCase/blob/master/CHANGELOG" target="_blank">changelog</a> for changes. Use the quick links section or browse the <a href="https://github.com/ifsale/PhpToolCase/tree/master" target="_blank">repository</a>.
-											</p>
-											<h4>Beta Version Released(0.8.2b)</h4>
-											<h5>August 30 2013</h5>
-											<p>
-													A new beta has been realeased, view <a href="https://github.com/ifsale/PhpToolCase/blob/beta/CHANGELOG" target="_blank">changelog</a> for changes. Use the quick links section or browse the <a href="https://github.com/ifsale/PhpToolCase/tree/beta" target="_blank">repository</a>.
-											</p>
-										</div>
-										<img class="paperclip" src="http://phptoolcase.com/images/paperclip.png" alt="paperclip" />
-										<div class="sidebar">
 											<h1>Quick Links</h1>
-											<a href="http://phptoolcase.com/download.html"><h2>Download Library</h2></a>
-											<h4>Latest Stable Version(0.8.3)</h4>
+											<a href="http://phptoolcase.com/documentation.html">
+												<h2>
+													<img src="http://phptoolcase.com/images/docu4.png" style="margin-right:5px;float:left;height:25px;">
+													User Guides
+												</h2>
+											</a>
+											<ul>
+												<li><a href="http://phptoolcase.com/guides/ptc-db-guide.html">Connection Manager</a></li>
+												<li><a href="http://phptoolcase.com/guides/ptc-qb-guide.html">Query Builder</a></li>
+												<li><a href="http://phptoolcase.com/guides/ptc-orm-guide.html">ORM component</a></li>
+												<li><a href="http://phptoolcase.com/guides/ptc-dispatcher-guide.html">Event Dispatcher</a></li>
+												<li><a href="http://phptoolcase.com/guides/ptc-hm-guide.html">Autoloader / HandyMan</a></li>
+												<li><a href="http://phptoolcase.com/guides/ptc-debug-guide.html">Debugger & Logger</a></li>
+												<li><a href="http://phptoolcase.com/guides/ptc-forms-guide.html">Dynamic Forms Generator</a></li>
+												<!-- <li><a href="http://phptoolcase.com/guides/ptc-helpers-guide.html">Library Helpers</a></li> -->
+												<li><a href="https://github.com/ifsale/PhpToolCase/wiki" target="_blank">Wiki Pages</a></li>
+											</ul>
+											<a href="http://phptoolcase.com/download.html">
+												<h2>
+													<img src="http://phptoolcase.com/images/download.jpg" style="margin-right:5px;float:left;height:25px;">
+													Download Library
+												</h2>
+											</a>
+											<h4>Latest Stable Version(0.9.2)</h4>
 											<ul>
 												<li><a href="https://github.com/ifsale/PhpToolCase/tarball/master" target="_blank">Download Tarball</a></li>
 												<li><a href="https://github.com/ifsale/PhpToolCase/zipball/master" target="_blank">Download Zip File</a></li>
 												<li><a href="https://github.com/ifsale/PhpToolCase" target="_blank">Browse Repository</a></li>
 											</ul>
-											<h4>Beta Version (0.8.2b)</h4>
+											<h4>Beta Version (0.9.3b)</h4>
 											<ul>
 												<li><a href="https://github.com/ifsale/PhpToolCase/tarball/beta" target="_blank">Download Tarball</a></li>
 												<li><a href="https://github.com/ifsale/PhpToolCase/zipball/beta" target="_blank">Download Zip File</a></li>
 												<li><a href="https://github.com/ifsale/PhpToolCase/tree/beta" target="_blank">Browse Repository</a></li>
 											</ul>
-											<a href="http://phptoolcase.com/documentation.html"><h2>User Guides</h2></a>
-											<ul>
-												<li><a href="http://phptoolcase.com/guides/ptc-debug-guide.html">Debugger & Logger</a></li>
-												<li><a href="http://phptoolcase.com/guides/ptc-db-guide.html">Mysql Helper</a></li>
-												<li><a href="http://phptoolcase.com/guides/ptc-forms-guide.html">Dynamic Forms Generator</a></li>
-												<li>OBJ Controller(<b>Available Soon</b>)</li>
-											</ul>
 											<h2>Usefull</h2>
 											<ul>
-												<li><a href="http://phptoolcase.com/api/0.8.3/ric_CHANGELOG.html" target="_blank">Changelog</a></li>
-												<li><a href="http://phptoolcase.com/api/0.8.3/ric_TODO.html" target="_blank">To Do</a></li>
+												<li><a href="https://github.com/ifsale/PhpToolCase/blob/master/CHANGELOG" target="_blank">Changelog</a></li>
+												<li><a href="https://github.com/ifsale/PhpToolCase/blob/master/TODO" target="_blank">To Do</a></li>
 												<li><a href="https://github.com/ifsale/PhpToolCase/issues" target="_blank">Bug Tracker</a></li>
 												<li><a href="https://chrome.google.com/webstore/detail/nfhmhhlpfleoednkpnnnkolmclajemef" target="_blank">PhpConsole(Chrome Extension)</a></li>
-												<li><a href="http://phptoolcase.com/hosted-scripts.html">Hosted Scripts</a></li>
+												<li><a href="http://wordpress.org/plugins/debugger-logger/" target="_blank">PtcDebug Wordpress Plugin</a></li>
+												<li><a href="http://phptoolcase.com/hosted-scripts.html">Hosted Scripts Section</a></li>
 											</ul>
+										</div>
+										<img class="paperclip" src="http://phptoolcase.com/images/paperclip.png" alt="paperclip" />
+										<div class="sidebar">
+											<h1>Contribute</h1>
+											<h2>GitHub<img src="http://phptoolcase.com/images/github.ico" style="float:left;margin-right:5px;margin-top:2px;height:22px;"></h2>
+											<p>Fork the repository and use it as a base for your PHP project!</p>
+											<div style="diplay:inline-block;">
+												<iframe src="http://ghbtns.com/github-btn.html?user=ifsale&repo=PhpToolCase&type=watch&count=true"
+  allowtransparency="true" frameborder="0" scrolling="0" width="80" height="20"></iframe>
+												<iframe src="http://ghbtns.com/github-btn.html?user=ifsale&repo=PhpToolCase&type=fork&count=true"
+  allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
+											</div>
+											<br>
+											<h2>Make a Donation</h2>
+											<p>Make a donation to support and help the library to grow.</p>
+											<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="Donate" style="margin-left:50px;">
+<img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1">
+</form>
+
 										</div>
 									</div>
 			<div id="content">
+				<a href="http://phptoolcase.com/documentation.html">Guides</a> > <span style="color:#F14E23;font-weight:bold;">HTML Forms Generator</span>
 				<h1>
 					<img src="http://phptoolcase.com/images/html-code.gif" style="margin-right:10px;height:69px;width:100px;">
 					Introducing The HTML Forms Component
@@ -93,8 +143,10 @@
 				<p>
 					The dynamic html forms generator is an excellent tool that will help you build all kinds of html forms in just a few minutes.
 					It will make you forget about all the problems involved with fields alignment, layouts, and server-side validation. 
-					For client-side validation the wonderfull jquery validator plugin can be used.
-					This class is especially adviced to webdesigners and webmasters that are having troubles with html forms.
+					For client-side validation the wonderful jquery validator plugin can be used.
+					The component can also use event listeners to process form submission and validation, by using the 
+					<a href="http://phptoolcase.com/guides/ptc-dispatcher-guide.html">Event Dispatcher (PtcEvent)</a> component.
+					This class is especially advised to webdesigners and webmasters that are having troubles with html forms.
 					Make sure you check the bottom of the page where you will find the 
 					<a href="#jqueryPlugins">jquery-ui plugins</a> for client-side validation, and to style the form components.
 				</p>
@@ -114,8 +166,10 @@
 					<a href="https://github.com/ifsale/PhpToolCase/blob/master/PtcForms.php" target="_blank">download from the repository</a>.<br>
 				</p>	
 				<p>
-					**Form submission has been disabled for the live examples, 
-					you will need to download the source code of the example to test the server-side validation and the form submission
+					<i>
+						**Form submission has been disabled for the live examples, 
+						you will need to download the source code of the example to test the server-side validation and the form submission
+					</i>
 				</p>
 				<h3>Example 1 - Login Form</h3>
 				<p>
@@ -125,12 +179,19 @@
 				<h3>Example 2 - Contact Form</h3>
 				<p>
 					This example will use a contact form and send an email with the data on successfull validation:
-					<br><a href="contact-form-ex.html" target="_blank">Open in new window</a> | <a href="#" onclick="openContact('contact-form-ex.html');return false;">Use jquery modal dialog</a> | <a href="https://github.com/ifsale/PhpToolCase/blob/master/examples/ptcforms-ex2.php" target="_blank">View source code</a>
+					<br><a href="contact-form-ex.html" target="_blank">Open in new window</a> | <a href="#" onclick="openContact('contact-form-ex.html');return false;">Use jquery modal dialog</a> | <a href="https://github.com/ifsale/PhpToolCase/blob/master/examples/ptcform-ex2.php" target="_blank">View source code</a>
 				</p>
 				<h3>Example 3 - User Registration Form</h3>
 				<p>
 					This example will use a registration form and print a succefull message if form is valid:
-					<br><a href="registration-form-ex.html" target="_blank">Open in new window</a> | <a href="#" onclick="openReg('registration-form-ex.html');return false;">Use jquery modal dialog</a> | <a href="https://github.com/ifsale/PhpToolCase/blob/master/examples/ptcforms-ex3.php" target="_blank">View source code</a>
+					<br><a href="registration-form-ex.html" target="_blank">Open in new window</a> | <a href="#" onclick="openReg('registration-form-ex.html');return false;">Use jquery modal dialog</a> | <a href="https://github.com/ifsale/PhpToolCase/blob/master/examples/ptcform-ex3.php" target="_blank">View source code</a>
+				</p>
+				<h3>Example 4 - Using Event Listeners</h3>
+				<p>
+					This example is the same as example 2 <b>(produces the same html output)</b>, but uses the  
+					<br><a href="http://phptoolcase.com/guides/ptc-dispatcher-guide.html">Event Dispatcher (PtcEvent)</a> component to add event listeners for the form submission and validation.
+					Have a look at the source code to see how this is done:
+					<a href="https://github.com/ifsale/PhpToolCase/blob/master/examples/ptcform-ex4.php" target="_blank">View source code</a>
 				</p>
 				<h2 style="text-align:center;" id="jqueryPlugins">Jquery Plugins</h2>
 				<p>
@@ -158,19 +219,36 @@
 						<ol class="code">$("form").form();</ol>
 					</div>
 				</p>
-				<p>For a complete list of options and examples read the <a href="http://phptoolcase.com/api/0.8.3/PhpToolCase/tutorial_PtcForms.cls.html" target="_blank">user guide</a>.</p>
-				<p align="center"><a href="#" onclick="window.scrollTo(0,0); return false">&uArr;Back to Top&uArr;</a><p>
+				<p>
+					For a complete list of options and examples read the 
+					<a href="http://phptoolcase.com/api/0.9.2/dynamic_form.html" target="_blank">full user guide</a>.
+				</p>
+				<br><br>
+				<div><i>**If you like this class, help the project to grow by rating or writing a review at one of the following sites:</i></div>
+				<div>
+					<a href="http://ifsale.users..phpclasses.org/package/7962-PHP-Generate-and-validate-HTML-forms-dynamically.html#ratings" target="_blank" title="Rate our script at Phpclasses.org">
+						<img src="http://files.phpclasses.org/graphics/phpclasses/logo-phpclasses.png" style="width:120px;padding:10px 10px 0 0">
+					</a>
+					<a href="https://sourceforge.net/projects/phptoolcase/reviews?source=navbar" target="_blank" title="Rate our script at Sourceforce">
+						<img src="http://www.userlogos.org/files/logos/jumpordie/sourceforge-2.png" style="height:42px;vertical-align:top;padding:10px 10px 0 0">
+					</a>
+					<a href="http://www.hotscripts.com/rate/143555/?RID=N900660" title="Rate our Script at Hot Scripts" target="_blank" style="width: 88px; height: 31px;">
+						<img src="http://cdn.hotscripts.com/img/widgets/btn_88x31-2.gif" alt="Vote for us on Hot Scripts" style="border: 0;height: 31px;vertical-align:top;margin-top:5px;padding:10px 10px 0 0" />
+					</a>
+				</div>
+				<br>
+				<p align="center" style="margin-left:250px;"><a href="#" onclick="window.scrollTo(0,0); return false">&uArr;Back to Top&uArr;</a></p>
 			</div>
 		</div>
 		<div id="exampleDiv"></div>
 		<div id="footer">
 										<p>
-											<a href="http://phptoolcase.com/index.html">Home</a> | 
-											<a href="http://phptoolcase.com/documentation.html">Documentation</a> | 
-											<a href="http://phptoolcase.com/contact.html">Contact</a> | 
-											<a href="http://phptoolcase.com/about.html">About</a>
+											<a href="http://phptoolcase.com/index.html" title="Homepage">Home</a> | 
+											<a href="http://phptoolcase.com/documentation.html"  title="Quick user guides and API documentation">Documentation</a> | 
+											<a href="http://phptoolcase.com/contact.html" title="Contact developer">Contact</a> | 
+											<a href="http://phptoolcase.com/about.html" title="About the PhpToolCase library">About</a>
 										</p>
-										<p style="font-size:12px;">PhpToolCase &copy;2013</p>					
+										<p style="font-size:12px;">PhpToolCase &copy;2012-2014</p>					
 									<!--<script>
 										var filename=location.pathname.substr(location.pathname.lastIndexOf("/")+1,location.pathname.length);
 										console.log("the file name",filename);

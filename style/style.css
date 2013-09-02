@@ -121,7 +121,8 @@ ol li
   text-decoration: none;}
 
 .slogan
-{ float: right; 
+{ 
+	/*float: right; */ 
   padding-right: 25px;
   text-align: right; 
   font: 300% tangerine, aerial; 
@@ -129,7 +130,7 @@ ol li
 
 #menubar
 { height: 46px;
-  width: 700px;
+  width: 750px;
   margin: 0px auto -1px auto;
   float: right;
   padding: 0px 0 0 0;} 
@@ -142,7 +143,8 @@ ul#menu li
   padding: 0 0 0px 0px;
   list-style: none;
   margin: 2px 0 0 0;
-  background: transparent;}
+  background: transparent;
+  }
 
 ul#menu li a
 { font: normal 170% 'Yanone Kaffeesatz', sans-serif;
@@ -156,13 +158,13 @@ ul#menu li a
 
 ul#menu li.current a
 { height: 20px;
-  padding: 6px 22px 15px 22px;}
-
-ul#menu li.current a
-{ background: #fff;
+  padding: 6px 22px 15px 22px;
+  background: #fff;
   border: 1px solid #ddd;
   border-bottom: 0;
-  color: #F14E23;}
+  color: #F14E23;
+  border-radius: 5px 5px 0 0; 
+  }
 
 ul#menu li a:hover
 { color: #F14E23;}
@@ -173,7 +175,9 @@ ul#menu li a:hover
   margin: 0 auto 0 auto;
   padding: 0;
   background: #fff;
-  border: 1px solid #E7E7E7;} 
+  border: 1px solid #E7E7E7;
+  border-radius: 5px;
+  } 
 
 #sidebar_container
 { float: right;
@@ -186,7 +190,9 @@ ul#menu li a:hover
   margin: 0 24px 27px 0;
   background: #FBFBFB;
   border: 1px solid #eee;
-  padding: 0 15px 15px 15px;}
+  padding: 0 15px 15px 15px;
+  border-radius: 5px; 
+  }
 
 .sidebar h3, .content h1
 { padding: 10px 15px;
@@ -326,11 +332,16 @@ table tr td
   border-top: 1px solid #FFF;}*/
 .code{
 color:black;
+background-color:#FBFCFD;
+		border: 1px solid #C4CFE5;
+		padding:15px;
+		margin-left: 0px;
 }
 .code li{
 		padding:0px;
 		margin:0px;
 		white-space: nowrap;
+		list-style-type: none;
 }
  .src-line {
 font-family: 'Courier New', Courier, monospace;
