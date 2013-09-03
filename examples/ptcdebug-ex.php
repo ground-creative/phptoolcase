@@ -3,7 +3,7 @@
 
 	$_GET['debug']=true;       		// turn on the debug
 
-	//$_GET['debugOff']=true;    		// turn off debug
+	//$_GET['debug_off']=true;    		// turn off debug
 
 	require_once('../PtcDebug.php');	// include the PtcDebug class
 
