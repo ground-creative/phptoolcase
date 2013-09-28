@@ -2,5 +2,5 @@
 EXAMPLE FOLDER WITH CLASSES THAT HAVE DIFFERENT NAMING CONVENTIONS FOR THE HANDYMAN AUTOLOADER EXAMPLES:
  
 
-- class.hm-test-sep1.php		example class file using "class.{CLASS}" as naming convention AND "-" as separator to replace "_" in the class name
-- Hm-Test-Sep.php			example class file with "-" as separator replacing "_" in class name and "{class}" as naming convention
+- class.hm-test-sep1.php	  example class file using "class.{CLASS}" as naming convention AND "-" as separator
+- Hm-Test-Sep.php	 	  example class file with "-" as separator and "{class}" as naming convention
