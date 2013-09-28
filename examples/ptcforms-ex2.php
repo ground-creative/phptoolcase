@@ -1,7 +1,8 @@
-<?
+<?php
+
 	/* 
 	* CONTACT FORM EXAMPLE FOR PTCFORMS.PHP CLASS
-	* REMOVE COMMENT FROM LINE 27 FOR UI-PLUGINS
+	* REMOVE COMMENT FROM LINE 28 FOR UI-PLUGINS
 	*/
 
 	### PARAMATERS FOR THE EXAMPLE ################
@@ -131,4 +132,3 @@
 		$test=$form->render();
 	}
 	echo'</body></html>';
-?>
