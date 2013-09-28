@@ -37,7 +37,7 @@ AS IT WILL NOT BREAK YOUR CODE, AND WILL GIVE YOU TIME TO UPGRADE.
 	-	added support for lambda functions for the _doDump( ) method
 	-	changed html ids for elements to addptcdebug prefix to all ids
 	-	changed self for static to be able to extend and override all methods
-	-	added _PTCDEBUG_NAMESPACE_ constant to check if class is already active and retrieve it's namespace
+	-	added _PTCDEBUG_NAMESPACE_ constant to check if class is already active and retrieve it is namespace
 	-	added get_called_class to actually be able to extend and override all methods
 	-	added startCoverage and stopCoverage methods to add code coverage analysis functionality to the class
 	-	added ptc_start_coverage and ptc_stop_coverage to add code coverage analysis functionality to the class
@@ -184,7 +184,7 @@ AS IT WILL NOT BREAK YOUR CODE, AND WILL GIVE YOU TIME TO UPGRADE.
 			refer to the manual for details and usage for these options
 	
 	-	added the _doDump and _formatVar methods to properly format a given variable to be more friendly to read
-	-	added the following functions as alias for their respective methods (it's shorter to type):
+	-	added the following functions as alias for their respective methods (it is shorter to type):
 	
 		-	lo_msg 					(PtcDebug::bufferLog)
 		-	log_sql 					(PtcDebug::bufferSql)
