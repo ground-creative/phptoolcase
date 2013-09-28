@@ -1,14 +1,16 @@
 <?php 
+
 	/**
 	* MYSQL QUERY HELPER CLASS 
-	* PHP version 5
+	* PHP version 5.3
 	* @category 	Framework
 	* @package  	PhpToolCase
-	* @version	0.8.2b
+	* @version	0.8.4b
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
 	*/
+	
 	class PtcDb
 	{
 		/**
@@ -16,13 +18,21 @@
 		* @var 	string
 		* @tutorial	PtcDb.cls#mySqlFlag
 		*/
-		public $mySqlFlag=MYSQL_ASSOC;
+		public $mySqlFlag = MYSQL_ASSOC;
 		/**
 		* Store query results in array
 		* @var 	array
 		* @tutorial	PtcDb.cls#references
 		*/
-		public $queryResults=array();
+		public $queryResults = array( );
+		/**
+		* Defines a constant with the class namespace
+		*/
+		public function __construct( )
+		{ 
+			$namespace = @strtoupper( @str_replace( '\\' , '_' , __NAMESPACE__ ) ) . '_';
+			@define( '_PTCDB_' . $namespace , get_called_class( ) ); // declare the class namespace
+		}
 		/**
 		* Connect to database
 		* @param	string	$dbHost		address for mysql server
@@ -32,24 +42,21 @@
 		* @param	string	$dbCharset	charset to use
 		* @tutorial	PtcDb.cls#getting_started.dbConnect
 		*/
-		public function dbConnect($dbHost,$dbUser,$dbPass,$dbName=NULL,$dbCharset=NULL)
+		public function dbConnect( $dbHost , $dbUser , $dbPass , $dbName = NULL , $dbCharset = NULL )
 		{
-			if(class_exists('PtcDebug',true))	// debug
+			self::_debug( $dbUser . '@' . $dbHost . '[' . $dbName . ']','Connecting to' , 'Connection' );	// debug msg
+			$this->dbLink = @mysql_connect( $dbHost , $dbUser , $dbPass ) or 
+							trigger_error( 'Mysql Error: ' . mysql_error( ) , E_USER_ERROR );
+			self::_debugBuffer( 'Connecting to' );											// debug stop timer
+			if ( $dbName )
 			{ 
-				log_sql($dbUser.'@'.$dbHost.'['.$dbName.']','Connecting to');
+				@mysql_select_db( $dbName ) or 
+							trigger_error( ' Mysql Error: ' . mysql_error( ) , E_USER_ERROR );
 			}
-			$this->dbLink=@mysql_connect($dbHost,$dbUser,$dbPass) or 
-				trigger_error('Mysql Error: '.mysql_error(),E_USER_ERROR);
-			if(class_exists('PtcDebug',true)){ stop_timer('Connecting to'); }
-			if($dbName)
+			if ( $dbCharset )
 			{ 
-				@mysql_select_db($dbName) or 
-					trigger_error(' Mysql Error: '.mysql_error(),E_USER_ERROR);
-			}
-			if($dbCharset)
-			{ 
-				@mysql_query("SET NAMES '".$dbCharset."'",$this->dbLink) or 
-					trigger_error(' Mysql Error: '.mysql_error(),E_USER_ERROR);
+				@mysql_query( "SET NAMES '" . $dbCharset . "'" , $this->dbLink ) or 
+							trigger_error( ' Mysql Error: ' . mysql_error( ) , E_USER_ERROR );
 			}
 		}
 		/**
@@ -57,17 +64,20 @@
 		* @param	string	$sql	sql query to be returned
 		* @param	string	$ref	gives a reference to the resource. See {@tutorial PtcDb.cls#references}
 		* @tutorial	PtcDb.cls#complex_queries.sqlToArray		
-		* @return	returns a 2 dimensions array with values or null if query is empty
+		* @return	returns  a 2 dimensions array with values or null if query is empty
 		*/
-		public function sqlToArray($sql,$ref=0)
+		public function sqlToArray( $sql , $ref = 0 )
 		{
-			if(class_exists('PtcDebug',true)){ log_sql('','_'.$ref); }// debug
-			$this->queryResults[$ref]=@mysql_query($sql) or 
-				trigger_error('- REF '.$ref.' - Mysql Error: '.mysql_error(),E_USER_ERROR);
-			if(class_exists('PtcDebug',true)){ stop_timer('_'.$ref); }// debug
-			while($row=@mysql_fetch_array($this->queryResults[$ref],$this->mySqlFlag)){ $result[]=$row; } 
-			if(class_exists('PtcDebug',true)){ add_to_log('_'.$ref,@$result,'- REF '.$ref.' - '.$sql); }
-			return (@$result) ? $result : null;
+			self::_debug( '' ,  '- REF ' . $ref . ' - ' . $sql );							// debug
+			$this->queryResults[ $ref ] = @mysql_query( $sql ) or 
+				trigger_error( '- REF ' . $ref . ' - Mysql Error: ' . mysql_error( ) , E_USER_ERROR );
+			self::_debugBuffer( '- REF ' . $ref . ' - ' . $sql );							// debug stop timer
+			while ( $row = @mysql_fetch_array( $this->queryResults[ $ref ] , $this->mySqlFlag ) )
+			{ 
+				$result[ ] = $row; 
+			} 
+			self::_debugBuffer( '- REF ' . $ref . ' - ' . $sql , 'attach' , @$result);			// debug attach result
+			return ( @$result ) ? $result : null;
 		}
 		/**
 		* Execute sql statement and return result
@@ -76,13 +86,13 @@
 		* @tutorial	PtcDb.cls#complex_queries.executeSql
 		* @return	returns the sql reference.
 		*/
-		public function executeSql($sql,$ref=0)
+		public function executeSql( $sql , $ref = 0 )
 		{
-			if(class_exists('PtcDebug',true)){ log_sql('','- REF '.$ref.' - '.$sql); }// debug
-			$this->queryResults[$ref]=@mysql_query($sql) or
+			self::_debug( '' , '- REF ' . $ref . ' - ' . $sql );				// debug
+			$this->queryResults[ $ref ] = @mysql_query( $sql ) or
 				trigger_error('- REF '.$ref.' - Mysql Error: '.mysql_error(),E_USER_ERROR);
-			if(class_exists('PtcDebug',true)){ stop_timer('- REF '.$ref.' - '.$sql); }// debug
-			return  $this->queryResults[$ref];
+			self::_debugBuffer( '- REF ' . $ref . ' - ' . $sql );				// debug stop timer
+			return  $this->queryResults[ $ref ];
 		}
 		/**
 		* Read 1 row from given table
@@ -92,11 +102,11 @@
 		* @tutorial	PtcDb.cls#select_data.readRow
 		* @return	returns an array  with values or null if query is empty.
 		*/
-		public function readRow($table,$fields,$ref=0)
+		public function readRow( $table , $fields , $ref = 0 )
 		{
-			$sql="SELECT * FROM ".$table.$this->_queryFields($fields);
-			$result=$this->sqlToArray($sql,$ref);
-			return is_array($result) ?  $result[0] : $result;
+			$sql = "SELECT * FROM " . $table . $this->_queryFields( $fields );
+			$result = $this->sqlToArray( $sql , $ref );
+			return is_array( $result ) ?  $result[ 0 ] : $result;
 		}
 		/**
 		* Read records from given table
@@ -108,10 +118,10 @@
 		* @tutorial	PtcDb.cls#select_data.readTable
 		* @return	returns a multidimensional array or null if query is empty
 		*/
-		public function readTable($table,$fields=null,$order=null,$limit=null,$ref=0)
+		public function readTable( $table , $fields = null , $order = null , $limit = null , $ref = 0 )
 		{	
-			$sql="SELECT * FROM ".$table.$this->_queryFields($fields)." ".trim($order)." ".trim($limit);
-			return $this->sqlToArray($sql,$ref);
+			$sql = "SELECT * FROM " . $table.$this->_queryFields( $fields ) . " " . trim( $order ) . " " . trim( $limit );
+			return $this->sqlToArray( $sql , $ref );
 		}
 		/**
 		* Insert record from given table
@@ -121,19 +131,19 @@
 		* @tutorial	PtcDb.cls#manipulating data.insertRow
 		* @return	returns the sql reference.
 		*/
-		public function insertRow($table,$array,$ref=0)
+		public function insertRow( $table , $array , $ref = 0 )
 		{
-			$fields="";
-			$values="";
-			foreach($array as $k => $v) 
+			$fields = "";
+			$values = "";
+			foreach ( $array as $k => $v ) 
 			{
-				$fields.='`'.$k.'`,';
-				$values.="'".$this->_cleanQuery($v)."',";
+				$fields .= '`' . $k . '`,';
+				$values .= "'" . $this->_cleanQuery( $v ) . "',";
 			}
-			$fields=substr($fields,0,strlen($fields)-1);
-			$values=substr($values,0,strlen($values)-1);
-			$sql="INSERT INTO ".$table." (".$fields.") VALUES (".$values.")";
-			return $this->executeSql($sql,$ref);
+			$fields = substr( $fields , 0 , strlen( $fields ) - 1 );
+			$values = substr( $values , 0 , strlen( $values ) - 1 );
+			$sql = "INSERT INTO " . $table . " (" . $fields . ") VALUES (" . $values . ")";
+			return $this->executeSql( $sql , $ref );
 		}
 		/**
 		* Update 1 record in given table
@@ -144,23 +154,23 @@
 		* @tutorial	PtcDb.cls#manipulating data.updateRow
 		* @return	returns the sql reference.
 		*/
-		public function updateRow($table,$array,$recordId,$ref=0)
+		public function updateRow( $table , $array , $recordId , $ref = 0 )
 		{
-			$values="";
-			foreach($array as $k => $v) { $values.="`".$k."` = '".$this->_cleanQuery($v)."',"; }
-			$values=substr($values,0,strlen($values)-1);
-			$sql="UPDATE ".$table." SET ".$values." WHERE `id` = ".$recordId;
-			return $this->executeSql($sql,$ref);
+			$values = "";
+			foreach ( $array as $k => $v ) { $values .= "`" . $k . "` = '" . $this->_cleanQuery( $v ) . "',"; }
+			$values = substr( $values , 0 , strlen( $values ) - 1 );
+			$sql = "UPDATE " . $table . " SET " . $values . " WHERE `id` = " . $recordId;
+			return $this->executeSql( $sql , $ref );
 		}
 		/**
 		* Get last inerted id
 		* @tutorial	PtcDb.cls#manipulating data.lastId
 		* @return	returns last inserted id
 		*/
-		public function lastId()
+		public function lastId( )
 		{ 
-			$last_id=@mysql_insert_id() or trigger_error('Mysql Error: '.mysql_error(),E_USER_ERROR); 
-			if(class_exists('PtcDebug',true)){ log_sql($last_id,"Sql last inserted id"); }# debug
+			$last_id = @mysql_insert_id( ) or trigger_error( 'Mysql Error: ' . mysql_error() , E_USER_ERROR ); 
+			self::_debug( $last_id , 'Sql last inserted id' );
 			return $last_id; 
 		} 
 		/**
@@ -171,10 +181,10 @@
 		* @return	returns the sql reference.
 		* @tutorial	PtcDb.cls#manipulating data.deleteRow
 		*/
-		public function deleteRow($table,$recordId,$ref=0)
+		public function deleteRow( $table , $recordId , $ref = 0 )
 		{	
-			$sql="DELETE FROM ".$table." WHERE `id` = '".$recordId."'";
-			return $this->executeSql($sql,$ref);
+			$sql = "DELETE FROM " . $table . " WHERE `id` = '" . $recordId . "'";
+			return $this->executeSql( $sql , $ref );
 		}
 		/**
 		* Retrive value from given table based on 1 field
@@ -185,11 +195,11 @@
 		* @tutorial	PtcDb.cls#select_data.goFast
 		* @return	returns the value for the specified field,or null if query was empty
 		*/
-		public function goFast($table,$key,$value,$return="id")
+		public function goFast( $table , $key , $value , $return = 'id')
 		{
-			$field[$key]=$value;
-			$result=$this->readRow($table,$field);
-			return is_array($result) ? @$result[$return] : null;
+			$field[ $key ] = $value;
+			$result = $this->readRow( $table , $field );
+			return is_array( $result ) ? @$result[ $return ] : null;
 		}
 		/**
 		* Count rows of select query(based on reference)
@@ -197,15 +207,12 @@
 		* @tutorial	PtcDb.cls#select_data.countRows
 		* @return	returns number rows from select statement
 		**/
-		public function countRows($ref=0)
+		public function countRows( $ref=0 )
 		{
-			if(class_exists('PtcDebug',true)){ log_sql('','_'.$ref); }// debug
-			$result=mysql_num_rows($this->queryResults[$ref]); 
-			if(class_exists('PtcDebug',true))	// debug
-			{ 
-				stop_timer('_'.$ref); 
-				add_to_log('_'.$ref,@$result,'- REF '.$ref.' - number of rows:');	// attach result to buffer
-			}
+			self::_debug( '' , '_' . $ref );												// debug
+			$result = mysql_num_rows( $this->queryResults[ $ref ] ); 
+			self::_debugBuffer( '_' . $ref );												// debug stop timer
+			self::_debugBuffer( '_' . $ref , 'attach' , @$result , '- REF ' . $ref . ' - number of rows:' );	// debug attach result
 			return $result;
 		}
 		/**
@@ -213,56 +220,93 @@
 		* @param	string	$dbLink	link resource
 		* @tutorial	PtcDb.cls#getting_started.dbClose
 		**/
-		public function dbClose($dbLink=null)
+		public function dbClose( $dbLink = null )
 		{
-			if(!$dbLink){ $dbLink=$this->dbLink; }
-			$sql_ref=@mysql_query("SELECT DATABASE()",$dbLink) or 
-				trigger_error('Mysql Error: '.mysql_error(),E_USER_ERROR);
-			$connection=@mysql_result($sql_ref,0) or
-				trigger_error('Mysql Error: '.mysql_error(),E_USER_ERROR);
-			if(class_exists('PtcDebug',true)){ log_sql($connection,'closing connection to'); }// debug
-			@mysql_close($dbLink) or trigger_error('Mysql Error: '.mysql_error(),E_USER_ERROR);
-			if(class_exists('PtcDebug',true)){ stop_timer('closing connection to'); }// debug
+			if ( !$dbLink ) { $dbLink = $this->dbLink; }
+			$sql_ref = @mysql_query( "SELECT DATABASE()" ,$dbLink ) or 
+								trigger_error( 'Mysql Error: ' . mysql_error( ) , E_USER_ERROR );
+			$connection = @mysql_result( $sql_ref , 0 ) or
+								trigger_error( 'Mysql Error: ' . mysql_error( ) , E_USER_ERROR );
+			self::_debug( $connection , 'closing connection to' );	// debug
+			@mysql_close( $dbLink ) or trigger_error( 'Mysql Error: ' . mysql_error( ) , E_USER_ERROR );
+			self::_debugBuffer('closing connection to');			// debug stop timer
+
 		}
 		/**
 		* Protect against sql injection
 		* @param	string	$string	clean values before sql query(prevent sql injection)
 		*/
-		protected function _cleanQuery($string)
+		protected function _cleanQuery( $string )
 		{
-			if(get_magic_quotes_gpc()){ $string=stripslashes($string); }# prevent duplicate backslashes
-			if(phpversion() >='4.3.0'){ $string=mysql_real_escape_string($string); }
-			else{ $string=mysql_escape_string($string); }
+			// prevent duplicate backslashes
+			if ( get_magic_quotes_gpc( ) ) { $string = stripslashes( $string ); }
+			if ( phpversion( ) >= '4.3.0' ){ $string = mysql_real_escape_string( $string ); }
+			else{ $string = mysql_escape_string( $string ); }
 			return $string;
 		}
 		/**
 		* Fields in the select statement WHERE clause
 		* @param	array|string	$fields	 query fields
 		*/
-		protected function _queryFields($fields)
+		protected function _queryFields( $fields )
 		{
-			$i=1;
-			$query_fields=null;
-			if(is_array($fields))
+			$i = 1;
+			$query_fields = null;
+			if ( is_array( $fields ) )
 			{
-				foreach($fields as $k => $v) 
+				foreach ( $fields as $k => $v ) 
 				{
-					if($i<sizeof($fields)){ $query_fields.="`".$k."` = '".$this->_cleanQuery($v)."' AND "; }
-					else{ $query_fields.="`".$k."` = '".$this->_cleanQuery($v)."'"; }
+					if ( $i < sizeof( $fields ) ) 
+					{
+						$query_fields .= "`" . $k . "` = '" . $this->_cleanQuery( $v ) . "' AND ";  
+					}
+					else { $query_fields .= "`" . $k . "` = '" . $this->_cleanQuery( $v ) . "'"; }
 					$i++;
 				}
 			}
-			else if($fields)
+			else if ( $fields )
 			{ 
-				if(preg_match("/:/",$fields))
+				if ( strpos( $fields , ':' ) )
 				{ 
-					$fields=explode(":",$fields); 
-					$query_fields="`".$fields[0]."` = '".$this->_cleanQuery($fields[1])."'";
+					$fields = explode( ":" , $fields ); 
+					$query_fields = "`" . $fields[ 0 ] . "` = '" . $this->_cleanQuery( $fields[ 1 ] ) . "'";
 				}
-				else{ $query_fields="`id` = '".$this->_cleanQuery($fields)."'"; }
+				else { $query_fields = "`id` = '" . $this->_cleanQuery( $fields ) . "'"; }
 			}
-			return ($query_fields) ? " WHERE ".$query_fields :  "";
+			return ( $query_fields ) ? " WHERE " . $query_fields :  "";
+		}
+		/**
+		* Send messsages to the PtcDebug class if present and it\'s namespace
+		* @param 	mixed 	$string		the string to pass
+		* @param	string	$type		the type of debug  (timer, attach)
+		* @param 	mixed 	$statement		some statement if required
+		* @param	string	$category		a category for the messages panel
+		*/
+		protected static function _debug( $string , $statement = null , $category = null )
+		{
+			if ( !defined( '_PTCDEBUG_NAMESPACE_' ) ){ return false; }
+			return @call_user_func_array( array( _PTCDEBUG_NAMESPACE_ , 'bufferSql' ) ,  
+										array( $string , $statement , $category )  );
+		}
+		/**
+		* Adds time and query results to the PtcDebug class
+		* @param	string	$reference		a reference to look for ("$statement")
+		* @param	string	$type		the type of debug  (timer, attach)
+		* @param 	mixed 	$string		the string to pass
+		* @param 	mixed 	$statement		some new statement if required
+		*/
+		protected static function _debugBuffer( $reference , $type = null , $string = null , $statement = null )
+		{
+			if ( !defined( '_PTCDEBUG_NAMESPACE_' ) ){ return false; }
+			if ( $type == 'attach' && $string )
+			{
+				return @call_user_func_array( array( '\\' . _PTCDEBUG_NAMESPACE_ , 'addToBuffer' ) ,  
+													array( $reference , $string , $statement )  );
+			}
+			else
+			{
+				return @call_user_func_array( array( '\\' . _PTCDEBUG_NAMESPACE_ , 'stopTimer' ) , 
+																	array( $reference )  );
+			}
 		}
  	}
-?>
-
