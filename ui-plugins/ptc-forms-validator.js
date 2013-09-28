@@ -3,6 +3,8 @@
 * http://bassistance.de/jquery-plugins/jquery-plugin-validation/
 */
 
+var $=jQuery;
+
 $.validator.setDefaults
  ({
 	//debug: true,
