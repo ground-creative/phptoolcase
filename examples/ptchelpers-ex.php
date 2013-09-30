@@ -11,9 +11,10 @@
 
 	require_once( '../PtcHm.php' );	// require the handyman component
 	
+	declare(ticks=1);				// declare globally for the code coverage and function calls trace
 	
 	/* REGISTER THE AUTOLOADER */
-	PtcHandyMan::register( );	// will auto include the ptc-helpers.php file
+	PtcHandyMan::register( );		// will auto include the ptc-helpers.php file
 	
 	
 	/* START THE DEBUGGER & LOGGER COMPONENT */
@@ -51,7 +52,7 @@
 	
 	
 		/* WATCHING A VARIABLE */	
-		declare(ticks=1)
+		declare(ticks=1)					// declaring code block it is more precise for watching vars
 		{
 			$var = 'some test';
 			ptc_watch( 'var' );				// PtcDebug::watch( )
