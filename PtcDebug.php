@@ -25,6 +25,11 @@
 		*/
 		public static function getCoverage( ) { return static::$_finalCoverageData; }
 		/**
+		* Adds style properties to the floating panel styles array
+		* @param	string	$css		some css to add
+		*/
+		public static function addCss( $css ){ static::$_panelCss = static::$_panelCss . "\n" . $css; }
+		/**
 		* Checks if  the debug "url_key" and "url_pass" are set on the referer url
 		* @return	returns true if "url_key" and "url_pass" are in the referer url, otherwise false
 		*/
@@ -155,7 +160,8 @@
 						$buffer.=', but could not find phpConsole class!';
 					}
 				}
-				if ( static::$_options[ 'enable_inspector' ] )
+				if ( static::$_options[ 'enable_inspector' ] || static::$_options[ 'code_coverage' ] || 
+													static::$_options[ 'trace_functions' ] )
 				{ 
 					register_tick_function( array( $called_class , 'tickHandler' ) ); 
 					//if ( static::$_options[ 'declare_ticks' ] ) { declare( ticks = 1 ); }
@@ -166,6 +172,11 @@
 					static::startCoverage( );
 					$buffer .= "<br>Code coverage analysis for all scripts enabled!";					
 				}
+				if ( static::$_options[ 'trace_functions' ] === 'full' ) 
+				{ 
+					static::startTrace( );
+					$buffer .= "<br>Function calls tracing for all scripts enabled!";					
+				}
 				if ( !isset( $_SESSION[ 'debug_show_messages' ] ) ){ static::_setSessionVars( ); }
 				if ( @$_GET[ 'hidepanels' ] ){ static::_disablePanels( ); }
 				else
@@ -174,7 +185,7 @@
 					static::$_options['show_globals']=$_SESSION['debug_show_globals']; 
 					static::$_options['show_sql']=$_SESSION['debug_show_sql']; 
 				}
-				declare( ticks = 1 );		// declare ticks globally
+				declare( ticks = 1 );		// declare ticks globally just in case
 				@define( '_PTCDEBUG_NAMESPACE_' , $called_class ); 
 				static::$_tickTime = ( ( microtime( true ) - $now ) + static::$_tickTime );
 				static::bufferLog( '' , '<span>' . $buffer . '<span>' );
@@ -186,16 +197,21 @@
 		public static function tickHandler( )
 		{
 			//$now = microtime( true );
+			if ( static::$_codeCoverage || static::$_functionTrace ) { $bt = debug_backtrace( ); }
 			if ( static::$_disableOpcode ) // try to disable opcode cache
 			{ 
 				static::_disableOpcodeCache( );
 				static::$_disableOpcode = false;
 			}
-			if ( static::$_options[ 'enable_inspector' ] ) { static::_watchCallback( ); }
-			if ( static::$_codeCoverage ) { static::_codeCoverageAnalysis( ); }
+			if ( static::$_options[ 'enable_inspector' ] && count( static::$_watchedVars ) ) 
+			{ 
+				static::_watchCallback( ); 
+			}
+			if ( static::$_codeCoverage ) { static::_codeCoverageAnalysis( $bt ); }
+			if ( static::$_functionTrace ) { static::_traceFunctionCalls( $bt ); }
 			//if ( static::$_options[ 'profiler' ] ) { }
-			//if ( static::$_options[ 'function_calls' ] ) { }
-			// FIXME: the timer goes to minus
+			unset( $bt );
+			// FIXME: the timer goes to minus here
 			//static::$_tickTime = ( ( microtime( true ) - $now ) + static::$_tickTime ); 
 		}
 		/*
@@ -205,10 +221,10 @@
 		{
 			if ( @static::$_options[ 'code_coverage' ] )
 			{
-				if ( static::$_codeCoverage )
+				if ( static::$_codeCoverage && static::$_options[ 'code_coverage' ] !== 'full' )
 				{
 					static::bufferLog( 'Coverage already started, please use stopCoverage( ) 
-								before starting a new one', '' , 'Debugger Notice' );
+										before starting a new one!', '' , 'Debugger Notice' );
 					return false;
 				}
 				static::$_codeCoverage = true;
@@ -219,13 +235,55 @@
 		*/
 		public static function stopCoverage( )
 		{
-			static::$_codeCoverage = false;
-			if( static::$_coverageData )
+			if ( static::$_options[ 'code_coverage' ] !== 'full' )
 			{
-				static::$_finalCoverageData[ ] = static::$_coverageData;
-				static::$_coverageData = null;
+				static::$_codeCoverage = false;
+				if( static::$_coverageData )
+				{
+					static::$_finalCoverageData[ ] = static::$_coverageData;
+					static::$_coverageData = null;
+				}
 			}
-			else{ static::bufferLog( 'No data found' , 'code coverage analysis' , 'Code Coverage' ); }
+		}
+		/*
+		* Starts the function calls trace utility
+		*/
+		public static function startTrace( )
+		{
+			if ( @static::$_options[ 'trace_functions' ] )
+			{
+				if ( static::$_functionTrace && static::$_options[ 'trace_functions' ] !== 'full' )
+				{
+					static::bufferLog( 'Function calls tracing has been already started, please use stopTrace( ) 
+											before starting a new one!' , '' , 'Debugger Notice' );
+					return false;
+				}
+				static::$_functionTrace = true;
+			}
+		}
+		/*
+		* Stops the function calls trace utility
+		*/
+		public static function stopTrace( )
+		{
+			if ( static::$_options[ 'trace_functions' ] !== 'full' )
+			{
+				static::$_functionTrace = false;
+				if ( static::$_traceData )
+				{
+					static::$_finalTraceData[ ] = static::$_traceData;
+					static::$_traceData = null;
+				}
+			}
+		}
+		/**
+		* Excludes functions from the function calls tracing engine
+		* @param	array | string	$functions	the function the exclude by their name	
+		*/
+		public static function excludeFromTrace( $functions )
+		{
+			$functions = ( is_array( $functions) ) ? $functions : array( $functions );
+			static::$_excludeFromTrace = array_merge( static::$_excludeFromTrace , $functions );
 		}
 		/**
 		* Watches a variable that is in a declare(ticks=n); code block, for changes 
@@ -303,6 +361,17 @@
 			return true;
 		}
 		/**
+		* Convert memory_usage( ) into a readable format
+		* @param	float		$val			The value to convert
+		* @param	int		$precision	the decimal points
+		*/
+		public static function convertMemUsage( $val , $precision = 2)
+		{
+			$ram = array(" Bytes", " KB", " MB", " GB", " TB", " PB", " EB", " ZB", " YB");
+			return $usage = ( $val ) ? @round( $val / pow( 1024 , 
+					($i = floor( log( $val , 1024) ) ) ) , $precision ) . $ram[ $i ] : '0 Bytes';
+		}
+		/**
 		* Handles php errors
 		* @param 	string 	$errno	error number (php standards)
 		* @param 	string 	$errstr	error string
@@ -367,7 +436,20 @@
 		{
 			@unregister_tick_function( 'tickHandler' );
 			static::$_countTime = false;
-			if ( static::$_codeCoverage ) { static::stopCoverage( ); }
+			if ( static::$_codeCoverage ) 
+			{ 
+				$trace_o = static::$_options[ 'code_coverage' ];
+				static::$_options[ 'code_coverage' ] = true;
+				static::stopCoverage( );
+				static::$_options[ 'code_coverage' ] = $trace_o;
+			}
+			if ( static::$_functionTrace ) 
+			{
+				$trace_o = static::$_options[ 'trace_functions' ];
+				static::$_options[ 'trace_functions' ] = true;
+				static::stopTrace( ); 
+				static::$_options[ 'trace_functions' ] = $trace_o;
+			}
 			static::$_endTime = microtime( true );
 			if( static::$_consoleStarted ){ static::_debugConsole(); }
 			if( static::$_options[ 'show_interface' ] )
@@ -445,27 +527,27 @@
 			'allowed_ips'			=>	null , // restrict access with ip's
 			'session_start'			=>	false , // start session for persistent debugging
 			'show_interface'		=>	true , // show the interface ( false to debug in console only )
-			'enable_inspector'		=>	true , // enable variables inspector, use declare(ticks=n); in code block
-			'declare_ticks'			=>   false , // declare ticks glabally with value of 1
 			'set_time_limit'			=>	null , // set php execution time limit
 			'memory_limit'			=>	null , // set php memory size	
 			'show_messages'		=>	true , // show messages panel
 			'show_globals'			=>	true , // show global variables in vars panel
 			'show_sql'			=>	true , // show sql panel
-			'show_w3c'			=>	true, // show trhe w3c panel
+			'show_w3c'			=>	false, // show trhe w3c panel
+			'minified_html'			=>	true , // compress html for a lighter output
 			'trace_depth'			=>	10 , // maximum depth for the backtrace
 			'max_dump_depth'		=>	6 , // maximum depth for the dump function	
 			'panel_top'			=>	'0px;' , // panel top position
 			'panel_right'			=>	'0px;' , // panel right position
 			'default_category'		=>	'General' , // default category for the messages
-			'minified_html'			=>	true , // compress html for a lighter output
-			'code_coverage'		=>	true // start code coverage analysis, use full to start globally
+			'enable_inspector'		=>	true , // enable variables inspector, use declare(ticks=n); in code block
+			'code_coverage'		=>	true, // enable code coverage analysis, use "full" to start globally
+			'trace_functions'		=>	true // enable function calls tracing, use "full" to start globally
 		);
 		/**
 		* Array of methods excluded from the backtrace
 		* @var	array
 		*/
-		protected static $_excludeMethods=array('bufferLog','bufferSql');
+		protected static $_excludeMethods=array( );
 		/**
 		* Code coverage analysis storage
 		*/
@@ -474,7 +556,15 @@
 		* Final data array for the code coveage
 		*/
 		protected static $_finalCoverageData = array( );
-				/**
+		/**
+		* Function calls tracing storage property
+		*/
+		protected static $_traceData = null;
+		/**
+		* Final data array for the function calls trace
+		*/
+		protected static $_finalTraceData = array( );
+		/**
 		* Array with all options
 		* @var	array
 		*/
@@ -522,9 +612,74 @@
 		*/
 		protected static $_codeCoverage = false;
 		/**
+		* Function calls trace property to start the analysis
+		*/
+		protected static $_functionTrace = false;
+		/**
 		* Controlls when to disable opcode cache
 		*/
 		protected static $_disableOpcode = true;
+		/**
+		* Exclude functions from the function calls trace array 
+		*/
+		protected static $_excludeFromTrace = array( );
+		/**
+		* Property that holds the css for the floating panel
+		*/
+		protected static $_panelCss = '#ptcDebugPanel{font-family:Arial,sant-serif;
+				position:fixed;top:{PANEL_TOP};right:{PANEL_RIGHT};
+				background:#eee;color:#333;z-index:10000;line-height:1.3em;
+				text-align:left;padding:0px;margin:0px;height:25px;}
+				ul.tabs li{background-color:#ddd;border-color:#999;margin:0 -3px -1px 0;
+				padding:3px 6px;border-width:1px;list-style:none;display:inline-block;border-style:solid;}
+				ul.tabs li.active{background-color:#fff;border-bottom-color:transparent;
+				text-decoration:}ul.tabs li:hover{background-color:#eee;}
+				ul.tabs li.active:hover{background-color:#fff;}ul.tabs.merge-up{margin-top:-24px;}
+				ul.tabs.right{padding:0 0 0 0;text-align:right;}
+				ul.tabs{border-bottom-color:#999;border-bottom-width:1px;font-size:14px;
+				list-style:none;margin:0;padding:0;z-index:100000;position:relative;
+				background-color:#EEE}ul.tabs a{color:purple;font-size:10px;
+				text-decoration:none;}.tabs a:hover{color:red;}
+				ul.tabs a.active{color:black;background-color:yellow;}
+				.msgTable{padding:0;margin:0;border:1px solid #999;font-family:Arial;
+				font-size:11px;text-align:left;border-collapse:separate;border-spacing:2px;}
+				.msgTable th{margin:0;border:0;padding:3px 5px;vertical-align:top;
+				background-color:#999;color:#EEE;white-space:nowrap;}
+				.msgTable td{margin:0;border:0;padding:3px 3px 3px 3px;vertical-align:top;}
+				.msgTable tr td{background-color:#ddd;color:#333}
+				.msgTable tr.php-notice td{background-color:lightblue;}
+				.msgTable tr.exception td{background-color:greenyellow;}
+				.msgTable tr.php-warning td{background-color:yellow;}
+				.msgTable tr.php-error td{background-color:orange;}
+				.msgTable tr.inspector td{background-color:lightgreen;}
+				.innerTable a.php-notice{color:lightblue;}
+				.innerTable a.exception{color:greenyellow;}
+				.innerTable a.php-warning{color:yellow;}
+				.innerTable a.php-error{color:orange;}.innerTable a.inspector{color:lightgreen;}
+				.innerTable a.general{color:darkgrey;}.innerTable a.show-all{color:red;}
+				#ptcDebugFilterBar{background-color:black;margin-bottom:8px;padding:4px;
+				font-size:13px;}.innerTable{z-index:10000;position:relative;background:#eee;
+				height:300px;padding:30px 10px 0 10px;overflow:auto;clear:both;}
+				.innerTable a{color:dodgerBlue;font-size:bold;text-decoration:none}
+				.innerTable p{font-size:12px;color:#333;text-align:left;line-height:12px;}
+				.innerPanel h1{font-size:16px;font-weight:bold;margin-bottom:20px;
+				padding:0;border:0px;background-color:#EEE;}
+				#ptcDebugPanelTitle{height:25px;float:left;z-index:1000000;position:relative;}
+				#ptcDebugPanelTitle h1{font-size:16px;font-weight:bold;margin-bottom:20px;
+				margin-left:10px;padding:0 0 0 0;border:0px;background-color:#EEE;
+				color:#669;margin-top:5px;;height:20px;}
+				#analysisPanel h2{font-size:14px;font-weight:bold;margin-bottom:20px;
+				padding:0 0 0 0;border:0px;background-color:#EEE;
+				color:#669;margin-top:5px;;height:20px;}
+				.vars-config, .vars-config span{font-weight:bold;}
+				.msgTable pre span, .vars-config span{padding:2px;}
+				.msgTable pre, span, .vars{font-size:11px;line-height:15px;
+				font-family:"andale mono","monotype.com","courier new",courier,monospace;}
+				.msgTable pre,.msgTable span{font-weight:bold;}
+				#varsPanel a{text-decoration:none;font-size:14px;font-weight:bold;color:#669;
+				line-height:25px;}.count_vars{font-size:11px;color:purple;padding:0;margin:0;}
+				.fixed{width:1%;white-space:nowrap;}.fixed1{width:5%;white-space:nowrap;}
+				#ptcDebugStatusBar{height:2px;background-color:#999;}' ;
 		/**
 		* Sends the buffer to the PhpConsole class
 		*/
@@ -695,13 +850,15 @@
 		/**
 		* Collect data for code coverage analysis
 		*/
-		protected static function _codeCoverageAnalysis( )
+		protected static function _codeCoverageAnalysis( $backtrace = null)
 		{
-			$backtrace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS );
+			$backtrace = ( !$backtrace ) ? 
+				debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS ) : $backtrace;
 			$backtrace = array_reverse( $backtrace );
 			foreach ( $backtrace as $k => $v )
 			{
-				if ( @$v[ 'file' ] ==  __FILE__ ) { continue; }
+				if ( @$v[ 'file' ] ==  __FILE__ || 
+						@strpos( $v[ 'file' ] ,  'runtime-created function' ) ) { continue; }
 				if ( @$v[ 'line' ] && !@array_key_exists( @$v[ 'line' ] , 
 							@static::$_coverageData[ $v[ 'file' ] ] ) )
 				{
@@ -849,21 +1006,21 @@
 				if(is_array($avar))
 				{
 					$count=count($avar);
-					@$result.=$indent.($varName ? $varName.' => ' : '</span>');
+					@$result.=$indent.($varName ? '<span>' . $varName . '</span> => ' : '</span>');
 					if(!empty($avar))
 					{
 						$depth=($depth+1);
-						$result.='<a href="#" onclick="showVars(\''.$id.'\',this);return false;"><span>'.
+						$result.='<a href="#" onclick="ptc_show_vars(\''.$id.'\',this);return false;"><span>'.
 															$type.'('.$count.')&dArr;</span></a>';
 						$result.='<div style="display:none;" id="'.$id.'">'.$indent.'<span> (</span><br>';
 						$keys=array_keys($avar);
-						if($depth<static::$_options['max_dump_depth'])
+						if ( $depth < static::$_options[ 'max_dump_depth' ] )
 						{
-							foreach($keys as $name)
+							foreach ( $keys as $name )
 							{
-								if($name!=="GLOBALS") // avoid globals for recursion nightmares
+								if ( $name !== 'GLOBALS' ) // avoid globals for recursion nightmares
 								{
-									$value=&$avar[$name];
+									$value = &$avar[ $name ];
 									$name=static::_cleanBuffer($name);
 									$result.=static::_doDump($value,'<span style="color:#CF7F18;">[\''.
 										$name.'\']</span>',$indent.$do_dump_indent,$reference,$depth);
@@ -898,7 +1055,7 @@
 						@$avar->recursion_protection_scheme = "recursion_protection_scheme";
 						$depth = ( $depth + 1 );
 						@$result .= $indent . ( $varName ? $varName . ' => ' : '');
-						$result .= '<a href="#" onclick="showVars(\''.$id.'\',this);return false;">';
+						$result .= '<a href="#" onclick="ptc_show_vars(\''.$id.'\',this);return false;">';
 						$result .= '<span>' . $type . '(' . get_class( $avar ) . ')&dArr;</span></a>'.
 							'<div style="display:none;" id="' . $id . '">' . $indent . ' <span> ( </span><br>';
 						if ( $depth < static::$_options[ 'max_dump_depth' ] )
@@ -964,10 +1121,10 @@
 				else
 				{
 					if($varName=="recursion_protection_scheme"){ return; }
-					@$result.=$indent.$varName.' => <span style="'.$span_color.'">';
+					@$result .= $indent . '<span>' . $varName . '</span> => <span style="'.$span_color.'">';
 					if(is_string($avar) && (strlen($avar)>50))
 					{ 
-						$result.='<a href="#" onclick="showString(\''.$id.
+						$result.='<a href="#" onclick="ptc_show_string(\''.$id.
 									'\',this);return false;" style="font-weight:bold;">'; 
 					}
 					$result.=$type.'(';
@@ -1055,6 +1212,7 @@
 												$raw_trace[$i]['function'].'()' : null;
 					}
 				}
+				unset( $raw_trace );
 			}
 			else{ $php_trace=null; }
 			return @$php_trace;
@@ -1112,7 +1270,7 @@
 			$num_msg = @count( static::$_buffer[ 'sql' ] );
 			$ul .= '<li>' . static::_menuLinks( 'sqlPanel' , 'mysql query messages ( ' . $num_msg . ' ) ' , 
 														'sql ( ' . $num_msg . ' ) ' ) . '</li>';
-			$num_msg = @count( static::$_finalCoverageData );
+			$num_msg = (@count( static::$_finalCoverageData ) + @count( static::$_finalTraceData ) );
 			$ul .= '<li>' . static::_menuLinks( 'analysisPanel' , 'analysis ( ' . $num_msg . ' ) ' , 
 													'analysis ( ' . $num_msg . ' ) ' ) . '</li>';
 			$ul .= '<li>' . static::_menuLinks( 'varsPanel' , 'configuration & evariables' , 
@@ -1134,7 +1292,7 @@
 		{
 			$title=ucwords($title);
 			$text=strtoupper($text);
-			$return='<a href="#" onClick="showPanel(\''.$Id.'\',\''.$title.'\',this);return false;">';
+			$return='<a href="#" onClick="ptc_show_panel(\''.$Id.'\',\''.$title.'\',this);return false;">';
 			return $return.=$text.'</a>';
 		}
 		/**
@@ -1194,12 +1352,12 @@
 				if(sizeof($categories)>1)
 				{
 					ksort($categories);
-					$div .= '<div id="ptcDebugFilterBar"><a href="#" onClick="filter_categories(\'' . 
+					$div .= '<div id="ptcDebugFilterBar"><a href="#" onClick="ptc_filter_categories(\'' . 
 									$type . 'Table\',\'showAll\')" class="show-all">Show All</a> | ';
 					foreach($categories as $k=>$v)
 					{ 
 						$catId=str_replace(" ","-",strtolower($k));
-						$div.='<a href="#" onClick="filter_categories(\''.$type.
+						$div.='<a href="#" onClick="ptc_filter_categories(\''.$type.
 									'Table\',\''.$catId.'\')" class="'.$catId.'">'.$k."(".$v.")</a> | "; 
 					}
 					$div=substr($div,0,-3);
@@ -1223,7 +1381,7 @@
 					if(count(@$arr['errfile'])>1)
 					{
 						$class='ptc-debug-class-'.rand();
-						$div.=' <a href="#" onclick="showTrace(\''.$class.'\',this);return false;"><span>'.
+						$div.=' <a href="#" onclick="ptc_show_trace(\''.$class.'\',this);return false;"><span>'.
 																		'&dArr;</span></a>';
 					}
 					@array_shift($arr['errfile']);
@@ -1282,19 +1440,19 @@
 		* @param	string	$file		the full path to the file
 		* @param	string	$line	the line to be highlighted
 		*/
-		protected static function _buildTraceLink($file,$line=null)
+		protected static function _buildTraceLink( $file , $line = null )
 		{
-			$html='<a href="#" onclick="';
-			if(session_id()!=='' && @$_SESSION['code_highlighter'])
+			$html = '<a href="#" onclick="';
+			if ( session_id( ) !== '' && @$_SESSION[ 'code_highlighter' ] )
 			{
-				$js_file=@addslashes(@str_replace($document_root,'',$file));
-				$html.='read_code(\''.addslashes($file).'\',\''.$line.'\');return false;" title="'.@$file.'">';
+				$js_file = @addslashes( @str_replace( $document_root , '' , $file ) );
+				$html .= 'ptc_read_code(\'' . addslashes( $file ) . '\',\'' . $line . '\');return false;" title="' . @$file . '">';
 			}
 			else
 			{ 
-				$html.='return false;"';
-				$html.=' title="'.@$file.' '."\n\n".'** USE SESSION_START(), IF YOU WISH';
-				$html.=' TO ACTIVATE THE CODE POPUP HIGHLIGHTER **" style="cursor:text;">'; 
+				$html .= 'return false;"';
+				$html .= ' title="' . @$file . ' '."\n\n".'** USE SESSION_START(), IF YOU WISH';
+				$html .= ' TO ACTIVATE THE CODE POPUP HIGHLIGHTER **" style="cursor:text;">'; 
 			}	
 			return $html;
 		}
@@ -1364,6 +1522,16 @@
 		{
 			$div = '<div id="analysisPanel" style="display:none;" class="innerTable">';
 			$div .= '<h2>Code Coverage Analysis</h2>';
+			$div .= static::_buildCoverageData( );
+			$div .= '<br><h2>Function Calls Trace</h2>';
+			$div .= static::_buildTraceData( );
+			return $div .= '</div>' ;
+		}
+		/**
+		* Build the html data for the code coverage analysis
+		*/
+		protected static function _buildCoverageData( )
+		{
 			if ( static::$_options[ 'code_coverage' ] )
 			{
 				if ( !empty( static::$_finalCoverageData ) )
@@ -1371,21 +1539,84 @@
 					$i = 1;
 					foreach ( static::$_finalCoverageData as $data )
 					{
-						$div .= '<span><b>Coverage ' . $i . '</b></span> &nbsp;&nbsp;' . 
-													static::_formatVar( $data );
+						$div .= '<div style="font-weight:bold;"><span><b>Coverage ' . $i; 
+						$div .= ' result:</b></span> &nbsp;&nbsp;' . static::_formatVar( $data ) . '</div>';
 						$i++;
 					}
 				}
-				else{ $div .= '<span class="vars">no data available</span>'; }
+				else{ $div .= '<span class="vars">no data available</span><br>'; }
 			}
 			else 
 			{ 
 				$div .= '<span class="vars">';
 				$div .= 'Code coverage is disabled! To use this feature, ';
-				$div .= 'set the option [\'code_coverage\'] to true or \'full\'!';
-				$div .= '</span>'; 
-			}	
-			return $div .= '</div>' ;
+				$div .= 'set the option [\'code_coverage\'] to \'true\' or \'full\'!';
+				$div .= '</span><br>'; 
+			}
+			return $div;
+		}
+		/**
+		* Build the html data for the function calls trace
+		*/
+		protected static function _buildTraceData( )
+		{
+			if ( static::$_options[ 'trace_functions' ] )
+			{
+				if ( !empty( static::$_finalTraceData ) )
+				{
+					for ( $a = 0; $a < sizeof( static::$_finalTraceData ); $a++ )
+					{
+						$data = static::$_finalTraceData[ $a ];
+						// this is just a patch
+						$data = array_map( 'unserialize' , array_unique( array_map( 'serialize' , $data ) ) );
+						$div .= '<span><b>Trace ' . ( $a +1 ) . ' result: ';
+						$div .= '<a href="#" onclick="ptc_show_trace_table(\'jsLive-' . $a . '\' , this );return false;">';
+						$div .=sizeof( $data ). ' calls &dArr;</a></b></span>';
+						$div .= '<table border="1" style="width:100%;display:none" class="msgTable jsLive-' . 
+																			$a . '" id="logTable">';
+						$div .= '<tbody><tr><th>#</th><th>function</th><th>file</th>';
+						$div .= '<th>line</th><!--<th>memory</th>--><th>called by</th><th>in</th></tr>';
+						$i = 1;
+						foreach ( $data as $k => $v )
+						{
+							$link = ( $v[ 'file' ] ) ? static::_buildTraceLink( $v[ 'file' ] , $v[ 'line' ] ) 
+																	. $v[ 'file' ] . '</a>' : '';		
+							$args = ( @$v[ 'args' ] ) ? @preg_replace( '/Array/' , '' ,  
+													@static::_formatVar( $v[ 'args' ] ) , 1 )  : '( )';
+							$called_by_args = ( @$v[ 'called_by_args' ] ) ? @preg_replace( '/Array/' , '' ,  
+													@static::_formatVar( $v[ 'called_by_args' ] ) , 1 )  : '';
+							if ( !$called_by_args && @$v[ 'called_by' ] ) { @$v[ 'called_by' ] = @$v[ 'called_by' ] . '( )'; }
+							$in = ( @$v[ 'in' ] ) ? static::_buildTraceLink( $v[ 'in' ] , @$v[ 'on_line' ] ) . $v[ 'in' ] : '';
+							$in .= ( @$v[ 'on_line' ] ) ? ': '. $v[ 'on_line' ] : ''; 
+							$in .=( @$v[ 'in' ] ) ? '</a>' : '';
+							$div .= '<tr class="general">';
+							$div .= '<td class="fixed"><div style="color:black;"># '. $i . '</div></td>';
+							$div .= '<td class="fixed"><div style="color:darkred;font-weight:bold;">';
+							$div .= $v[ 'function' ] .$args . '</div></td>';
+							$div .= '<td class="fixed">'.$link.'</td>';
+							$div .= '<td class="fixed"><div style="color:black;font-weight:bold;">';
+							$div .= @$v[ 'line' ] .'</div></td>';
+							//$div .= '<td class="fixed"><div style="color:green;font-weight:bold;">';
+							//$div .= @static::convertMemUsage( $v[ 'memory' ] ) . '</div></td>';
+							$div .= '<td class="fixed"><div style="color:purple;font-weight:bold;">';
+							$div .= @$v[ 'called_by' ] . $called_by_args . '</div></td>';
+							$div .= '<td class="fixed">' . $in . '</td>';
+							$div .= '</tr>';
+							$i++;
+						}
+						$div .= '</tbody></table><br>';
+					}
+				}
+				else { $div .= '<span class="vars">no data available</span>'; }
+			}
+			else 
+			{ 
+				$div .= '<span class="vars">';
+				$div .= 'Functions calls tracing is disabled! To use this feature, ';
+				$div .= 'set the option [\'trace_functions\'] to \'true\' or \'full\'!';
+				$div .= '</span><br>'; 
+			}
+			return $div;
 		}
 		/**
 		* Builds the vars panel
@@ -1393,7 +1624,7 @@
 		protected static function _buildVarsPanel( )
 		{
 			$div = '<div id="varsPanel" style="display:none;" class="innerTable">';
-			$div .= '<a href="#" onClick="showVars(\'files\',this)">Files';
+			$div .= '<a href="#" onClick="ptc_show_vars(\'files\',this)">Files';
 			$included_files = @get_included_files( );
 			$div .= '<span class="count_vars">(' . @sizeof( $included_files ) . 
 											')</span>&dArr;</a><br>';
@@ -1422,16 +1653,16 @@
 			$div .= static::_buildInnerVars( 'functionsInternal' , 'Internal Functions' , 
 												@$functions[ 'internal' ] );
 			$div .= static::_buildInnerVars( 'functionsUser' , 'User Functions' , @$functions[ 'user' ] );
-			$div .= static::_buildInnerVars( 'phpInfo' , 'Php' , $php_info = static::_buildPhpInfo( ) );
 			$div.=static::_buildInnerVars( 'declared_classes' , 'Declared Classes' ,
 											$classes = @get_declared_classes( ) );
 			$div.=static::_buildInnerVars( 'declared_interfaces' , 'Declared Interfaces' ,
-										$interfaces = @get_declared_interfaces( ) );						
+										$interfaces = @get_declared_interfaces( ) );	
+			$div .= static::_buildInnerVars( 'phpInfo' , 'Php Config' , $php_info = static::_buildPhpInfo( ) );										
 			if ( !static::$_options[ 'show_globals' ] ) 
 			{ 
 				$div .= '<span class="vars">Global Vars Disabled</span>'; 
 			}
-			else { $div .= static::_buildInnerVars( 'globals' , 'Globals' , array_reverse( $GLOBALS ) ); }
+			else { $div .= static::_buildInnerVars( 'globals' , 'Globals ' , array_reverse( $GLOBALS ) ); }
 			return  $div .= '</div>';
 		}
 		/**
@@ -1443,8 +1674,8 @@
 		protected static function _buildInnerVars( $panelId , $linkTitle , $array )
 		{
 			$div = '<div id="' . $panelId . '" class="vars vars-config" ';
-			$div .= 'style="line-height:20px;font-size:14px;">' . $linkTitle;
-			$div .= @static::_doDump( $array );
+			$div .= 'style="line-height:20px;font-size:14px;"><span>' . $linkTitle;
+			$div .= '</span> '. @static::_doDump( $array );
 			return $div .= '</div>';
 		}
 		/**
@@ -1497,64 +1728,9 @@
 		*/
 		protected static function _includeCss( )
 		{
-			return static::_compressHtml(
-				'<style type="text/css">
-					#ptcDebugPanel{font-family:Arial,sant-serif;position:fixed;top:' . 
-					static::$_options[ 'panel_top' ] .';right:' . static::$_options[ 'panel_right' ] . ';
-					background:#eee;color:#333;z-index:10000;line-height:1.3em;text-align:left;
-					padding:0px;margin:0px;height:25px;}
-					ul.tabs li{background-color:#ddd;border-color:#999;margin:0 -3px -1px 0;
-					padding:3px 6px;border-width:1px;list-style:none;display:inline-block;border-style:solid;}
-					ul.tabs li.active{background-color:#fff;border-bottom-color:transparent;
-					text-decoration:}ul.tabs li:hover{background-color:#eee;}
-					ul.tabs li.active:hover{background-color:#fff;}
-					ul.tabs.merge-up{margin-top:-24px;}
-					ul.tabs.right{padding:0 0 0 0;text-align:right;}
-					ul.tabs{border-bottom-color:#999;border-bottom-width:1px;font-size:14px;
-					list-style:none;margin:0;padding:0;z-index:100000;position:relative;
-					background-color:#EEE}ul.tabs a{color:purple;font-size:10px;
-					text-decoration:none;}.tabs a:hover{color:red;}
-					ul.tabs a.active{color:black;background-color:yellow;}
-					.msgTable{padding:0;margin:0;border:1px solid #999;font-family:Arial;
-					font-size:11px;text-align:left;border-collapse:separate;border-spacing:2px;}
-					.msgTable th{margin:0;border:0;padding:3px 5px;vertical-align:top;
-					background-color:#999;color:#EEE;white-space:nowrap;}
-					.msgTable td{margin:0;border:0;padding:3px 3px 3px 3px;vertical-align:top;}
-					.msgTable tr td{background-color:#ddd;color:#333}
-					.msgTable tr.php-notice td{background-color:lightblue;}
-					.msgTable tr.exception td{background-color:greenyellow;}
-					.msgTable tr.php-warning td{background-color:yellow;}
-					.msgTable tr.php-error td{background-color:orange;}
-					.msgTable tr.inspector td{background-color:lightgreen;}
-					.innerTable a.php-notice{color:lightblue;}
-					.innerTable a.exception{color:greenyellow;}
-					.innerTable a.php-warning{color:yellow;}
-					.innerTable a.php-error{color:orange;}.innerTable a.inspector{color:lightgreen;}
-					.innerTable a.general{color:darkgrey;}.innerTable a.show-all{color:red;}
-					#ptcDebugFilterBar{background-color:black;margin-bottom:8px;padding:4px;font-size:13px;}
-					.innerTable{z-index:10000;position:relative;background:#eee;
-					height:300px;padding:30px 10px 0 10px;overflow:auto;clear:both;}
-					.innerTable a{color:dodgerBlue;font-size:bold;text-decoration:none}
-					.innerTable p{font-size:12px;color:#333;text-align:left;line-height:12px;}
-					.innerPanel h1{font-size:16px;font-weight:bold;margin-bottom:20px;
-					padding:0;border:0px;background-color:#EEE;}
-					#ptcDebugPanelTitle{height:25px;float:left;z-index:1000000;position:relative;}
-					#ptcDebugPanelTitle h1{font-size:16px;font-weight:bold;margin-bottom:20px;
-					margin-left:10px;padding:0 0 0 0;border:0px;background-color:#EEE;
-					color:#669;margin-top:5px;;height:20px;}
-					#analysisPanel h2{font-size:14px;font-weight:bold;margin-bottom:20px;
-					padding:0 0 0 0;border:0px;background-color:#EEE;
-					color:#669;margin-top:5px;;height:20px;}
-					.vars-config, .vars-config span{font-weight:bold;}
-					.msgTable pre span, .vars-config span{padding:2px;}
-					.msgTable pre, span, .vars{font-size:11px;line-height:15px;
-					font-family:"andale mono","monotype.com","courier new",courier,monospace;}
-					.msgTable pre,.msgTable span{font-weight:bold;}
-					#varsPanel a{text-decoration:none;font-size:14px;font-weight:bold;color:#669;
-					line-height:25px;}.count_vars{font-size:11px;color:purple;padding:0;margin:0;}
-					.fixed{width:1%;white-space:nowrap;}.fixed1{width:5%;white-space:nowrap;}
-					#ptcDebugStatusBar{height:2px;background-color:#999;}
-				</style>' );
+			return static::_compressHtml( '<style type="text/css">' . str_replace( array( '{PANEL_TOP}' , 
+										'{PANEL_RIGHT}' ) , array( static::$_options[ 'panel_top' ] , 
+									static::$_options[ 'panel_right' ] ) , static::$_panelCss ) . '</style>' );
 		}
 		/**
 		* Includes the javascript for the interface
@@ -1567,39 +1743,39 @@
 					var panels=new Object;panels.msg="msgPanel";panels.vars="varsPanel";
 					panels.sql="sqlPanel";panels.w3c="w3cPanel";panels.timer="timerPanel";
 					panels.analysis="analysisPanel";
-					function showPanel(elId,panelTitle,el)
+					function ptc_show_panel(elId,panelTitle,el)
 					{
 						var floatDivId="ptcDebugPanel";
 						var tabs=document.getElementById(\'floatingTab\').getElementsByTagName("a");
 						for(var i=0;i<tabs.length;i++){tabs[i].className="";}
 						if(document.getElementById(elId).style.display=="none")
 						{ 	
-							resetPanels();
+							ptc_reset_panels();
 							document.getElementById(elId).style.display=\'\'; 
 							document.getElementById(\'ptcDebugStatusBar\').style.display=\'\';
 							document.getElementById(floatDivId).style.width=\'100%\';
-							el.className="active";activePanelID=elId;setTitle(panelTitle);
+							el.className="active";activePanelID=elId;ptc_set_title(panelTitle);
 						}
 						else
 						{
 							document.getElementById(\'ptcDebugPanelTitle\').style.display=\'none\';
-							resetPanels();
+							ptc_reset_panels();
 							document.getElementById(floatDivId).style.width=\'\';
 						}
 						return false;
 					};
-					function resetPanels()
+					function ptc_reset_panels()
 					{
 						document.getElementById(\'ptcDebugStatusBar\').style.display=\'none\'; 
 						for(var i in panels){document.getElementById(panels[i]).style.display=\'none\';}
 					};
-					function setTitle(panelTitle)
+					function ptc_set_title(panelTitle)
 					{
 						document.getElementById(\'ptcDebugPanelTitle\').style.display=\'\';
 						document.getElementById(\'ptcDebugPanelTitle\').innerHTML=\'<h1>\'+panelTitle+\'</h1>\';
 					};
 					function hideInterface(){document.getElementById(\'ptcDebugPanel\').style.display=\'none\';};
-					function showVars(elId,link)
+					function ptc_show_vars(elId,link)
 					{
 						var element=document.getElementById(elId).style;
 						if(element.display=="none")
@@ -1613,7 +1789,7 @@
 							element.display=\'none\'; 
 						}
 					};
-					function showString(elId,link)
+					function ptc_show_string(elId,link)
 					{
 						if(document.getElementById(elId).style.display=="none")
 						{ 	
@@ -1628,7 +1804,7 @@
 							document.getElementById(elId).style.display=\'none\'; 
 						}
 					};
-					function showTrace(className,link)
+					function ptc_show_trace(className,link)
 					{
 						var elements=document.getElementsByClassName(\'\'+className+\'\');
 						for(i in elements)
@@ -1648,7 +1824,7 @@
 							}
 						}
 					};
-					function read_code(filename,line) 
+					function ptc_read_code(filename,line) 
 					{
 						var query="http://' . addslashes( $_SERVER[ 'HTTP_HOST' ] ) .
 							$path = addslashes( str_replace( realpath( $_SERVER[ 'DOCUMENT_ROOT' ] ) ,
@@ -1658,7 +1834,7 @@
 						if(window.focus){newwindow.focus()};
 						return false;
 					};
-					function filter_categories(tableId,catId)
+					function ptc_filter_categories( tableId , catId )
 					{
 						var table=document.getElementById(tableId);
 						var trs=table.getElementsByTagName("tr");
@@ -1670,7 +1846,21 @@
 							for(var i=0; i<cur_cat.length; ++i){cur_cat[i].style.display="";}
 						}
 					};
-					window.onload=function() 
+					function ptc_show_trace_table( className , link )
+					{
+						var panel = document.getElementsByClassName( className );
+						if ( panel[ 0 ].style.display == "none" ) 
+						{
+							link.innerHTML=link.innerHTML.replace( "\u21d3" , "\u21d1" );						
+							panel[ 0 ].style.display = ""; 
+						}
+						else 
+						{
+							link.innerHTML=link.innerHTML.replace( "\u21d1" , "\u21d3" );
+							panel[ 0 ].style.display = "none"; 
+						}
+					};
+					window.onload=function( ) 
 					{
 						var div=document.getElementById("ptcDebugStatusBar");
 						var press=false;
@@ -1686,7 +1876,7 @@
 						};
 						this.onmouseup=function(){press=false;};
 					};
-					/*function minimize()
+					/*function ptc_minimize( )
 					{
 						var floatDivId="ptcDebugPanel";resetPanels();
 						document.getElementById(floatDivId).style.width=\'300px\';
@@ -1739,13 +1929,13 @@
 		{
 			if ( extension_loaded( 'xcache' ) ) 
 			{
-				@ini_set( 'xcache.optimizer', false ); // Will be implemented in 2.0, here for future proofing
-				// XCache seems to do some optimizing, anyway.
-				// The recorded number of ticks is smaller with xcache.cacher enabled than without.
+				// will be implemented in 2.0, here for future proofing
+				@ini_set( 'xcache.optimizer', false );
+				// xcache seems to do some optimizing, anyway..
 			}
 			else if ( extension_loaded( 'apc' ) )
 			{
-				@ini_set( 'apc.optimization', 0 ); // Removed in APC 3.0.13 (2007-02-24)
+				@ini_set( 'apc.optimization', 0 ); // removed in apc 3.0.13 (2007-02-24)
 				apc_clear_cache();
 			} 
 			else if ( extension_loaded( 'eaccelerator' ) ) 
@@ -1755,11 +1945,61 @@
 				{
 					@eaccelerator_optimizer( false );
 				}
-				// Try setting eaccelerator.optimizer = 0 in a .user.ini or .htaccess file
+				// try setting eaccelerator.optimizer = 0 in a .user.ini or .htaccess file
 			} 
 			else if (extension_loaded( 'Zend Optimizer+' ) ) 
 			{
 				@ini_set('zend_optimizerplus.optimization_level', 0);
+			}
+		}
+		/**
+		* Function calls trace engine (this is an alpha version)
+		* @param	array	$trace	the php debug_backtrace( ) result
+		*/
+		protected static function _traceFunctionCalls( $trace = null )
+		{
+			//$depth = 2;
+			$trace = ( !$trace ) ? debug_backtrace( true ) : $trace;
+			$i= 1 ;
+			foreach ( $trace as $k => $v )
+			{
+				//if( $depth === $i ){ break; }
+				if ( @$v[ 'class' ] == get_called_class( ) || 
+					@in_array( $v[ 'function' ] , static::$_excludeFromTrace ) ) 
+				{ 
+					continue;
+				}
+				$new_array = array
+				(
+					//'ns' 			=> 	$exe_time
+					//'memory' 		=> 	memory_get_usage( true ),
+					'file' 				=> 	@$v[ 'file' ] ,
+					'line'				=>	@$v[ 'line' ] ,
+					'args'			=>	@$v[ 'args' ],
+					'function' 			=> 	@$v[ 'class' ] . @$v[ 'type' ] . @$v[ 'function' ]  ,
+				);
+				/*$break = false;
+				foreach ( @static::$_traceData as $data )
+				{
+					$data[ 'funct' ] =  @$data[ 'class' ] . @$data[ 'type' ] . @$data[ 'function' ];
+					if ( @$data[ 'file'] == @$new_array[ 'file' ]  &&  @$data['line'] ==  
+						@$new_array[ 'line' ] && @$data[ 'funct' ] == @$new_array[ 'function' ])
+					{
+						$break = true;
+						break;
+					}
+				}
+				if ( $break ) { continue; } */
+				if ( @$trace[ $k + 1 ][ 'function' ] || @$trace[ $k + 1 ][ 'class' ] )
+				{
+					$new_array[ 'called_by' ] = @$trace[ $k + 1 ][ 'class' ] . 
+								@$trace[ $k + 1 ][ 'type' ] . @$trace[ $k + 1 ][ 'function' ];
+		 			$new_array[ 'called_by_args' ] = @$trace[ $k + 1 ][ 'args' ];
+					$new_array[ 'in' ] = @$trace[ $k + 1 ][ 'file' ];
+					$new_array[ 'on_line' ] = @$trace[ $k + 1 ][ 'line' ];
+				}
+				@static::$_traceData[ ] = array_filter( $new_array );
+				$i++;
 			}
 		}
 		/**
