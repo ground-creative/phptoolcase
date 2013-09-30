@@ -4,7 +4,7 @@
 	* EXAMPLE FILE FOR PTCDEBUG CLASS
 	*/
 
-	session_start( );				// start session for persistent debugging and code highlighter popup
+	session_start( );		// start session for persistent debugging and code highlighter popup
 
 	$_GET[ 'debug' ] = true;       		// turn on the debug
 
@@ -23,7 +23,11 @@
 	
 	
 	/* START CODE COVERAGE ANALYSIS TO CHECK WHICH LINES HAVE BEEN EXECUTED */
-	PtcDebug::startCoverage( );		// set option['code_coverage'] to "full" to check the hole application
+	PtcDebug::startCoverage( );	// set option['code_coverage'] to "full" to check the hole application
+	
+	
+	/* START TRACING FUNCTION CALLS */
+	PtcDebug::startTrace( );	// set option['trace_functions'] to "full" to check the hole application
 
 
 	/* LOGGING A MESSAGE */
@@ -83,7 +87,11 @@
 	
 	
 	/* STOP CODE COVERAGE ANALYSIS */
-	//PtcDebug::stopCoverage( );	// we could start it again later, if stopCoverage( ) is not used it will be stopped at shutdown
+	PtcDebug::stopCoverage( );	// we could start it again later, if stopCoverage( ) is not used it will be stopped at shutdown
+	
+	
+	/* STOT TRACING FUNCTION CALLS */
+	PtcDebug::stopTrace( );		// we could start it again later, if stopTrace( ) is not used it will be stopped at shutdown
 	
 	
 	/* CATCHING AN EXCEPTION */
