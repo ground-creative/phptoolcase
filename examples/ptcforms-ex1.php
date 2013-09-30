@@ -1,7 +1,8 @@
-<?	
+<?php
+
 	/* 
 	* LOGIN-FORM EXAMPLE FOR PTCFORMS.PHP CLASS
-	* REMOVE COMMENT FROM LINE 41 FOR UI-PLUGINS
+	* REMOVE COMMENT FROM LINE 43 FOR UI-PLUGINS
 	*/
 
 	### PARAMATERS FOR THE EXAMPLE ###############
@@ -32,6 +33,7 @@
 		'form_width'			=>	'415px',	// form width in pixels
 		'spacer_height'		=>	'10px;'	// spacer height between fields
 	);
+	
 	require_once('../PtcForms.php');
 	$form=new PtcForms($options);
 	
@@ -145,4 +147,3 @@
 			exit(); 
 		}
 	}*/
-?>
