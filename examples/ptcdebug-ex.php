@@ -6,6 +6,8 @@
 
 	session_start( );		// start session for persistent debugging and code highlighter popup
 
+	declare(ticks=1);		// declare globally for the code coverage and function calls trace
+
 	$_GET[ 'debug' ] = true;       		// turn on the debug
 
 	//$_GET['debug_off']=true;    		// turn off debug
@@ -73,7 +75,7 @@
 
 
 	/* WATCHING A VARIABLE */	
-	declare(ticks=1)
+	declare(ticks=1)						// declaring code block it is more precise for watching vars
 	{
 		$var = 'some test';
 		PtcDebug::watch( 'var' );				// passing the variable without the "$" symbol
