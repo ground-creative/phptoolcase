@@ -122,7 +122,17 @@
 	* @see PtcDebug::stopCoverage()
 	*/
 	function ptc_stop_coverage( ) { return ptc_run( 'stopCoverage' ,@_PTCDEBUG_NAMESPACE_ ); }
-	
+	/*
+	* Starts the function calls trace utility
+	* @see PtcDebug::starTrace()
+	*/
+	function ptc_start_trace( ) { return ptc_run( 'startTrace' , @_PTCDEBUG_NAMESPACE_ ); }
+	/*
+	* Stop the function calls trace utility
+	* @see PtcDebug::stopTrace()
+	*/
+	function ptc_stop_trace( ) { return ptc_run( 'stopTrace' ,@_PTCDEBUG_NAMESPACE_ ); }
+
 	
 	/** HANDYMAN COMPONENT HELPERS **************************************************/
 	
