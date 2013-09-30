@@ -1,10 +1,13 @@
-  
+     
 EXAMPLE FILES FOR ALL LIBRARY COMPONENTS:
  
 
-- ptcdebug-ex.php				debugger & logger examples file
-- ptcdb-ex.php					mysql query helper examples file
-- ptcforms-ex1.php				Dynamic Forms login form example file
-- ptcforms-ex2.php				Dynamic Forms contact form example file
-- ptcforms-ex3.php				Dynamic Forms registration form example file
-- ptcforms-ui-plugins.php			Dynamic Forms ui-plugins includes for all form examples
+- ptcdebug-ex.php			debugger & logger examples file
+- ptcdb-ex.php				mysql query helper examples file
+- ptchm-ex.php				handyman example file
+- ptcforms-ex1.php			dynamic forms login form example file
+- ptcforms-ex2.php			dynamic forms contact form example file
+- ptcforms-ex3.php			dynamic forms registration form example file
+- ptcforms-ui-plugins.php		dynamic forms ui-plugins includes for all form examples
+- ptchelpers-ex.php			phptoolcase helper functions example file
+- autoloader-example-files	folder holding the classes for the handyman ptchm-ex.php example file
