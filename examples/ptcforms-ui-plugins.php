@@ -1,4 +1,5 @@
-<?
+<?php
+
 	/* THIS FILE IS NEED FOR THE JAVASCRIPT TO WORK CORRECTLY
 	*  FOR VALIDATOR THE FILE ptc-forms-validator.js IS REQUIRED
 	*  FOR UI STYLES THE FILE ptc-forms-ui.js IS REQUIRED
@@ -33,4 +34,3 @@
 				}
 			});
 		</script>';
-?>
