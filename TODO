@@ -1,7 +1,7 @@
  
 ##########################################################
 
-PhpToolCase Version 0.8.3 open source project
+PhpToolCase Version 0.9 open source project
 
 A powerfull set of tools to speed up the process of coding
 
@@ -13,16 +13,12 @@ A powerfull set of tools to speed up the process of coding
 
 
 - Debugger & Logger (PtcDebug):
-		
-	- fix js resize panel with IE
 
 	- Make a better panel for the timer
 	
-	- Build a login for better security
-	
-	- Make a wordpress plugin
-	
 	- Fix timer problem with the watch_var method, the runtime should be removed
+	
+	- Make  a better trace function calls engine
 	
 
 - Forms Generator & Validator (PtcForms):
