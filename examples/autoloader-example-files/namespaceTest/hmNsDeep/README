@@ -1,0 +1,5 @@
+  
+EXAMPLE SUBFOLDER WITH NAMESPACED CLASSES FOR THE HANDYMAN AUTOLOADER EXAMPLES:
+ 
+
+- HmTestNsDeep.php	example for the autoloader, namespaced class file in subdirectory added as a namespace directory
