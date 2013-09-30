@@ -1,4 +1,9 @@
-<?
+<?php
+
+	/* 
+	* EXAMPLE FILE FOR PTCDB CLASS
+	*/
+	
 	#### DB DETAILS NEEDED FOR THE EXAMPLE TO WORK ##
 	$db['host']="localhost";				# mysql host
 	$db['user']="mysql user";			# mysql user
@@ -159,4 +164,3 @@
 
 	// close connection
 	$ptc->dbClose();
-?>
