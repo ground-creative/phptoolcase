@@ -532,7 +532,7 @@
 			'show_messages'		=>	true , // show messages panel
 			'show_globals'			=>	true , // show global variables in vars panel
 			'show_sql'			=>	true , // show sql panel
-			'show_w3c'			=>	false, // show trhe w3c panel
+			'show_w3c'			=>	true, // show the w3c panel
 			'minified_html'			=>	true , // compress html for a lighter output
 			'trace_depth'			=>	10 , // maximum depth for the backtrace
 			'max_dump_depth'		=>	6 , // maximum depth for the dump function	
