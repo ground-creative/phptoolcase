@@ -1,7 +1,7 @@
  
 ##########################################################
 
-PhpToolCase Version 0.8.3 open source project
+PhpToolCase Version 0.8.4b open source project
 
 A powerfull set of tools to speed up the process of coding
 
@@ -9,15 +9,101 @@ A powerfull set of tools to speed up the process of coding
 
 == BACKWARD COMPATIILITY (ATTENTION)!!!!! ==================
 
-VERSION 0.8.3 IS NOT COMPATIBLE WITH VERSIONS PRIOR TO 0.8.2.B !!!!!!
+VERSION 0.8.9 IS NOT COMPATIBLE WITH VERSIONS PRIOR TO 0.8.4B !!!!!!
 
-IF YOU ARE PLANNING TO UPGRADE PLEASE DOWNLOAD VERSION 0.8.2B 
-AS IT WILL NOT BREAK YOUR CODE, AND WILL GIVE YOU TIME TO UPGRADE.
+IF YOU ARE PLANNING TO UPGRADE PLEASE DOWNLOAD VERSION 0.8.4B 
+AS IT WILL NOT BREAK YOUR CODE, AND GIVE YOU TIME TO UPGRADE.
 
 
 == CHANGELOG ===================================
 
+- Version 0.9:
 
+	PtcDebug.php
+	
+	-	the following functions/methods have been removed:
+	
+		-	log_msg				use ptc_log instead
+		-	log_sql				use ptc_log_sql instead
+		-	watch_var			use ptc_watch instead
+		-	add_to_log			use ptc_attach instead
+		-	stop_timer			use ptc_stop_timer instead
+
+- Version 0.8.4b:
+
+	PtcDebug.php
+	
+	-	added full windows support for the code popup highlighter
+	-	added addCss( ) method to add style parameters to the floating panel
+	-	the following functions/methods have been marked as deprecated:
+	
+		-	log_msg				use ptc_log instead
+		-	log_sql				use ptc_log_sql instead
+		-	watch_var			use ptc_watch instead
+		-	add_to_log			use ptc_attach instead
+		-	stop_timer			use ptc_stop_timer instead
+		
+			these methods will be removed in the next version release
+			
+	-	moved all functions outside the class to the ptc-helpers.php file, which is now required for backward compatibility
+	-	added E_PARSE flag as a php error 
+	-	added support for lambda functions for the _doDump( ) method
+	-	changed html ids for elements to addptcdebug prefix to all ids
+	-	changed self for static to be able to extend and override all methods
+	-	added _PTCDEBUG_NAMESPACE_ constant to check if class is already active and retrieve it is namespace
+	-	added get_called_class to actually be able to extend and override all methods
+	-	added startCoverage and stopCoverage methods to add code coverage analysis functionality to the class
+	-	added startTrace and stopTrace methods to add function calls trace functionality to the class
+	-	moved watchCallback method to protected methods section
+	-	moved all private methods and properties to the protected section to be able to extend and override all methods
+	-	added tickHandler to be able to controll all methods involved with the register_tick_function 
+	-	added full namespace support, te class can now be safely namespaced
+	-	added method getCoverage( ) to retrieve the code coverage data analysis
+	-	added method getBuffer( ) to retrieve the buffer storage array
+	-	added method convertMemUsage( ) to convert memory_usage( ) into a readable format
+	-	added excludeFromTrace( ) method to eliminate functions from the trace function calls engine
+	-	added the following options:
+	
+		-	panel_top
+		-	panel_right
+		-	minified_html
+		-	code_coverage
+		-	trace_functions
+		-	show_w3c
+		
+			refer to the manual and the wiki pages for details and usage for these options
+
+	-	added total number of messages to the messages  and sql panels
+	-	added _buildAnalysisPanel to build the analysis panel for the code coverage utility
+	-	added _disableOpcodeCache( ) method for a more efficent code coverage analysis
+
+	PtcDb.php:
+	
+	-	removed the possibility to autoload the PtcDebug class
+	-	added _debug method to send messages to the PtcDebug class
+	-	added _debugBuffer method to send messages to the PtcDebug class
+
+	PtcForms.php:
+	
+	-	chaged the following validator methods:
+		
+		-	validateEmail
+		-	ValidateNumber
+		-	validatEqualTo
+		-	validatePattern
+		
+			all the validator methods now check if an actual value is set before validating
+		
+	-	changed the method validateRequired to use strlen
+	-	replaced preg_match for strpos
+	-	changed global variable ptcRandId to _ptcRandId
+	-	removed the possibility to autoload the PtcDebug class
+	-	added _debug method to send messages to the PtcDebug class
+	
+	PtcHm.php:
+	
+	this is the first release for this component
+	
 - Version 0.8.3:
 
 	PtcForms.php:
@@ -114,7 +200,7 @@ AS IT WILL NOT BREAK YOUR CODE, AND WILL GIVE YOU TIME TO UPGRADE.
 			refer to the manual for details and usage for these options
 	
 	-	added the _doDump and _formatVar methods to properly format a given variable to be more friendly to read
-	-	added the following functions as alias for their respective methods (it's shorter to type):
+	-	added the following functions as alias for their respective methods (it is shorter to type):
 	
 		-	lo_msg 					(PtcDebug::bufferLog)
 		-	log_sql 					(PtcDebug::bufferSql)
