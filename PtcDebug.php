@@ -185,7 +185,6 @@
 					static::$_options['show_globals']=$_SESSION['debug_show_globals']; 
 					static::$_options['show_sql']=$_SESSION['debug_show_sql']; 
 				}
-				declare( ticks = 1 );		// declare ticks globally just in case
 				@define( '_PTCDEBUG_NAMESPACE_' , $called_class ); 
 				static::$_tickTime = ( ( microtime( true ) - $now ) + static::$_tickTime );
 				static::bufferLog( '' , '<span>' . $buffer . '<span>' );
@@ -274,7 +273,7 @@
 					static::$_finalTraceData[ ] = static::$_traceData;
 					static::$_traceData = null;
 				}
-			}
+			}		
 		}
 		/**
 		* Excludes functions from the function calls tracing engine
@@ -1474,9 +1473,9 @@
 				}
 				@$html .= '<div style="font-weight:bold;color:' . $styleColor . ';' . 
 												@$display . '"' . @$class . '>';
-				
+
 				if ( $v || @$var[ $k + 1 ] ) { $html .= $indent; }
-				
+
 				if( !$v ) { $v = '&nbsp;'; }
 				$html .= $v . '</div>';
 				$indent = $indent . '<span style="color:black;">| &nbsp;</span>';
@@ -1958,17 +1957,18 @@
 		*/
 		protected static function _traceFunctionCalls( $trace = null )
 		{
-			//$depth = 2;
+			$depth = 10;
 			$trace = ( !$trace ) ? debug_backtrace( true ) : $trace;
 			$i= 1 ;
+			$methods = get_class_methods( get_called_class( ) );
 			foreach ( $trace as $k => $v )
 			{
-				//if( $depth === $i ){ break; }
-				if ( @$v[ 'class' ] == get_called_class( ) || 
-					@in_array( $v[ 'function' ] , static::$_excludeFromTrace ) ) 
+				if ( @$v[ 'class' ] == get_called_class( ) || @in_array( $v[ 'function' ] , $methods ) || 
+										@in_array( $trace[ $k + 1 ][ 'function' ] , $methods )) 
 				{ 
 					continue;
 				}
+				if( $depth === $i ){ break; }
 				$new_array = array
 				(
 					//'ns' 			=> 	$exe_time
@@ -1978,18 +1978,6 @@
 					'args'			=>	@$v[ 'args' ],
 					'function' 			=> 	@$v[ 'class' ] . @$v[ 'type' ] . @$v[ 'function' ]  ,
 				);
-				/*$break = false;
-				foreach ( @static::$_traceData as $data )
-				{
-					$data[ 'funct' ] =  @$data[ 'class' ] . @$data[ 'type' ] . @$data[ 'function' ];
-					if ( @$data[ 'file'] == @$new_array[ 'file' ]  &&  @$data['line'] ==  
-						@$new_array[ 'line' ] && @$data[ 'funct' ] == @$new_array[ 'function' ])
-					{
-						$break = true;
-						break;
-					}
-				}
-				if ( $break ) { continue; } */
 				if ( @$trace[ $k + 1 ][ 'function' ] || @$trace[ $k + 1 ][ 'class' ] )
 				{
 					$new_array[ 'called_by' ] = @$trace[ $k + 1 ][ 'class' ] . 
@@ -2001,6 +1989,8 @@
 				@static::$_traceData[ ] = array_filter( $new_array );
 				$i++;
 			}
+			unset( $new_array );
+			unset( $trace );
 		}
 		/**
 		* Removes html entities from the buffer
