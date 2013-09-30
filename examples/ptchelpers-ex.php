@@ -1,9 +1,9 @@
 <?php
 
 	/* 
-	* EXAMPLE FILE FOR PTC HELPER FUNCTIONS FOR THE LIBRARY COMPONENTS
-	* ALL EXAMPLES HAVE TAKEN FROM THE COMPONENTS EXAMPLE FILES
-	* PtcHm.php and PtcDebug.php are required for these examples
+	* EXAMPLE FILE FOR HELPER FUNCTIONS FOR THE LIBRARY COMPONENTS
+	* ALL EXAMPLES HAVE BEEN TAKEN FROM THE COMPONENTS EXAMPLE FILES
+	* PTCHM.PHP AND PTCDEBUG.PHP ARE REQUIRED FOR THESE EXAMPLES
 	*/
 	
 	session_start( );				// start session for persistent debugging and code highlighter popup
@@ -25,12 +25,16 @@
 		'die_on_error'	=>	false,	// continue if fatal error
 	);
 	PtcDebug::load( $options );		// initialize the class
-	
+
 	
 	/*** PTC DEBUGGER & LOGGER HELPERPS ****************************************************/
 	
 		/* START CODE COVERAGE ANALYSIS TO CHECK WHICH LINES HAVE BEEN EXECUTED */
-		ptc_start_coverage( );		// PtcDebug::startCoverage( )
+		ptc_start_coverage( );				// PtcDebug::startCoverage( )
+	
+	
+		/* START FUNCTION CALLS TRACING  */
+		ptc_start_trace( );					// PtcDebug::startTrace( )
 	
 	
 		/* LOGGING A MESSAGE */
@@ -38,11 +42,11 @@
 		
 		
 		/* LOGGING SQL QUERIES AND TIMING EXECUTION */
-		$sql = 'select from where something';		// some sql query, will be used as reference
-		ptc_log_sql( '' , $sql  );					// PtcDebug::bufferSql( )
+		$sql = 'select from where something';	// some sql query, will be used as reference
+		ptc_log_sql( '' , $sql  );				// PtcDebug::bufferSql( )
 		$sql_result = array( 'key' => 'value' , 'key1' => 'value1' ); // this should be the sql result of the sql query
 		ptc_stop_timer( $sql );				// PtcDebug::stopTimer( )
-		ptc_attach( $sql , $sql_result );	// PtcDebug::addToBuffer( )
+		ptc_attach( $sql , $sql_result );		// PtcDebug::addToBuffer( )
 	
 	
 		/* WATCHING A VARIABLE */	
@@ -53,8 +57,14 @@
 			$var = 'some new value';			// the variable changed
 		}
 		
+		
 		/* STOP CODE COVERAGE ANALYSIS */
-		//ptc_stop_coverage( );	// PtcDebug::stopCoverage( )
+		ptc_stop_coverage( );				// PtcDebug::stopCoverage( )
+		
+		
+		/* STOP FUNCTION CALLS TRACING */
+		ptc_stop_trace( );					// PtcDebug::stopTrace( )
+	
 	
 	/*** PTC HANDYMAN HELPERPS ****************************************************/
 	
