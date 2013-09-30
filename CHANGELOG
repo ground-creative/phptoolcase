@@ -12,7 +12,7 @@ A powerfull set of tools to speed up the process of coding
 VERSION 0.8.4B IS NOT COMPATIBLE WITH VERSIONS PRIOR TO 0.8.2B !!!!!!
 
 IF YOU ARE PLANNING TO UPGRADE PLEASE DOWNLOAD VERSION 0.8.2B 
-AS IT WILL NOT BREAK YOUR CODE, AND WILL GIVE YOU TIME TO UPGRADE.
+AS IT WILL NOT BREAK YOUR CODE, AND GIVE YOU TIME TO UPGRADE.
 
 
 == CHANGELOG ===================================
@@ -23,6 +23,7 @@ AS IT WILL NOT BREAK YOUR CODE, AND WILL GIVE YOU TIME TO UPGRADE.
 	PtcDebug.php
 	
 	-	added full windows support for the code popup highlighter
+	-	added addCss( ) method to add style parameters to the floating panel
 	-	the following functions/methods have been marked as deprecated:
 	
 		-	log_msg				use ptc_log instead
@@ -32,7 +33,8 @@ AS IT WILL NOT BREAK YOUR CODE, AND WILL GIVE YOU TIME TO UPGRADE.
 		-	stop_timer			use ptc_stop_timer instead
 		
 			these methods will be removed in the next version release
-	
+			
+	-	moved all functions outside the class to the ptc-helpers.php file, which is now required for backward compatibility
 	-	added E_PARSE flag as a php error 
 	-	added support for lambda functions for the _doDump( ) method
 	-	changed html ids for elements to addptcdebug prefix to all ids
@@ -40,26 +42,29 @@ AS IT WILL NOT BREAK YOUR CODE, AND WILL GIVE YOU TIME TO UPGRADE.
 	-	added _PTCDEBUG_NAMESPACE_ constant to check if class is already active and retrieve it is namespace
 	-	added get_called_class to actually be able to extend and override all methods
 	-	added startCoverage and stopCoverage methods to add code coverage analysis functionality to the class
-	-	added ptc_start_coverage and ptc_stop_coverage to add code coverage analysis functionality to the class
+	-	added startTrace and stopTrace methods to add function calls trace functionality to the class
 	-	moved watchCallback method to protected methods section
 	-	moved all private methods and properties to the protected section to be able to extend and override all methods
 	-	added tickHandler to be able to controll all methods involved with the register_tick_function 
 	-	added full namespace support, te class can now be safely namespaced
-	-	added method getCoverage( ) to retrieve the code caverage data analysis
+	-	added method getCoverage( ) to retrieve the code coverage data analysis
 	-	added method getBuffer( ) to retrieve the buffer storage array
+	-	added method convertMemUsage( ) to convert memory_usage( ) into a readable format
+	-	added excludeFromTrace( ) method to eliminate functions from the trace function calls engine
 	-	added the following options:
 	
 		-	panel_top
 		-	panel_right
 		-	minified_html
 		-	code_coverage
+		-	trace_functions
 		-	show_w3c
 		
 			refer to the manual and the wiki pages for details and usage for these options
 
 	-	added total number of messages to the messages  and sql panels
 	-	added _buildAnalysisPanel to build the analysis panel for the code coverage utility
-	-	added _disableOpcodeCache( ) method for amore efficent code coverage analysis
+	-	added _disableOpcodeCache( ) method for a more efficent code coverage analysis
 
 	PtcDb.php:
 	
@@ -86,7 +91,7 @@ AS IT WILL NOT BREAK YOUR CODE, AND WILL GIVE YOU TIME TO UPGRADE.
 	
 	PtcHm.php:
 	
-	this the first release for this component
+	this is the first release for this component
 	
 - Version 0.8.3:
 
