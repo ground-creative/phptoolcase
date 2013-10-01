@@ -13,6 +13,8 @@
 	* @link     	http://phptoolcase.com
 	*/
 
+	declare(ticks=1); // used by the watch var , function calls trace and the code coverage utilities
+
 	class PtcDebug
 	{
 		/**
