@@ -3,16 +3,18 @@
 	/* 
 	* EXAMPLE FILE FOR HELPER FUNCTIONS FOR THE LIBRARY COMPONENTS
 	* ALL EXAMPLES HAVE BEEN TAKEN FROM THE COMPONENTS EXAMPLE FILES
-	* PTCHM.PHP AND PTCDEBUG.PHP ARE REQUIRED FOR THESE EXAMPLES
+	* PTCHM.PHP, PTCDEBUG.PHP AND THE AUTOLOADER EXAMPLE FILES FOLDER 
+	* ARE REQUIRED FOR THESE EXAMPLES
 	*/
 	
 	session_start( );				// start session for persistent debugging and code highlighter popup
 
 	require_once( '../PtcHm.php' );	// require the handyman component
 	
+	declare(ticks=1);				// declare globally for the code coverage and function calls trace
 	
 	/* REGISTER THE AUTOLOADER */
-	PtcHandyMan::register( );	// will auto include the ptc-helpers.php file
+	PtcHandyMan::register( );		// will auto include the ptc-helpers.php file and all other classes
 	
 	
 	/* START THE DEBUGGER & LOGGER COMPONENT */
@@ -20,9 +22,10 @@
 	//$_GET['debug_off']=true;    		// turn off debug
 	$options=array				// add some options before class initialization
 	(
-		'url_key'		=>	'debug',
-		'url_pass'		=>	'true',
-		'die_on_error'	=>	false,	// continue if fatal error
+		'url_key'				=>	'debug',
+		'url_pass'				=>	'true',
+		'die_on_error'			=>	false,	// continue if fatal error
+		'exclude_categories'	=>	null		// don't exclude categories from the output
 	);
 	PtcDebug::load( $options );		// initialize the class
 
@@ -50,7 +53,7 @@
 	
 	
 		/* WATCHING A VARIABLE */	
-		declare(ticks=1)
+		declare(ticks=1)					// declaring code block it is more precise for watching vars
 		{
 			$var = 'some test';
 			ptc_watch( 'var' );				// PtcDebug::watch( )
@@ -98,3 +101,17 @@
 		$dirs = ptc_dir( );			// PtcHandyMan::getDirs( ) params: ( files , directories , ns )
 		ptc_log( $dirs , 'getting all directories and files to be autoloaded' ); //PtcDebug::bufferLog( );
 	
+
+	/*** PTC EVENT HELPERPS ****************************************************/
+
+		/* ADDING EVENT LISTENERS ( PtcEvent::listen( ) ) */
+		ptc_listen( 'some.event' , function( $data ) 
+		{
+			// do some stuff
+			ptc_log( $data , 'Called event with closure as call back' );  // PtcDebug::bufferLog( )
+		} );
+		
+		
+		/* FIRING EVENTS ( PtcEvent::fire( ) ) */
+		ptc_fire( 'some.event' , array( 'some data' ) );
+
