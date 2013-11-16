@@ -1,7 +1,7 @@
  
 ##########################################################
 
-PhpToolCase Version 0.8.4b open source project
+PhpToolCase Version 0.9.1b open source project
 
 A powerfull set of tools to speed up the process of coding
 
@@ -9,15 +9,62 @@ A powerfull set of tools to speed up the process of coding
 
 == BACKWARD COMPATIILITY (ATTENTION)!!!!! ==================
 
-VERSION 0.8.4B IS NOT COMPATIBLE WITH VERSIONS PRIOR TO 0.8.2B !!!!!!
-
-IF YOU ARE PLANNING TO UPGRADE PLEASE DOWNLOAD VERSION 0.8.2B 
-AS IT WILL NOT BREAK YOUR CODE, AND GIVE YOU TIME TO UPGRADE.
-
+VERSION 0.9.1B IS NOT COMPATIBLE WITH PREVIOUS VERSIONS!!!!!!
 
 == CHANGELOG ===================================
 
+- Version 0.9.1b:
 
+	PtcEvent.php
+	
+	-	this is the first release for this component
+	
+	PtcQueryBuilder.php
+	
+	-	this is the first release for this component
+	
+	PtcMapper.php
+	
+	-	this is the first release for this component
+	
+	PtcDb.php
+	
+	-	component has been completely rewritten and is now a dabatase connection manager
+
+	PtcHm.php
+	
+	-	added ptcevent register as helper
+	-	added a method to get propected / private properties
+	
+	PtcForm.php
+	
+	-	changed the class name, removed the "s"
+	-	added a boot method if class is extended
+	-	added observers for events
+	-	added a method formFields if class is extended
+	-	moved attributes for elements to top
+	-	added closure support for addElement parameters
+	-	added a property to store submit input fields, and call submit event
+	-	added an error msg property to add before the form is rendered
+	-	added call class method if exists to validator
+	-	fixed input style bug
+	-	added event_class option
+	-	fixed keep_values for radio/checkbox groups
+	-	added setErrMsg method to set the errMsg property
+	
+	PtcDebug.php
+	
+	-	added a callback to watch method
+	-	upgraded to the new phpconsole class, for ajax requests
+	-	added a search string in files form to the analysis panel
+	-	added an options to exclude categories from the output
+	-	moved all session vars inside 1 array
+
+	ptc-helpers.php
+	
+	-	added ptc_listen function
+	-	added ptc_fire function
+	
 - Version 0.8.4b:
 
 	PtcDebug.php
