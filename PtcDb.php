@@ -1,11 +1,10 @@
-<?php 
-
+<?
 	/**
-	* MYSQL QUERY HELPER CLASS 
+	* PHP TOOLCASE DATABASE CONNECTION MANAGER CLASS
 	* PHP version 5.3
-	* @category 	Framework
+	* @category 	Libraries
 	* @package  	PhpToolCase
-	* @version	0.8.4b
+	* @version	0.9.1b
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
@@ -13,300 +12,210 @@
 	
 	class PtcDb
 	{
-		/**
-		* Mysql mode(MYSQL_BOTH,MYSQL_ASSOC,MYSQL_NUM)
-		* @var 	string
-		* @tutorial	PtcDb.cls#mySqlFlag
+		/** 
+		* Adds a connection to the connection details array
+		* @param	array	$options		the details of the connection
+		* @param	string	$name		the name of the connection
 		*/
-		public $mySqlFlag = MYSQL_ASSOC;
-		/**
-		* Store query results in array
-		* @var 	array
-		* @tutorial	PtcDb.cls#references
-		*/
-		public $queryResults = array( );
-		/**
-		* Defines a constant with the class namespace
-		*/
-		public function __construct( )
-		{ 
-			$namespace = @strtoupper( @str_replace( '\\' , '_' , __NAMESPACE__ ) ) . '_';
-			@define( '_PTCDB_' . $namespace , get_called_class( ) ); // declare the class namespace
-		}
-		/**
-		* Connect to database
-		* @param	string	$dbHost		address for mysql server
-		* @param	string	$dbUser		user for mysql server
-		* @param	string	$dbPass		password for mysql server
-		* @param	string	$dbName		database name
-		* @param	string	$dbCharset	charset to use
-		* @tutorial	PtcDb.cls#getting_started.dbConnect
-		*/
-		public function dbConnect( $dbHost , $dbUser , $dbPass , $dbName = NULL , $dbCharset = NULL )
+		public static function add( $options , $name = 'default' )
 		{
-			self::_debug( $dbUser . '@' . $dbHost . '[' . $dbName . ']','Connecting to' , 'Connection' );	// debug msg
-			$this->dbLink = @mysql_connect( $dbHost , $dbUser , $dbPass ) or 
-							trigger_error( 'Mysql Error: ' . mysql_error( ) , E_USER_ERROR );
-			self::_debugBuffer( 'Connecting to' );											// debug stop timer
-			if ( $dbName )
-			{ 
-				@mysql_select_db( $dbName ) or 
-							trigger_error( ' Mysql Error: ' . mysql_error( ) , E_USER_ERROR );
-			}
-			if ( $dbCharset )
-			{ 
-				@mysql_query( "SET NAMES '" . $dbCharset . "'" , $this->dbLink ) or 
-							trigger_error( ' Mysql Error: ' . mysql_error( ) , E_USER_ERROR );
-			}
-		}
-		/**
-		* Execute any select statement
-		* @param	string	$sql	sql query to be returned
-		* @param	string	$ref	gives a reference to the resource. See {@tutorial PtcDb.cls#references}
-		* @tutorial	PtcDb.cls#complex_queries.sqlToArray		
-		* @return	returns  a 2 dimensions array with values or null if query is empty
-		*/
-		public function sqlToArray( $sql , $ref = 0 )
-		{
-			self::_debug( '' ,  '- REF ' . $ref . ' - ' . $sql );							// debug
-			$this->queryResults[ $ref ] = @mysql_query( $sql ) or 
-				trigger_error( '- REF ' . $ref . ' - Mysql Error: ' . mysql_error( ) , E_USER_ERROR );
-			self::_debugBuffer( '- REF ' . $ref . ' - ' . $sql );							// debug stop timer
-			while ( $row = @mysql_fetch_array( $this->queryResults[ $ref ] , $this->mySqlFlag ) )
-			{ 
-				$result[ ] = $row; 
-			} 
-			self::_debugBuffer( '- REF ' . $ref . ' - ' . $sql , 'attach' , @$result);			// debug attach result
-			return ( @$result ) ? $result : null;
-		}
-		/**
-		* Execute sql statement and return result
-		* @param	string	$sql	sql query to be returned
-		* @param	string	$ref	gives a reference to the resource. See {@tutorial PtcDb.cls#references}
-		* @tutorial	PtcDb.cls#complex_queries.executeSql
-		* @return	returns the sql reference.
-		*/
-		public function executeSql( $sql , $ref = 0 )
-		{
-			self::_debug( '' , '- REF ' . $ref . ' - ' . $sql );				// debug
-			$this->queryResults[ $ref ] = @mysql_query( $sql ) or
-				trigger_error('- REF '.$ref.' - Mysql Error: '.mysql_error(),E_USER_ERROR);
-			self::_debugBuffer( '- REF ' . $ref . ' - ' . $sql );				// debug stop timer
-			return  $this->queryResults[ $ref ];
-		}
-		/**
-		* Read 1 row from given table
-		* @param	string		$table	mysql table
-		* @param	array|string	$fields	query fields
-		* @param	string	$ref	gives a reference to the resource. See {@tutorial PtcDb.cls#references}
-		* @tutorial	PtcDb.cls#select_data.readRow
-		* @return	returns an array  with values or null if query is empty.
-		*/
-		public function readRow( $table , $fields , $ref = 0 )
-		{
-			$sql = "SELECT * FROM " . $table . $this->_queryFields( $fields );
-			$result = $this->sqlToArray( $sql , $ref );
-			return is_array( $result ) ?  $result[ 0 ] : $result;
-		}
-		/**
-		* Read records from given table
-		* @param	string		$table	mysql table
-		* @param	array|string	$fields	query fields
-		* @param	string		$order 	order records
-		* @param	string		$limit	limit number of records
-		* @param	string	$ref	gives a reference to the resource. See {@tutorial PtcDb.cls#references}
-		* @tutorial	PtcDb.cls#select_data.readTable
-		* @return	returns a multidimensional array or null if query is empty
-		*/
-		public function readTable( $table , $fields = null , $order = null , $limit = null , $ref = 0 )
-		{	
-			$sql = "SELECT * FROM " . $table.$this->_queryFields( $fields ) . " " . trim( $order ) . " " . trim( $limit );
-			return $this->sqlToArray( $sql , $ref );
-		}
-		/**
-		* Insert record from given table
-		* @param	string	$table	mysql table
-		* @param	array	$array	query fields
-		* @param	string	$ref	gives a reference to the resource. See {@tutorial PtcDb.cls#references}
-		* @tutorial	PtcDb.cls#manipulating data.insertRow
-		* @return	returns the sql reference.
-		*/
-		public function insertRow( $table , $array , $ref = 0 )
-		{
-			$fields = "";
-			$values = "";
-			foreach ( $array as $k => $v ) 
+			if( array_key_exists( $name , static::$_connections ) )
 			{
-				$fields .= '`' . $k . '`,';
-				$values .= "'" . $this->_cleanQuery( $v ) . "',";
-			}
-			$fields = substr( $fields , 0 , strlen( $fields ) - 1 );
-			$values = substr( $values , 0 , strlen( $values ) - 1 );
-			$sql = "INSERT INTO " . $table . " (" . $fields . ") VALUES (" . $values . ")";
-			return $this->executeSql( $sql , $ref );
-		}
-		/**
-		* Update 1 record in given table
-		* @param	string	$table		mysql table
-		* @param	array	$array		array of values to update
-		* @param	int		$recordId		the record id to be updated
-		* @param	string	$ref	gives a reference to the resource. See {@tutorial PtcDb.cls#references}
-		* @tutorial	PtcDb.cls#manipulating data.updateRow
-		* @return	returns the sql reference.
-		*/
-		public function updateRow( $table , $array , $recordId , $ref = 0 )
-		{
-			$values = "";
-			foreach ( $array as $k => $v ) { $values .= "`" . $k . "` = '" . $this->_cleanQuery( $v ) . "',"; }
-			$values = substr( $values , 0 , strlen( $values ) - 1 );
-			$sql = "UPDATE " . $table . " SET " . $values . " WHERE `id` = " . $recordId;
-			return $this->executeSql( $sql , $ref );
-		}
-		/**
-		* Get last inerted id
-		* @tutorial	PtcDb.cls#manipulating data.lastId
-		* @return	returns last inserted id
-		*/
-		public function lastId( )
-		{ 
-			$last_id = @mysql_insert_id( ) or trigger_error( 'Mysql Error: ' . mysql_error() , E_USER_ERROR ); 
-			self::_debug( $last_id , 'Sql last inserted id' );
-			return $last_id; 
-		} 
-		/**
-		* Delete row from given table
-		* @param	string	$table		mysql table
-		* @param	int		$recordId		the record id to be deleted
-		* @param	string	$ref	gives a reference to the resource. See {@tutorial PtcDb.cls#references}
-		* @return	returns the sql reference.
-		* @tutorial	PtcDb.cls#manipulating data.deleteRow
-		*/
-		public function deleteRow( $table , $recordId , $ref = 0 )
-		{	
-			$sql = "DELETE FROM " . $table . " WHERE `id` = '" . $recordId . "'";
-			return $this->executeSql( $sql , $ref );
-		}
-		/**
-		* Retrive value from given table based on 1 field
-		* @param	string		$table		mysql table
-		* @param	string		$key		table field name
-		* @param	string		$value		the value to look for
-		* @param	string		$return		the field to return
-		* @tutorial	PtcDb.cls#select_data.goFast
-		* @return	returns the value for the specified field,or null if query was empty
-		*/
-		public function goFast( $table , $key , $value , $return = 'id')
-		{
-			$field[ $key ] = $value;
-			$result = $this->readRow( $table , $field );
-			return is_array( $result ) ? @$result[ $return ] : null;
-		}
-		/**
-		* Count rows of select query(based on reference)
-		* @param	string	$ref	gives a reference to the resource. See {@tutorial PtcDb.cls#references}
-		* @tutorial	PtcDb.cls#select_data.countRows
-		* @return	returns number rows from select statement
-		**/
-		public function countRows( $ref=0 )
-		{
-			self::_debug( '' , '_' . $ref );												// debug
-			$result = mysql_num_rows( $this->queryResults[ $ref ] ); 
-			self::_debugBuffer( '_' . $ref );												// debug stop timer
-			self::_debugBuffer( '_' . $ref , 'attach' , @$result , '- REF ' . $ref . ' - number of rows:' );	// debug attach result
-			return $result;
-		}
-		/**
-		* Close link to DB
-		* @param	string	$dbLink	link resource
-		* @tutorial	PtcDb.cls#getting_started.dbClose
-		**/
-		public function dbClose( $dbLink = null )
-		{
-			if ( !$dbLink ) { $dbLink = $this->dbLink; }
-			$sql_ref = @mysql_query( "SELECT DATABASE()" ,$dbLink ) or 
-								trigger_error( 'Mysql Error: ' . mysql_error( ) , E_USER_ERROR );
-			$connection = @mysql_result( $sql_ref , 0 ) or
-								trigger_error( 'Mysql Error: ' . mysql_error( ) , E_USER_ERROR );
-			self::_debug( $connection , 'closing connection to' );	// debug
-			@mysql_close( $dbLink ) or trigger_error( 'Mysql Error: ' . mysql_error( ) , E_USER_ERROR );
-			self::_debugBuffer('closing connection to');			// debug stop timer
-
-		}
-		/**
-		* Protect against sql injection
-		* @param	string	$string	clean values before sql query(prevent sql injection)
-		*/
-		protected function _cleanQuery( $string )
-		{
-			// prevent duplicate backslashes
-			if ( get_magic_quotes_gpc( ) ) { $string = stripslashes( $string ); }
-			if ( phpversion( ) >= '4.3.0' ){ $string = mysql_real_escape_string( $string ); }
-			else{ $string = mysql_escape_string( $string ); }
-			return $string;
-		}
-		/**
-		* Fields in the select statement WHERE clause
-		* @param	array|string	$fields	 query fields
-		*/
-		protected function _queryFields( $fields )
-		{
-			$i = 1;
-			$query_fields = null;
-			if ( is_array( $fields ) )
-			{
-				foreach ( $fields as $k => $v ) 
+				if( array_key_exists( $name , static::$_connections ) )
 				{
-					if ( $i < sizeof( $fields ) ) 
+					trigger_error( 'Connection name "' . $name . 
+						'" already exists, use some other name!' , E_USER_ERROR );
+					return false;
+				}
+			}
+			foreach( $options as $k => $v )
+			{
+				if( !array_key_exists( $k , static::$_connectionOptions ) )
+				{
+					trigger_error( 'Unknown option "' . $k . '" passed as argument to PtcDb!',
+																E_USER_WARNING );
+				}
+			}
+			$options['name' ] = $name;
+			if( array_key_exists( 'pdo_attributes' , $options ) )
+			{
+				$options['pdo_attributes' ] = $options['pdo_attributes' ] + 
+										static::$_connectionOptions[ 'pdo_attributes' ];
+			}
+			$options = array_merge( static::$_connectionOptions , $options );
+			static::$_connectionsDetails[ $name ] = $options;
+			static::_debug( static::$_connectionsDetails[ $name ] , 
+					'added connection <b>"' . $name . '"</b>' , 'Connection Manager' );
+			return static::$_connectionsDetails[ $name ] = $options;
+		}
+		/**
+		* Retrieves connection details previously configured
+		* @param	string	$name	the name of the connection to retrieve
+		* @return 	returns the connection if $name is set, otherwise all connections
+		*/
+		public static function getConnection( $name  = null )
+		{
+			if( !$name ){ return static::$_connectionsDetails; } // return all connections
+			if( !static::_checkConnectionName( $name ) ){ return false; }
+			return static::$_connectionsDetails[ $name ];
+		}
+		/**
+		* Retrieves the Pdo object
+		* @param	string 	$name 	the name of the connection
+		*/
+		public static function getPdo( $name )
+		{
+			if ( !static::_checkConnectionName( $name ) ){ return false; }
+			static::_initializeConnection( $name );
+			return static::$_connections[ $name ][ 'pdo_object' ];
+		}
+		/**
+		* Retreive the query builder object if present
+		* @param	string	$name	the name of the connection
+		*/
+		public static function getQB( $name )
+		{
+			if( !static::_checkConnectionName( $name ) ){ return false; }
+			static::_initializeConnection( $name );
+			if( !static::$_connectionsDetails[ $name ][ 'query_builder' ] )
+			{
+				trigger_error( 'QueryBuilder was not set for connection "' . $name . 
+														'"!', E_USER_ERROR );
+				return false;
+			}
+			return $connection = static::$_connections[ $name ][ 'query_builder' ];
+			//return function ( ) use ( $connection ){ return $connection }; // lambda time!
+		
+		}
+		/**
+		* Calls methods from the default connection
+		* @param	string	$method		the name of the method to call
+		* @param	array	$args		arguments for the method
+		*/
+		public static function __callStatic( $method , $args = null )
+		{
+			$name = 'default'; // use the default connection
+			if ( !static::_initializeConnection( $name ) ){ return false; }
+			if ( $qb =@static::$_connections[ $name ][ 'query_builder' ] ) // call query builder
+			{
+				if( in_array( $method , get_class_methods( $qb ) ) )
+				{
+					return call_user_func_array( array( $qb , $method ) , $args );
+				}
+			}
+			else // call the pdo object methods
+			{
+				$pdo =static::$_connections[ $name ][ 'pdo_object' ];
+				return call_user_func_array( array(  $pdo , $method ) , $args );
+			}
+			trigger_error( 'Call to undefined method "' .$method . '"!' , E_USER_ERROR );
+			return false;
+		}
+		/** 
+		* Connections options property
+		*/
+		protected static $_connectionOptions = array
+		(
+			'name'				=>	'default' ,
+			'driver'    				=> 	'mysql' ,
+			'user'				=>	'root' ,
+			'pass'				=>	'' ,
+			'host'				=>	'localhost' ,
+			'db'					=>	'database' ,
+			'charset'   			=> 	'utf8' ,
+			'query_builder'			=>	false ,
+			'query_builder_class'	=>	'PtcQueryBuilder' ,
+			//'collation' 			=> 	'utf8_unicode_ci' ,
+			//'prefix'    				=> 	'' , 
+			'pdo_attributes'		=>	array
+			( 
+				PDO::ATTR_ERRMODE 			=> 	PDO::ERRMODE_WARNING ,
+				PDO::ATTR_DEFAULT_FETCH_MODE 	=> 	PDO::FETCH_OBJ
+			)
+		);
+		/**
+		* Pdo and query builder objects property
+		*/
+		protected static $_connections = array( );
+		/**
+		* Connection details property
+		*/
+		protected static $_connectionsDetails = array( );
+		/**
+		* Initializes the pdo and query builder obejcts
+		* @param	string	$name	the name of the connection
+		*/
+		protected static function _initializeConnection( $name )
+		{
+			if ( !array_key_exists( $name , static::$_connections ) )
+			{
+				$options = static::$_connectionsDetails[ $name ];
+				static::$_connections[ $name ][ 'pdo_object' ] = new \PDO( 
+							static::_pdoDriver( $options[ 'driver' ] , $options[ 'host' ] ) . 
+								';dbname=' . $options[ 'db' ] . ';charset:' . $options[ 'charset' ] .';' , 
+														$options[ 'user' ] , $options [ 'pass' ] );
+				if ( !static::$_connections[ $name ][ 'pdo_object' ]){ return false; } // pdo failed
+				foreach ( $options[ 'pdo_attributes' ] as $k => $v )
+				{
+					static::$_connections[ $name ][ 'pdo_object' ]->setAttribute( $k , $v );
+				}
+				if ( $options[ 'query_builder' ] )
+				{
+					$qb =false;
+					if ( class_exists( $options[ 'query_builder_class' ] ) || 
+					file_exists( dirname(__FILE__) . $options[ 'query_builder_class' ] . '.php' ) ){ $qb = true; }
+					if ( !$qb )
 					{
-						$query_fields .= "`" . $k . "` = '" . $this->_cleanQuery( $v ) . "' AND ";  
+						trigger_error( 'Class "' . $options[ 'query_builder_class' ] . 
+								'" not found , please include the class file manually!' , E_USER_ERROR );
+						return false;
 					}
-					else { $query_fields .= "`" . $k . "` = '" . $this->_cleanQuery( $v ) . "'"; }
-					$i++;
+					static::$_connections[ $name ][ 'query_builder' ] = 
+						new $options[ 'query_builder_class' ]( static::$_connections[ $name ][ 'pdo_object' ] );
 				}
+				static::_debug( array( 'details' => static::$_connectionsDetails[ $name ] , 
+						'connection' => static::$_connections[ $name ] ) , 'connection <b>"' . 
+											$name . '"</b> initialized' , 'Connection Manager' );
 			}
-			else if ( $fields )
-			{ 
-				if ( strpos( $fields , ':' ) )
-				{ 
-					$fields = explode( ":" , $fields ); 
-					$query_fields = "`" . $fields[ 0 ] . "` = '" . $this->_cleanQuery( $fields[ 1 ] ) . "'";
-				}
-				else { $query_fields = "`id` = '" . $this->_cleanQuery( $fields ) . "'"; }
+			return true;
+		}
+		/**
+		* Checks if a given connection exists
+		* @param	string	$name	the name of the connection to check
+		*/
+		protected static function _checkConnectionName( $name )
+		{
+			if ( !array_key_exists( $name , static::$_connectionsDetails ) )
+			{
+				trigger_error( 'Could not find connection details with name "' . $name . '"!' , 
+																E_USER_ERROR );
+				return false;
 			}
-			return ( $query_fields ) ? " WHERE " . $query_fields :  "";
+			return true;
+		}	
+		/**
+		* Builds the pdo driver
+		* @param	string	$driver	the driver type
+		* @param	string	$host	the database server host
+		*/
+		protected static function _pdoDriver( $driver , $host )
+		{
+			switch( $driver )
+			{
+				case 'mysql' :
+				default : return 'mysql:host=' . $host;
+			}
 		}
 		/**
 		* Send messsages to the PtcDebug class if present and it\'s namespace
 		* @param 	mixed 	$string		the string to pass
-		* @param	string	$type		the type of debug  (timer, attach)
-		* @param 	mixed 	$statement		some statement if required
-		* @param	string	$category		a category for the messages panel
+		* @param 	mixed 	$statement	some statement if required
+		* @param	string	$category	a category for the messages panel
 		*/
 		protected static function _debug( $string , $statement = null , $category = null )
 		{
-			if ( !defined( '_PTCDEBUG_NAMESPACE_' ) ){ return false; }
-			return @call_user_func_array( array( _PTCDEBUG_NAMESPACE_ , 'bufferSql' ) ,  
-										array( $string , $statement , $category )  );
+			if ( !defined( '_PTCDEBUG_NAMESPACE_' ) ) { return false; }
+			return @call_user_func_array( array( '\\' . _PTCDEBUG_NAMESPACE_ , 'bufferSql' ) ,  
+											array( $string , $statement , $category )  );
 		}
-		/**
-		* Adds time and query results to the PtcDebug class
-		* @param	string	$reference		a reference to look for ("$statement")
-		* @param	string	$type		the type of debug  (timer, attach)
-		* @param 	mixed 	$string		the string to pass
-		* @param 	mixed 	$statement		some new statement if required
-		*/
-		protected static function _debugBuffer( $reference , $type = null , $string = null , $statement = null )
-		{
-			if ( !defined( '_PTCDEBUG_NAMESPACE_' ) ){ return false; }
-			if ( $type == 'attach' && $string )
-			{
-				return @call_user_func_array( array( '\\' . _PTCDEBUG_NAMESPACE_ , 'addToBuffer' ) ,  
-													array( $reference , $string , $statement )  );
-			}
-			else
-			{
-				return @call_user_func_array( array( '\\' . _PTCDEBUG_NAMESPACE_ , 'stopTimer' ) , 
-																	array( $reference )  );
-			}
-		}
- 	}
+	}
