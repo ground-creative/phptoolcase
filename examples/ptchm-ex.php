@@ -18,7 +18,7 @@
 	PtcHandyMan::addFiles( array
 	(
 		'HmTestClassFile' => PtcHandyMan::getAppPath( 'lib' ) . '/class-file.php' , // adding a file to the autoloader
-		'ns\HmTestClassFile'=> PtcHandyMan::getAppPath( 'lib' ) . '/ns-class-file.php' , // adding a namespaced file
+		'ns\HmTestClassFile' => PtcHandyMan::getAppPath( 'lib' ) . '/ns-class-file.php' , // adding a namespaced file
 	) );
 	
 	
