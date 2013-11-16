@@ -19,8 +19,8 @@
 		'spacer_height'		=>	'10px',
 	);
 	
-	require_once('../PtcForms.php');
-	$form=new PtcForms($options);
+	require_once('../PtcForm.php');
+	$form=new PtcForm($options);
 	
 	echo '<!DOCTYPE html><html><head>';
 	
