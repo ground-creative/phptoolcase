@@ -1,7 +1,7 @@
  
 ##########################################################
 
-PhpToolCase Version 0.8.4b open source project
+PhpToolCase Version 0.9.1b open source project
 
 A powerfull set of tools to speed up the process of coding
 
@@ -40,7 +40,7 @@ Visit phptoolcase.com for complete guides and examples.
 == Evolution: view TODO
 
 
-== Requirements: php version 5.2+
+== Requirements: php version 5.3+
 
 
 
