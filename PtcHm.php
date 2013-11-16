@@ -5,7 +5,7 @@
 	* PHP version 5.3
 	* @category 	Libraries
 	* @package  	PhpToolCase
-	* @version	0.8.4b
+	* @version	0.9.1b
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
@@ -13,21 +13,6 @@
 
 	class PtcHandyMan			
 	{
-		public function __construct( $options=null , $debugOptions=null )
-		{		
-			/* load the debugger & logger if present */
-			/*if($debugOptions && !defined('PTCDEBUG_LOADED'))
-			{
-				if(class_exists(__NAMESPACE__.'\PtcDebug'))
-				{
-					PtcDebug::load($debugOptions); 
-				}
-				else if($debugOptions && class_exists('\PtcDebug'))
-				{
-					\PtcDebug::load($debugOptions); 
-				}
-			}*/
-		}
 		/**
 		* Alias of {@link addDirs()}
 		*/
@@ -104,17 +89,21 @@
 		* Registers the autoloader to load classes when needed
 		* @param	bool		$addThisPath			adds the path where the class resides as a directory
 		* @param	bool		$useHelpers			load the ptc-helpers.php file if in this directory
-		* @param	bool		$registerAutoLoader	regiisters the load method with te spl utilities
+		* @param	bool		$registerAutoLoader	regiiters the load method with the spl utilities
 		*/
 		public static function register( $addThisPath = true , $useHelpers = true , $registerAutoLoader = true )
 		{
 			$this_class = get_called_class( );
 			if ( $addThisPath ) { static::addDir( dirname( __FILE__ ) ); }	// add this path
-			if ( $useHelpers && file_exists( dirname( __FILE__ ) . '/ptc-helpers.php' ) ) // add the helpers if found
+			if ( $registerAutoLoader ) { spl_autoload_register( array( $this_class , 'load' ) ); }
+			if ( $useHelpers && file_exists( dirname( __FILE__ ) . '/ptc-helpers.php' ) ) // add helpers if found
 			{ 
 				require_once( dirname( __FILE__ ) . '/ptc-helpers.php' ); 
 			}
-			if ( $registerAutoLoader ) { spl_autoload_register( array( $this_class , 'load' ) ); }
+			if ( $useHelpers && file_exists( dirname( __FILE__ ) . '/PtcEvent.php' ) ) 
+			{ 
+				__NAMESPACE__ . PtcEvent::register( ); // register PtcEvent with helpers
+			}
 			$namespace = @strtoupper( @str_replace( '\\' , '_' , __NAMESPACE__ ) ) . '_';
 			@define( '_PTCHANDYMAN_' . $namespace , $this_class ); 		// declare the class namespace
 			static::_debug( 'Autoloader registerd' , '' , 'Autoloader' );
@@ -213,6 +202,34 @@
 			static::$_appPaths = array_merge( static::$_appPaths , $add_paths );
 		}
 		/**
+		* Gets protected and private properties from a class or object
+		* @param	mixed	$object			the name of the class or the initialized object
+		* @param	string	$propertyName	the name of the property
+		*/
+		public static function getProperty( $object , $propertyName )
+		{
+			if ( !$object ){ return null; }
+			if ( is_string( $object ) )	// static property
+			{
+				if ( !class_exists( $object ) ){ return null; }
+				$reflection = new \ReflectionProperty( $object , $propertyName );
+				if ( !$reflection ){ return null; }
+				$reflection->setAccessible( true );
+				return $reflection->getValue( );
+			}
+			$class = new \ReflectionClass( $object );
+			if ( !$class ){ return null; }
+			if( !$class->hasProperty( $propertyName ) ) // check if property exists
+			{
+				trigger_error( 'Property "' . $propertyName . '" not found in class "' . 
+									get_class( $object ) . '"!' , E_USER_WARNING );
+				return null;
+			}
+			$property = $class->getProperty( $propertyName );
+			$property->setAccessible( true );
+			return $property->getValue( $object );
+		}		
+		/**
 		* Load classes automatically with namespaces support based on folder structure
 		* @param	string 	$class	the name of the class to autoload
 		* @return					returns true if a file has been loaded, false otherwise
@@ -291,18 +308,18 @@
 			if ( file_exists( $path . $class . '.php' ) )	// try the file
 			{
 				static::_debug( array( 'file' => $path . $class . '.php' , 'class' => $class_name ),
-												'Included class file' , 'Autoloader' ); // debug
+													'Included class file' , 'Autoloader' ); // debug
 				require_once(  $path . $class . '.php');
 				return true;
 			}
 			else if ( file_exists( $path . $new_file = strtolower( $class ) . '.php' ) )	// try the file lowercase
 			{
 				static::_debug( array( 'file' => $path . $new_file , 'class' => $class_name ),
-												'Included class file' , 'Autoloader' ); // debug
+													'Included class file' , 'Autoloader' ); // debug
 				require_once(  $path . $new_file );
 				return true;
 			}
-			else { return static::_guessFileName( $class , $path , $namespace ); } // use an engine to guess the file
+			else{ return static::_guessFileName( $class , $path , $namespace ); } // use an engine to guess the file
 			return false;
 		}
 		/**
@@ -374,7 +391,7 @@
 		*/
 		protected static function _addDirectory( $directory )
 		{
-			if ( @in_array( $directory , @static::$_dirs[ 'directories' ] ) )	// check if directory is already present
+			if ( @in_array( $directory , @static::$_dirs[ 'directories' ] ) ) // check if dir is already present
 			{
 					static::_debug( $directory , 'Path already exists!' , 'Autoloader' );	// debug
 					return false;
@@ -390,7 +407,7 @@
 		*/		
 		protected static function _addNamespaceDirectory( $namespace , $directory )
 		{
-			if ( @array_key_exists( $namespace , @static::$_dirs[ 'ns' ] ) ) // check if directory is already present
+			if ( @array_key_exists( $namespace , @static::$_dirs[ 'ns' ] ) ) // check if dir is already present
 			{
 					trigger_error( 'Cannot redeclare namespace "' . $namespace . '"!' , E_USER_ERROR );
 					return false;
