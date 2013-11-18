@@ -62,13 +62,12 @@
 		{
 			$storage = static::$_storage[ get_called_class( ) ];
 			static::_fireEvent( 'deleting' , array( 
-					&$this->_fields[ $storage[ 'uniqueKey' ] ] , &$this->_fields ) );
+					&$this->_fields[ static::$_uniqueKey ] , &$this->_fields ) );
 			$result = static::_getQB( )->table( $storage[ 'table' ] )
-							 ->delete( $this->_fields[ $storage[ 'uniqueKey' ] ] )
+							 ->delete( $this->_fields[ static::$_uniqueKey ] )
 							 ->run( );	 
 			static::_fireEvent( 'deleted' , 
-				array( &$this->_fields[ $storage[ 'uniqueKey' ] ] , 
-										&$this->_fields , &$result ) );
+				array( &$this->_fields[ static::$_uniqueKey ] , &$this->_fields , &$result ) );
 			//$this->reset( );	// reset fields
 			return $result;
 		}
@@ -87,13 +86,12 @@
 			static::_mapFields( );
 			$values = $this->_fields;
 			static::_fireEvent( 'saving' , array( &$values ) );
-			if ( array_key_exists( $storage[ 'uniqueKey' ] , $this->_fields ) ) // update record
+			if ( array_key_exists( static::$_uniqueKey , $this->_fields ) ) // update record
 			{
 				static::_fireEvent( 'updating' , array( &$values ) );
-				unset( $values[ $storage[ 'uniqueKey' ] ] );
+				unset( $values[ static::$_uniqueKey ] );
 				$result = static::_getQB( )->table( $storage[ 'table' ] )
-							->update( $values , 
-								$this->_fields[ $storage[ 'uniqueKey' ] ] )
+							->update( $values , $this->_fields[ static::$_uniqueKey ] )
 							->run( );
 				static::_fireEvent( 'updated' , array( &$values , &$result ) );
 			}
@@ -104,7 +102,7 @@
 								->insert( $this->_fields )->run( ); 
 				static::_fireEvent( 'inserted' , array( &$values , &$result ) );
 			}
-			static::_fireEvent( 'saved' , array( &$values , &$result ) );
+			static::_fireEvent( 'saved' , array( &$values , $result ) );
 			//$this->reset( );	// reset fields
 			return $result;
 		}
@@ -170,7 +168,7 @@
 		*/
 		public static function observe( $class = null )
 		{
-			if ( !class_exists( $events_class = static::_getProperty( 'eventClass' ) ) )
+			if ( !class_exists( $events_class = static::$_eventClass ) )
 			{
 				trigger_error( $events_class . ' NOT FOUND!' , E_USER_ERROR );
 				return false;
@@ -214,8 +212,7 @@
 			{
 				$meth = explode( 'get_' , $method );
 				if ( !static::_checkColumn( $meth[ 1 ] ) ){ return false; }
-				$column = ( !array_key_exists( 1 , $args ) ) ? 
-							static::$_storage[ $class ][ 'uniqueKey' ] : $args[ 0 ];
+				$column = ( !array_key_exists( 1 , $args ) ) ? static::$_uniqueKey : $args[ 0 ];
 				$value = ( !array_key_exists( 1 , $args ) ) ? $args[ 0 ] : $args[ 1 ];
 				return static::_getQB( )->table( static::$_storage[ $class ][ 'table' ] )
 							     ->where( $column , '=' , $value )
@@ -227,7 +224,7 @@
 				if ( !static::_checkColumn( $meth[ 1 ] ) ){ return false; }
 				static::_fireEvent( array( 'saving' , 'updating' ) , array( &$meth , &$args ) );			     
 				$result = static::_getQB( )->table( static::$_storage[ $class ][ 'table' ] )
-						->where( static::$_storage[ $class ][ 'uniqueKey' ] , '=' , $args[ 1 ] )
+						->where( static::$_uniqueKey , '=' , $args[ 1 ] )
 						->update( array( $meth[ 1 ] => $args[ 0 ] ) )
 						->run( );
 				static::_fireEvent( array( 'updated' , 'saved' ) , array( &$meth , &$args , &$result ) );
@@ -303,14 +300,14 @@
 		protected static function _fireEvent( $event , $data )
 		{
 			$event = ( is_array( $event ) ) ? $event : array( $event );
-			$events_class = static::_getProperty( 'eventClass' );
+			$event_class = static::$_eventClass;
 			if ( array_key_exists( $class = get_called_class( ) , static::$_observers ) )
 			{
 				foreach ( static::$_observers[ $class ] as $k => $v )
 				{
 					foreach ( $event as $ev )
 					{
-						if ( $v === $ev ){ $events_class::fire( $k , $data ); }
+						if ( $v === $ev ){ $event_class::fire( $k , $data ); }
 					}
 				}
 			}
@@ -320,9 +317,8 @@
 		*/		
 		protected static function _getQB( )
 		{
-			$connectionManager = static::_getProperty( 'connectionManager' );
-			$connectionName = static::_getProperty( 'connectionName' );
-			return call_user_func( $connectionManager . '::getQB' , $connectionName );	
+			return call_user_func( static::$_connectionManager . '::getQB' , 
+											static::$_connectionName );	
 		}
 		/**
 		*
@@ -332,20 +328,22 @@
 			$db = static::_getQB( );
 			if ( !array_key_exists( $class = get_called_class( ) , static::$_storage ) )
 			{
-				$arr = array( );
-				$arr[ 'uniqueKey' ] = static::_getProperty( 'uniqueKey' );
-				$arr[ 'map' ] = static::_getProperty( 'map' );
-				$arr[ 'table' ] = static::_getProperty( 'table' );
-				$db->run( 'SHOW TABLES LIKE ?' , array( $arr[ 'table' ] ) );
+				static::$_storage[ $class ] = array( );
+				if ( static::$_table ){ static::$_storage[ $class ][ 'table' ] = static::$_table; }
+				else
+				{
+					static::$_storage[ $class ][ 'table' ] = strpos( $class , '\\' ) ? 
+						strtolower( end( explode( '\\' . $class ) ) ) : strtolower( $class );
+				}
+				$db->run( 'SHOW TABLES LIKE ?' , array( static::$_storage[ $class ][ 'table' ] ) );
 				if ( !$db->countRows( ) )
 				{ 
-					trigger_error( $arr[ 'table' ] . 
-							'does not exists, quitting now!' , E_USER_ERROR );
+					trigger_error( 'Table ' . static::$_storage[ $class ][ 'table' ] . 
+								' does not exists, quitting now!' , E_USER_ERROR );
 					return false;
 				}
-				static::$_storage[ $class ] = $arr;
 				static::$_storage[ $class ][ 'columns' ] = static::getColumns( );
-
+				if ( method_exists( $class , 'boot' ) ){ static::boot( ); }
 			}
 			return $class;
 		}
@@ -354,10 +352,9 @@
 		*/
 		protected function _mapFields( )
 		{
-			$map = static::$_storage[ get_called_class( ) ][ 'map' ];
-			if ( !empty( $map ) )
+			if ( !empty( static::$_map ) )
 			{
-				foreach ( $map as $k => $v )
+				foreach ( static::$_map as $k => $v )
 				{
 					if ( array_key_exists( $v , $this->_fields ) )
 					{
@@ -365,33 +362,6 @@
 						unset( $this->_fields[ $v ] );
 					}
 				}
-			}
-		}
-		/**
-		*
-		*/
-		protected static function _getProperty( $property , $found = false )
-		{
-			switch( $property )
-			{
-				case 'table' :
-					if ( static::$_table ){ return static::$_table; }
-					if ( strpos( $class , '\\' ) )
-					{ 
-						$class = end( explode( '\\' . $class ) ); 
-					}
-					return strtolower( $class );
-				break;
-				case 'map' : return static::$_map;
-				break;
-				case 'uniqueKey' : return static::$_uniqueKey;
-				break;				
-				case 'connectionManager' : return static::$_connectionManager;
-				break;
-				case 'connectionName' : return static::$_connectionName;
-				break;
-				case 'eventClass' : return static::$_eventClass;
-				default : return null;
 			}
 		}
 	}
