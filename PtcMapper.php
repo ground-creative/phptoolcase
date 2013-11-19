@@ -79,8 +79,8 @@
 			$storage = static::$_storage[ get_called_class( ) ];
 			if ( empty( $this->_fields ) )
 			{
-				trigger_error( 'Nothing to save in table' . static::$storage[ 'table' ] .
-												'!' , E_USER_WARNING );
+				trigger_error( 'Nothing to save in table' . 
+					static::$storage[ 'table' ] . '!' , E_USER_WARNING );
 				return false;
 			}
 			static::_mapFields( );
@@ -113,8 +113,7 @@
 		public static function find( $id )
 		{
 			$class = static::_initialize( );
-			static::_getQB( )->setFetchMode( PDO::FETCH_CLASS | 
-									PDO::FETCH_PROPS_LATE , $class );
+			static::_getQB( )->setFetchMode( PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE , $class );
 			return $result = static::_getQB( )->table( static::$_storage[ $class ][ 'table' ] )
 								->where( 'id' , '=' , $id )
 								->row( );
@@ -125,8 +124,7 @@
 		public static function all( )
 		{
 			$class = static::_initialize( );
-			static::_getQB( )->setFetchMode( PDO::FETCH_CLASS | 
-									PDO::FETCH_PROPS_LATE , $class );
+			static::_getQB( )->setFetchMode( PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE , $class );
 			return $result = static::_getQB( )->table( static::$_storage[ $class ][ 'table' ] )
 								->run( );
 		}
@@ -181,8 +179,7 @@
 				{
 					$cls = strtolower( $class );
 					$events_class::listen( $cls . '.' . $event , $class . '::' . $event );
-					static::$_observers[ get_called_class( ) ][ $cls . 
-												'.' . $event ] = $event;
+					static::$_observers[ get_called_class( ) ][ $cls . '.' . $event ] = $event;
 				}
 			}
 		}
@@ -286,7 +283,7 @@
 		{
 			$storage = static::$_storage[ get_called_class( ) ];
 			if ( !array_key_exists( $column , $storage[ 'columns' ] ) && 
-							!in_array( $column , $storage[ 'map' ] ) )
+							!in_array( $column , static::$_map ) )
 			{
 				trigger_error( 'Column ' . $column . ' does not exists in table  ' . 
 								$storage[ 'table' ] . '!' , E_USER_ERROR );
@@ -317,8 +314,7 @@
 		*/		
 		protected static function _getQB( )
 		{
-			return call_user_func( static::$_connectionManager . '::getQB' , 
-											static::$_connectionName );	
+			return call_user_func( static::$_connectionManager . '::getQB' , static::$_connectionName );	
 		}
 		/**
 		*
