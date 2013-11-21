@@ -114,7 +114,7 @@
 			$errMsg = '<div class="errMsg" style="text-align:center;width:' . $obj->getOption( 'form_width' ) . 
 										'">Something went wrong. Please review the form!</div><br>';
 		}
-		public static function valid( $result , $msg , $obj ) // form is valid, let's redirect the user to the login area
+		public static function valid( $result , $msg , $obj ) // form is valid, let's send the contact form by email
 		{
 			global $email_address , $mail_subject;
 			$mail_body = "Firstname: " . $_POST[ 'ct_firstname' ] . "\n";
