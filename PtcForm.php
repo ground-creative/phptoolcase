@@ -52,7 +52,7 @@
 			}
 			if ( method_exists( get_called_class( ) , 'formFields' ) )
 			{ 
-				$this->buildFormFields( );
+				$this->formFields( );
 				$method = $this->_getFormValues( );
 				foreach ( $method as $k => $v )
 				{
