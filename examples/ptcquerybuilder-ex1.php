@@ -32,7 +32,7 @@
 					   ->prepare( );
 
 	
-	/* SELECT WITH LIMIT, GROUP BY, ORDER AND LIMIT */
+	/* SELECT WITH GROUP BY, ORDER AND LIMIT */
 	$query_where2 = $qb->table( 'test_table' )
 					 //->group( 'field1' ) // group by method
 					   ->order( 'field1' , 'desc' )

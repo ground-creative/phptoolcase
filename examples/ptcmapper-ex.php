@@ -130,7 +130,7 @@
 	
 	
 	/* UPDATING ONLY 1 COLUMN VALUE BASED ON ID */
-	Test_Table::set_field1( 'new value saved' , 1 ); // set field1 = 'new value saved' where id = 2 
+	Test_Table::set_field1( 'new value saved' , 1 ); // set field1 = 'new value saved' where id = 1
 	
 
 	/* USING THE QUERY BUILDER METHODS DIRECTLY */
