@@ -1,7 +1,7 @@
  
 ##########################################################
 
-PhpToolCase Version 0.9 open source project
+PhpToolCase Version 0.9.2 open source project
 
 A powerfull set of tools to speed up the process of coding
 
@@ -18,17 +18,12 @@ A powerfull set of tools to speed up the process of coding
 	
 	- Fix timer problem with the watch_var method, the runtime should be removed
 	
-	- Make  a better trace function calls engine
+	- Make a better trace function calls engine
 	
 
 - Forms Generator & Validator (PtcForms):
 	
 	- Make a method that will only build the fields without the "<form>" tag
-	
-	
-- Mysql Helper Component (PtcDb):
-
-	- Rewrite a new wrapper with pdo support instead of mysql which is deprecated
 
 
 
