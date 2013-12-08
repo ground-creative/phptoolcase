@@ -17,7 +17,7 @@ A powerfull set of tools to speed up the process of coding
 	- Make a better panel for the timer
 	
 	- Fix timer problem with the watch_var method, the runtime should be removed
-	
+
 	- Make a better trace function calls engine
 	
 
