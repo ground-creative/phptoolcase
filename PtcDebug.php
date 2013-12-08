@@ -5,15 +5,14 @@
 	* <br>All class properties and methods are static because it's required 
 	* to let them work on script shutdown when FATAL error occurs.
 	* PHP version 5.3
-	* @category 	Libraries
-	* @package  	PhpToolCase
-	* @version	0.9
+	* @category 	Library
+	* @version	0.9.2
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
 	*/
 
-	declare(ticks=1); // used by the watch var , function calls trace and the code coverage utilities
+	declare( ticks = 1 ); // used by the watch var , function calls trace and code coverage utilities
 
 	class PtcDebug
 	{
@@ -23,54 +22,53 @@
 		*/
 		public static function getBuffer( ) { return static::$_buffer; }	
 		/** 
-		* Retrieves the code coverage analysis data stored in the $_finalCoverageData property
+		* Retrieves the code coverage analysis data stored in the PtcDebug::$_finalCoverageData property
 		*/
 		public static function getCoverage( ) { return static::$_finalCoverageData; }
 		/**
 		* Adds style properties to the floating panel styles array
-		* @param	string	$css		some css to add
+		* @param	string		$css		some css to add
 		*/
 		public static function addCss( $css ){ static::$_panelCss = static::$_panelCss . "\n" . $css; }
 		/**
-		* Checks if  the debug "url_key" and "url_pass" are set on the referer url
-		* @return	returns true if "url_key" and "url_pass" are in the referer url, otherwise false
+		* Checks if  the debug "url_key" and "url_pass" are set on the referer url. See @ref check_referer
+		* @return	true if "url_key" and "url_pass" are in the referer url, otherwise false
 		*/
-		public static function checkReferer()
+		public static function checkReferer( )
 		{
-			if(@array_key_exists('HTTP_REFERER',@$_SERVER))
+			if ( @array_key_exists( 'HTTP_REFERER' , @$_SERVER ) )
 			{ 
-				$query=parse_url($_SERVER['HTTP_REFERER'],PHP_URL_QUERY);
-				$params=array();
-				parse_str($query,$params);
-				if(@$params[static::$_options['url_key']]==static::$_options['url_pass'])
+				$query = parse_url( $_SERVER[ 'HTTP_REFERER' ] , PHP_URL_QUERY );
+				$params = array( );
+				parse_str( $query , $params );
+				if ( @$params[ static::$_options[ 'url_key' ] ] == static::$_options[ 'url_pass' ] )
 				{
-					$_GET[static::$_options['url_key']]=$params[static::$_options['url_key']];
+					$_GET[ static::$_options[ 'url_key' ] ] = $params[ static::$_options[ 'url_key' ] ];
 					return true;
 				}
 			}
 			return false;
 		}													
 		/**
-		* Sets the error handler to be the debug class. good for production with "$dieOnFatal" set to false
-		* @param	string	$dieOnFatal		die if fatal error occurs
-		* @tutorial	PtcDebug.cls#setErrorHandler
+		* Sets the error handler to be the debug class. good for production with "$dieOnFatal" set to false.
+		* See @ref replaceErrorHandler
+		* @param	string		$dieOnFatal		die if fatal error occurs
 		*/
 		public static function setErrorHandler( $dieOnFatal = true )
 		{
-			ini_set('display_errors',false);
-			ini_set('html_errors', false);	
-			if(!@static::$_options['error_reporting'])
+			ini_set( 'display_errors' , false );
+			ini_set( 'html_errors' , false );	
+			if ( !@static::$_options[ 'error_reporting' ] )
 			{
-				@static::$_options['error_reporting']=static::$_defaultOptions['error_reporting'];
+				@static::$_options[ 'error_reporting' ] = static::$_defaultOptions[ 'error_reporting' ];
 			}			
-			ini_set('error_reporting',static::$_options['error_reporting']);
+			ini_set( 'error_reporting' , static::$_options[ 'error_reporting' ] );
 			@static::$_options[ 'die_on_error' ] = $dieOnFatal;
 			set_error_handler( array( get_called_class( ) , 'errorHandler' ) ); 
 		}
 		/**
-		* Loads the debug interface and/or the console class if requested
-		* @param 	array 	$options		array of options, see {@link _defaultOptions}
-		* @tutorial	PtcDebug.cls#debugLoader
+		* Loads the debug interface and/or the console class if requested. See @ref dbg_getting_started
+		* @param 	array 		$options		array of options, see PtcDebug::$ _defaultOptions
 		*/
 		public static function load( $options = null )
 		{
@@ -107,60 +105,57 @@
 				else{ $buffer .= '<br>Session id is ' . session_id( ); }
 			}
 			if ( !@$_SESSION ){ $_SESSION = array( ); }
-			if (@$_GET[ static::$_options[ 'url_key' ] ] == static::$_options[ 'url_pass' ] )
+			if ( !@$_SESSION[ 'ptcdebug' ] ){ $_SESSION[ 'ptcdebug' ] = array( ); }
+			if ( @$_GET[ static::$_options[ 'url_key' ] ] == static::$_options[ 'url_pass' ] )
 			{
-				$_SESSION[static::$_options['url_key']]=true;
-				$_SESSION['code_highlighter']=true;
-				//$buffer.='<br>PtcDebug turned on!';
+				$_SESSION[ 'ptcdebug' ][ static::$_options[ 'url_key' ] ] = true;
+				$_SESSION[ 'ptcdebug' ][ 'code_highlighter' ]	= true;
+				$_SESSION[ 'ptcdebug' ][ 'search_files' ] = true;
+				//$buffer .= '<br>PtcDebug turned on!';
 			}
-			else if(@$_GET[static::$_options['url_key'].'_off']==static::$_options['url_pass'])
+			else if ( @$_GET[ static::$_options[ 'url_key' ] . '_off' ] == static::$_options[ 'url_pass' ] )
 			{
-				$_SESSION[static::$_options['url_key']]=false; 
-				$_SESSION['code_highlighter']=false;
+				$_SESSION[ 'ptcdebug' ][ static::$_options[ 'url_key' ] ] = false;
+				$_SESSION[ 'ptcdebug' ][ 'code_highlighter' ]	= false;
+				$_SESSION[ 'ptcdebug' ][ 'search_files' ] = false;
 			}
-			if(@$_SESSION[static::$_options['url_key']])
+			if ( static::_getSessionVars( static::$_options[ 'url_key' ] ) )
 			{ 
-				static::$_startTime=microtime(true);
-				$console_debug['errors']=false;
-				$console_debug['exceptions']=false;
-				if ( static::$_options[ 'set_time_limit' ] ) { set_time_limit( static::$_options[ 'set_time_limit' ] ); }
-				if ( static::$_options[ 'memory_limit' ] ) { ini_set( 'memory_limit' , static::$_options[ 'memory_limit' ] ); }
+				static::$_startTime = microtime( true );
+				if ( static::$_options[ 'set_time_limit' ] )
+				{ 
+					set_time_limit( static::$_options[ 'set_time_limit' ] ); 
+				}
+				if ( static::$_options[ 'memory_limit' ] )
+				{ 
+					ini_set( 'memory_limit' , static::$_options[ 'memory_limit' ] ); 
+				}
 				if ( static::$_options[  'show_interface' ] || static::$_options[ 'debug_console' ] )
 				{	
 					register_shutdown_function( array( $called_class , 'processBuffer' ) ); 
 				}
 				if ( static::$_options[ 'replace_error_handler' ] )	// replace error handler
 				{
-					$console_debug[ 'errors' ] = true;
-					$console_debug[ 'exceptions' ] = true;
 					static::setErrorHandler( static::$_options[ 'die_on_error' ] );
 					$buffer .= '<br>Error handler has been overridden!';
 				}
-				if(static::$_options['catch_exceptions'])	// set exception handler
+				if ( static::$_options[ 'catch_exceptions' ] )	// set exception handler
 				{
 					set_exception_handler( array( $called_class , 'exceptionHandler' ) );
 					$buffer .= "<br>Exception Handler turned on!";
 				}
-				if(static::$_options['debug_console'])	// try to laod the console class
+				if ( static::$_options[ 'debug_console' ] )	// try to laod the console class
 				{
+					static::$_consoleStarted = false;
 					$buffer.='<br>Console debug turned on';
-					if(file_exists(dirname(__FILE__)."/PhpConsole/PhpConsole.php"))
+					if ( file_exists( dirname( __FILE__ ) . '/PhpConsole/__autoload.php' ) )
 					{
-						require_once(dirname(__FILE__).'/PhpConsole/PhpConsole.php');
-						static::$_consoleStarted=true;
+						require_once( dirname(__FILE__).'/PhpConsole/__autoload.php' );
+						static::$_consoleStarted = true;
+						\PhpConsole\Helper::register( );
+						$buffer .= ", phpConsole class started!";
 					}
-					if(static::$_consoleStarted || class_exists('\PhpConsole',true))
-					{ 
-						\PhpConsole::start($console_debug['errors'],$console_debug['exceptions'],
-																		dirname(__FILE__));
-						$buffer.=", phpConsole class started!";
-						static::$_consoleStarted=true;
-					}
-					else
-					{ 
-						static::$_consoleStarted=false;
-						$buffer.=', but could not find phpConsole class!';
-					}
+					else{ $buffer .= ', but could not find phpConsole class!'; }
 				}
 				if ( static::$_options[ 'enable_inspector' ] || static::$_options[ 'code_coverage' ] || 
 													static::$_options[ 'trace_functions' ] )
@@ -179,17 +174,18 @@
 					static::startTrace( );
 					$buffer .= "<br>Function calls tracing for all scripts enabled!";					
 				}
-				if ( !isset( $_SESSION[ 'debug_show_messages' ] ) ){ static::_setSessionVars( ); }
+				if ( !static::_getSessionVars( 'show_messages' ) ){ static::_setSessionVars( ); }
 				if ( @$_GET[ 'hidepanels' ] ){ static::_disablePanels( ); }
 				else
 				{
-					static::$_options['show_messages']=$_SESSION['debug_show_messages']; 
-					static::$_options['show_globals']=$_SESSION['debug_show_globals']; 
-					static::$_options['show_sql']=$_SESSION['debug_show_sql']; 
+					static::$_options[ 'show_messages' ] = static::_getSessionVars( 'show_messages' );
+					static::$_options[ 'show_globals' ] = static::_getSessionVars( 'show_globals' );
+					static::$_options[ 'show_sql' ] = static::_getSessionVars( 'show_sql' );
+					static::$_options[ 'show_w3c' ] = static::_getSessionVars( 'show_w3c' );
 				}
 				@define( '_PTCDEBUG_NAMESPACE_' , $called_class ); 
 				static::$_tickTime = ( ( microtime( true ) - $now ) + static::$_tickTime );
-				static::bufferLog( '' , '<span>' . $buffer . '<span>' );
+				static::bufferLog( '' , '<span>' . $buffer . '<span>' , 'Debug Loader' );
 			}
 		}
 		/**
@@ -215,8 +211,8 @@
 			// FIXME: the timer goes to minus here
 			//static::$_tickTime = ( ( microtime( true ) - $now ) + static::$_tickTime ); 
 		}
-		/*
-		* Starts the code coverage analysis utility to find executed lines
+		/**
+		* Starts the code coverage analysis utility to find executed lines. See @ref codeCoverage
 		*/
 		public static function startCoverage( )
 		{
@@ -231,8 +227,8 @@
 				static::$_codeCoverage = true;
 			}
 		}
-		/*
-		* Stops the code coverage analysis utility
+		/**
+		* Stops the code coverage analysis utility. See @ref codeCoverage
 		*/
 		public static function stopCoverage( )
 		{
@@ -246,8 +242,8 @@
 				}
 			}
 		}
-		/*
-		* Starts the function calls trace utility
+		/**
+		* Starts the function calls trace utility. See @ref traceFunctions
 		*/
 		public static function startTrace( )
 		{
@@ -262,8 +258,8 @@
 				static::$_functionTrace = true;
 			}
 		}
-		/*
-		* Stops the function calls trace utility
+		/**
+		* Stops the function calls trace utility. See @ref traceFunctions
 		*/
 		public static function stopTrace( )
 		{
@@ -279,7 +275,7 @@
 		}
 		/**
 		* Excludes functions from the function calls tracing engine
-		* @param	array | string	$functions	the function the exclude by their name	
+		* @param	array | string		$functions	the function the exclude by their name	
 		*/
 		public static function excludeFromTrace( $functions )
 		{
@@ -287,20 +283,20 @@
 			static::$_excludeFromTrace = array_merge( static::$_excludeFromTrace , $functions );
 		}
 		/**
-		* Watches a variable that is in a declare(ticks=n); code block, for changes 
-		* @param 	string 	$variableName		the name of the variable to watch
-		* @see		watch_var()
-		* @tutorial	PtcDebug.cls#watchVar
+		* Watches a variable that is in a declare(ticks=n); code block, for changes. See @ref variableInspector 
+		* @param 	string 	$variableName	the name of the variable to watch
+		* @param 	string 	$callback		a callback function that retrieves the variable
 		*/
-		public static function watch( $variableName )
+		public static function watch( $variableName , $callback = null )
 		{
 			if ( @static::$_options[ 'enable_inspector' ] )
 			{
-				$var = static::_findWatchVar( $variableName );
+				$var = ( $callback ) ? array( 'value' => $callback( ) , 'callback' => $callback ) : 
+														static::_findWatchVar( $variableName );
 				static::$_watchedVars[ $variableName ] = $var;
-				$value = static::$_watchedVars[ $variableName ];		
+				$value = ( $callback ) ? call_user_func( $callback ) : static::$_watchedVars[ $variableName ];		
 				static::bufferLog( $value , 'Watching variable <span style="font-weight:bold;">$' . 
-												$variableName . '</span> = ' , 'Inspector' );
+														$variableName . '</span> = ' , 'Inspector' );
 			}
 			else
 			{
@@ -310,36 +306,30 @@
 			}
 		}
 		/**
-		* Writes data to the messages panel
-		* @param 	mixed 	$string		the string to pass
-		* @param 	mixed 	$statement	some statement if required
-		* @param	string	$category	a category for the messages panel
-		* @see		ptc_log()
-		* @tutorial	PtcDebug.cls#logging.log_msg
+		* Writes data to the messages panel. See @ref logging_data
+		* @param 	mixed 		$string		the string to pass
+		* @param 	mixed 		$statement		some statement if required
+		* @param	string		$category		a category for the messages panel
 		*/
 		public static function bufferLog( $string , $statement = null , $category = null )
 		{ 
 			static::_buildBuffer( 'log' , $string , $statement , $category );
 		}
 		/**
-		* Writes data to the sql panel
-		* @param 	mixed 	$string		the string to pass
-		* @param 	mixed 	$statement	some statement if required
-		* @param	string	$category	a category for the sql panel
-		* @see		log_sql()
-		* @tutorial	PtcDebug.cls#logging.log_sql
+		* Writes data to the sql panel. See @ref log_sql
+		* @param 	mixed 		$string		the string to pass
+		* @param 	mixed 		$statement		some statement if required
+		* @param	string		$category		a category for the sql panel
 		*/
 		public static function bufferSql( $string , $statement = null , $category = null )
 		{ 
 			static::_buildBuffer( 'sql' , $string , $statement , $category ); 
 		}
 		/**
-		* Monitors the execution of php code, or sql queries based on a reference 
+		* Monitors the execution of php code, or sql queries based on a reference. See @ref execution_timing
 		* @param	string			$reference	a reference to look for ("$statement")
 		* @param 	string|numeric 	$precision	sec/ms
-		* @see	stop_timer()
-		* @tutorial	PtcDebug.cls#stopTimer
-		* @return	resturns true if a given reference is found, otherwise false
+		* @return	true if a given reference is found, otherwise false
 		*/
 		public static function stopTimer( $reference = null , $precision = 1 )
 		{
@@ -359,12 +349,17 @@
 					static::$_buffer[ $last[ 'key' ] ][ 'time' ] = round( $time * 1000 , 3 ) . ' ms';
 				break;
 			}
+			if ( static::$_options[ 'debug_console' ] )
+			{
+				static::$_buffer[ $last[ 'key' ] ][ 'console_time' ] = 
+							static::$_buffer[ $last[ 'key' ] ][ 'time' ];
+			}
 			return true;
 		}
 		/**
 		* Convert memory_usage( ) into a readable format
 		* @param	float		$val			The value to convert
-		* @param	int		$precision	the decimal points
+		* @param	int		$precision		the decimal points
 		*/
 		public static function convertMemUsage( $val , $precision = 2)
 		{
@@ -373,13 +368,12 @@
 					($i = floor( log( $val , 1024) ) ) ) , $precision ) . $ram[ $i ] : '0 Bytes';
 		}
 		/**
-		* Handles php errors
+		* Handles php errors. See @ref replaceErrorHandler
 		* @param 	string 	$errno	error number (php standards)
 		* @param 	string 	$errstr	error string
 		* @param 	string 	$errfile	error file
 		* @param 	string 	$errline	error line
-		* @see		setErrorHandler()
-		@return		returns true to prevent php default error handler to fire
+		@return	true to prevent php default error handler to fire
 		*/
 		public static function errorHandler( $errno , $errstr , $errfile , $errline ) 
 		{
@@ -393,7 +387,7 @@
 		}
 		/**
 		* Exception handler, catches exceptions that are not in a try/catch block
-		* @param 	object 	$exception	the exception object
+		* @param 	object 	$exception		the exception object
 		*/
 		public static function exceptionHandler( $exception )
 		{
@@ -402,36 +396,33 @@
 			static::_buildBuffer( 'log' , '{errorHandler}' , $err );
 		}
 		/**
-		* Attaches a message to the end of the buffer array to add data based on a reference 
-		* @param	string	$reference	a reference to look for ("$statement")
-		* @param	mixed	$string		the message to show
-		* @param	string	$statement	a new statement if required
-		* @return	returns true if the given reference is found, false otherwise
-		* @see		add_to_log()
-		* @tutorial	PtcDebug.cls#addToLog
+		* Attaches a message to the end of the buffer array to add data based on a reference. See @ref add_to_log 
+		* @param	string		$reference		a reference to look for ("$statement")
+		* @param	mixed		$string		the message to show
+		* @param	string		$statement		a new statement if required
+		* @return	true if the given reference is found, false otherwise
 		*/
-		public static function addToBuffer($reference,$string,$statement=null)
+		public static function addToBuffer( $reference , $string , $statement = null )
 		{
-			$raw_buffer=static::_findReference($reference,2);
-			if(!$raw_buffer){ return false; }
-			$last=$raw_buffer['data'];
-			if(@$string)
+			$raw_buffer = static::_findReference( $reference , 2 );
+			if ( !$raw_buffer ){ return false; }
+			$last = $raw_buffer[ 'data' ];
+			if ( @$string )
 			{	
-				$last['var_type']=gettype($string);
-				$last['errstr']=$string; 
+				$last[ 'var_type' ] = gettype( $string );
+				$last[ 'errstr' ] = $string; 
 			}
-			if($statement){ $last['errmsg']=$statement; }
-			if(static::$_options['debug_console'])
+			if ( $statement ){ $last[ 'errmsg' ] = $statement; }
+			if ( static::$_options[ 'debug_console' ] )
 			{
-				$last['console_string']=(!@$string) ? $last['errstr'] : $string;
-				$last['console_statement']=(!@$statement) ? $last['errmsg'] : $statement;
+				$last[ 'console_string' ] = ( !@$string ) ? $last[ 'errstr' ] : $string;
+				$last[ 'console_statement' ] = ( !@$statement ) ? $last[ 'errmsg' ] : $statement;
 			}
-			@static::$_buffer[$raw_buffer['key']]=$last;
+			@static::$_buffer[ $raw_buffer[ 'key' ] ] = $last;
 			return true;
 		}
 		/**
 		* Processes the buffer to show the interface and/or the console messages
-		* @see		load()
 		*/
 		public static function processBuffer( )
 		{
@@ -461,25 +452,86 @@
 			}
 		}
 		/**
-		* File highlighter that opens a popup window inspect source code
-		* @param 	string 	$file		the full path for the file
-		* @param 	string 	$line	the line to be highlighted
-		* @tutorial	PtcDebug.cls#fileInspector
-		* @return	returns the html output of highlight_file()
+		* Searches files for a string inside a given folder recursively. See @ref search_string
+		* @param	string		$query	the string to lok for
+		* @param	string		$path		a starting path to search recursively
+		* @param	int		$last		check last result
+		* @return	an html table with all results
 		*/
-		public static function highlightFile($file,$line=null)
+		public static function findString( $query , $path = null , $last = 1 )
 		{
-			$lines=implode(range(1,count(file($file))),'<br />'); 
-			$content=highlight_file($file,true); 
-			if($line)
+			$path = ( $path ) ? $path : dirname(__FILE__);
+			$real_path = realpath( $path );
+			if ( !$real_path )	// need to trigger error if path is not found
 			{
-				$line=$line-1;
-				$l=explode('<br />',$content);
-				$l[$line]='<div id="line" style="display:inline;background-color:yellow;">'.
-																$l[$line].'</div>';
-				$content=implode('<br />',$l);
+				trigger_error( 'The path "' . $path . 
+					'" does not exists or is not accessible!' , E_USER_WARNING );
+				return false;
 			}
-			$html=' 
+			$fp = @opendir( $real_path );
+			if ( !$fp )		// need to trigger error if path is not found
+			{
+				trigger_error( 'The path "' . $path .
+					'" does not exists or is not accessible!' , E_USER_WARNING );
+				return false;
+			}
+			while ( $f = readdir( $fp ) )
+			{
+				if ( preg_match( '#^\.+$#' , $f ) ){ continue; } // ignore symbolic links
+				$file_full_path = $real_path . DIRECTORY_SEPARATOR . $f;
+				if ( is_dir( $file_full_path ) )
+				{ 
+					@$result .=  static::findString( $query , $file_full_path , $last ); 
+				} 
+				else
+				{
+					$file_lines = @file( $file_full_path );
+					if ( $file_lines )
+					{
+					$line_number = 1; 
+					foreach ( $file_lines as $line )
+					{ 
+						$search_count = substr_count( $line , $query ); 
+						if ( $search_count > 0 ) // we found matches 
+						{ 
+							$line = preg_replace( '|' . $query . '|', 
+							'<span style="color:yellow;font-weight:bold;">' . $query . 
+														'</span>' , htmlentities( $line ) );
+							@$result .= '<tr>';
+							$result .= '<td style="white-space: nowrap;"># ' . $last . '</td>';
+							$result .= '<td><div style="color:blue;">' . $file_full_path . '</div></td>';
+							$result .= '<td><div style="font-weight:bold;color:black;">' . 
+														$line_number . '</div></td>';
+							$result .= '<td><div style="color:darkred;font-weight:bold;"">' . $line . '</div></td>';
+							$result .= '<td><div style="font-weight:bold;color:red;">
+														' . $search_count . '</div></td>';
+							$result .= '</tr>';
+							$last++;
+						} 
+						$line_number++; 
+					}}
+				}	
+			}
+			return @$result;
+		}
+		/**
+		* File highlighter that opens a popup window inspect source code. See @ref file_inspector
+		* @param 	string 	$file		the full path for the file
+		* @param 	string 	$line		the line to be highlighted
+		* @return	the html output of the source code
+		*/
+		public static function highlightFile( $file , $line = null )
+		{
+			$lines = implode( range( 1 , count( file ( $file ) ) ) , '<br />' ); 
+			$content = highlight_file( $file , true ); 
+			if ( $line )
+			{
+				$line = $line - 1;
+				$l = explode( '<br />' , $content );
+				$l[ $line ] = '<div id="line" style="display:inline;background-color:yellow;">' . $l[ $line ] . '</div>';
+				$content = implode( '<br />' , $l );
+			}
+			$html = ' 
 			    <style type="text/css"> 
 				.num{float:left;color:gray;font-size:13px;
 				font-family:monospace;text-align:right;margin-right:6pt;
@@ -506,47 +558,45 @@
 					}
 				};
 			</script>';
-			$html.="<table><tr><td class=\"num\">\n$lines\n</td>
-									<td>\n$content\n</td></tr></table>"; 
+			$html .= "<table><tr><td class=\"num\">\n$lines\n</td>";
+			$html .= "<td>\n$content\n</td></tr></table>"; 
 			return $html;
 		}
 		/**
-		* Default options for the debug class
-		* @var	array
-		* @tutorial	PtcDebug.cls#_defaultOptions
+		* Default options for the debug class. See @ref dbg_class_options
 		*/
-		protected static $_defaultOptions=array
+		protected static $_defaultOptions = array
 		(
-			'url_key'				=>	'debug' , // the key to pass to the url to turn on debug
-			'url_pass'				=>	'true' , // the pass to turn on debug
+			'url_key'			=>	'debug' , // the key to pass to the url to turn on debug
+			'url_pass'			=>	'true' , // the pass to turn on debug
 			'replace_error_handler'	=>	true , // replace default php error handler
-			'error_reporting'		=>   E_ALL , // error reporting flag
-			'catch_exceptions'		=>	true , // sets exception handler to be this class method
-			'check_referer'			=>   false , // check referer for key and pass ( good for ajax debugging )
-			'die_on_error'			=>	true , // die if fatal error occurs ( with this class error handler )
-			'debug_console'		=>	false , // only for Chrome,show messages in console(phpConsole needed)
-			'allowed_ips'			=>	null , // restrict access with ip's
-			'session_start'			=>	false , // start session for persistent debugging
+			'error_reporting'		=>	E_ALL , // error reporting flag
+			'catch_exceptions'	=>	true , // sets exception handler to be this class method
+			'check_referer'		=>   	false , // check referer for key and pass ( good for ajax debugging )
+			'die_on_error'		=>	true , // die if fatal error occurs ( with this class error handler )
+			'debug_console'		=>	false , // only for Chrome,show messages in console ( phpConsole needed )
+			'allowed_ips'		=>	null , // restrict access with ip's
+			'session_start'		=>	false , // start session for persistent debugging
 			'show_interface'		=>	true , // show the interface ( false to debug in console only )
-			'set_time_limit'			=>	null , // set php execution time limit
-			'memory_limit'			=>	null , // set php memory size	
+			'set_time_limit'		=>	null , // set php execution time limit
+			'memory_limit'		=>	null , // set php memory size	
 			'show_messages'		=>	true , // show messages panel
-			'show_globals'			=>	true , // show global variables in vars panel
+			'show_globals'		=>	true , // show global variables in vars panel
 			'show_sql'			=>	true , // show sql panel
 			'show_w3c'			=>	true, // show the w3c panel
-			'minified_html'			=>	true , // compress html for a lighter output
-			'trace_depth'			=>	10 , // maximum depth for the backtrace
-			'max_dump_depth'		=>	6 , // maximum depth for the dump function	
-			'panel_top'			=>	'0px;' , // panel top position
-			'panel_right'			=>	'0px;' , // panel right position
-			'default_category'		=>	'General' , // default category for the messages
-			'enable_inspector'		=>	true , // enable variables inspector, use declare(ticks=n); in code block
+			'minified_html'		=>	true , // compress html for a lighter output
+			'trace_depth'		=>	10 , // maximum depth for the backtrace
+			'max_dump_depth'	=>	6 , // maximum depth for the dump function	
+			'panel_top'			=>	'0px' , // panel top position
+			'panel_right'		=>	'0px' , // panel right position
+			'default_category'	=>	'General' , // default category for the messages
+			'enable_inspector'	=>	true , // enable variables inspector, use declare(ticks=n); in code block
 			'code_coverage'		=>	true, // enable code coverage analysis, use "full" to start globally
-			'trace_functions'		=>	true // enable function calls tracing, use "full" to start globally
+			'trace_functions'		=>	true, // enable function calls tracing, use "full" to start globally
+			'exclude_categories'	=>	array( 'Event Manager' , 'Autoloader' ) // exclude categories from the output
 		);
 		/**
 		* Array of methods excluded from the backtrace
-		* @var	array
 		*/
 		protected static $_excludeMethods=array( );
 		/**
@@ -567,45 +617,34 @@
 		protected static $_finalTraceData = array( );
 		/**
 		* Array with all options
-		* @var	array
 		*/
 		protected static $_options = array( );
 		/**
 		* The debug buffer
-		* @var	array
 		*/	
 		protected static $_buffer = array( );
 		/**
 		* Application start time
-		* @var	time
-		* @see stopTimer()
 		*/
 		protected static $_startTime = null;		
 		/**
 		* Application end time
-		* @var	time
-		* @see stopTimer()
 		*/
 		protected static $_endTime = null;
 		/**
 		* Decides if we should send the buffer to the PhpConsole class
-		* @var	bool
 		*/
 		protected static $_consoleStarted = false;
 		/**
 		* Array of watched variables declared
-		* @var	array
 		*/
 		protected static $_watchedVars = array();
 		/**
 		* Tick execution time property
-		* @var	array
-		* @see watch_var()
 		*/
 		protected static $_tickTime = 0;
 		/**
-		* Exclude {@link $_buildBuffer} from execution timing property
-		* @var	bool
+		* Exclude PtcDebug::$_buildBuffer from execution timing property
 		*/	
 		protected static $_countTime = true;
 		/**
@@ -631,17 +670,18 @@
 				position:fixed;top:{PANEL_TOP};right:{PANEL_RIGHT};
 				background:#eee;color:#333;z-index:10000;line-height:1.3em;
 				text-align:left;padding:0px;margin:0px;height:25px;}
-				ul.tabs li{background-color:#ddd;border-color:#999;margin:0 -3px -1px 0;
+				#ptcDebugPanel ul.tabs li{background-color:#ddd;border-color:#999;margin:0 -3px -1px 0;
 				padding:3px 6px;border-width:1px;list-style:none;display:inline-block;border-style:solid;}
-				ul.tabs li.active{background-color:#fff;border-bottom-color:transparent;
-				text-decoration:}ul.tabs li:hover{background-color:#eee;}
-				ul.tabs li.active:hover{background-color:#fff;}ul.tabs.merge-up{margin-top:-24px;}
-				ul.tabs.right{padding:0 0 0 0;text-align:right;}
-				ul.tabs{border-bottom-color:#999;border-bottom-width:1px;font-size:14px;
+				#ptcDebugPanel ul.tabs li.active{background-color:#fff;border-bottom-color:transparent;
+				text-decoration:}#ptcDebugPanel ul.tabs li:hover{background-color:#eee;}
+				#ptcDebugPanel ul.tabs li.active:hover{background-color:#fff;}
+				#ptcDebugPanel ul.tabs.merge-up{margin-top:-24px;}
+				#ptcDebugPanel ul.tabs.right{padding:0 0 0 0;text-align:right;}
+				#ptcDebugPanel ul.tabs{border-bottom-color:#999;border-bottom-width:1px;font-size:14px;
 				list-style:none;margin:0;padding:0;z-index:100000;position:relative;
-				background-color:#EEE}ul.tabs a{color:purple;font-size:10px;
-				text-decoration:none;}.tabs a:hover{color:red;}
-				ul.tabs a.active{color:black;background-color:yellow;}
+				background-color:#EEE}#ptcDebugPanel ul.tabs a{color:purple;font-size:10px;
+				text-decoration:none;}#ptcDebugPanel .tabs a:hover{color:red;}
+				#ptcDebugPanel ul.tabs a.active{color:black;background-color:yellow;}
 				.msgTable{padding:0;margin:0;border:1px solid #999;font-family:Arial;
 				font-size:11px;text-align:left;border-collapse:separate;border-spacing:2px;}
 				.msgTable th{margin:0;border:0;padding:3px 5px;vertical-align:top;
@@ -654,8 +694,7 @@
 				.msgTable tr.php-error td{background-color:orange;}
 				.msgTable tr.inspector td{background-color:lightgreen;}
 				.innerTable a.php-notice{color:lightblue;}
-				.innerTable a.exception{color:greenyellow;}
-				.innerTable a.php-warning{color:yellow;}
+				.innerTable a.exception{color:greenyellow;}.innerTable a.php-warning{color:yellow;}
 				.innerTable a.php-error{color:orange;}.innerTable a.inspector{color:lightgreen;}
 				.innerTable a.general{color:darkgrey;}.innerTable a.show-all{color:red;}
 				#ptcDebugFilterBar{background-color:black;margin-bottom:8px;padding:4px;
@@ -682,42 +721,74 @@
 				.fixed{width:1%;white-space:nowrap;}.fixed1{width:5%;white-space:nowrap;}
 				#ptcDebugStatusBar{height:2px;background-color:#999;}' ;
 		/**
-		* Sends the buffer to the PhpConsole class
+		* Sends the buffer to the PhpConsole class. See @ref ajax_env
 		*/
 		protected static function _debugConsole()
 		{
-			if(function_exists('debug'))
+			$handler = \PhpConsole\Handler::getInstance( );
+			$handler->setHandleErrors( false );
+			$handler->setHandleExceptions( false );
+			$handler->start( );
+			foreach ( static::$_buffer as $k => $arr )
 			{
-				foreach(static::$_buffer as $k=>$arr)
+				if ( @$arr[ 'console_string' ] || @$arr[ 'console_statement' ] )
 				{
-					if(@$arr['console_string']!='{errorHandler}' && 
-						(@$arr['console_string'] || @$arr['console_statement']))
+					if ( !@$arr )
 					{
-						$console_string=@$arr['console_string'];
-						if(!@$arr)
+						$php_trace = static::_debugTrace( 1 );
+						$arr=array( 'errline' => $php_trace[ 'line' ] , 'errfile' => $php_trace[ 'file' ] ); 
+					}
+					$statement = ( @$arr[ 'console_statement' ] ) ? 
+							strip_tags( preg_replace( "=<br */?>=i" , "\n" , 
+									@$arr[ 'console_statement' ] ) ) : null;
+					$statement .= ( @$arr[ 'console_time' ] ) ? ' [time: ' . $arr[ 'console_time' ] . ']' : '';
+					$console_type = '[' . @end( @explode( '/' , $arr[ 'errfile' ][ 0 ] ) ) . ':';
+					$console_type .= $arr[ 'errline' ][ 0 ] . ']';
+					$key=(@$arr['type']=='log') ? 'messages' : 'sql';
+					if(static::$_options['show_'.$key])
+					{ 
+						if ( 'error' === $arr['console_statement'] )
 						{
-							$php_trace=static::_debugTrace(1);
-							$arr=array('errline'=>$php_trace['line'],'errfile'=>$php_trace['file']); 
+							$handler->handleError( $arr[ 'console_category' ] , $arr[ 'errstr' ] , 
+											$arr[ 'errfile' ][ 0 ] , $arr[ 'errline' ][ 0 ] , null , 2 );
 						}
-						$console_string=(@is_array($console_string) || @is_object($console_string)) ? 
-													@print_r($console_string,true) : $console_string;
-						$statement=(@$arr['console_statement']) ? 
-									preg_replace("=<br */?>=i", "\n",@$arr['console_statement']) : null;
-						$debug_console=($statement) ? @strip_tags($statement)." ".$console_string : $console_string;
-						$console_type=$arr['type'].'['.@end(@explode('/',$arr['errfile'][0])).':';
-						$console_type.=$arr['errline'][0].']';
-						$key=(@$arr['type']=='log') ? 'messages' : 'sql';
-						if(static::$_options['show_'.$key]){ @\debug($debug_console,$console_type); }
+						else
+						{
+							\PC::debug( $console_type , $arr[ 'console_category' ] . '.file' ); 
+							if ( $statement )
+							{ 
+								\PC::debug( $statement , $arr[ 'console_category' ] . '.message' ); 
+							}
+							if ( @$arr[ 'console_string' ] )
+							{ 	
+								\PC::debug( $arr[ 'console_string' ] , $arr[ 'console_category' ] . '.result' ); 
+							}
+							if ( @$arr[ 'errfile' ] )
+							{
+								unset( $arr[ 'errfile' ][ 0 ] );
+								if ( !empty( $arr[ 'errfile' ] ) )
+								{ 
+									\PC::debug( $arr[ 'errfile' ] , $arr[ 'console_category' ] . '.trace' ); 
+								}
+							}
+							//\PC::debug( $arr , $arr[ 'console_category' ] . '[full]' ); 
+						}
 					}
 				}
-				$time=((static::$_endTime-static::$_startTime)-static::$_tickTime);
-				$console_final='Seconds: '.round($time,3).' | Milliseconds: '.round($time*1000,3);
-				@\debug($console_final,'Global Execution Time');
 			}
+			if ( !static::$_options[ 'show_interface' ] )
+			{
+				static::_buildCoverageData( );
+				static::_buildTraceData( ); 
+			}
+			$time = ( ( static::$_endTime - static::$_startTime ) - static::$_tickTime );
+			$console_final = 'Seconds: ' . round( $time , 3 ) . ' | Milliseconds: ' . round( $time * 1000 , 3 );
+			\PC::debug( array( @get_included_files( ) ) , static::$_options[ 'default_category' ] . '.includedFiles' );
+			\PC::debug( 'Global Execution Time ' . $console_final , static::$_options[ 'default_category' ] );
 		}
 		/**
 		* Checks if a given ip has access
-		* @param 	string|array	$allowedIps	the ip's that are allowed
+		* @param 	string|array		$allowedIps		the ip's that are allowed
 		*/
 		protected static function _checkAccess($allowedIps=null)
 		{
@@ -736,90 +807,118 @@
 		*/
 		protected static function _setSessionVars()
 		{
-			$_SESSION['debug_show_messages']=static::$_options['show_messages'];
-			$_SESSION['debug_show_globals']=static::$_options['show_globals'];
-			$_SESSION['debug_show_sql']=static::$_options['show_sql'];
+			$_SESSION[ 'ptcdebug' ]['show_messages']=static::$_options['show_messages'];
+			$_SESSION[ 'ptcdebug' ]['show_globals']=static::$_options['show_globals'];
+			$_SESSION[ 'ptcdebug' ]['show_sql']=static::$_options['show_sql'];
+			$_SESSION[ 'ptcdebug' ]['show_w3c']=static::$_options['show_w3c'];
 		}
 		/**
 		* Controls which panels will be shown with $_GET variable "hidepanels"
 		*/
-		protected static function _disablePanels()
+		protected static function _disablePanels( )
 		{
-			$hide=@explode(',',$_GET['hidepanels']);
-			if(!@empty($hide))
+			$hide = @explode( ',' , $_GET[ 'hidepanels' ] );
+			if ( !@empty( $hide ) )
 			{
-				$_SESSION['debug_show_messages']=true;
-				$_SESSION['debug_show_globals']=true;
-				$_SESSION['debug_show_sql']=true;
-				foreach($hide as $k=>$v)
+				$_SESSION[ 'ptcdebug' ][ 'show_messages' ] = true;
+				$_SESSION[ 'ptcdebug' ][ 'show_globals' ] = true;
+				$_SESSION[ 'ptcdebug' ][ 'show_sql' ] = true;
+				$_SESSION[ 'ptcdebug' ][ 'show_w3c' ] = true;
+				foreach ( $hide as $k => $v )
 				{
-					if($v=='msg' || $v=='all'){ $_SESSION['debug_show_messages']=false; }
-					if($v=='globals' || $v=='all'){ $_SESSION['debug_show_globals']=false; }
-					if($v=='sql' || $v=='all'){ $_SESSION['debug_show_sql']=false; }
+					if ( $v == 'msg' || $v == 'all' )
+					{ 
+						$_SESSION[ 'ptcdebug' ][ 'show_messages' ] = false; 
+					}
+					if ( $v == 'globals' || $v == 'all' )
+					{ 
+						$_SESSION[ 'ptcdebug' ][ 'show_globals' ] = false; 
+					}
+					if ( $v == 'sql' || $v == 'all' )
+					{ 
+						$_SESSION[ 'ptcdebug' ][ 'show_sql' ] = false; 
+					}
+					if ( $v == 'w3c' || $v == 'all' )
+					{ 
+						$_SESSION[ 'ptcdebug' ][ 'show_w3c' ] = false; 
+					}
 				}
 			}			
-			static::$_options['show_messages']=$_SESSION['debug_show_messages']; 
-			static::$_options['show_globals']=$_SESSION['debug_show_globals']; 
-			static::$_options['show_sql']=$_SESSION['debug_show_sql']; 
+			static::$_options[ 'show_messages' ] = static::_getSessionVars( 'show_messages' );
+			static::$_options[ 'show_globals' ] = static::_getSessionVars( 'show_globals' );
+			static::$_options[ 'show_sql' ] = static::_getSessionVars( 'show_sql' );
+			static::$_options[ 'show_w3c' ] = static::_getSessionVars( 'show_w3c' );
 		}
 		/**
 		* Builds the buffer
-		* @param 	string	$type		log/sql
-		* @param 	mixed 	$string		the string to pass
-		* @param 	mixed 	$statement	some statement preceding the string
-		* @param	string	$category	a category for the message
+		* @param 	string		$type			log/sql
+		* @param 	mixed 		$string		the string to pass
+		* @param 	mixed 		$statement		some statement preceding the string
+		* @param	string		$category		a category for the message
 		*/
-		protected static function _buildBuffer($type,$string,$statement=null,$category=null)
+		protected static function _buildBuffer( $type , $string , $statement = null , $category = null )
 		{
-			if(defined('_PTCDEBUG_NAMESPACE_') && @$_SESSION[static::$_options['url_key']] &&
-				(static::$_options['show_interface'] || static::$_options['debug_console']))	// if debug is on
+			if ( @in_array( $category , static::$_options[ 'exclude_categories' ] ) ){ return; }
+			if ( defined( '_PTCDEBUG_NAMESPACE_' ) && 
+				@static::_getSessionVars( static::$_options[ 'url_key' ] ) && 
+					( static::$_options[ 'show_interface' ] || static::$_options[ 'debug_console' ] ) ) 
 			{
-				$buffer=array('start_time'=>microtime(true),'type'=>$type);
-				$php_trace=static::_debugTrace(static::$_options['trace_depth']);
-				$buffer['errline']=@$php_trace['line'];
-				$buffer['errfile']=@$php_trace['file'];
-				$buffer['function']=@$php_trace['function'];
-				$buffer['class']=@$php_trace['class'];
-				if($string==='{errorHandler}')
+				$buffer = array( 'start_time' => microtime( true ) , 'type' => $type );
+				$php_trace = static::_debugTrace( static::$_options[ 'trace_depth' ] );
+				$buffer[ 'errline' ] = @$php_trace[ 'line' ];
+				$buffer[ 'errfile' ] = @$php_trace[ 'file' ];
+				$buffer[ 'function' ] = @$php_trace[ 'function' ];
+				$buffer[ 'class' ] = @$php_trace[ 'class' ];
+				if ( $string === '{errorHandler}' )
 				{
-					$buffer['errno']=$statement['errno'];
-					$buffer['errstr']=$statement['errstr'];
-					if($statement['errfile']=='trace')
+					$buffer[ 'errno' ] = $statement[ 'errno' ];
+					$buffer[ 'errstr' ] = $statement[ 'errstr' ];
+					if ( $statement[ 'errfile' ] == 'trace' )
 					{
-						$params=@explode(':',@str_replace(':\\','{win-patch}',@$buffer['errfile'][0])); // windows patch
-						@$buffer['errfile'][0]=@str_replace('{win-patch}',':\\',@$params[0]);
+						$params = @explode( ':' , @str_replace( ':\\' , '{win-patch}' , 
+												@$buffer[ 'errfile' ][ 0 ] ) ); // windows patch
+						@$buffer[ 'errfile' ][ 0 ] = @str_replace( '{win-patch}' , ':\\' , @$params[ 0 ] );
 					}
 					else	// if static::errorHandler() called the function
 					{
-						if(!@is_array($buffer['errline'])){ $buffer['errline']=array(); }
-						if(!@is_array($buffer['errfile'])){ $buffer['errfile']=array(); }
-						if(!@is_array($buffer['function'])){ $buffer['function']=array(); }
-						if(!@is_array($buffer['class'])){ $buffer['class']=array(); }
-						@array_unshift($buffer['errline'],$statement['errline']);
-						@array_unshift($buffer['errfile'],$statement['errfile']);
-						@array_unshift($buffer['function'],'');
-						@array_unshift($buffer['class'],'');
+						if ( !@is_array( $buffer[ 'errline' ] ) ){ $buffer[ 'errline' ] = array( ); }
+						if ( !@is_array( $buffer[ 'errfile' ] ) ){ $buffer[ 'errfile' ] = array( ); }
+						if ( !@is_array( $buffer[ 'function' ] ) ){ $buffer[ 'function' ] = array( ); }
+						if ( !@is_array( $buffer[ 'class' ] ) ){ $buffer[ 'class' ] = array( ); }
+						@array_unshift( $buffer[ 'errline' ] , $statement[ 'errline' ] );
+						@array_unshift( $buffer[ 'errfile' ] , $statement[ 'errfile' ] );
+						@array_unshift( $buffer[ 'function' ] , '' );
+						@array_unshift( $buffer[ 'class' ] , '' );
+					}
+					if ( static::$_options[ 'debug_console' ] )
+					{
+						//var_dump($buffer  );
+						$buffer[ 'console_string' ] = $buffer;
+						$buffer[ 'console_statement' ] = 'error';
+						$buffer[ 'console_category' ] = $statement[ 'errno' ];
 					}
 				}
 				else
 				{
-					$params=@explode(':',@str_replace(':\\','{win-patch}',@$buffer['errfile'][0])); // windows patch
-					@$buffer['errfile'][0]=@str_replace('{win-patch}',':\\',@$params[0]);
-					$buffer['var_type']=gettype($string);
-					if(!$category){ $category=static::$_options['default_category']; } 
-					$buffer['errno']=$category;
-					$buffer['errstr']=$string;
-					$buffer['errmsg']=$statement;						
-					if(static::$_options['debug_console'])
+					$params = @explode( ':' , @str_replace( ':\\' , '{win-patch}' , 
+												@$buffer[ 'errfile' ][ 0 ] ) ); // windows patch
+					@$buffer[ 'errfile' ][ 0 ] = @str_replace( '{win-patch}' , ':\\' , @$params[ 0 ] );
+					$buffer[ 'var_type' ] = gettype( $string );
+					if ( !$category ){ $category = static::$_options[ 'default_category' ]; } 
+					$buffer[ 'errno' ] = $category;
+					$buffer[ 'errstr' ] = $string;
+					$buffer[ 'errmsg' ] = $statement;						
+					if ( static::$_options[ 'debug_console' ] )
 					{
-						$buffer['console_string']=$string;
-						$buffer['console_statement']=$statement;
+						$buffer[ 'console_string' ] = $string;
+						$buffer[ 'console_statement' ] = $statement;
+						$buffer[ 'console_category' ] = $category;
 					}
 				}
-				@static::$_buffer[]=$buffer;
-				if(static::$_countTime)
+				@static::$_buffer[ ] = $buffer;
+				if ( static::$_countTime )
 				{ 					
-					static::$_tickTime=((microtime(true)-$buffer['start_time'])+static::$_tickTime);
+					static::$_tickTime = ( ( microtime( true ) - $buffer[ 'start_time' ] ) + static::$_tickTime );
 				}
 			}
 		}
@@ -832,24 +931,46 @@
 			{
 				foreach ( static::$_watchedVars as $variableName => $variableValue ) 
 				{
-					$var = static::_findWatchVar( $variableName );
-					if ( @$var !== @$variableValue ) 
+					if ( is_array( $variableValue ) )
 					{
-						$info=array
-						(
-							'variable'		=>	'$' . $variableName ,
-							'previous_value'	=>	static::$_watchedVars[ $variableName ] ,
-							'new_value'		=>	$var
-						);			
-						static::$_watchedVars[ $variableName ] = $var;
-						static::bufferLog( $info ,' Watched variable changed  <span style="font-weight:bold;">$'.
-															$variableName . '</span> = ','Inspector');
+						$var = $variableValue[ 'callback' ]( );
+						if ( @$var !== @$variableValue[ 'value' ] ) 
+						{
+							$info=array
+							(
+								'variable'			=>	'$' . $variableName ,
+								'previous_value'	=>	$variableValue[ 'value' ] ,
+								'new_value'		=>	$var
+							);			
+							static::$_watchedVars[ $variableName ] = 
+								array( 'value' => $var , 'callback' => $variableValue[ 'callback' ] );
+						}
 					}
-				}	
+					else
+					{
+						$var = static::_findWatchVar( $variableName );
+						if ( @$var !== @$variableValue ) 
+						{
+							$info=array
+							(
+								'variable'			=>	'$' . $variableName ,
+								'previous_value'	=> 	$variableValue ,
+								'new_value'		=>	$var
+							);			
+							static::$_watchedVars[ $variableName ] = $var;
+						}
+					}
+				}
+				if ( @$info )
+				{ 
+					static::bufferLog( $info ,' Watched variable changed  <span style="font-weight:bold;">$'.
+															$variableName . '</span> = ','Inspector'); 
+				}
 			}
 		}
 		/**
 		* Collect data for code coverage analysis
+		* @param	array		$backtrace	the debug_backtrace( )
 		*/
 		protected static function _codeCoverageAnalysis( $backtrace = null)
 		{
@@ -873,8 +994,8 @@
 		}
 		/**
 		* Evaluates the type of variable for output
-		* @param 	mixed 	$string	the variable to pass
-		* @return	returns the html output with the variable content
+		* @param 	mixed 		$var	the variable to pass
+		* @return	the html output with the variable content
 		*/
 		protected static function _formatVar($var)
 		{	
@@ -893,7 +1014,7 @@
 		/**
 		* Retrieves the variable to watch from the "$GLOBALS"
 		* @param 	string 	$variableName		the name of the variable to find
-		* @return	returns the watched variable if found, otherwise null
+		* @return	the watched variable if found, otherwise null
 		*/
 		protected static function _findWatchVar($variableName)
 		{
@@ -920,9 +1041,9 @@
 		}
 		/**
 		* Finds a value in the buffer based on a reference (the "$statement")
-		* @param 	string	$reference	the reference to look for
+		* @param 	string		$reference	the reference to look for
 		* @param	numeric	$type		"1" to time execution, "2" to attach data to a message
-		* @return	returns the array if the given reference is found in the buffer
+		* @return	the array if the given reference is found in the buffer
 		*/
 		protected static function _findReference($reference,$type=1)
 		{
@@ -952,11 +1073,12 @@
 		}
 		/**
 		* Custom dump to properly format a given variable and make it more friendly to read
-		* @param 	mixed 	$var			the string to pass
-		* @param 	mixed 	$varName	some statement preceding the variable
+		* @param 	mixed 		$var			the string to pass
+		* @param 	mixed 		$varName		some statement preceding the variable
 		* @param 	string 	$indent		uses "|" as indents by default
-		* @param 	string 	$reference	a reference to prevent recursion
-		* @return	returns the html output with the variable
+		* @param 	string 	$reference		a reference to prevent recursion
+		* @param 	int 		$depth		maximun depth
+		* @return	the html output with the variable
 		*/
 		protected static function _doDump( &$var , $varName = NULL , $indent = NULL , $reference = NULL , $depth = 0 )
 		{
@@ -1162,7 +1284,7 @@
 		}
 		/**
 		* Sorts the buffer
-		* @return	returns the sorted buffer array
+		* @return	the sorted buffer array
 		*/
 		protected static function _sortBuffer()
 		{
@@ -1179,7 +1301,8 @@
 		}
 		/**
 		* Trace php as best as we can
-		* @return	returns the trace without the methods in the {@link _excludeMethods} property
+		* @param	int	$depth	the maximum trace depth
+		* @return	the trace without the methods in the PtcDebug::$_excludeMethods property
 		*/
 		protected static function _debugTrace( $depth = NULL )
 		{										
@@ -1236,7 +1359,7 @@
 		}
 		/**
 		* Builds the debug interface
-		* @return	returns the html with interface
+		* @return	the html with interface
 		*/
 		protected static function _buildInterface( )
 		{
@@ -1259,7 +1382,7 @@
 		}
 		/**
 		* Builds the debug menu
-		* @return	returns the html menu compressed
+		* @return	the html menu compressed
 		*/
 		protected static function _buildMenu( )
 		{
@@ -1274,7 +1397,7 @@
 			$num_msg = (@count( static::$_finalCoverageData ) + @count( static::$_finalTraceData ) );
 			$ul .= '<li>' . static::_menuLinks( 'analysisPanel' , 'analysis ( ' . $num_msg . ' ) ' , 
 													'analysis ( ' . $num_msg . ' ) ' ) . '</li>';
-			$ul .= '<li>' . static::_menuLinks( 'varsPanel' , 'configuration & evariables' , 
+			$ul .= '<li>' . static::_menuLinks( 'varsPanel' , 'configuration & environment variables' , 
 													'vars & config' ) . '</li>';
 			$ul .= '<li>' . static::_menuLinks( 'w3cPanel' , 'W3C validator' , 'w3c' ) . '</a></li>';
 			$ul .='<li>' . static::_menuLinks( 'timerPanel' , 'execution time monitor' , 'timer' ) . '</li>';
@@ -1284,22 +1407,23 @@
 		}
 		/**
 		* Builds the menu links
-		* @param	string	$Id		the panel id
-		* @param	string	$title		the panel title
-		* @param	string	$text		the text for the link
-		* @return	returns the html anchor tag
+		* @param	string		$id		the panel id
+		* @param	string		$title		the panel title
+		* @param	string		$text		the text for the link
+		* @return	the html anchor tag
 		*/
-		protected static function _menuLinks($Id,$title,$text)
+		protected static function _menuLinks( $id , $title , $text )
 		{
-			$title=ucwords($title);
-			$text=strtoupper($text);
-			$return='<a href="#" onClick="ptc_show_panel(\''.$Id.'\',\''.$title.'\',this);return false;">';
-			return $return.=$text.'</a>';
+			$title = ucwords( $title );
+			$text = strtoupper( $text );
+			$return = '<a href="#" onClick="ptc_show_panel(\'' . $id . '\',\'' . 
+										$title . '\',this);return false;">';
+			return $return .= $text . '</a>';
 		}
 		/**
 		* Checks message types
-		* @param	string|numeric		php standards
-		* @return	returns the message type as a readable string
+		* @param	string|numeric	$msg		php standards
+		* @return	the message type as a readable string
 		*/
 		protected static function _msgType( $msg = NULL )
 		{
@@ -1333,118 +1457,124 @@
 		}
 		/**
 		* Builds the html log and sql tables
-		* @param	string	$type	sql|log
-		* @return	returns the html table data
+		* @param	string		$type		sql|log
+		* @return	the html table data
 		*/
-		protected static function _buildHtmlTable($type)
+		protected static function _buildHtmlTable( $type )
 		{
-			$div=null;
-			if(@static::$_buffer[$type])
+			$div = null;
+			if ( @static::$_buffer[ $type ] )
 			{
-				$categories=array();
-				foreach(static::$_buffer[$type] as $k=>$arr)
+				$categories = array( );
+				foreach ( static::$_buffer[ $type ] as $k => $arr )
 				{
-					if(@$arr['errno'])
+					if ( @$arr[ 'errno' ] )
 					{			
-						if(!array_key_exists($arr['errno'],$categories)){ $categories[$arr['errno']]=1; }
-						else{ $categories[$arr['errno']]=($categories[$arr['errno']]+1); }
+						if ( !array_key_exists( $arr[ 'errno' ] , $categories ) )
+						{ 	
+							$categories[ $arr[ 'errno' ] ] = 1; 
+						}
+						else
+						{ 
+							$categories[ $arr[ 'errno' ] ] = ( $categories[ $arr[ 'errno' ] ] + 1 ); 
+						}
 					}
 				}
-				if(sizeof($categories)>1)
+				if ( sizeof( $categories ) > 1 )
 				{
-					ksort($categories);
+					ksort( $categories );
 					$div .= '<div id="ptcDebugFilterBar"><a href="#" onClick="ptc_filter_categories(\'' . 
 									$type . 'Table\',\'showAll\')" class="show-all">Show All</a> | ';
-					foreach($categories as $k=>$v)
+					foreach ( $categories as $k => $v )
 					{ 
-						$catId=str_replace(" ","-",strtolower($k));
-						$div.='<a href="#" onClick="ptc_filter_categories(\''.$type.
-									'Table\',\''.$catId.'\')" class="'.$catId.'">'.$k."(".$v.")</a> | "; 
+						$cat_id = str_replace( ' ' , '-' , strtolower( $k ) );
+						$div .= '<a href="#" onClick="ptc_filter_categories(\'' . $type . 
+							'Table\',\'' . $cat_id . '\')" class="' . $cat_id . '">' . $k . "(" . $v . ")</a> | "; 
 					}
-					$div=substr($div,0,-3);
-					$div.='</div>';
+					$div = substr( $div , 0 , -3 );
+					$div .= '</div>';
 				}
-				$a=1;
-				$div.='<table border="1" style="width:100%" class="msgTable" id="'.$type.'Table"><tr>';
-				$div.='<th>#</th><th>category</th><th>file</th><th>line</th>
-														<th>class</th><th>function</th>';
-				if($type=="log"){ $div.='<th>type</th>'; }
-				$div.='<th>time</th><th>message</th></tr>';
-				foreach(static::$_buffer[$type] as $k=>$arr)
+				$a = 1;
+				$div .= '<table border="1" style="width:100%" class="msgTable" id="' . $type . 'Table"><tr>';
+				$div .= '<th>#</th><th>category</th><th>file</th><th>line</th>';
+				$div .= '<th>class</th><th>function</th>';
+				if ( $type == 'log' ){ $div .= '<th>type</th>'; }
+				$div .= '<th>time</th><th>message</th></tr>';
+				foreach ( static::$_buffer[ $type ] as $k => $arr )
 				{
-					$msg_class=@str_replace(' ','-',$arr['errno']);
-					$div.='<tr class="'.strtolower($msg_class).'"><td class="fixed"># '.$a.'</td>';
+					$msg_class = @str_replace( ' ' , '-' , $arr[ 'errno' ] );
+					$div .= '<tr class="' . strtolower( $msg_class ) . '"><td class="fixed"># ' . $a . '</td>';
 					//$div.='<td style="'.static:: _errorMsgStyle($arr['errno']).'">'.$arr['errno'].'</td>';
-					$div.='<td class="fixed"><span style="color:green;">'.@$arr['errno'].'</span></td>';
-					$div.='<td class="fixed">';
-					$div.=@static::_buildTraceLink(@$arr['errfile'][0],@$arr['errline'][0]);
-					$div.='<span>'.@end(@explode(DIRECTORY_SEPARATOR,$arr['errfile'][0])).'</span></a>';
-					if(count(@$arr['errfile'])>1)
+					$div .= '<td class="fixed"><span style="color:green;">'.@$arr['errno'].'</span></td>';
+					$div .= '<td class="fixed">';
+					$div .= @static::_buildTraceLink( @$arr[ 'errfile' ][ 0 ] , @$arr[ 'errline' ][ 0 ] );
+					$div .= '<span>' . @end( @explode( DIRECTORY_SEPARATOR , $arr[ 'errfile' ][ 0 ] ) ).'</span></a>';
+					if ( count( @$arr[ 'errfile' ] ) > 1 )
 					{
-						$class='ptc-debug-class-'.rand();
-						$div.=' <a href="#" onclick="ptc_show_trace(\''.$class.'\',this);return false;"><span>'.
-																		'&dArr;</span></a>';
+						$class = 'ptc-debug-class-' . rand( );
+						$div .= ' <a href="#" onclick="ptc_show_trace(\'' . $class . 
+									'\',this);return false;"><span>' . '&dArr;</span></a>';
 					}
-					@array_shift($arr['errfile']);
-					if(!empty($arr['errfile']))
+					@array_shift( $arr[ 'errfile' ] );
+					if ( !empty( $arr[ 'errfile' ] ) )
 					{
-						$indent='<span style="color:black;">| &nbsp;</span>';
-						foreach($arr['errfile'] as $k=>$file)
+						$indent = '<span style="color:black;">| &nbsp;</span>';
+						foreach ( $arr[ 'errfile' ] as $k => $file )
 						{
-							$div.='<div class="'.$class.'" style="display:none;">';
-							if($file || @$arr['errfile'][$k+1]){ $div.=$indent; }
-							$params=@explode(':',str_replace(':\\','{win-patch}',$file));	// windows patch;
-							@$params[0]=@str_replace('{win-patch}',':\\',@$params[0]);
-							$div.=@static::_buildTraceLink($params[0],$params[1]);
-							$div.=@end(@explode(DIRECTORY_SEPARATOR,$file)).'</a></div>';		
-							$indent=$indent.'<span style="color:black;">| &nbsp;</span>';							
+							$div .= '<div class="' . $class . '" style="display:none;">';
+							if ( $file || @$arr[ 'errfile' ][ $k + 1 ] ){ $div .= $indent; }
+							$params = @explode( ':' , str_replace( ':\\' , '{win-patch}' , $file ) ); // windows patch;
+							@$params[ 0 ] = @str_replace( '{win-patch}' , ':\\' , @$params[ 0 ] );
+							$div .= @static::_buildTraceLink( $params[ 0 ] , $params[ 1 ] );
+							$div .= @end( @explode( DIRECTORY_SEPARATOR , $file ) ) . '</a></div>';		
+							$indent = $indent . '<span style="color:black;">| &nbsp;</span>';							
 						}
 					}
-					$div.='</td>';
-					$div.='<td class="fixed">'.@static::_buildTraceTree(@$arr['errline'],$class,'black').'</td>';
-					$div.='<td class="fixed">'.@static::_buildTraceTree(@$arr['class'],$class,'purple').'</td>';
-					$div.='<td class="fixed">'.@static::_buildTraceTree(@$arr['function'],$class,'darkred').'</td>';
-					if($type=="log")
+					$div .= '</td>';
+					$div .= '<td class="fixed">' . @static::_buildTraceTree( @$arr[ 'errline' ] , $class , 'black' ) . '</td>';
+					$div .= '<td class="fixed">' . @static::_buildTraceTree( @$arr[ 'class' ] , $class , 'purple' ) . '</td>';
+					$div.='<td class="fixed">' . @static::_buildTraceTree( @$arr[ 'function' ] , $class , 'darkred' ) . '</td>';
+					if ( $type == 'log' )
 					{
-						$div.='<td class="fixed">';
-						switch(@$arr['var_type'])
+						$div .= '<td class="fixed">';
+						switch ( @$arr[ 'var_type' ] )
 						{
-							case 'boolean': $color='color:#92008d;'; break;
-							case 'NULL': $color='color:black;'; break;
-							case 'integer': $color='color:red;';  break;
-							case 'double': $color='color:#10C500;'; break;
-							case 'array': $color='color:blue'; break;
-							case 'object': $color='color:#CF3F33'; break;
+							case 'boolean' : $color = 'color:#92008d;'; break;
+							case 'NULL' : $color = 'color:black;'; break;
+							case 'integer' : $color = 'color:red;';  break;
+							case 'double' : $color = 'color:#10C500;'; break;
+							case 'array' : $color = 'color:blue'; break;
+							case 'object' : $color = 'color:#CF3F33'; break;
 							//case 'string': $color='color:#CF3F33'; break;
-							default: $color='';
+							default : $color = '';
 						}
-						$div.='<span style="'.$color.'">'.@$arr['var_type'].'</span>';
-						$div.='</td>';
+						$div .= '<span style="' . $color . '">' . @$arr[ 'var_type' ] . '</span>';
+						$div .= '</td>';
 					}
-					$div.=(@$arr['time']) ? '<td class="fixed"><span style="color:blue;font-weight:normal;"">'.
-											$arr['time'].'</span></td>' : '<td class="fixed">&nbsp;</td>';	
-					$errors=array('php-warning','php-notice','php-error','exception');											
-					$err_style=(!in_array(strtolower($msg_class),$errors)) ? 'font-weight:normal;' : 'color:darkred;';			
-					$div.='<td><span style="'.$err_style.'">';
-					if(@$arr['errmsg']){ $div.=@$arr['errmsg'].' '; }
-					$div.=static::_formatVar(@$arr['errstr']);
-					$div.='</span></td></tr>';
+					$div .= ( @$arr[ 'time' ] ) ? '<td class="fixed"><span style="color:blue;font-weight:normal;"">'.
+											$arr[ 'time' ] . '</span></td>' : '<td class="fixed">&nbsp;</td>';	
+					$errors = array( 'php-warning' , 'php-notice' , 'php-error' , 'exception' );											
+					$err_style = ( !in_array( strtolower( $msg_class ) , $errors ) ) ? 'font-weight:normal;' : 'color:darkred;';			
+					$div .= '<td><span style="' . $err_style . '">';
+					if ( @$arr[ 'errmsg' ] ){ $div .= @$arr[ 'errmsg' ] . ' '; }
+					$div .= static::_formatVar( @$arr[ 'errstr' ] );
+					$div .= '</span></td></tr>';
 					$a++;
 				}
-				$div.="</table><br>";
+				$div .= "</table><br>";
 			}
-			else{ $div='<span class="vars">no messages</span>'; }
+			else{ $div = '<span class="vars">no messages</span>'; }
 			return $div;
 		}
 		/**
 		* Builds the link for the code highlighter popup
-		* @param	string	$file		the full path to the file
-		* @param	string	$line	the line to be highlighted
+		* @param	string		$file		the full path to the file
+		* @param	string		$line		the line to be highlighted
 		*/
 		protected static function _buildTraceLink( $file , $line = null )
 		{
 			$html = '<a href="#" onclick="';
-			if ( session_id( ) !== '' && @$_SESSION[ 'code_highlighter' ] )
+			if ( session_id( ) !== '' && static::_getSessionVars( 'code_highlighter' ) )
 			{
 				$js_file = @addslashes( @str_replace( $document_root , '' , $file ) );
 				$html .= 'ptc_read_code(\'' . addslashes( $file ) . '\',\'' . $line . '\');return false;" title="' . @$file . '">';
@@ -1459,9 +1589,9 @@
 		}
 		/**
 		* Builds the tree for the links in the vars & config panel
-		* @param	mixed	$var			the variable
-		* @param	string	$className	a css class
-		* @param	string	$styleColor	the color for 
+		* @param	mixed		$var			the variable
+		* @param	string		$className		a css class
+		* @param	string		$styleColor		the color for 
 		*/
 		protected static function _buildTraceTree( $var , $className = null , $styleColor = null )
 		{
@@ -1516,8 +1646,6 @@
 		}
 		/**
 		* Builds the Analysis panel for code coverage analysis
-		* @param	$type			log or sql
-		* @param	$panelId		some id for the panel
 		*/
 		protected static function _buildAnalysisPanel( )
 		{
@@ -1526,10 +1654,27 @@
 			$div .= static::_buildCoverageData( );
 			$div .= '<br><h2>Function Calls Trace</h2>';
 			$div .= static::_buildTraceData( );
+			$div .= '<br><h2>Search Files For String</h2>';
+			if ( session_id( ) === '' )
+			{
+				$div .= '<span class="vars">Use session start to search for a string inside files!</span>';
+			}
+			else
+			{
+				$div .= '<form id="searchStringForm" method="get" ';
+				$div .= 'onSubmit="ptc_search_string( );return false;">';
+				$div .= '<span><b>Path: </b>&nbsp;&nbsp;</span>';
+				$div .= '<input name="ptc_search_path" type="text" value="' . 
+									$_SERVER[ 'DOCUMENT_ROOT' ] . '" size="120"><br>';
+				$div .= '<span><b>String: </b></span>';
+				$div .= '<input name="ptc_search_files" type="text" size="120">';
+				$div .= '<input name="ptc_submit_search" type="submit" value="Search">';
+				$div .= '</form>';
+			}
 			return $div .= '</div>' ;
 		}
 		/**
-		* Build the html data for the code coverage analysis
+		* Builds the html data for the code coverage analysis
 		*/
 		protected static function _buildCoverageData( )
 		{
@@ -1542,10 +1687,15 @@
 					{
 						$div .= '<div style="font-weight:bold;"><span><b>Coverage ' . $i; 
 						$div .= ' result:</b></span> &nbsp;&nbsp;' . static::_formatVar( $data ) . '</div>';
+						if ( static::$_consoleStarted )
+						{
+							\PC::debug( $data , static::$_options[ 'default_category' ] .'.coverageResult ' . ( $i ) );
+						}
 						$i++;
 					}
+					//static::$_finalCoverageData = array( );
 				}
-				else{ $div .= '<span class="vars">no data available</span><br>'; }
+				else{ @$div .= '<span class="vars">no data available</span><br>'; }
 			}
 			else 
 			{ 
@@ -1557,10 +1707,10 @@
 			return $div;
 		}
 		/**
-		* Build the html data for the function calls trace
+		* Builds the html data for the function calls trace
 		*/
 		protected static function _buildTraceData( )
-		{
+		{		
 			if ( static::$_options[ 'trace_functions' ] )
 			{
 				if ( !empty( static::$_finalTraceData ) )
@@ -1569,8 +1719,9 @@
 					{
 						$data = static::$_finalTraceData[ $a ];
 						// this is just a patch
-						$data = array_map( 'unserialize' , array_unique( array_map( 'serialize' , $data ) ) );
-						$div .= '<span><b>Trace ' . ( $a +1 ) . ' result: ';
+						$data = array_unique( $data , SORT_REGULAR );
+						//$data = array_map( 'unserialize' , array_unique( array_map( 'serialize' , $data ) ) );
+						@$div .= '<span><b>Trace ' . ( $a +1 ) . ' result: ';
 						$div .= '<a href="#" onclick="ptc_show_trace_table(\'jsLive-' . $a . '\' , this );return false;">';
 						$div .=sizeof( $data ). ' calls &dArr;</a></b></span>';
 						$div .= '<table border="1" style="width:100%;display:none" class="msgTable jsLive-' . 
@@ -1580,8 +1731,8 @@
 						$i = 1;
 						foreach ( $data as $k => $v )
 						{
-							$link = ( $v[ 'file' ] ) ? static::_buildTraceLink( $v[ 'file' ] , $v[ 'line' ] ) 
-																	. $v[ 'file' ] . '</a>' : '';		
+							$link = ( @$v[ 'file' ] ) ? static::_buildTraceLink( $v[ 'file' ] , @$v[ 'line' ] ) 
+																		. $v[ 'file' ] . '</a>' : '';		
 							$args = ( @$v[ 'args' ] ) ? @preg_replace( '/Array/' , '' ,  
 													@static::_formatVar( $v[ 'args' ] ) , 1 )  : '( )';
 							$called_by_args = ( @$v[ 'called_by_args' ] ) ? @preg_replace( '/Array/' , '' ,  
@@ -1606,9 +1757,14 @@
 							$i++;
 						}
 						$div .= '</tbody></table><br>';
+						if ( static::$_consoleStarted )
+						{
+							\PC::debug( $data , static::$_options[ 'default_category' ] .'.traceResult ' . ( $a + 1 ) );
+						}
 					}
+					//static::$_finalTraceData = array( );
 				}
-				else { $div .= '<span class="vars">no data available</span>'; }
+				else { $div .= '<span class="vars">no data available</span><br>'; }
 			}
 			else 
 			{ 
@@ -1668,9 +1824,9 @@
 		}
 		/**
 		* Builds the inner vars div
-		* @param	string	$panelId		the id of the panel to show/hide
-		* @param	string	$linkTitle		the title of the link
-		* @param	string	$array		array of parameters
+		* @param	string		$panelId		the id of the panel to show/hide
+		* @param	string		$linkTitle		the title of the link
+		* @param	string		$array		array of parameters
 		*/
 		protected static function _buildInnerVars( $panelId , $linkTitle , $array )
 		{
@@ -1829,10 +1985,32 @@
 					{
 						var query="http://' . addslashes( $_SERVER[ 'HTTP_HOST' ] ) .
 							$path = addslashes( str_replace( realpath( $_SERVER[ 'DOCUMENT_ROOT' ] ) ,
-									'' , realpath( dirname( __FILE__ ) ) ) ) . '/PtcDebug.php?file="+filename;
-						if(line){query+="&line="+line;}
+							'' , realpath( dirname( __FILE__ ) ) ) ) . '/PtcDebug.php?ptc_read_file="+filename;
+						if(line){query+="&ptc_read_line="+line;}
 						newwindow=window.open(query,"name","height=350,width=820");
 						if(window.focus){newwindow.focus()};
+						return false;
+					};
+					function ptc_search_string( )
+					{
+						if ( !document.getElementsByName("ptc_search_files")[0].value )
+						{
+							alert( "Please type a search string!" );
+						}
+						else if ( !document.getElementsByName("ptc_search_path")[0].value )
+						{
+							alert( "Please type a search path!" );
+						}
+						else
+						{
+							var query="http://' . addslashes( $_SERVER[ 'HTTP_HOST' ] ) .
+							$path = addslashes( str_replace( realpath( $_SERVER[ 'DOCUMENT_ROOT' ] ) ,
+							'' , realpath( dirname( __FILE__ ) ) ) ) . 
+							'/PtcDebug.php?ptc_search_files="+document.getElementsByName("ptc_search_files")[0].value;
+							query+="&ptc_search_path="+document.getElementsByName("ptc_search_path")[0].value;
+							newwindow=window.open(query,"name","height=350,width=1220");
+							if(window.focus){newwindow.focus()};
+						}
 						return false;
 					};
 					function ptc_filter_categories( tableId , catId )
@@ -1887,7 +2065,7 @@
 		}
 		/**
 		* Compresses the html before render
-		* @var	string	$html	some html code
+		* @param	string		$html		some html code
 		*/
 		protected static function _compressHtml( $html )
 		{
@@ -1954,8 +2132,8 @@
 			}
 		}
 		/**
-		* Function calls trace engine (this is an alpha version)
-		* @param	array	$trace	the php debug_backtrace( ) result
+		* Function calls trace engine
+		* @param	array		$trace	the php debug_backtrace( ) result
 		*/
 		protected static function _traceFunctionCalls( $trace = null )
 		{
@@ -1996,20 +2174,58 @@
 		}
 		/**
 		* Removes html entities from the buffer
-		* @param	string	$var		some string
+		* @param	string		$var		some string
 		*/	
 		protected static function _cleanBuffer( $var )
 		{ 
 			return ( @is_string( $var ) ) ? @htmlentities( $var ) : $var;
 		}
+		/**
+		* Retrieves the session var for the ptcdebug class
+		* @param	string		$var		the session var to retrieve
+		*/
+		protected static function _getSessionVars( $var = null )
+		{
+			return ( $var ) ? @$_SESSION[ 'ptcdebug' ][ $var ] : @$_SESSION[ 'ptcdebug' ];
+		}
+		/**
+		* Shows the search popup window with the result
+		* @param	string		$string	a search string to search for
+		* @param	string		$path		a start path where to search for a string recursively
+		*/
+		public static function showSearchPopup( $string , $path = null )
+		{	
+			$path = ( $path ) ? $path : dirname( __FILE__ );
+			static::$_options[ 'minified_html' ] = false;
+			static::$_options[ 'panel_top' ] = '0px';
+			static::$_options[ 'panel_right' ] = '0px';
+			$result = static::_includeCss( );
+			$result .= '<div style="background: #eee;color: #333;height:100%;">';
+			$result .= '<table class="msgTable" id="searchString" border="1" style="width:100%;">';
+			$result .= '<tbody><tr><th>#</th><th>file</th><th>line</th>';
+			$result .= '<th>string</th><th>occurences</th></tr>';
+			$result .= PtcDebug::findString( $string , $path );
+			$result = str_replace( $path , '' , $result );
+			return $result . '</tbody></table></div>';
+		}
 	}
 	/**
 	* Calls highlight file method to show source code, session_start() must be active for security reasons
 	*/
-	if ( @$_GET[ 'file' ] )
+	if ( @$_GET[ 'ptc_read_file' ] )
 	{
 		@session_start( );
-		if( !@$_SESSION[ 'code_highlighter' ] ) { exit( ); }
-		echo PtcDebug::highlightFile( $_GET[ 'file' ] , @$_GET[ 'line' ] );
+		if ( !@$_SESSION[ 'ptcdebug' ][ 'code_highlighter' ] ) { exit( ); }
+		echo PtcDebug::highlightFile( $_GET[ 'ptc_read_file' ] , @$_GET[ 'ptc_read_line' ] );
+		exit( );
+	}
+	/**
+	* Shows a popup with string search results, session_start() must be active for security reasons
+	*/
+	if ( @$_GET[ 'ptc_search_files' ] )
+	{
+		@session_start( );
+		if ( !@$_SESSION[ 'ptcdebug' ][ 'search_files' ] ) { exit( ); }
+		echo PtcDebug::showSearchPopup( $_GET[ 'ptc_search_files' ] , @$_GET[ 'ptc_search_path' ] );
 		exit( );
 	}
