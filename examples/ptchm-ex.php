@@ -18,7 +18,7 @@
 	PtcHandyMan::addFiles( array
 	(
 		'HmTestClassFile' => PtcHandyMan::getAppPath( 'lib' ) . '/class-file.php' , // adding a file to the autoloader
-		'ns\HmTestClassFile'=> PtcHandyMan::getAppPath( 'lib' ) . '/ns-class-file.php' , // adding a namespaced file
+		'ns\HmTestClassFile' => PtcHandyMan::getAppPath( 'lib' ) . '/ns-class-file.php' , // adding a namespaced file
 	) );
 	
 	
@@ -61,10 +61,10 @@
 	
 	PtcHandyMan::addSeparator( '-' );			// adding a separator for class names
 	PtcHandyMan::addConvention( '{CLASS}' );	// adding a naming convention ( {CLASS} , {SEP} )
-	$sep_class=new Hm_Test_Sep( ); // laods by replacing the "_" with "-" added separator in  the class name
+	$sep_class=new Hm_Test_Sep( ); // loads by replacing the "_" with "-" added separator in  the class name
 	
 	PtcHandyMan::addConvention( 'class.{CLASS}' );	// adding another naming convention
-	$sep_class1 = new Hm_Test_Sep1( ); // laods by replacing the "_" with "-" added separator in  the class name
+	$sep_class1 = new Hm_Test_Sep1( ); // loads by replacing the "_" with "-" added separator in  the class name
 		
 	
 	/* GETTING THE DIRECTORIES OF THE AUTOLOADER */
