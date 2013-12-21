@@ -18,6 +18,10 @@
 		*/
 		public function getOption( $name = null ){ return $this->getOptions( $name ); }
 		/**
+		* Retrieves current form values if submitted
+		*/
+		public function getValues( ){ return $this->_values; }
+		/**
 		* Sets form method(POST/GET) and retrieves sent values. See @ref dyn_class_options
 		* @param 	array 		$options	see PtcForm::$_defaultOptions for available options
 		*/
@@ -104,10 +108,10 @@
 				if ( $match = preg_match( '/\[.*?\]/' , $k , $matches ) ) // work with []
 				{
 					/* brackets[] are supported only by select and radio/checkboxgroup */
-					if($field_type!='radiogroup' && $field_type!='checkboxgroup' && $field_type!='select')
+					if ( $field_type != 'radiogroup' && $field_type != 'checkboxgroup' && $field_type != 'select' )
 					{
-						trigger_error(__CLASS__.'::'.__FUNCTION__.'() brackets[] not supported for "'.
-												$field_type.'" field',$this->_options['err_msg_level']);
+						trigger_error( __CLASS__ . '::' . __FUNCTION__ . '() brackets[] not supported for "'.
+												$field_type . '" field' , $this->_options[ 'err_msg_level' ] );
 						continue;
 					}
 					/* check if field has values */
@@ -153,9 +157,14 @@
 				$this->_addFieldParams( $field_name , $k , $v );
 			}
 			$this->_fields[ $field_name ] = $this->_addDefaultValues( $this->_fields[ $field_name ] );
-			if ( 'submit' === $field_type ){ $this->_submit[ ] = $field_name; } 
+			if ( 'submit' === $field_type )
+			{ 
+				$this->_submit[ ] = $field_name; 
+				$this->_savedSubmit[ ] = $field_name; 
+			} 
 			$this->_fireEvent( 'added' , array( $field_name , &$this->_fields[ $field_name ] , $this ) );
-		}
+			$this->_saveValue( $field_name , $field_type );
+		}		
 		/**
 		* Adds a spacer div. See @ref add_custom
 		* @param	string	$spacerVal	the height for the spacer in px
@@ -500,11 +509,11 @@
 			'style_tables'		=>	true , // add default style to table elements to align properly
 			'spacer_height'		=>	'3px' , // height for the spacer between fields
 			'keep_values'		=>	true , // repopulate filled fields on form submission
-			'print_form'			=>	true , // print form to screen or return html only
+			'print_form'		=>	true , // print form to screen or return html only
 			'start_tab'			=>	"\t" , // format html code with tabs
 			'err_msg_level'		=>	E_USER_WARNING , // error messages level
-			'debug_category'		=>	'PtcForm' , // default category for the PtcDebug class
-			'event_class'		=>	'\PtcEvent' // event class parameter
+			'debug_category'	=>	'PtcForm' , // default category for the PtcDebug class
+			'event_class'		=>	null // event class parameter
 		);
 		/**
 		* Html templates property for all elements
@@ -600,6 +609,14 @@
 		* Property that holds the submit buttons names
 		*/
 		protected $_submit = array( );
+		/**
+		* Form values property if submitted
+		*/
+		protected $_values = array( );
+		/**
+		* save submit buttons to rebuild form values
+		*/		
+		protected $_savedSubmit = array( );
 		/**
 		* Adds values to fields
 		* @param	string			$fieldName		the name of the field
@@ -926,15 +943,15 @@
 		* @param	array			$type		('events','attributes','validate','label','labelOptions','parentEl','value/s')
 		* @param	array|string		$options	the options to pass
 		*/
-		protected function _addFieldParams($fieldName,$type,$options)
+		protected function _addFieldParams( $fieldName , $type , $options )
 		{
-			$options=is_array($options) ? $options : array($options);
-			$name=explode('=>',$fieldName);
-			$a=sizeof($name);
-			$exclude_types=array('composite','fieldset'); // exclude from validate
-			switch($a)
+			$options = is_array( $options ) ? $options : array( $options );
+			$name = explode( '=>' , $fieldName );
+			$a=sizeof( $name );
+			$exclude_types = array( 'composite' , 'fieldset' ); // exclude from validate
+			switch( $a )
 			{
-				case 1:
+				case 1 :
 					if(!@$this->_fields[$fieldName])
 					{ 
 						trigger_error(__CLASS__.'::'.__FUNCTION__.' could not add '.$type.
@@ -977,8 +994,6 @@
 																					E_USER_WARNING);
 							return;
 						}
-						
-						
 						if ( $this->_fields[$name[0]][ 'type' ] == 'checkboxgroup' || 
 								$this->_fields[$name[0]][ 'type' ] == 'radiogroup' /*&& 
 										!array_key_exists( $name[ 0 ] , $this->_validate*/ )
@@ -986,8 +1001,6 @@
 							$this->_addValidator( $name[ 0 ] , $options );
 						}
 						else{ $this->_addValidator( $name[ 1 ] , $options ); }
-						
-						
 						if ( $this->_fields[$name[0]]['values'][$name[1]]['type']=='radiogroup' || 
 							$this->_fields[$name[0]]['values'][$name[1]]['type']=='checkboxgroup')
 						{
@@ -1274,37 +1287,44 @@
 		*/
 		protected function _rebuildValues( $fieldName )
 		{
+			$rebuild_values = false;
+			$method = $this->_getFormValues( );
+			if ( empty( $method ) ){ return; }
+			foreach ( $method as $k => $v )
+			{
+				if ( in_array( $k , $this->_savedSubmit ) ){ $rebuild_values = true; }
+			}
+			if ( !$rebuild_values ){ return; }
 			if ( !@array_key_exists( 'noAutoValue' , @$this->_fields[ $fieldName ][ 'attributes' ] ) )
 			{
-				$method = $this->_getFormValues( );
-				if ( $this->_options[ 'keep_values' ]  && !empty( $method ) )
+				if ( $this->_options[ 'keep_values' ]  /*&& !empty( $method )*/ )
 				{
 					switch ( $this->_fields[ $fieldName ][ 'type' ] )
 					{
 						case 'checkbox' :
 						case 'radio' :
-							if ( !@$this->_fields[ $fieldName ][ 'attributes' ][ 'value' ] )
+							if ( !@array_key_exists( 'value' , $this->_fields[ $fieldName ][ 'attributes' ] ) )
 							{
 								$this->_fields[ $fieldName ][ 'attributes' ][ 'value' ] = 'on';
 							}
 							unset( $this->_fields[ $fieldName ][ 'attributes' ][ 'checked' ] );
 							foreach ( $this->_hiddenValues  as $k => $v )
 							{
-								if ( @array_key_exists( $k , $method ) && 
+								if ( array_key_exists( $k , $method ) && 
 									$k == str_replace( '[]' , '' , $fieldName ) &&  
-									@$method[ $k ] == $this->_fields[ $fieldName ][ 'attributes' ][ 'value' ] )
+									$method[ $k ] == $this->_fields[ $fieldName ][ 'attributes' ][ 'value' ] )
 								{
 									$this->_addFieldParams( $fieldName , 'attributes' , array( 'checked' => 1 ) );
 								}
 							}
 						break;
-						case 'textarea' :
+						/*case 'textarea' :
 							unset( $this->_fields[ $fieldName ][ 'attributes' ][ 'value' ] );
 							if ( @strlen( $method[ $fieldName ] ) > 0 )
 							{
 								$this->_addFieldValues( $fieldName , @$method[ $fieldName ] ); 
 							}
-						break;
+						break;*/
 						case 'select' :
 							foreach ( @$this->_fields[ $fieldName ][ 'values' ] as $k => $arrV )
 							{
@@ -1324,6 +1344,22 @@
 							}
 					}
 				}
+			}
+		}
+		/**
+		* Saves values if form was sent
+		* @param	string	$fieldName	the name of the field
+		* @param	string	$type		the field type
+		*/
+		protected function _saveValue( $fieldName , $type )
+		{
+			$not_supported_type = array( 'composite' , 'fieldset' , 'custom' );
+			if ( in_array( $type , $not_supported_type ) ){ return; } 
+			$method = $this->_getFormValues( );
+			if ( empty( $method ) ){ return; }
+			if ( @array_key_exists( $fieldName , $method ) )
+			{
+				$this->_values[ $fieldName ] = $method[ $fieldName ];
 			}
 		}
 		/**
@@ -1552,7 +1588,8 @@
 		*/		
 		protected function _getEventClass( )
 		{
-			return __NAMESPACE__ . $this->_options[ 'event_class' ]; 
+			return ( $this->_options[ 'event_class' ] ) ? 
+				$this->_options[ 'event_class' ] : __NAMESPACE__ . '\PtcEvent';
 		}		
 		/**
 		* Send messsages to the PtcDebug class if present
