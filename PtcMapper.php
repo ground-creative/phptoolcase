@@ -19,12 +19,12 @@
 		/**
 		* Resets previously set values
 		*/
-		public function reset( ) { $this->_fields = array( ); }
+		public function reset( ){ $this->_fields = array( ); }
 		/**
 		* Removes values from fields property
 		* @param	string		$key		the table column name
 		*/
-		public function remove( $key ) { unset( $this->_fields[ $key ] ); }
+		public function remove( $key ){ unset( $this->_fields[ $key ] ); }
 		/**
 		* Returns values as an associative array. See @ref convert_to_array
 		*/
