@@ -21,14 +21,11 @@
 		*/
 		public static function add( $options , $name = 'default' )
 		{
-			if( array_key_exists( $name , static::$_connections ) )
+			if( array_key_exists( $name , static::$_connectionsDetails ) )
 			{
-				if( array_key_exists( $name , static::$_connections ) )
-				{
-					trigger_error( 'Connection name "' . $name . 
-						'" already exists, use some other name!' , E_USER_ERROR );
-					return false;
-				}
+				trigger_error( 'Connection name "' . $name . 
+					'" already exists, use some other name!' , E_USER_ERROR );
+				return false;
 			}
 			foreach( $options as $k => $v )
 			{
@@ -109,7 +106,7 @@
 			}
 			else // call the pdo object methods
 			{
-				$pdo =static::$_connections[ $name ][ 'pdo_object' ];
+				$pdo = static::$_connections[ $name ][ 'pdo_object' ];
 				return call_user_func_array( array(  $pdo , $method ) , $args );
 			}
 			trigger_error( 'Call to undefined method "' .$method . '"!' , E_USER_ERROR );
@@ -120,19 +117,19 @@
 		*/
 		protected static $_connectionOptions = array
 		(
-			'name'			=>	'default' , // the connection name
-			'driver'    			=> 	'mysql' , // the driver for the pdo object
+			'name'				=>	'default' , // the connection name
+			'driver'    				=> 	'mysql' , // the driver for the pdo object
 			'user'				=>	'root' , // the database username
 			'pass'				=>	'' , // the username password
 			'host'				=>	'localhost' , // the database host
-			'db'				=>	'database' , // the database name
+			'db'					=>	'database' , // the database name
 			'charset'   			=> 	'utf8' , // the database charset
-			'query_builder'		=>	false , // use the query builder component
+			'query_builder'			=>	false , // use the query builder component
 			'query_builder_class'	=>	'PtcQueryBuilder' , // the name of the query builder class
 			'pdo_attributes'		=>	array // attributes for the pdo object
 			( 
-				PDO::ATTR_ERRMODE 				=> 	PDO::ERRMODE_WARNING ,
-				PDO::ATTR_DEFAULT_FETCH_MODE 	=> 	PDO::FETCH_OBJ
+				\PDO::ATTR_ERRMODE 				=> 	\PDO::ERRMODE_WARNING ,
+				\PDO::ATTR_DEFAULT_FETCH_MODE 	=> 	\PDO::FETCH_OBJ
 			)
 		);
 		/**
@@ -198,7 +195,7 @@
 		}	
 		/**
 		* Builds the pdo driver
-		* @param	string	$driver	the driver type
+		* @param	string	$driver		the driver type
 		* @param	string	$host		the database server host
 		* @return	the Pdo driver
 		*/
@@ -212,7 +209,7 @@
 		}
 		/**
 		* Sends messsages to the PtcDebug class if present
-		* @param 	mixed 		$string		the string to pass
+		* @param 	mixed 		$string			the string to pass
 		* @param 	mixed 		$statement		some statement if required
 		* @param	string		$category		some category
 		*/
