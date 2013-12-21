@@ -16,7 +16,7 @@
 		* Adds the pdo instance to the query builder object. See @ref qb_getting_started
 		* @param	object	$pdo	the pdo object
 		*/
-		public function __construct( PDO $pdo = null )
+		public function __construct( \PDO $pdo = null )
 		{
 			$this->_randomId = $this->_generateRandomId( );
 			if ( $pdo ){ $this->_pdo = $pdo; }
@@ -231,7 +231,7 @@
 			if ( $column )
 			{
 				$this->_columns = $this->addBackTicks( $column );
-				$this->setFetchMode( PDO::FETCH_ASSOC );
+				$this->setFetchMode( \PDO::FETCH_ASSOC );
 			}
 			//$this->_columns = ( $column ) ? $this->addBackTicks( $column ) : $this->_columns;
 			$this->_currentQueryType = 'select';
@@ -635,13 +635,13 @@
 			{
 				switch ( $value ) 
 				{
-					case is_int( $value ): $type = PDO::PARAM_INT;
+					case is_int( $value ): $type = \PDO::PARAM_INT;
 					break;
-					case is_bool( $value ): $type = PDO::PARAM_BOOL;
+					case is_bool( $value ): $type = \PDO::PARAM_BOOL;
 					break;
-					case is_null( $value ): $type = PDO::PARAM_NULL;
+					case is_null( $value ): $type = \PDO::PARAM_NULL;
 					break;
-					default: $type = PDO::PARAM_STR;
+					default: $type = \PDO::PARAM_STR;
 				}
 			}
 			$this->_query->bindValue( $pos , $value , $type );
