@@ -1,10 +1,10 @@
-<?
+<?php
+
 	/**
 	* PHP TOOLCASE DATABASE CONNECTION MANAGER CLASS
 	* PHP version 5.3
-	* @category 	Libraries
-	* @package  	PhpToolCase
-	* @version	0.9.1b
+	* @category 	Library
+	* @version	0.9.3b
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
@@ -13,27 +13,26 @@
 	class PtcDb
 	{
 		/** 
-		* Adds a connection to the connection details array
-		* @param	array	$options		the details of the connection
-		* @param	string	$name		the name of the connection
+		* Adds a connection to the manager, will trigger an error if connection name is already present.
+		* See @ref db_getting_started
+		* @param	array		$options		the details of the connection, see @ref connection_options
+		* @param	string		$name		the name of the connection
+		* @return 	an array with the connection details as values or false if name is already present 
 		*/
 		public static function add( $options , $name = 'default' )
 		{
-			if( array_key_exists( $name , static::$_connections ) )
+			if( array_key_exists( $name , static::$_connectionsDetails ) )
 			{
-				if( array_key_exists( $name , static::$_connections ) )
-				{
-					trigger_error( 'Connection name "' . $name . 
-						'" already exists, use some other name!' , E_USER_ERROR );
-					return false;
-				}
+				trigger_error( 'Connection name "' . $name . 
+					'" already exists, use some other name!' , E_USER_ERROR );
+				return false;
 			}
 			foreach( $options as $k => $v )
 			{
 				if( !array_key_exists( $k , static::$_connectionOptions ) )
 				{
-					trigger_error( 'Unknown option "' . $k . '" passed as argument to PtcDb!',
-																E_USER_WARNING );
+					trigger_error( 'Unknown option "' . $k . 
+						'" passed as argument to PtcDb!',E_USER_WARNING );
 				}
 			}
 			$options['name' ] = $name;
@@ -49,9 +48,9 @@
 			return static::$_connectionsDetails[ $name ] = $options;
 		}
 		/**
-		* Retrieves connection details previously configured
+		* Retrieves connection details previously configured. See @ref connectionDetails
 		* @param	string	$name	the name of the connection to retrieve
-		* @return 	returns the connection if $name is set, otherwise all connections
+		* @return 	an array with the connection as values if $name is set, otherwise all connections set
 		*/
 		public static function getConnection( $name  = null )
 		{
@@ -60,8 +59,9 @@
 			return static::$_connectionsDetails[ $name ];
 		}
 		/**
-		* Retrieves the Pdo object
+		* Retrieves the Pdo object. See @ref usingPdo 
 		* @param	string 	$name 	the name of the connection
+		* @return	the Pdo object
 		*/
 		public static function getPdo( $name )
 		{
@@ -70,8 +70,9 @@
 			return static::$_connections[ $name ][ 'pdo_object' ];
 		}
 		/**
-		* Retreive the query builder object if present
+		* Creates a new query builder object if class is present. See @ref usingQueryBuilder
 		* @param	string	$name	the name of the connection
+		* @return	the new query builder object
 		*/
 		public static function getQB( $name )
 		{
@@ -79,16 +80,14 @@
 			static::_initializeConnection( $name );
 			if( !static::$_connectionsDetails[ $name ][ 'query_builder' ] )
 			{
-				trigger_error( 'QueryBuilder was not set for connection "' . $name . 
-														'"!', E_USER_ERROR );
+				trigger_error( 'QueryBuilder was not set for connection "' . $name . '"!', E_USER_ERROR );
 				return false;
 			}
-			return $connection = static::$_connections[ $name ][ 'query_builder' ];
-			//return function ( ) use ( $connection ){ return $connection }; // lambda time!
-		
+			$class = static::_namespace( static::$_connectionsDetails[ $name ][ 'query_builder_class' ] );
+			return new $class( static::$_connections[ $name ][ 'pdo_object' ] );
 		}
 		/**
-		* Calls methods from the default connection
+		* Calls Pdo or query builder methods from the default connection directly
 		* @param	string	$method		the name of the method to call
 		* @param	array	$args		arguments for the method
 		*/
@@ -96,41 +95,41 @@
 		{
 			$name = 'default'; // use the default connection
 			if ( !static::_initializeConnection( $name ) ){ return false; }
-			if ( $qb =@static::$_connections[ $name ][ 'query_builder' ] ) // call query builder
+			if ( $qb = static::getQB( $name ) ) // call query builder
 			{
-				if( in_array( $method , get_class_methods( $qb ) ) )
+				if ( in_array( $method , get_class_methods( $qb ) ) )
 				{
 					return call_user_func_array( array( $qb , $method ) , $args );
 				}
+				trigger_error( 'Call to undefined method "' . $method . '"!' , E_USER_ERROR );
+				return false;
 			}
 			else // call the pdo object methods
 			{
-				$pdo =static::$_connections[ $name ][ 'pdo_object' ];
-				return call_user_func_array( array(  $pdo , $method ) , $args );
+				$pdo = static::$_connections[ $name ][ 'pdo_object' ];
+				return call_user_func_array( array( $pdo , $method ) , $args );
 			}
-			trigger_error( 'Call to undefined method "' .$method . '"!' , E_USER_ERROR );
+			trigger_error( 'Call to undefined method "' . $method . '"!' , E_USER_ERROR );
 			return false;
 		}
 		/** 
-		* Connections options property
+		* Default connection options property, see @ref connection_options
 		*/
 		protected static $_connectionOptions = array
 		(
-			'name'				=>	'default' ,
-			'driver'    				=> 	'mysql' ,
-			'user'				=>	'root' ,
-			'pass'				=>	'' ,
-			'host'				=>	'localhost' ,
-			'db'					=>	'database' ,
-			'charset'   			=> 	'utf8' ,
-			'query_builder'			=>	false ,
-			'query_builder_class'	=>	'PtcQueryBuilder' ,
-			//'collation' 			=> 	'utf8_unicode_ci' ,
-			//'prefix'    				=> 	'' , 
-			'pdo_attributes'		=>	array
+			'name'				=>	'default' , // the connection name
+			'driver'    				=> 	'mysql' , // the driver for the pdo object
+			'user'				=>	'root' , // the database username
+			'pass'				=>	'' , // the username password
+			'host'				=>	'localhost' , // the database host
+			'db'					=>	'database' , // the database name
+			'charset'   			=> 	'utf8' , // the database charset
+			'query_builder'			=>	false , // use the query builder component
+			'query_builder_class'	=>	'PtcQueryBuilder' , // the name of the query builder class
+			'pdo_attributes'		=>	array // attributes for the pdo object
 			( 
-				PDO::ATTR_ERRMODE 			=> 	PDO::ERRMODE_WARNING ,
-				PDO::ATTR_DEFAULT_FETCH_MODE 	=> 	PDO::FETCH_OBJ
+				\PDO::ATTR_ERRMODE 			=> 	\PDO::ERRMODE_WARNING ,
+				\PDO::ATTR_DEFAULT_FETCH_MODE 	=> 	\PDO::FETCH_OBJ
 			)
 		);
 		/**
@@ -143,7 +142,7 @@
 		protected static $_connectionsDetails = array( );
 		/**
 		* Initializes the pdo and query builder obejcts
-		* @param	string	$name	the name of the connection
+		* @param	string		$name		the name of the connection
 		*/
 		protected static function _initializeConnection( $name )
 		{
@@ -151,9 +150,9 @@
 			{
 				$options = static::$_connectionsDetails[ $name ];
 				static::$_connections[ $name ][ 'pdo_object' ] = new \PDO( 
-							static::_pdoDriver( $options[ 'driver' ] , $options[ 'host' ] ) . 
-								';dbname=' . $options[ 'db' ] . ';charset:' . $options[ 'charset' ] .';' , 
-														$options[ 'user' ] , $options [ 'pass' ] );
+					static::_pdoDriver( $options[ 'driver' ] , $options[ 'host' ] ) . ';dbname=' . $options[ 'db' ] . 
+					';charset:' . $options[ 'charset' ] .';' , $options[ 'user' ] , $options [ 'pass' ] , 
+						array( \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES ' . $options[ 'charset' ] ) );
 				if ( !static::$_connections[ $name ][ 'pdo_object' ]){ return false; } // pdo failed
 				foreach ( $options[ 'pdo_attributes' ] as $k => $v )
 				{
@@ -161,17 +160,12 @@
 				}
 				if ( $options[ 'query_builder' ] )
 				{
-					$qb =false;
-					if ( class_exists( $options[ 'query_builder_class' ] ) || 
-					file_exists( dirname(__FILE__) . $options[ 'query_builder_class' ] . '.php' ) ){ $qb = true; }
-					if ( !$qb )
+					$class = static::_namespace( $options[ 'query_builder_class' ] );
+					if ( !class_exists( $class ) && !file_exists( dirname( __FILE__ ) . '/' . $class . '.php' ) )
 					{
-						trigger_error( 'Class "' . $options[ 'query_builder_class' ] . 
-								'" not found , please include the class file manually!' , E_USER_ERROR );
+						trigger_error( 'Class "' . $class  . '" not found!' , E_USER_ERROR );
 						return false;
 					}
-					static::$_connections[ $name ][ 'query_builder' ] = 
-						new $options[ 'query_builder_class' ]( static::$_connections[ $name ][ 'pdo_object' ] );
 				}
 				static::_debug( array( 'details' => static::$_connectionsDetails[ $name ] , 
 						'connection' => static::$_connections[ $name ] ) , 'connection <b>"' . 
@@ -182,21 +176,22 @@
 		/**
 		* Checks if a given connection exists
 		* @param	string	$name	the name of the connection to check
+		* @return	true if connection exists, false otherwise
 		*/
 		protected static function _checkConnectionName( $name )
 		{
 			if ( !array_key_exists( $name , static::$_connectionsDetails ) )
 			{
-				trigger_error( 'Could not find connection details with name "' . $name . '"!' , 
-																E_USER_ERROR );
+				trigger_error( 'Could not find connection with name "' . $name . '"!' , E_USER_ERROR );
 				return false;
 			}
 			return true;
 		}	
 		/**
 		* Builds the pdo driver
-		* @param	string	$driver	the driver type
-		* @param	string	$host	the database server host
+		* @param	string	$driver		the driver type
+		* @param	string	$host		the database server host
+		* @return	the Pdo driver
 		*/
 		protected static function _pdoDriver( $driver , $host )
 		{
@@ -207,15 +202,22 @@
 			}
 		}
 		/**
-		* Send messsages to the PtcDebug class if present and it\'s namespace
-		* @param 	mixed 	$string		the string to pass
-		* @param 	mixed 	$statement	some statement if required
-		* @param	string	$category	a category for the messages panel
+		* Adds namespace to the library components
+		*/	
+		protected static function _namespace( $className , $string = 'PtcQueryBuilder' )
+		{
+			return ( $string === $className ) ? __NAMESPACE__ . '\\' . $className : $className;
+		}
+		/**
+		* Sends messsages to the PtcDebug class if present
+		* @param 	mixed 		$string			the string to pass
+		* @param 	mixed 		$statement		some statement if required
+		* @param	string		$category		some category
 		*/
 		protected static function _debug( $string , $statement = null , $category = null )
 		{
-			if ( !defined( '_PTCDEBUG_NAMESPACE_' ) ) { return false; }
+			if ( !defined( '_PTCDEBUG_NAMESPACE_' ) ){ return false; }
 			return @call_user_func_array( array( '\\' . _PTCDEBUG_NAMESPACE_ , 'bufferSql' ) ,  
-											array( $string , $statement , $category )  );
+												array( $string , $statement , $category )  );
 		}
 	}
