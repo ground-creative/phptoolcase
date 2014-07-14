@@ -2,8 +2,8 @@
 EXAMPLES FOLDER FOR FORMS GENERATOR & VALIDATOR COMPONENT
 
 
-- ptcforms-ex1.php			dynamic forms login form example file
-- ptcforms-ex2.php			dynamic forms contact form example file
-- ptcforms-ex3.php			dynamic forms registration form example file
-- ptcforms-ex4.php			dynamic forms contact form example file with event handlers
-- ptcforms-ui-plugins.php		dynamic forms ui-plugins includes for all form examples
+- ptcforms-ex1.php			login form example file
+- ptcforms-ex2.php			contact form example file
+- ptcforms-ex3.php			registration form example file
+- ptcforms-ex4.php			contact form example file with event handlers
+- ptcforms-ui-plugins.php		ui-plugins includes for all form examples
