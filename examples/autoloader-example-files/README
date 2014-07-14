@@ -2,9 +2,9 @@
 EXAMPLE FOLDER WITH CLASSES FOR THE HANDYMAN AUTOLOADER EXAMPLES:
  
 
-- HmTestClass.php		example class file for the autoloader added as directory
-- hmtestclassln.php		lowercase class file example for the autoloader added as directory
-- class-file.php			example class file added to the autoloder
+- HmTestClass.php		example class for the autoloader added as directory
+- hmtestclassln.php		lowercase class example added as directory
+- class-file.php			example class added to the autoloder
 - ns-class-file.php		namespaced example class file added to the autoloder
 - namespaceTest		example folder with namespaced classes added to the autoloade
 - test-separators		example folder with classes with different naming conventions
