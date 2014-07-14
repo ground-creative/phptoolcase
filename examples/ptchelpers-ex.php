@@ -3,7 +3,7 @@
 	/* 
 	* EXAMPLE FILE FOR HELPER FUNCTIONS FOR THE LIBRARY COMPONENTS
 	* ALL EXAMPLES HAVE BEEN TAKEN FROM THE COMPONENTS EXAMPLE FILES
-	* PTCHM.PHP, PTCDEBUG.PHP AND THE AUTOLOADER EXAMPLE FILES FOLDER 
+	* PTCHM.PHP, PTCDEBUG.PHP, PTCEVENT.PHP AND THE AUTOLOADER EXAMPLE FILES FOLDER 
 	* ARE REQUIRED FOR THESE EXAMPLES
 	*/
 	
@@ -25,6 +25,7 @@
 		'url_key'				=>	'debug',
 		'url_pass'				=>	'true',
 		'die_on_error'			=>	false,	// continue if fatal error
+		'debug_console'		=>	true , // send messages to console, chrome only with php-console extension
 		'exclude_categories'	=>	null		// don't exclude categories from the output
 	);
 	PtcDebug::load( $options );		// initialize the class
@@ -100,9 +101,68 @@
 		/* GETTING THE DIRECTORIES OF THE AUTOLOADER ( PtcHandyMan::getDirs( ) )*/
 		$dirs = ptc_dir( );			// PtcHandyMan::getDirs( ) params: ( files , directories , ns )
 		ptc_log( $dirs , 'getting all directories and files to be autoloaded' ); //PtcDebug::bufferLog( );
-	
+		
+		
+		/* RETRIEVE VALUES FROM A MULTIDIMENSIONAL ARRAY */
+		$array = array
+		( 
+			'depth1'	=>	array( 'first value' , 'second value' , 'third value' )
+		);
+		print 'Getting a value inside a multidimensional array: ';
+		print ptc_array_get( $array , 'depth1.0' );	// PtcHandyMan::arrayGet( )
+		
+		
+		/* SETTING VALUES IN A MULTIDIMENSIONAL ARRAY */
+		print '<br><br>Setting a value inside a multidimensional array: ';
+		ptc_array_set( $array , 'depth1.3' , 'some new value' );	// PtcHandyMan::arraySet( )
+		ptc_array_set( $array , 'depth1.4' , array( 'some new value' , 'some other value' ) ); // setting an array as value
+		print ptc_array_get( $array , 'depth1.4.0' );	// PtcHandyMan::arrayGet( )
+		ptc_array_set( $array , 'depth1.3' , 'forced new value' , true ); // force to change a value that is already set	
+		
 
-	/*** PTC EVENT HELPERPS ****************************************************/
+		/* COUNT VALUES OF ELEMENT INSIDE MULTIDIMENSIONAL ARRAY */
+		print '<br><br>Counting values of an element inside a multidimensional array: ';
+		print ptc_array_count( $array , 'depth1.4' );	// PtcHandyMan::arrayCount( )
+		
+		
+		/* REMOVE ELEMENTS FROM MULTIDIMENSIONAL ARRAY */
+		ptc_array_del( $array , 'depth1.2' );	// PtcHandyMan::arrayDel( )
+		
+		
+		/* WORKING WITH SESSIONS */
+		print '<br><br><br><b>WORKING WITH SESSION VARIABLES:</b><br><br>';
+		
+		
+		/* STARTING A SESSION WITH THE SESSION MANAGER */
+		ptc_session( 'start' );						// PtcHandyMan::session( )
+		
+		
+		/* SET AND RETRIEVE SESSION VALUES */
+		ptc_session_set( 'val' , 'some value' );			// PtcHandyMan::sessionSet( )
+		ptc_session_set( 'key' , array( 'some stuff' ) );		// PtcHandyMan::sessionSet( )
+		ptc_session_set( 'key.1' , 'some other value' );	// PtcHandyMan::sessionSet( )
+		print 'retrieve session values: ';
+		print ptc_session_get( 'key.1' );		// PtcHandyMan::sessionGet( )
+		ptc_session_set( 'key.1' , 'some new value' , true ); // force to change a value that is already set	
+		
+		
+		/* DELETING SESSION VALUES */
+		ptc_session_del( 'key.0' ); // PtcHandyMan::sessionDel( )
+		
+		
+		/* DESTROYING AND  CLOSING A SESSION WITH THE SESSION MANAGER */
+		ptc_session( 'destroy' );						// PtcHandyMan::session( )
+		ptc_session( 'close' );						// PtcHandyMan::session( )
+		
+		
+		/* CONVERT  ARRAY TO JSON AND SEND HEADER RESPONSE */
+		print '<br><br><br><b>CONVERTING ARRAYS TO JSON:</b><br><br>';
+		print ptc_json( $array , null , false ); 			// PtcHandyMan::json( )
+		print '<br><br><br><b>CONVERTING ARRAYS TO JSONP:</b><br><br>';
+		print ptc_json( $array , 'jsonp_function' , false );  	// PtcHandyMan::json( )
+
+
+	/*** PTC EVENT HELPERS ****************************************************/
 
 		/* ADDING EVENT LISTENERS ( PtcEvent::listen( ) ) */
 		ptc_listen( 'some.event' , function( $data ) 
