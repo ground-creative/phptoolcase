@@ -1,0 +1,7 @@
+
+EXAMPLES FOLDER FOR VIEW COMPONENT
+ 
+
+- index.php				main example file
+- nested.view.php			nested view example file
+- test.view.php				main test view example file
