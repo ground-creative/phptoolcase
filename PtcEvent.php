@@ -18,10 +18,9 @@
 		*/
 		public static function register( )
 		{
-			$namespace = @strtoupper( @str_replace( '\\' , '_' , __NAMESPACE__ ) ) . '_';
-			if ( !defined( '_PTCEVENT_' . $namespace ) ) // declare the class namespace
+			if ( !defined( '_PTCEVENT_' ) ) // declare the class namespace
 			{
-				@define( '_PTCEVENT_' . $namespace , get_called_class( ) ); 
+				@define( '_PTCEVENT_' , get_called_class( ) ); 
 			}
 		}
 		/**
@@ -122,7 +121,7 @@
 		* @param	string	$event	the event name to fire
 		* @param	array	$data	an array with the data you wish to pass to the listeners
 		*/
-		public static function fire( $event , $data )
+		public static function fire( $event , $data = array( ) )
 		{
 			static::register( );
 			$main = $event;
@@ -144,7 +143,7 @@
 				{
 					$data = ( is_array( $data ) ) ? $data : array( $data );
 					static::_debug( array( 'callback' => $wildcard , 'data' => array( $data , $main ) ) , 
-					'firing wildcard <b>' . $event[ 0 ] . '.' . $event[ 1 ] . '[ ' . $a . ' ]</b>' , 'Event Manager' );
+						'firing wildcard <b>' . $event[ 0 ] . '.' . $event[ 1 ] . '[ ' . $a . ' ]</b>' , 'Event Manager' );
 					$a++;
 					if ( false === static::_run( $wildcard , array( $data , $main ) ) ){ return; }
 				}
