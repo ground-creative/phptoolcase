@@ -1,6 +1,6 @@
 
 EXAMPLES FOLDER FOR ROUTER COMPONENT
-
+ 
 
 - .htaccess				required file to make the routes work
 - filters.php				filters example file for route filters
