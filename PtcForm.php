@@ -1,11 +1,10 @@
 <?php
 
 	/**
-	* PHP TOOLCASE HTML FORMS GENERATOR/VALIDATOR CLASS 
+	* HTML FORMS GENERATOR/VALIDATOR CLASS 
 	* PHP version 5.3
-	* @category 	Libraries
-	* @package  	PhpToolCase
-	* @version	0.9.1b
+	* @category Library
+	* @version	0.9.3b
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
@@ -14,14 +13,17 @@
 	class PtcForm
 	{
 		/**
-		* Alias of getOptions( )
+		* Alias of PtcForm::getOptions( )
 		* @param	string	$name	the name of the option
 		*/
 		public function getOption( $name = null ){ return $this->getOptions( $name ); }
 		/**
-		* Sets form method(POST/GET) and retrieves sent values
-		* @param 	array 	$options		see {@link _defaultOptions} for available options
-		* @tutorial	PtcForms.cls#class_options
+		* Retrieves current form values if submitted
+		*/
+		public function getValues( ){ return $this->_values; }
+		/**
+		* Sets form method(POST/GET) and retrieves sent values. See @ref dyn_class_options
+		* @param 	array 		$options	see PtcForm::$_defaultOptions for available options
 		*/
 		public function  __construct( $options = array( ) )
 		{	
@@ -70,10 +72,8 @@
 			}
 		}
 		/**
-		* Adds a field to the form object
-		* @param	array		$params		parameters for the field
-		* @see		PtcForms::$_fields
-		* @tutorial	PtcForms.cls#addField
+		* Adds elemtns to the form object. See @ref adding_fields
+		* @param	array		$params	parameters for the field, see @ref fieldParams
 		*/
 		public function addElement( $params )
 		{
@@ -108,10 +108,10 @@
 				if ( $match = preg_match( '/\[.*?\]/' , $k , $matches ) ) // work with []
 				{
 					/* brackets[] are supported only by select and radio/checkboxgroup */
-					if($field_type!='radiogroup' && $field_type!='checkboxgroup' && $field_type!='select')
+					if ( $field_type != 'radiogroup' && $field_type != 'checkboxgroup' && $field_type != 'select' )
 					{
-						trigger_error(__CLASS__.'::'.__FUNCTION__.'() brackets[] not supported for "'.
-												$field_type.'" field',$this->_options['err_msg_level']);
+						trigger_error( __CLASS__ . '::' . __FUNCTION__ . '() brackets[] not supported for "'.
+												$field_type . '" field' , $this->_options[ 'err_msg_level' ] );
 						continue;
 					}
 					/* check if field has values */
@@ -157,14 +157,18 @@
 				$this->_addFieldParams( $field_name , $k , $v );
 			}
 			$this->_fields[ $field_name ] = $this->_addDefaultValues( $this->_fields[ $field_name ] );
-			if ( 'submit' === $field_type ){ $this->_submit[ ] = $field_name; } 
+			if ( 'submit' === $field_type )
+			{ 
+				$this->_submit[ ] = $field_name; 
+				$this->_savedSubmit[ ] = $field_name; 
+			} 
 			$this->_fireEvent( 'added' , array( $field_name , &$this->_fields[ $field_name ] , $this ) );
-		}
+			$this->_saveValue( $field_name , $field_type );
+		}		
 		/**
-		* Adds a spacer div
+		* Adds a spacer div. See @ref add_custom
 		* @param	string	$spacerVal	the height for the spacer in px
-		* @tutorial	PtcForms.cls#addField.add_spacer
-		* @return	returns the html
+		* @return	the output html
 		*/
 		public function addSpacer( $spacerVal = null )
 		{
@@ -173,11 +177,10 @@
 			return $this->_options[ 'start_tab' ] . $spacer_el = str_replace( '{spacerVal}' , $spacer_height , $spacer_el );
 		}
 		/**
-		* Renders the form
-		* @param	array	$attributes	form attributes
-		* @param	array	$events		form events
-		* @tutorial	PtcForms.cls#render
-		* @return	the html will be returned if the option "print_form" is set to false, see {@link _defaultOptions}
+		* Renders the form. See @ref render_form
+		* @param	array		$attributes		form attributes
+		* @param	array		$events		form events
+		* @return	the html will be returned if the option "print_form" is set to false, see PtcForm::$_defaultOptions
 		*/
 		public function render( $attributes = array( ) , $events = array( ) )
 		{
@@ -233,9 +236,8 @@
 			$this->_fireEvent( 'rendered' , array( &$container , $this ) );
 		}
 		/**
-		* Validate form fields defined with the "validate" parameter
-		* @tutorial	PtcForms.cls#addFieldValidator.validate_form
-		* @return	returns the validator fields, isValid(bool) and errors(array) as array keys
+		* Validates form fields defined with the "validate" parameter. See @ref validate_form
+		* @return	the validation results, isValid(bool) and errors(array) as array keys
 		*/
 		public function validate( )
 		{
@@ -323,23 +325,21 @@
 			trigger_error( $signature . ' no fields to validate found, quitting now!' , $this->_options[ 'err_msg_level' ] );
 			return false;
 		}
-		
-		protected $_errMsg = null;
 		/**
-		* Check if value is empty
-		* @param	string	$fieldName	the name of the input field
-		* @param	array	$array		array of values to check
-		* @return	returns true if value is not empty, otherwise false
+		* Checks if value is empty
+		* @param	string		$fieldName	the name of the input field
+		* @param	array		$array	array of values to check
+		* @return	true if value is not empty, otherwise false
 		*/
 		public function validateRequired( $fieldName , $array )
 		{ 
 			return ( @strlen( $array[ $fieldName ] ) > 0 ) ? true : false; 
 		}
 		/**
-		* Check if value is valid email
-		* @param	string	$fieldName	the name of the input field
-		* @param	array	$array		array of values to check
-		* @return	returns true if value is a correct email, otherwise false
+		* Checks if value is valid email
+		* @param	string		$fieldName	the name of the input field
+		* @param	array		$array	array of values to check
+		* @return	true if value is a correct email, otherwise false
 		*/
 		public function validateEmail( $fieldName , $array )
 		{
@@ -352,10 +352,10 @@
 			else{ return true; }
 		}
 		/**
-		* Check if value is numeric
-		* @param	string	$fieldName	the name of the input field
-		* @param	array	$array		array of values to check
-		* @return	returns true if value is numeric, otherwise false
+		* Checks if value is numeric
+		* @param	string		$fieldName	the name of the input field
+		* @param	array		$array	array of values to check
+		* @return	true if value is numeric, otherwise false
 		*/
 		public function validateNumber( $fieldName , $array )
 		{ 
@@ -366,11 +366,11 @@
 			else{ return true; }
 		}
 		/**
-		* Check if value matches other field value
-		* @param	string	$fieldName	the name of the input field
-		* @param	string	$matchField	the name of the input field to match
-		* @param	array	$array		array of values to check
-		* @return	returns true if value is equal to other given value, otherwise false
+		* Checks if value matches other field value
+		* @param	string		$fieldName		the name of the input field
+		* @param	string		$matchField		the name of the input field to match
+		* @param	array		$array		array of values to check
+		* @return	true if value is equal to other given value, otherwise false
 		*/
 		public function validateEqualTo( $fieldName , $matchField , $array )
 		{ 
@@ -381,11 +381,11 @@
 			else{ return true; }
 		}
 		/**
-		* Check if given regex pattern is matched
-		* @param	string	$fieldName	the name of the input field
-		* @param	string	$pattern		the pattern to match(regex)
-		* @param	array	$array		array of values to check
-		* @return	returns true if value matches the given pattern, otherwise false
+		* Checks if given regex pattern is matched
+		* @param	string		$fieldName	the name of the input field
+		* @param	string		$pattern	the pattern to match(regex)
+		* @param	array		$array	array of values to check
+		* @return	true if value matches the given pattern, otherwise false
 		*/
 		public function validatePattern( $fieldName , $pattern , $array )
 		{ 
@@ -396,28 +396,24 @@
 			else{ return true; }
 		}
 		/**
-		* Alias of {@link customTpls()}
+		* Alias of PtcForm::customTpls( )
 		*/
 		public function customTpl($templates){ $this->customTpls($templates); }
 		/**
-		* Manipulates html templates for all elements
-		* @param	array	$templates	array of html templates
-		* @see		PtcForms::$_htmlTpls
-		* @tutorial	PtcForms.cls#customTpls
+		* Manipulates html templates for all elements. See @ref manipulate_templates
+		* @param	array		$templates	array of html templates
 		*/
 		public function customTpls( $templates )
 		{
 			$this->_htmlTpls=array_merge( $this->_htmlTpls , $templates );
 		}
 		/**
-		* Alias of {@link addElAttributes()}
+		* Alias of PtcForm::addElAttributes( )
 		*/
 		public function addElAttribute( $attributes ) { $this->addElAttributes( $attributes ); }
 		/**
-		* Adds attributes to array of attributes for html elements 
-		* @param	array|string	$attributes	array or string to add as attribute/s
-		* @see		$_elAttributes
-		* @tutorial	PtcForms.cls#addFieldAttributes.add_el_attributes
+		* Adds attributes to array of attributes for html elements. See @ref adding_html_attributes 
+		* @param	array|string		$attributes	array or string to add as attribute/s
 		*/
 		public function addElAttributes( $attributes )
 		{
@@ -425,12 +421,10 @@
 			$this->_elAttributes = array_merge( $this->_elAttributes , $attributes );
 		}
 		/**
-		* Changes label containers default styles
-		* @param	array	$labelStyle	ex: "array('float'=>'left','margin'=>'2px 3px 0 0');"
+		* Changes label containers default styles. See @ref change_style_labels
+		* @param	array		$labelStyle	ex: "array('float'=>'left','margin'=>'2px 3px 0 0');"
 		* @param	int		$num		options(1,2,3)
-		* @param	string	$type		"left","right","top"
-		* @see		$_labelStyles
-		* @tutorial	PtcForms.cls#changeDefaultStyles.setLabelStyle		
+		* @param	string		$type		"left","right","top"
 		*/
 		public function setLabelStyle( $labelStyle , $num , $type = null )
 		{ 
@@ -443,11 +437,9 @@
 			}
 		}
 		/**
-		* Changes default input fields style
-		* @param	array	$style		ex: "array('border'=>'2px inset','padding'=>'5px');"
-		* @param	string	$type		"input", "radio" or "button"
-		* @see		$_inputStyles	
-		* @tutorial	PtcForms.cls#changeDefaultStyles.setInputStyle
+		* Changes default input fields style. See @ref change_style_fields
+		* @param	array		$style		ex: "array('border'=>'2px inset','padding'=>'5px');"
+		* @param	string		$type		"input", "radio" or "button"
 		*/
 		public function setInputStyle( $style , $type )
 		{ 
@@ -458,8 +450,8 @@
 			}
 		}
 		/**
-		* Adds observers to manage form events with the PtcEvent component
-		* @param	string	$class	the name of the observer class
+		* Adds observers to manage form events with the PtcEvent component. See @ref using_observer
+		* @param	string		$class		the name of the observer class
 		*/
 		public function observe( $class = null )
 		{
@@ -482,7 +474,7 @@
 		}
 		/**
 		* Returns options defined for the form
-		* @param	string	$name	the option name
+		* @param	string		$name		the option name
 		*/
 		public function getOptions( $name = null )
 		{
@@ -490,43 +482,41 @@
 		}
 		/**
 		* Adds html before the form container, doesn't have to be an error msg
-		* @param	string	$msg	some text
+		* @param	string		$msg		some text
 		*/
-		public function setErrorMsg( $msg ){ return $this->_errMsg = $msg; }
+		public function setErrorMsg( $msg ){ $this->_errMsg = $msg; }
 		/**
-		* Class options property, to be merged with {@link $_defaultOptions} property
-		* @var	array
-		* @see		$_defaultOptions
+		* Property for the message to show on top of the form
+		*/
+		protected $_errMsg = null;
+		/**
+		* Class options property, to be merged with PtcForm::$_defaultOptions property
 		*/
 		protected $_options = array( );
 		/**
 		* Default options for the class
-		* @var	array
-		* @tutorial	PtcForms.cls#class_options	
 		*/
 		protected $_defaultOptions = array
 		(
-			'form_method'			=>	'post' ,	// the form method to use
-			'form_action'			=>	'#' ,		// the form action url
-			'form_width'			=>	'500px' ,	// the width for the main container
-			'add_class_validator'	=>	false ,	// add validator classes to fields for use with jquery
-			'labels_align'			=>	'left' ,	// align labels globally(left,top,right,none)
-			'labels_width'			=>	'40%' ,	// the width for labels as a percentage
-			'style_elements'		=>	true ,	// add default style to input elements to align properly
-			'style_labels'			=>	true ,	// add default style to label elements to align properly
-			'style_tables'			=>	true ,	// add default style to table elements to align properly
-			'spacer_height'		=>	'3px' ,	// height for the spacer between fields
-			'keep_values'			=>	true ,	// repopulate filled fields on form submission
-			'print_form'			=>	true ,	// print form to screen or return html only
-			'start_tab'			=>	"\t" ,		// format html code with tabs
-			'err_msg_level'			=>	E_USER_WARNING ,	// error messages level
-			'debug_category'		=>	'PtcForm' ,	// default category for the PtcDebug class
-			'event_class'			=>	'\PtcEvent' 	// event class parameter
+			'form_method'		=>	'post' , // the form method to use
+			'form_action'		=>	'#' , // the form action url
+			'form_width'		=>	'500px' , // the width for the main container
+			'add_class_validator'	=>	false , // add validator classes to fields for use with jquery
+			'labels_align'		=>	'left' , // align labels globally(left,top,right,none)
+			'labels_width'		=>	'40%' , // the width for labels as a percentage
+			'style_elements'		=>	true , // add default style to input elements to align properly
+			'style_labels'		=>	true , // add default style to label elements to align properly
+			'style_tables'		=>	true , // add default style to table elements to align properly
+			'spacer_height'		=>	'3px' , // height for the spacer between fields
+			'keep_values'		=>	true , // repopulate filled fields on form submission
+			'print_form'		=>	true , // print form to screen or return html only
+			'start_tab'			=>	"\t" , // format html code with tabs
+			'err_msg_level'		=>	E_USER_WARNING , // error messages level
+			'debug_category'	=>	'PtcForm' , // default category for the PtcDebug class
+			'event_class'		=>	null // event class parameter
 		);
 		/**
 		* Html templates property for all elements
-		* @var	array
-		* @tutorial	PtcForms.cls#customTpls
 		*/
 		protected $_htmlTpls = array
 		(
@@ -547,8 +537,6 @@
 		);
 		/**
 		*  Default label styles property
-		*  @var	array
-		* @tutorial	PtcForms.cls#changeDefaultStyles.setLabelStyle
 		*/
 		protected $_labelStyles = array
 		(
@@ -569,8 +557,6 @@
 		);
 		/**
 		*  Default input styles options property
-		*  @var	array
-		* @tutorial	PtcForms.cls#changeDefaultStyles.setInputStyle
 		*/
 		protected $_inputStyles=array
 		(
@@ -580,8 +566,6 @@
 		);
 		/**
 		* Html attributes for all elements
-		* @var	array
-		* @tutorial	PtcForms.cls#addFieldAttributes
 		*/
 		protected $_elAttributes = array
 		( 
@@ -591,28 +575,22 @@
 		);
 		/**
 		* Possible options in fields storage
-		* @var	array
 		*/
 		protected $_storageKeys = array( 'events' , 'attributes' , 'validate' , 'label' , 'labelOptions' , 'parentEl' );
 		/**
 		* Fields storage property
-		* @var	array
 		*/
 		protected $_fields = array( );
 		/**
 		* Auto generated hidden fields storage
-		* @var	array
 		*/
 		protected $_hiddenValues = array( );
 		/**
 		* Build hidden values property
-		* @var	bool
 		*/
 		protected $_buildHidden = true;
 		/**
 		* Array of fields to validate with the validator engine
-		* @var	array
-		* @tutorial	PtcForms.cls#addFieldValidator
 		*/
 		protected $_validate = array( );
 		/**
@@ -632,9 +610,17 @@
 		*/
 		protected $_submit = array( );
 		/**
+		* Form values property if submitted
+		*/
+		protected $_values = array( );
+		/**
+		* save submit buttons to rebuild form values
+		*/		
+		protected $_savedSubmit = array( );
+		/**
 		* Adds values to fields
-		* @param	string		$fieldName	the name of the field
-		* @param	array|string	$options		value/s to add
+		* @param	string			$fieldName		the name of the field
+		* @param	array|string		$options		value/s to add
 		*/
 		protected function _addFieldValues( $fieldName , $options )
 		{
@@ -672,14 +658,14 @@
 		}
 		/**
 		* Removes a field from the object
-		* @param	string	$fieldName	the name of the field to be removed
+		* @param	string		$fieldName	the name of the field to be removed
 		*/
 		protected function _removeField( $fieldName ){ unset( $this->_fields[ $fieldName ] ); }
 		/**
 		* Builds the container for the field
-		* @param	string	$fieldName	the name of the field
-		* @param	string	$fieldHtml	the html field element
-		* @param	string	$labelHtml	the html label element
+		* @param	string		$fieldName		the name of the field
+		* @param	string		$fieldHtml		the html field element
+		* @param	string		$labelHtml		the html label element
 		* @param	bool		$switch		reverse html label position(for radio/checkbox)
 		*/
 		protected function _buildContainer( $fieldName , $fieldHtml , $labelHtml = '' , $switch = false )
@@ -698,8 +684,8 @@
 		}
 		/**
 		* Add composite for multiple layouts with html table
-		* @param	string	$fieldName	the name of the input field
-		* @param	array	$values		array of fields
+		* @param	string		$fieldName	the name of the input field
+		* @param	array		$values	array of fields
 		*/
 		protected function _addCompositeField( $fieldName , $values )
 		{
@@ -717,8 +703,7 @@
 		}
 		/**
 		* Adds empty default values when addElement() is called
-		* @param	string	$array
-		* @see	PtcForms::$_storageKeys
+		* @param	string		$array	tne field array to add default values to
 		*/
 		protected function _addDefaultValues( $array )
 		{
@@ -730,8 +715,8 @@
 		}
 		/**
 		* Switches between span and label elements according to field type
-		* @param	string	$fieldName	the name of the input field
-		* @param	string	$labelText	the text for the label
+		* @param	string		$fieldName	the name of the input field
+		* @param	string		$labelText	the text for the label
 		*/
 		protected function _switchLabelEl( $fieldName , $labelText )
 		{
@@ -754,7 +739,7 @@
 		}
 		/**
 		* Builds the fields
-		* @param	string	$fieldName	the name of the field
+		* @param	string		$fieldName	the name of the field
 		*/
 		protected function _buildField($fieldName)
 		{
@@ -879,11 +864,11 @@
 		}
 		/**
 		* Builds a dynamic table for multiple layouts
-		* @param	string	$cols			number of columns
-		* @param	string	$type			the table type(1,2)
-		* @param	string	$fieldName		the name of the field
-		* @param	array	$data			the values for the table
-		* @param	string	$container		the html table template
+		* @param	string		$cols			number of columns
+		* @param	string		$type			the table type(1,2)
+		* @param	string		$fieldName		the name of the field
+		* @param	array		$data			the values for the table
+		* @param	string		$container		the html table template
 		*/
 		protected function _buildTableData($cols,$type,$fieldName,$data,$container)
 		{
@@ -954,19 +939,19 @@
 		}
 		/**
 		* Adds parameters to the fields
-		* @param	string		$fieldName	the name of the field
-		* @param	array		$type		('events','attributes','validate','label','labelOptions','parentEl','value/s')
-		* @param	array|string	$options		the options to pass
+		* @param	string			$fieldName	the name of the field
+		* @param	array			$type		('events','attributes','validate','label','labelOptions','parentEl','value/s')
+		* @param	array|string		$options	the options to pass
 		*/
-		protected function _addFieldParams($fieldName,$type,$options)
+		protected function _addFieldParams( $fieldName , $type , $options )
 		{
-			$options=is_array($options) ? $options : array($options);
-			$name=explode('=>',$fieldName);
-			$a=sizeof($name);
-			$exclude_types=array('composite','fieldset'); // exclude from validate
-			switch($a)
+			$options = is_array( $options ) ? $options : array( $options );
+			$name = explode( '=>' , $fieldName );
+			$a=sizeof( $name );
+			$exclude_types = array( 'composite' , 'fieldset' ); // exclude from validate
+			switch( $a )
 			{
-				case 1:
+				case 1 :
 					if(!@$this->_fields[$fieldName])
 					{ 
 						trigger_error(__CLASS__.'::'.__FUNCTION__.' could not add '.$type.
@@ -1009,8 +994,6 @@
 																					E_USER_WARNING);
 							return;
 						}
-						
-						
 						if ( $this->_fields[$name[0]][ 'type' ] == 'checkboxgroup' || 
 								$this->_fields[$name[0]][ 'type' ] == 'radiogroup' /*&& 
 										!array_key_exists( $name[ 0 ] , $this->_validate*/ )
@@ -1018,8 +1001,6 @@
 							$this->_addValidator( $name[ 0 ] , $options );
 						}
 						else{ $this->_addValidator( $name[ 1 ] , $options ); }
-						
-						
 						if ( $this->_fields[$name[0]]['values'][$name[1]]['type']=='radiogroup' || 
 							$this->_fields[$name[0]]['values'][$name[1]]['type']=='checkboxgroup')
 						{
@@ -1055,8 +1036,8 @@
 		}
 		/**
 		* Adds validation to the input field
-		* @param	string		$fieldName	the name of the field
-		* @param	array|string	$options		the options to pass
+		* @param	string			$fieldName		the name of the field
+		* @param	array|string		$options		the options to pass
 		*/
 		protected function _addValidator( $fieldName , $options )
 		{
@@ -1077,9 +1058,9 @@
 		}
 		/**
 		* Adds validator classes to the fields for js validation
-		* @param	string		$fieldName	the name of the field
-		* @param	array|string	$options		the options to pass
-		* @param	string		$fieldType	used by checkbox and radio groups only
+		* @param	string			$fieldName		the name of the field
+		* @param	array|string		$options		the options to pass
+		* @param	string			$fieldType		used by checkbox and radio groups only
 		*/
 		protected function _addClassValidator( $fieldName , $options , $fieldType = 'default' )
 		{
@@ -1107,8 +1088,8 @@
 		}
 		/**
 		* Adds default styles to fields to align properly
-		* @param	string	$fieldName	the name of the field
-		* @param	string	$fieldStyle	the style property
+		* @param	string		$fieldName		the name of the field
+		* @param	string		$fieldStyle		the style property
 		*/
 		protected function _addInputStyle( $fieldName , $fieldStyle )
 		{
@@ -1124,9 +1105,9 @@
 		}
 		/**
 		* Adds default style to the label container to align properly
-		* @param	string	$fieldName		the name of the field
-		* @param	string	$labelContainer	the html template for label element
-		* @param	string	$style			the style property
+		* @param	string		$fieldName		the name of the field
+		* @param	string		$labelContainer	the html template for label element
+		* @param	string		$style			the style property
 		*/
 		protected function _addLabelStyle( $fieldName , $labelContainer , $style )
 		{
@@ -1144,8 +1125,8 @@
 		}
 		/**
 		* Adds default style to the table to align properly
-		* @param	string	$fieldName	the name of the field
-		* @param	string	$tableStyle	the style property
+		* @param	string		$fieldName	the name of the field
+		* @param	string		$tableStyle	the style property
 		*/
 		protected function _addTableStyle( $fieldName , $tableStyle )
 		{
@@ -1170,8 +1151,8 @@
 			}
 		}
 		/**
-		* Compiles {@link _elAttributes} with the template {attributes}
-		* @param	string	the html element
+		* Compiles PtcForm::_elAttributes with the template {attributes}
+		* @param	string		$container	the html element
 		*/
 		protected function _buildElAttributes( $container )
 		{
@@ -1182,9 +1163,9 @@
 		}
 		/**
 		* Builds attributes for html elements
-		* @param	string	$fieldName	the name of the field
-		* @param	string	$container	the html template for container
-		* @param	string	$arrKey		(events,attributes,validate,label,labelOptions,parentEl)	
+		* @param	string		$fieldName		the name of the field
+		* @param	string		$container		the html template for container
+		* @param	string		$arrKey		(events,attributes,validate,label,labelOptions,parentEl)	
 		*/
 		protected function _buildAttributes( $fieldName , $container , $arrKey )
 		{
@@ -1216,45 +1197,53 @@
 		}
 		/**
 		* Adds an id to all html elements
-		* @param	string	$fieldName	the name of element
-		* @param	string	$arrKey		the key inside the {@link _fields} array
+		* @param	string		$fieldName		the name of element
+		* @param	string		$arrKey		the key inside the PtcForm::$_fields array
 		*/
-		protected function _addElementId($fieldName,$arrKey)
+		protected function _addElementId( $fieldName , $arrKey )
 		{
-			if(!@array_key_exists('id',$this->_fields[$fieldName][$arrKey]))
+			if ( !@array_key_exists( 'id' , $this->_fields[ $fieldName ][ $arrKey ] ) )
 			{
-				if(!@is_array($this->_fields[$fieldName][$arrKey]))
+				if ( !@is_array( $this->_fields[ $fieldName ][ $arrKey ] ) )
 				{ 
-					$this->_fields[$fieldName][$arrKey]=array(); 
+					$this->_fields[ $fieldName ][ $arrKey ] = array( ); 
 				}
-				$this->_fields[$fieldName][$arrKey]['id']='ptc-gen'.$this->_randomId();
+				$this->_fields[ $fieldName ][ $arrKey ][ 'id' ] = 'ptc-gen' . $this->_randomId( );
 			}
 		}
 		/**
 		* Builds html select options
-		* @param	string	$fieldName	the name of the select field
+		* @param	string		$fieldName	the name of the select field
 		*/
-		protected function _buildList($fieldName)
+		protected function _buildList( $fieldName )
 		{
 
-			if(@$this->_fields[$fieldName]['values'])
+			if ( @$this->_fields[ $fieldName ][ 'values' ] )
 			{
-				$options='';
-				foreach(@$this->_fields[$fieldName]['values'] as $k => $arrV)
+				$options = '';
+				foreach ( @$this->_fields[ $fieldName ][ 'values' ] as $k => $arrV )
 				{
-					$option=$this->_buildElAttributes($this->_htmlTpls['select_option']);
-					if(@$arrV['label'][0]){ $option=str_replace('{label}',$arrV['label'][0],$option); }
-					foreach(@$arrV['attributes'] as $k=>$v){ $option=str_replace('{'.$k.'}',$k.'="'.$v.'"',$option); }
-					$options.=preg_replace('# {.*?}|{.*?}#i','',"\n".$this->_options['start_tab']."\t\t\t".$option);// clean up
+					$option = $this->_buildElAttributes( $this->_htmlTpls[ 'select_option' ] );
+					if ( @$arrV[ 'label' ][ 0 ] )
+					{ 
+						$option = str_replace( '{label}' , $arrV[ 'label' ][ 0 ] , $option ); 
+					}
+					foreach ( @$arrV[ 'attributes' ] as $k => $v )
+					{ 
+						$option = str_replace( '{' . $k . '}' , $k . '="' . $v . '"' , $option ); 
+					}
+					$options .= preg_replace( '# {.*?}|{.*?}#i' , '' , "\n" . 
+							$this->_options[ 'start_tab' ] . "\t\t\t" . $option );// clean up
 				}
-				$select_field=str_replace('{options}',$options."\n",$this->_htmlTpls['select']);
-				$select_field="\n".$this->_options['start_tab']."\t\t".$select_field."\n";
-				return $select_field=str_replace('</select>',$this->_options['start_tab']."\t\t</select>",$select_field);
+				$select_field = str_replace( '{options}' , $options . "\n" , $this->_htmlTpls[ 'select' ] );
+				$select_field = "\n" . $this->_options[ 'start_tab' ] . "\t\t" . $select_field . "\n";
+				return $select_field = str_replace( '</select>' , 
+								$this->_options[ 'start_tab' ] . "\t\t</select>" , $select_field );
 			}
 		}
 		/**
 		* Builds container for the field
-		* @param	string	$fieldName	the name of the field
+		* @param	string		$fieldName	the name of the field
 		*/
 		protected function _buildHtml( $fieldName )
 		{
@@ -1294,41 +1283,48 @@
 		}
 		/**
 		* Rebuilds values for the fields if form has been sent
-		* @param	string	$fieldName	the name of the field
+		* @param	string		$fieldName		the name of the field
 		*/
 		protected function _rebuildValues( $fieldName )
 		{
+			$rebuild_values = false;
+			$method = $this->_getFormValues( );
+			if ( empty( $method ) ){ return; }
+			foreach ( $method as $k => $v )
+			{
+				if ( in_array( $k , $this->_savedSubmit ) ){ $rebuild_values = true; }
+			}
+			if ( !$rebuild_values ){ return; }
 			if ( !@array_key_exists( 'noAutoValue' , @$this->_fields[ $fieldName ][ 'attributes' ] ) )
 			{
-				$method = $this->_getFormValues( );
-				if ( $this->_options[ 'keep_values' ]  && !empty( $method ) )
+				if ( $this->_options[ 'keep_values' ]  /*&& !empty( $method )*/ )
 				{
 					switch ( $this->_fields[ $fieldName ][ 'type' ] )
 					{
 						case 'checkbox' :
 						case 'radio' :
-							if ( !@$this->_fields[ $fieldName ][ 'attributes' ][ 'value' ] )
+							if ( !@array_key_exists( 'value' , $this->_fields[ $fieldName ][ 'attributes' ] ) )
 							{
 								$this->_fields[ $fieldName ][ 'attributes' ][ 'value' ] = 'on';
 							}
 							unset( $this->_fields[ $fieldName ][ 'attributes' ][ 'checked' ] );
 							foreach ( $this->_hiddenValues  as $k => $v )
 							{
-								if ( @array_key_exists( $k , $method ) && 
+								if ( array_key_exists( $k , $method ) && 
 									$k == str_replace( '[]' , '' , $fieldName ) &&  
-									@$method[ $k ] == $this->_fields[ $fieldName ][ 'attributes' ][ 'value' ] )
+									$method[ $k ] == $this->_fields[ $fieldName ][ 'attributes' ][ 'value' ] )
 								{
 									$this->_addFieldParams( $fieldName , 'attributes' , array( 'checked' => 1 ) );
 								}
 							}
 						break;
-						case 'textarea' :
+						/*case 'textarea' :
 							unset( $this->_fields[ $fieldName ][ 'attributes' ][ 'value' ] );
 							if ( @strlen( $method[ $fieldName ] ) > 0 )
 							{
 								$this->_addFieldValues( $fieldName , @$method[ $fieldName ] ); 
 							}
-						break;
+						break;*/
 						case 'select' :
 							foreach ( @$this->_fields[ $fieldName ][ 'values' ] as $k => $arrV )
 							{
@@ -1351,11 +1347,27 @@
 			}
 		}
 		/**
+		* Saves values if form was sent
+		* @param	string	$fieldName	the name of the field
+		* @param	string	$type		the field type
+		*/
+		protected function _saveValue( $fieldName , $type )
+		{
+			$not_supported_type = array( 'composite' , 'fieldset' , 'custom' );
+			if ( in_array( $type , $not_supported_type ) ){ return; } 
+			$method = $this->_getFormValues( );
+			if ( empty( $method ) ){ return; }
+			if ( @array_key_exists( $fieldName , $method ) )
+			{
+				$this->_values[ $fieldName ] = $method[ $fieldName ];
+			}
+		}
+		/**
 		* Builds the label for field
-		* @param	string	$case		(1,2,3)
-		* @param	string	$alignLabel	("left","top","right","none")
-		* @param	string	$labelWidth	the width of the label as a percentage
-		* @param	string	$labelHtml	the html template
+		* @param	string		$case			(1,2,3)
+		* @param	string		$alignLabel		("left","top","right","none")
+		* @param	string		$labelWidth		the width of the label as a percentage
+		* @param	string		$labelHtml		the html template
 		*/
 		protected function _buildLabel( $case , $alignLabel , $labelWidth , $labelHtml )
 		{
@@ -1466,10 +1478,10 @@
 		}
 		/**
 		* Checks for errors while building and rendering the form
-		* @param	string	$fieldName	the name of the field
-		* @param	string	$type		the check type (1,2,3,4,5)
-		* @param	string	$function		which function called this process
-		* @param	string	$errType		the error type		
+		* @param	string		$fieldName		the name of the field
+		* @param	string		$type			the check type (1,2,3,4,5)
+		* @param	string		$function		which function called this process
+		* @param	string		$errType		the error type		
 		*/
 		protected function _checkErrors( $fieldName , $type , $function = null , $errType = null )
 		{
@@ -1534,7 +1546,7 @@
 		}
 		/**
 		* Manipulates form values from POST or GET
-		* @param	array	$array	array of values(POST or GET)
+		* @param	array		$array	array of values(POST or GET)
 		*/
 		protected function _editFormValues( $array )
 		{
@@ -1553,8 +1565,8 @@
 		}
 		/**
 		* Fires events with the event class
-		* @param	string	$event	the name of the event
-		* @param	mixed	$data	the data to push
+		* @param	string		$event	the name of the event
+		* @param	mixed		$data		the data to push
 		*/
 		protected function _fireEvent( $event , $data )
 		{
@@ -1576,13 +1588,14 @@
 		*/		
 		protected function _getEventClass( )
 		{
-			return __NAMESPACE__ . $this->_options[ 'event_class' ]; 
+			return ( $this->_options[ 'event_class' ] ) ? 
+				$this->_options[ 'event_class' ] : __NAMESPACE__ . '\PtcEvent';
 		}		
 		/**
-		* Send messsages to the PtcDebug class if present and it\'s namespace
-		* @param 	mixed 	$string		the string to pass
-		* @param 	mixed 	$statement	some statement if required
-		* @param	string	$category	a category for the messages panel
+		* Send messsages to the PtcDebug class if present
+		* @param 	mixed 		$string		the string to pass
+		* @param 	mixed 		$statement		some statement if required
+		* @param	string		$category		a category for the messages panel
 		*/
 		protected static function _debug( $string , $statement = null , $category = null )
 		{
