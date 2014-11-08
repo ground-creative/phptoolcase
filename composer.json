@@ -1,0 +1,18 @@
+{
+    "name": "phptoolcase",
+    "type": "library",
+    "description": "A set of tools to speed up the process of coding",
+    "keywords": ["log","logging"],
+    "homepage": "http://phptoolcase.com",
+    "license": "GPL V2",
+    "authors": [
+        {
+            "name": "Carlo Pietrobattista",
+            "email": "carlo@salapc.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
