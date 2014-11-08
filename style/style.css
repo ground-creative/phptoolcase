@@ -371,5 +371,6 @@ text-decoration: none;
 }
 
 .fb-like.fb_iframe_widget span{
-  vertical-align: top !important;
+  vertical-align: middle !important;
+  margin-bottom: 10px;
 }
