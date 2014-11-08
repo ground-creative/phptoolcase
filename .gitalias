@@ -43,7 +43,7 @@
 			echo \"\\033[36m\"'-- Command: git commit -am \"'\"$1\"'\"'\"\\033[0m\";\
 			git commit -am \"$1\";\
 		else\
-			echo \"\\033[36m\"'-- Command: git commit -a --reuse-message=HEAD \"'\"$1\"'\"'\"\\033[0m\";\
+			echo \"\\033[36m-- Command: git commit -a --reuse-message=HEAD\\033[0m\";\
 			git commit -a --reuse-message=HEAD;\
 		fi;\
 		git commit -am \"$1\";\
