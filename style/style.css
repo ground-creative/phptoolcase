@@ -369,3 +369,7 @@ color: #009;
 background-color: transparent;
 text-decoration: none;
 }
+
+.fb-like.fb_iframe_widget span{
+  vertical-align: top !important;
+}
