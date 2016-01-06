@@ -29,25 +29,7 @@
 		public function table( $table ) 
 		{ 
 			$this->reset( );
-			$table = ( is_array( $table ) ) ? $table : array( $table );
-			foreach ( $table as $v )
-			{
-				if ( $val = $this->_checkRawValue( $v ) )
-				{ 
-					$this->_table .= ' ' . $val. ','; 
-					continue;
-				}
-				$divider = ( strpos( $v , ' as ' ) ) ? ' as ' : ' AS ';
-				$table = explode( $divider , $v );
-				$t = $this->addBackTicks( $table[ 0 ] ); 
-				if ( array_key_exists( 1 , $table ) )
-				{ 
-					$t .= ' as ' . $this->addBackTicks( $table[ 1 ] ); 
-				}
-				$this->_table .= $this->sanitize( $t ) . ',';
-				//$this->_table .= $this->addBackTicks( $this->sanitize( $v ) ) . ','; 
-			}
-			$this->_table = substr( $this->_table , 0 , strlen( $this->_table ) - 1 );
+			$this->_table = $this->_formatTable( $table );
 			$this->_currentQueryType = 'select'; // set query type as select by default
 			return $this; 
 		}
@@ -115,22 +97,23 @@
 		public function addBackTicks( $string )
 		{
 			if ( $val = $this->_checkRawValue( $string ) ){ return $val; }
-			$raw = explode( '.' , $string );
+			$raw = array_map( 'trim' , explode( '.' , $string ) );
 			$string = ( $raw[ 0 ] === '*' ) ? $raw[ 0 ] : '`' . $raw[ 0 ] . '`';
-			return $string .= ( @$raw[ 1 ] ) ? '.`' . $raw[ 1 ] . '`': ''; 
+			if ( @$raw[ 1 ] ){ $string .= ( $raw[ 1 ] === '*' ) ? '.' . $raw[ 1 ] : '.`' . $raw[ 1 ] . '`'; }
+			return $string;
 		}
 		/**
 		* Creates a join based on the parameters. See @ref qb_joins
-		* @param	string		$table			the name of the table to join
-		* @param	string		$first			the first column
+		* @param	string		$table		the name of the table to join
+		* @param	string		$first		the first column
 		* @param	string		$operator		the operator to use for the join
 		* @param	string		$second		the second column
-		* @param	string		$type			the type of join
+		* @param	string		$type		the type of join
 		*/
 		public function join( $table , $first , $operator = null , $second = null , $type = 'inner' )
 		{
 			if ( !$this->_isTableSet( ) ) { return false; }
-			$this->_join .= ' ' . strtoupper( $type ) . ' JOIN ' . $this->addBackTicks( $table );
+			$this->_join .= ' ' . strtoupper( $type ) . ' JOIN ' . $this->_formatTable( $table );
 			$this->_isClosure = true;
 			if ( $first instanceof \Closure ){ $this->_runClosure( $first  , 'join' ); }
 			else{ $this->on( $first, $operator, $second ); }
@@ -208,8 +191,7 @@
 			if ( !$type )
 			{
 				$type = 3;
-				// check statement that needs data in return
-				foreach ( $this->_returnStatements as $statement )
+				foreach ( $this->_returnStatements as $statement ) // statements that need return data
 				{
 					if ( strpos( trim( strtoupper( $this->_currentQuery ) ) , $statement ) === 0 ) 
 					{
@@ -256,7 +238,7 @@
 			{
 				if ( is_string( $v ) ) 
 				{
-					if ( false === strpos( $v, ':' ) ) { continue; }
+					if ( false === strpos( $v , ':' ) ) { continue; }
 					$query = preg_replace( '/\?/' , $v , $query , 1 );
 				}
 			}
@@ -266,7 +248,7 @@
 		/**
 		* Adds order to the query. See @ref qb_order_group_limit
 		* @param	string		$column		the column names
-		* @param	string		$direction		asc or desc
+		* @param	string		$direction	asc or desc
 		*/
 		public function order( $column , $direction = 'asc' )
 		{
@@ -408,7 +390,7 @@
 				return false;
 			}
 			$this->_fetchMode = ( $class ) ? array( $mode , $class ) : array( $mode );
-			
+			return $this;
 		}
 		/**
 		* Adds where operators and joins to the query
@@ -783,6 +765,33 @@
 			return true;
 		}
 		/**
+		* Adds backticks properly to table names
+		* @param	string|array	$table	the table name
+		*/
+		protected function _formatTable( $table )
+		{
+			$string = null;
+			$table = ( is_array( $table ) ) ? $table : array( $table );
+			foreach ( $table as $v )
+			{
+				if ( $val = $this->_checkRawValue( $v ) )
+				{ 
+					$string .= ' ' . $val. ','; 
+					continue;
+				}
+				$divider = ( strpos( $v , ' as ' ) ) ? ' as ' : ' AS ';
+				$table = explode( $divider , $v );
+				$t = $this->addBackTicks( $table[ 0 ] ); 
+				if ( array_key_exists( 1 , $table ) )
+				{ 
+					$t .= ' as ' . $this->addBackTicks( $table[ 1 ] ); 
+				}
+				$string .= $this->sanitize( $t ) . ',';
+				//$string .= $this->addBackTicks( $this->sanitize( $v ) ) . ','; 
+			}
+			return $string = substr( $string , 0 , strlen( $string ) - 1 );
+		}
+		/**
 		* Checks if a table was set
 		*/
 		protected function _isTableSet( )
@@ -851,10 +860,10 @@
 		}
 		/**
 		* Adds execution time and query results to the PtcDebug class
-		* @param	string		$reference		a reference to look for ("$statement")
-		* @param	string		$type			the type of debug  (timer, attach)
+		* @param	string		$reference	a reference to look for ("$statement")
+		* @param	string		$type		the type of debug  (timer, attach)
 		* @param 	mixed 		$string		the string to pass
-		* @param 	mixed 		$statement		some new statement if required
+		* @param 	mixed 		$statement	some new statement if required
 		*/
 		protected static function _debugBuffer( $reference , $type = null , $string = null , $statement = null )
 		{

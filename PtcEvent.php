@@ -5,23 +5,24 @@
 	* PHP version 5.3
 	* @category 	Libraries
 	* @package  	PhpToolCase
-	* @version	0.9.1b
+	* @version	0.9.3b
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
 	*/
-
+	
 	class PtcEvent
 	{
+		/**
+		* Alias of @ref getEvents()
+		*/
+		public static function getEvent( $name = null ){ return static::getEvents( $name ); }
 		/**
 		* Registers the component with a constant for ptc helpers functions
 		*/
 		public static function register( )
 		{
-			if ( !defined( '_PTCEVENT_' ) ) // declare the class namespace
-			{
-				@define( '_PTCEVENT_' , get_called_class( ) ); 
-			}
+			if ( !defined( '_PTCEVENT_' ) ) { @define( '_PTCEVENT_' , get_called_class( ) ); }
 		}
 		/**
 		* Adds a listener to an event
@@ -38,14 +39,15 @@
 				trigger_error( 'All event names must use "."!' , E_USER_ERROR );
 				return false;
 			}
-			if ( $callback instanceof Closure || is_callable( $callback ) ){ $call = $callback; }
+			if ( $callback instanceof \Closure || is_callable( $callback ) ){ $call = $callback; }
 			else
 			{
 				$try = explode( '@' , $callback );
-				if ( @class_exists( $try[ 0 ] ) )
+				$clean_name = explode( '::' , $try[ 0 ] );
+				if ( @class_exists( $clean_name[ 0 ] ) )
 				{
 					$method = ( sizeof( $try ) > 1 ) ? $try[ 1 ] : 'handle';
-					$call = array( new $try[ 0 ] , $method );
+					$call = ( false !== strpos( $try[ 0 ] , '::' ) ) ? $try[ 0 ] : array( new $try[ 0 ] , $method );
 				}
 				else	// no valid callback found
 				{
@@ -92,8 +94,8 @@
 				{ 
 					if ( !array_key_exists( $key , static::$_events[ $event[ 0 ] ][ $event[ 1 ] ] ) )
 					{
-						trigger_error( $key . ' not found in  <b>' . $event[ 0 ] . '.' . $event[ 1 ] . 
-															'</b>!' , E_USER_WARNING );
+						trigger_error( $key . ' not found in  <b>' . 
+							$event[ 0 ] . '.' . $event[ 1 ] . '</b>!' , E_USER_WARNING );
 						return false;
 					}
 					static::_debug( static::$_events[ $event[ 0 ] ][ $event[ 1 ] ][ $key ] , 
@@ -121,7 +123,7 @@
 		* @param	string	$event	the event name to fire
 		* @param	array	$data	an array with the data you wish to pass to the listeners
 		*/
-		public static function fire( $event , $data = array( ) )
+		public static function fire( $event , $data )
 		{
 			static::register( );
 			$main = $event;
@@ -143,7 +145,7 @@
 				{
 					$data = ( is_array( $data ) ) ? $data : array( $data );
 					static::_debug( array( 'callback' => $wildcard , 'data' => array( $data , $main ) ) , 
-						'firing wildcard <b>' . $event[ 0 ] . '.' . $event[ 1 ] . '[ ' . $a . ' ]</b>' , 'Event Manager' );
+					'firing wildcard <b>' . $event[ 0 ] . '.' . $event[ 1 ] . '[ ' . $a . ' ]</b>' , 'Event Manager' );
 					$a++;
 					if ( false === static::_run( $wildcard , array( $data , $main ) ) ){ return; }
 				}
