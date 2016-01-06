@@ -9,7 +9,7 @@
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
 	*/
-	
+
 	class PtcRouter
 	{
 		/**
@@ -148,8 +148,7 @@
 		public static function redirect( $location , $statusCode = 301 )
 		{
 			static::_setRedirectCookie( $statusCode );
-			$location = ( 0 !== strpos( $location , 
-				'Location: ' ) ) ? 'Location: ' . $location : $location; 
+			$location = ( 0 !== strpos( $location , 'Location: ' ) ) ? 'Location: ' . $location : $location; 
 			header( $location , true , $statusCode );
 			exit( );
 		}
@@ -166,8 +165,7 @@
 			}*/
 			if ( !class_exists( $controller ) )
 			{
-				trigger_error( 'Controller class ' . $controller . 
-							' could not be found!' , E_USER_ERROR );
+				trigger_error( 'Controller class ' . $controller . ' could not be found!' , E_USER_ERROR );
 				return false;
 			}
 			return static::_addControllerMethods( $controller , $route );
@@ -249,8 +247,7 @@
 		{
 			if ( array_key_exists( $name , static::$_filters ) )
 			{
-				trigger_error( 'Filter ' . $name . 
-					' already exists, use some other name!' , E_USER_ERROR );
+				trigger_error( 'Filter ' . $name . ' already exists, use some other name!' , E_USER_ERROR );
 				return false;
 			}
 			// check if we have a valid callback
@@ -266,7 +263,7 @@
 		public static function header( $statusCode , $replace = true ) 
 		{
 			$string = ( array_key_exists( $statusCode , static::$_statusCodes ) ) ? 
-						$_SERVER[ 'SERVER_PROTOCOL' ] . ' ' . $statusCode . ' ' . 
+							$_SERVER[ 'SERVER_PROTOCOL' ] . ' ' . $statusCode . ' ' . 
 								static::$_statusCodes[ $statusCode ] : $statusCode;
 			if ( is_numeric( $statusCode ) ){ header( $string , $replace , $statusCode ); }
 			else{ header( $string , $replace ); }
@@ -324,15 +321,17 @@
 				'filters'		=> static::$_filters ,
 				'groups'		=> static::$_groups ,
 				'global_filters'	=> static::$_globalFilters ,
-				'redirects'	=> null
+				'redirects'		=> null
 			);
-			if ( isset( $_COOKIE[ 'PtcRouter_redirects' ] ) && null !== $_COOKIE[ 'PtcRouter_redirects' ] )
+			if ( isset( $_COOKIE[ 'PtcRouter_redirects' ] ) && 
+					null !== $_COOKIE[ 'PtcRouter_redirects' ] )
 			{
 				$debug[ 'redirects' ] = json_decode( $_COOKIE[ 'PtcRouter_redirects' ] );
 			}
 			if ( !empty( static::$_globalFilters ) ) // check global filters patterns first
 			{
-				static::_debug( $debug , 'Starting to check global patterns filters!' , 'Router Config' );
+				static::_debug( $debug , 
+					'Starting to check global patterns filters!' , 'Router Config' );
 				if ( static::_runGlobalPatterns( $uri , $request , $protocol ) ){ return; }
 			}
 			if ( static::_redirectTrailingStash( static::$_trailingSlash ) ){ return; }
@@ -340,7 +339,8 @@
 			if ( !empty( $routes ) ) // start processing routes if any
 			{
 				$debug[ 'routes' ] = $routes;
-				static::_debug( $debug , 'Starting to check available routes!' , 'Router Config' );
+				static::_debug( $debug , 
+					'Starting to check available routes!' , 'Router Config' );
 				return static::_processRoutes( $routes , $uri , $request , $protocol );
 			}
 			static::_setRedirectCookie( 'remove' );
@@ -638,7 +638,7 @@
 			if ( isset( $current[ 'query' ] ) ){ $build .= '?' . $current[ 'query' ]; }
 			$build .= ' ' . $statusCode;
 			@$data[ ] = static::getProtocol( ) . '://' . 
-				$_SERVER[ 'HTTP_HOST' ] . $current[ 'path' ] . ' ' . $statusCode;
+						$_SERVER[ 'HTTP_HOST' ] . $current[ 'path' ] . ' ' . $statusCode;
 			setcookie( 'PtcRouter_redirects' , json_encode( $data ) , time( ) + 600 , '/' );
 		}
 		/**
@@ -665,13 +665,10 @@
 		{
 			if ( array_key_exists( $type , static::$_groupFilters ) )
 			{
-				if ( isset ( $route->filters[ $type ] ) )
+				foreach ( static::$_groupFilters[ $type ] as $filter )
 				{
-					$filters = $route->filters;
-					$filters[ $type ] = array_merge( static::$_groupFilters[ $type ] , $filters[ $type ] );
-					$route->set( 'filters' , $filters );
+					call_user_func_array( array( $route , $type ) , array( $filter ) );
 				}
-				else{ $route->set( 'filters' , array( $type => static::$_groupFilters[ $type ] ) ); }
 			}
 		}
 		/*
@@ -710,7 +707,7 @@
 		protected static function _addGroupPrefix( $groupName , $prefix )
 		{
 			$prefix = ( static::$_groups[ $groupName ]->prefix ) ?  $prefix . 
-				static::_cleanRoute( static::$_groups[ $groupName ]->prefix ) : $prefix;
+						static::_cleanRoute( static::$_groups[ $groupName ]->prefix ) : $prefix;
 			return $prefix;
 		}
 		/**
@@ -720,17 +717,6 @@
 		{
 			foreach ( $group->routes as $key => $val )
 			{
-				if ( $val->controller )
-				{
-					preg_match_all( '|/{.*?}|' , $prefix , $pr_matches ); // prefix placeholders
-					if ( !empty( $pr_matches[ 0 ] ) )
-					{
-						foreach ( $pr_matches[ 0 ] as $match )
-						{
-							$val->set( 'route' , str_replace( $match  , '' , $val->route ) );
-						}
-					}
-				}
 				$val->set( 'route' , $prefix . $val->route ); // set the uri with the group prefix
 				preg_match_all( '|/{.*?}|' , $val->route , $matches ); // placeholders
 				if ( !empty( $matches[ 0 ] ) )
@@ -773,7 +759,7 @@
 									$val->request === $route->request )
 						{
 							trigger_error( 'Duplicate route found, ' . $val->route . 
-										' cannot continue execution!' , E_USER_ERROR );
+							' cannot continue execution!' , E_USER_ERROR );
 							return false;
 						}
 					}
@@ -821,10 +807,7 @@
 				$domain = explode( '.' , $route->domain );
 				if ( count( $domain ) !== count( $host ) ) // check if parameter is optional
 				{
-					if ( false !== strpos( $domain[ 0 ] , '?}' ) )
-					{
-						unset( $domain[ 0 ] );
-					}
+					if ( false !== strpos( $domain[ 0 ] , '?}' ) ){ unset( $domain[ 0 ] ); }
 					else{ return false; } // abort if param is not optional
 				}
 				if ( false !== strpos( $domain[ 0 ] , '}' ) )
@@ -932,6 +915,11 @@
 			{
 				$route->protocol( $properties[ '_protocol' ][ $method ] );
 			}
+			If ( array_key_exists( '_map' , $properties ) && 
+				array_key_exists( $method , $properties[ '_map' ] ) )
+			{
+				$route->map( $properties[ '_map' ][ $method ] );
+			}
 			If ( array_key_exists( '_before' , $properties ) && 
 				array_key_exists( $method , $properties[ '_before' ] ) )
 			{
@@ -947,10 +935,7 @@
 				foreach ( $properties[ '_where' ] as $k => $v )
 				{
 					if ( false !== strpos( $params , '{' . $k . '}' ) || 
-						false !== strpos( $params , '{' . $k . '?}' ) )
-					{ 
-						$route->where( $k , $v ); 
-					}
+						false !== strpos( $params , '{' . $k . '?}' ) ){ $route->where( $k , $v ); }
 				}
 			}
 			return $route;
@@ -990,7 +975,7 @@
 		*/
 		protected static function _addControllerMethods( $controller , $route )
 		{
-			if ( $methods = get_class_methods( $controller ) )
+			if ( $methods = get_class_methods( $controller  ) )
 			{
 				$class = get_called_class( );
 				$route = static::_cleanRoute( $route , false );
@@ -1011,7 +996,7 @@
 						$params = static::_addControllerParams( $controller , $method , $base );
 						$params = static::_cleanRoute( $params , static::$_trailingSlash ); 
 						$obj = call_user_func_array( array( $class , substr( $call , 0 , -1 ) ) , 
-									array( $route . $params , $controller . '@' . $method ) );		
+									array( $route . $params , $controller . '@' . $method ) );
 						static::_addControllerProperties( $controller, $method , $obj , $params );
 					}
 				}
@@ -1045,16 +1030,14 @@
 		*/
 		protected static function _checkFilters( $route , $type )
 		{
-			if ( $route->filters && isset( $route->filters[ $type ] ) )
+			if ( !$route->filters || !@$route->filters[ $type ] ){ return true; }
+			foreach ( @$route->filters[ $type ] as $filter )
 			{
-				foreach ( $route->filters[ $type ] as $filter )
+				if ( !array_key_exists( $filter , static::$_filters ) )
 				{
-					if ( !array_key_exists( $filter , static::$_filters ) )
-					{
-						trigger_error( 'Filter name ' . $filter . ' does not exist!' , E_USER_ERROR );
-						return false;
-					}
-				}							
+					trigger_error( 'Filter name ' . $filter . ' does not exist!' , E_USER_ERROR );
+					return false;
+				}
 			}
 			return true;
 		}
@@ -1063,12 +1046,13 @@
 		*/
 		protected static function _runFilters( $route , $type , $response = null )
 		{
-			if ( isset( $route->filters[ $type ] ) )
+			if ( @$route->filters[ $type ] )
 			{
 				foreach ( $route->filters[ $type ] as $filter )
 				{
-					static::_debug( '' , 'Executing ' . $type . ' filter <b><i>' . $filter . 
-						'</i></b> for route <b></i>' . $route->route .'</i></b>' , 'Router Action' );
+					static::_debug( '' , 'Executing ' . $type . 
+						' filter <b><i>' . $filter . '</i></b> for route <b></i>' . 
+									$route->route .'</i></b>' , 'Router Action' );
 					$params = array( $route , static::getUri( ) );
 					if ( $response ){ $params[ ] = $response; } 
 					$result = call_user_func_array( static::$_filters[ $filter ] , $params );
@@ -1099,8 +1083,9 @@
 						if ( $route->patterns[ $raw ] instanceof \Closure || 
 									is_callable( $route->patterns[ $raw ] ) )
 						{	 
-							if ( !$result = call_user_func_array( $route->patterns[ $raw ] , 
-										array( $uri[ $k ] , $route->route ) ) ){ return false; }
+							$result = call_user_func_array( 
+								$route->patterns[ $raw ] , array( $uri[ $k ] , $route->route ) );
+							if ( !$result ){ return false; }
 							static::$_values[ ] = $result;
 							continue;
 						}
@@ -1194,20 +1179,19 @@
 		protected static function _checkCallback( $callback )
 		{
 			$call = null;
-			if ( $callback instanceof Closure || 
-				is_callable( $callback ) ){ return $callback; }
+			if ( $callback instanceof \Closure || is_callable( $callback ) ){ return $callback; }
 			else
 			{
 				$try = explode( '@' , $callback );
-				if ( @class_exists( $try[ 0 ] ) ) // the class needs to included
+				$clean_name = explode( '::' , $try[ 0 ] );
+				if ( @class_exists( $clean_name[ 0 ] ) )
 				{
 					$method = ( sizeof( $try ) > 1 ) ? $try[ 1 ] : 'handle';
-					$call = array( new $try[ 0 ] , $method );
+					$call = ( false !== strpos( $try[ 0 ] , '::' ) ) ? $try[ 0 ] : array( new $try[ 0 ] , $method );
 				}
 				else	// no valid callback found
 				{
-					trigger_error( 'Route ' . $callback . 
-						' is not a valid callback!' , E_USER_ERROR );
+					trigger_error( 'Route ' . $callback . ' is not a valid callback!' , E_USER_ERROR );
 					return false;
 				}
 			}
@@ -1240,10 +1224,7 @@
 		*/
 		public function __construct( $groups )
 		{
-			foreach ( $this->_defaultProperties as $k => $v )
-			{
-				$this->_properties[ $v ] = null; 
-			}
+			foreach ( $this->_defaultProperties as $k => $v ){ $this->_properties[ $v ] = null; }
 			return $this->_properties[ 'groups' ] = $groups;
 		}
 		/**
@@ -1280,10 +1261,7 @@
 		public function before( $filters )
 		{
 			$filters = explode( '|' , $filters ); 
-			foreach ( $filters as $filter )
-			{
-				@$this->_properties[ 'filters' ][ 'before' ][ ] = $filter;
-			}
+			foreach ( $filters as $filter ){ @$this->_properties[ 'filters' ][ 'before' ][ ] = $filter; }
 			return $this;
 		}
 		/**
@@ -1292,10 +1270,7 @@
 		public function after( $filters )
 		{
 			$filters = explode( '|' , $filters ); 
-			foreach ( $filters as $filter )
-			{
-				@$this->_properties[ 'filters' ][ 'after' ][ ] = $filter;
-			}
+			foreach ( $filters as $filter ){ @$this->_properties[ 'filters' ][ 'after' ][ ] = $filter; }
 			return $this;
 		}
 		/**
@@ -1303,15 +1278,9 @@
 		*/
 		public function where( $param , $pattern )
 		{
-			if ( !$this->_properties[ 'patterns' ] )
-			{ 
-				$this->_properties[ 'patterns' ] = array( ); 
-			}
+			if ( !$this->_properties[ 'patterns' ] ){ $this->_properties[ 'patterns' ] = array( ); }
 			$params = ( is_array( $param ) ) ? $param : array( $param => $pattern );
-			foreach ( $params as $k => $v )
-			{
-				$this->_properties[ 'patterns' ][ $k ] = $v;				
-			}
+			foreach ( $params as $k => $v ){ $this->_properties[ 'patterns' ][ $k ] = $v;	}
 			return $this;
 		}
 		/**
@@ -1333,10 +1302,7 @@
 		*/
 		public function add( $route )
 		{
-			if ( !$this->_properties[ 'routes' ] )
-			{ 
-				$this->_properties[ 'routes' ] = array( ); 
-			}
+			if ( !$this->_properties[ 'routes' ] ){ $this->_properties[ 'routes' ] = array( ); }
 			//$this->_properties[ 'routes' ][ $route->route ] = $route;
 			$this->_properties[ 'routes' ][ ] = $route;
 			return $this;
@@ -1370,10 +1336,7 @@
 			foreach ( $route as $k => $v ){ $this->_properties[ $k ] = $v; }
 			foreach ( $this->_defaultProperties as $k => $v )
 			{
-				if ( !@array_key_exists( $v , $this->_properties ) )
-				{ 
-					$this->_properties[ $v ] = null; 
-				}
+				if ( !@array_key_exists( $v , $this->_properties ) ){ $this->_properties[ $v ] = null; }
 			}
 		}
 		/**
@@ -1406,10 +1369,7 @@
 		*/
 		public function where( $param , $pattern = null )
 		{
-			if ( !is_array( $this->_properties[ 'patterns' ] ) )
-			{
-				$this->_properties[ 'patterns' ] = array( );
-			}
+			if ( !is_array( $this->_properties[ 'patterns' ] ) ){ $this->_properties[ 'patterns' ] = array( ); }
 			$params = ( is_array( $param ) ) ? $param : array( $param => $pattern );
 			foreach ( $params as $k => $v ){ $this->_properties[ 'patterns' ][ $k ] = $v; }
 			return $this;
@@ -1420,10 +1380,7 @@
 		public function before( $filters )
 		{
 			$filters = explode( '|' , $filters ); 
-			foreach ( $filters as $filter )
-			{
-				@$this->_properties[ 'filters' ][ 'before' ][ ] = $filter;
-			}
+			foreach ( $filters as $filter ){ @$this->_properties[ 'filters' ][ 'before' ][ ] = $filter; }
 			return $this;
 		}
 		/**
@@ -1432,10 +1389,7 @@
 		public function after( $filters )
 		{
 			$filters = explode( '|' , $filters ); 
-			foreach ( $filters as $filter )
-			{
-				@$this->_properties[ 'filters' ][ 'after' ][ ] = $filter;
-			}
+			foreach ( $filters as $filter ){ @$this->_properties[ 'filters' ][ 'after' ][ ] = $filter; }
 			return $this;
 		}
 		/**

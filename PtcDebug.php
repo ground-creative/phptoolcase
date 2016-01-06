@@ -1042,16 +1042,15 @@
 		*/
 		protected static function _formatVar($var)
 		{	
-			if(is_array($var) || is_object($var)){ $html_string=static::_doDump($var); }
-			else if(@is_bool($var))
+			if ( is_array( $var ) || is_object( $var ) ){ $html_string = static::_doDump( $var ); }
+			else if ( @is_bool( $var ) )
 			{ 
-				$html_string='<span style="color:#92008d;">'.($var==1 ? 'TRUE' : 'FALSE').'</span>'; 
+				$html_string = '<span style="color:#92008d;">' . ( $var == 1 ? 'TRUE' : 'FALSE' ) . '</span>'; 
 			}
-			else if(@is_null($var)){ $html_strisng='<span style="color:black;">NULL</span>'; }
-			else if(@is_float($var)){ $html_string='<span style="color:#10C500;">'.$var.'</span>'; }
-			else if(is_int($var)){ $html_string='<span style="color:red;">'.$var.'</span>'; }
-			// could be a string
-			else{ $html_string='<span>'.static::_cleanBuffer(@print_r($var,true)).'</span>'; }
+			else if( @is_null( $var ) ){ $html_strisng = '<span style="color:black;">NULL</span>'; }
+			else if( @is_float( $var ) ){ $html_string = '<span style="color:#10C500;">' . $var . '</span>'; }
+			else if( is_int( $var ) ){ $html_string = '<span style="color:red;">' . $var . '</span>'; }
+			else{ $html_string = '<span>' . static::_cleanBuffer( @print_r( $var , true ) ) . '</span>'; }
 			return @$html_string;
 		}
 		/**
@@ -1116,10 +1115,10 @@
 		}
 		/**
 		* Custom dump to properly format a given variable and make it more friendly to read
-		* @param 	mixed 		$var			the string to pass
-		* @param 	mixed 		$varName		some statement preceding the variable
+		* @param 	mixed 	$var			the string to pass
+		* @param 	mixed 	$varName	some statement preceding the variable
 		* @param 	string 	$indent		uses "|" as indents by default
-		* @param 	string 	$reference		a reference to prevent recursion
+		* @param 	string 	$reference	a reference to prevent recursion
 		* @param 	int 		$depth		maximun depth
 		* @return	the html output with the variable
 		*/
@@ -1207,12 +1206,13 @@
 				else if ( is_object( $avar ) )
 				{
 					$continue = true;
-					if ( false === strpos( @get_class( $avar ) , 'Reflection' ) )	// something is wrong with the reflection
+					if ( false === strpos( @get_class( $avar ) , 'Reflection' ) && 
+							false === strpos( @get_class( $avar ) , 'SimpleXML' ) )
 					{
 						$rf = @new \ReflectionFunction( $avar );
-						if ( ( @$rf->getName( ) == '{closure}' ) ) // work with lambda functions first
+						if ( false !== @strpos( $rf->getName( ) , '{closure}' ) ) // work with lambda functions first
 						{
-							$result .= $indent . ( $varName ? $varName . ' => ' : '');
+							@$result .= $indent . ( $varName ? $varName . ' => ' : '');
 							$result .= '<span>**RUNTIME CREATED FUNCTION** ';
 							if ( @$rf->getFileName( ) ) { $result .= @$rf->getFileName( ); } 
 							if ( @$rf->getStartLine( ) ) { $result .= ':' . @$rf->getStartLine( ); } 
