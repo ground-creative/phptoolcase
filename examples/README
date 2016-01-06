@@ -4,6 +4,7 @@ EXAMPLE FILES FOR ALL LIBRARY COMPONENTS:
 
 - ptcdebug-ex.php			debugger & logger examples file
 - ptcdb-ex.php				mysql query helper examples file
+<<<<<<< HEAD
 - ptchm-ex.php				handyman example file
 - ptcevent-ex.php			event dispacher component example file
 - ptcmapper-ex.php			ptcmapper object relational mapping example file
@@ -14,3 +15,5 @@ EXAMPLE FILES FOR ALL LIBRARY COMPONENTS:
 - form-example-files			examples folder for the dynamic forms component
 - router-example-files		examples folder for the router component
 - view-example-files			examples folder for the view component
+=======
+>>>>>>> master
