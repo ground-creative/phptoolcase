@@ -1,5 +1,5 @@
 {
-    "name": "phptoolcase",
+    "name": "phptoolcase/phptoolcase",
     "type": "library",
     "description": "A set of tools to speed up the process of coding",
     "keywords": ["php developer tools", "php library", "php framework", "dynamic forms", "application programming", "help php", "debug php", "php tools", "php toolcase", "easy php"],
