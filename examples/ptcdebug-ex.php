@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 	/* 
@@ -15,6 +16,18 @@
 	require_once( '../PtcDebug.php' );	// include the PtcDebug class
 
 	$options = array				// add some options before class initialization
+=======
+<?
+	//session_start();				# start session for persistent debugging
+	
+	$_GET['debug']=true;       		# turn on the debug
+	
+	//$_GET['debugOff']=true;    		# turn off debug
+	
+	require_once('../PtcDebug.php');	# include the PtcDebug class
+	
+	$options=array
+>>>>>>> master
 	(
 		'url_key'			=>	'debug' ,
 		'url_pass'			=>	'true' ,
@@ -95,6 +108,7 @@
 	PtcDebug::stopCoverage( );	// we could start it again later, if stopCoverage( ) is not used it will be stopped at shutdown
 	
 	
+<<<<<<< HEAD
 	/* STOT TRACING FUNCTION CALLS */
 	PtcDebug::stopTrace( );		// we could start it again later, if stopTrace( ) is not used it will be stopped at shutdown
 	
@@ -108,6 +122,12 @@
 	/* CATCHING AN EXCEPTION */
 	throw new Exception( 'Uncaught Exception' );
 	
+=======
+	function ddas()
+	{
+		fopen();
+	}
+>>>>>>> master
 	
 	//session_destroy();
 
