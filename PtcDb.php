@@ -9,7 +9,7 @@
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
 	*/
-	
+
 	class PtcDb
 	{
 		/** 

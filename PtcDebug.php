@@ -66,7 +66,7 @@
 		{
 			ini_set( 'display_errors' , false );
 			ini_set( 'html_errors' , false );	
-			if ( !@static::$_options[ 'error_reporting' ] )
+			if ( !isset( static::$_options[ 'error_reporting' ] ) )
 			{
 				@static::$_options[ 'error_reporting' ] = static::$_defaultOptions[ 'error_reporting' ];
 			}			
@@ -152,7 +152,7 @@
 					set_exception_handler( array( $called_class , 'exceptionHandler' ) );
 					$buffer .= "<br>Exception Handler turned on!";
 				}
-				if ( static::$_options[ 'debug_console' ] )	// try to laod the console class
+				if ( static::$_options[ 'debug_console' ] )	// try to load the console class
 				{
 					static::$_consoleStarted = false;
 					$buffer.='<br>Console debug turned on';
@@ -160,7 +160,11 @@
 					{
 						require_once( dirname(__FILE__).'/PhpConsole/__autoload.php' );
 						static::$_consoleStarted = true;
-						\PhpConsole\Helper::register( );
+						$instance = \PhpConsole\Connector::getInstance( );
+						$instance->setHeadersLimit( static::$_options[ 'max_header_size' ] );
+						$instance->getDebugDispatcher( )->setDumper( 
+							new \PhpConsole\Dumper( static::$_options[ 'max_dump_depth' ] ) ); 
+						//$instance->getDebugDispatcher( )->detectTraceAndSource = true;
 						$buffer .= ", phpConsole class started!";
 					}
 					else{ $buffer .= ', but could not find phpConsole class!'; }
@@ -636,7 +640,8 @@
 			'enable_inspector'	=>	true , // enable variables inspector, use declare(ticks=n); in code block
 			'code_coverage'		=>	true, // enable code coverage analysis, use "full" to start globally
 			'trace_functions'		=>	true, // enable function calls tracing, use "full" to start globally
-			'exclude_categories'	=>	array( 'Event Manager' , 'Autoloader' , 'Router Config' , 'View Config' ) // exclude categories from the output
+			'exclude_categories'	=>	array( ) , // exclude categories from the output
+			'max_header_size'		=>	4096 // maximum header size for phpconsole
 		);
 		/**
 		* Array of methods excluded from the backtrace
@@ -736,10 +741,13 @@
 				.msgTable tr.php-warning td{background-color:yellow;}
 				.msgTable tr.php-error td{background-color:orange;}
 				.msgTable tr.inspector td{background-color:lightgreen;}
-				.innerTable a.php-notice{color:lightblue;}
-				.innerTable a.exception{color:greenyellow;}.innerTable a.php-warning{color:yellow;}
-				.innerTable a.php-error{color:orange;}.innerTable a.inspector{color:lightgreen;}
-				.innerTable a.general{color:darkgrey;}.innerTable a.show-all{color:red;}
+				.innerTable a.php-notice{color:lightblue;!important;}
+				.innerTable a.exception{color:greenyellow !important;}
+				.innerTable a.php-warning{color:yellow !important;}
+				.innerTable a.php-error{color:orange !important;}
+				.innerTable a.inspector{color:lightgreen !important;}
+				.innerTable a.general{color:darkgrey !important;}
+				.innerTable a.show-all{color:red !important;}.innerTable a.top-links{color:white;}
 				#ptcDebugFilterBar{background-color:black;margin-bottom:8px;padding:4px;
 				font-size:13px;}.innerTable{z-index:10000;position:relative;background:#eee;
 				height:300px;padding:30px 10px 0 10px;overflow:auto;clear:both;}
@@ -782,8 +790,8 @@
 						$arr=array( 'errline' => $php_trace[ 'line' ] , 'errfile' => $php_trace[ 'file' ] ); 
 					}
 					$statement = ( @$arr[ 'console_statement' ] ) ? 
-							strip_tags( preg_replace( "=<br */?>=i" , "\n" , 
-									@$arr[ 'console_statement' ] ) ) : null;
+									strip_tags( preg_replace( "=<br */?>=i" , "\n" , 
+											@$arr[ 'console_statement' ] ) ) : null;
 					$statement .= ( @$arr[ 'console_time' ] ) ? ' [time: ' . $arr[ 'console_time' ] . ']' : '';
 					$console_type = '[' . @end( @explode( '/' , $arr[ 'errfile' ][ 0 ] ) ) . ':';
 					$console_type .= $arr[ 'errline' ][ 0 ] . ']';
@@ -797,24 +805,24 @@
 						}
 						else
 						{
-							\PC::debug( $console_type , $arr[ 'console_category' ] . '.file' ); 
+							$handler->debug( $console_type , strtolower( $arr[ 'console_category' ] ) . '.file' ); 
 							if ( $statement )
-							{ 
-								\PC::debug( $statement , $arr[ 'console_category' ] . '.message' ); 
+							{  	
+								$handler->debug( $statement , strtolower( $arr[ 'console_category' ] ) . '.message' ); 
 							}
 							if ( @$arr[ 'console_string' ] )
 							{ 	
-								\PC::debug( $arr[ 'console_string' ] , $arr[ 'console_category' ] . '.result' ); 
+								$handler->debug( $arr[ 'console_string' ] , strtolower( $arr[ 'console_category' ] . '.data' ) ); 
 							}
 							if ( @$arr[ 'errfile' ] )
 							{
 								unset( $arr[ 'errfile' ][ 0 ] );
 								if ( !empty( $arr[ 'errfile' ] ) )
 								{ 
-									\PC::debug( $arr[ 'errfile' ] , $arr[ 'console_category' ] . '.trace' ); 
+									$handler->debug( $arr[ 'errfile' ] , strtolower( $arr[ 'console_category' ] . '.trace' ) ); 
 								}
 							}
-							//\PC::debug( $arr , $arr[ 'console_category' ] . '[full]' ); 
+							//$handler->debug( $arr , strtolower( $arr[ 'console_category' ] . '[full]' ) ); 
 						}
 					}
 				}
@@ -826,8 +834,8 @@
 			}
 			$time = ( ( static::$_endTime - static::$_startTime ) - static::$_tickTime );
 			$console_final = 'Seconds: ' . round( $time , 3 ) . ' | Milliseconds: ' . round( $time * 1000 , 3 );
-			\PC::debug( array( @get_included_files( ) ) , static::$_options[ 'default_category' ] . '.includedFiles' );
-			\PC::debug( 'Global Execution Time ' . $console_final , static::$_options[ 'default_category' ] );
+			$handler->debug( array( @get_included_files( ) ) , strtolower( static::$_options[ 'default_category' ] . '.includes' ) );
+			$handler->debug( 'Global Execution Time ' . $console_final , strtolower( static::$_options[ 'default_category' ] ) );
 		}
 		/**
 		* Checks if a given ip has access
@@ -1399,6 +1407,7 @@
 				$err_type=static::msgType( $error['type'] );
 				if($err_type=='Php Error')
 				{				   
+					ini_set( 'memory_limit' , memory_get_usage( true ) + 1000000 );
 					$err=array('errno'=>$err_type,'errstr'=>$error['message'],
 								'errfile'=>$error['file'],'errline'=>$error['line']);	
 					static::_buildBuffer('log','{errorHandler}',$err);
@@ -1502,7 +1511,7 @@
 					{ 
 						$cat_id = str_replace( ' ' , '-' , strtolower( $k ) );
 						$div .= '<a href="#" onClick="ptc_filter_categories(\'' . $type . 
-							'Table\',\'' . $cat_id . '\')" class="' . $cat_id . '">' . $k . "(" . $v . ")</a> | "; 
+							'Table\',\'' . $cat_id . '\')" class="top-links ' . $cat_id . '">' . $k . "(" . $v . ")</a> | "; 
 					}
 					$div = substr( $div , 0 , -3 );
 					$div .= '</div>';
@@ -1976,21 +1985,18 @@
 					};
 					function ptc_show_trace(className,link)
 					{
-						var elements=document.getElementsByClassName(\'\'+className+\'\');
-						for(i in elements)
+						var elements = document.getElementsByClassName(\'\'+className+\'\');
+						for ( var i = 0; i < elements.length; i++ ) 
 						{
-							if(elements[i].hasOwnProperty(\'style\'))
+							if(elements[i].style.display=="none")
 							{
-								if(elements[i].style.display=="none")
-								{
-									link.innerHTML=link.innerHTML.replace("\u21d3","\u21d1");
-									elements[i].style.display=\'\'; 
-								}
-								else
-								{
-									link.innerHTML=link.innerHTML.replace("\u21d1","\u21d3");
-									elements[i].style.display=\'none\'; 
-								}
+								link.innerHTML=link.innerHTML.replace("\u21d3","\u21d1");
+								elements[i].style.display=\'\'; 
+							}
+							else
+							{
+								link.innerHTML=link.innerHTML.replace("\u21d1","\u21d3");
+								elements[i].style.display=\'none\'; 
 							}
 						}
 					};
@@ -1998,7 +2004,8 @@
 					{
 						var query="http://' . addslashes( $_SERVER[ 'HTTP_HOST' ] ) .
 							$path = addslashes( str_replace( realpath( $_SERVER[ 'DOCUMENT_ROOT' ] ) ,
-							'' , realpath( dirname( __FILE__ ) ) ) ) . '/PtcDebug.php?ptc_read_file="+filename;
+							'' , realpath( dirname( __FILE__ ) ) ) ) . '/PtcDebug.php?session_name=' . 
+													session_name( ) . '&ptc_read_file="+filename;
 						if(line){query+="&ptc_read_line="+line;}
 						newwindow=window.open(query,"name","height=350,width=820");
 						if(window.focus){newwindow.focus()};
@@ -2019,7 +2026,8 @@
 							var query="http://' . addslashes( $_SERVER[ 'HTTP_HOST' ] ) .
 							$path = addslashes( str_replace( realpath( $_SERVER[ 'DOCUMENT_ROOT' ] ) ,
 							'' , realpath( dirname( __FILE__ ) ) ) ) . 
-							'/PtcDebug.php?ptc_search_files="+document.getElementsByName("ptc_search_files")[0].value;
+							'/PtcDebug.php?session_name=' . session_name( ) . 
+							'&ptc_search_files="+document.getElementsByName("ptc_search_files")[0].value;
 							query+="&ptc_search_path="+document.getElementsByName("ptc_search_path")[0].value;
 							newwindow=window.open(query,"name","height=350,width=1220");
 							if(window.focus){newwindow.focus()};
@@ -2225,8 +2233,9 @@
 	/**
 	* Calls highlight file method to show source code, session_start() must be active for security reasons
 	*/
-	if ( @$_GET[ 'ptc_read_file' ] )
+	if ( isset( $_GET[ 'ptc_read_file' ] ) )
 	{
+		session_name( $_GET[ 'session_name' ] );
 		@session_start( );
 		if ( !@$_SESSION[ 'ptcdebug' ][ 'code_highlighter' ] ) { exit( ); }
 		echo PtcDebug::highlightFile( $_GET[ 'ptc_read_file' ] , @$_GET[ 'ptc_read_line' ] );
@@ -2235,8 +2244,9 @@
 	/**
 	* Shows a popup with string search results, session_start() must be active for security reasons
 	*/
-	if ( @$_GET[ 'ptc_search_files' ] )
+	if ( isset( $_GET[ 'ptc_search_files' ] ) )
 	{
+		session_name( $_GET[ 'session_name' ] );
 		@session_start( );
 		if ( !@$_SESSION[ 'ptcdebug' ][ 'search_files' ] ) { exit( ); }
 		echo PtcDebug::showSearchPopup( $_GET[ 'ptc_search_files' ] , @$_GET[ 'ptc_search_path' ] );

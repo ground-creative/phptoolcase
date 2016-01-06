@@ -256,7 +256,7 @@
 			foreach ( $paths as $k => $v )
 			{
 				//$path = realpath( $v );		// get real os path
-				if ( $path = realpath( $v ) )	// if path exists
+				if ( $path = static::_realpath( $v ) )	// if path exists
 				{	
 					$result = ( !is_int( $k ) ) ? static::_addNamespaceDirectory( 
 						str_replace( '\\' , '' , $k ) , $path ) : static::_addDirectory( $path );
@@ -283,7 +283,7 @@
 			foreach ( $files as $k => $v )
 			{
 				//$file = realpath( $v );		// get real OS path
-				if( $file = realpath( $v ) )		// path exists
+				if( $file = static::_realpath( $v ) )		// path exists
 				{	
 					$key = ( substr( $k , 0 , 1 ) == '\\' ) ? substr( $k , 1 ) : $k; // remove first '\'  if present
 					if ( @array_key_exists( $key , @static::$_dirs[ 'files' ] ) )  // check if name exists already
@@ -412,7 +412,7 @@
 			if ( empty( static::$_appPaths ) ) { static::_buildAppPaths( ); } // build paths once
 			foreach ( $paths as $k => $v )
 			{
-				if ( !$path = @realpath( $v ) )
+				if ( !$path = @static::_realpath( $v ) )
 				{
 					trigger_error( 'The file or path "' . $v .
 						'" does not exists or is not accessible!' , E_USER_ERROR ); 
@@ -488,7 +488,7 @@
 						array_pop( $folders );
 						foreach ( $folders as $k => $v ) { $path .= DIRECTORY_SEPARATOR . $v; }
 					}
-					if ( !@realpath( $path ) )
+					if ( !@static::_realpath( $path ) )
 					{
 						trigger_error( 'The path "' . $path . 
 							'" does not exists or is not accessible!' , E_USER_ERROR ); 
@@ -526,6 +526,25 @@
 		* Aliases for class names property
 		*/
 		protected static $_aliases = array( );
+		/**
+		* Custom realpath( ) you can add an event listener here
+		* @param	string	$path	the full path to a directory
+		*/
+		protected static function _realpath( $path )
+		{
+			if ( $result = realpath( $path ) ){ return $result; } 
+			if ( class_exists( __NAMESPACE__ . '\PtcEvent' ) )
+			{
+				$listener = PtcEvent::getEvents( 'autoloader' );
+				if ( isset( $listener[ 'realpath' ] ) )
+				{
+					$p_path = $path;
+					PtcEvent::fire( 'autoloader.realpath' , array( &$path ) );
+					return ( $path !== $p_path ) ? $path : $result;
+				}
+			}
+			return false;
+		}
 		/**
 		* Classes autoloader engine, tries various possibilities for file names
 		* @param	string		$class		the class name without namespaces

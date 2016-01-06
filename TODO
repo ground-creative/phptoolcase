@@ -1,0 +1,28 @@
+ 
+##########################################################
+
+PhpToolCase Version 0.9.1b open source project
+
+A powerfull set of tools to speed up the process of coding
+
+##########################################################
+
+
+
+== TO DO ===================================
+
+
+- Debugger & Logger (PtcDebug):
+
+	- Make a better html panel for the timer
+	
+	- Make  a better trace function calls engine
+	
+
+- Forms Generator & Validator (PtcForms):
+	
+	- Make a method that will only build the fields without the "<form>" tag
+
+- Authentication (PtcAuth):
+
+	- Make better example files

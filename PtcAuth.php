@@ -9,7 +9,7 @@
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
 	*/
-	
+
 	class PtcAuth 
 	{
 		/**
@@ -33,7 +33,7 @@
 				return static::_processLogin( $rand , 'none' , $expires );
 			}
 			if ( !$user = static::user( $userID ) ){ return false; }
-			return static::_processLogin( $user->{ $columns[ 'unique_key' ] } , 'none' , $expires );
+			return static::_processLogin( $user->{$columns[ 'unique_key' ] } , 'none' , $expires );
 		}
 		/**
 		*
@@ -128,8 +128,8 @@
 		{
 			$result = 3;
 			static::_fireEvent( 'verifying' , array( &$code ) );
-			static::_connection( )->setFetchMode( PDO::FETCH_OBJ );
-			$user = static::_connection( static::$_options[ 'users_table' ] )
+			static::_connection( )->setFetchMode( \PDO::FETCH_OBJ );
+			$user = static::_connection( static::$_options[ 'users_table' ])
 					->where( static::$_tableColumns[ 'verification' ] , '=' , $code )
 					->row( );
 			if ( !$user ){ $result = 2; } // code not found
@@ -156,9 +156,9 @@
 		*/
 		public static function user( $value = null )
 		{
-			$connection = ( static::$_options[ 'model' ] ) ? 
-				static::$_options[ 'model' ] : static::_connection( static::$_options[ 'users_table' ] );
-			static::_connection( )->setFetchMode( PDO::FETCH_OBJ );
+			$connection = ( static::$_options[ 'model' ] ) ? static::$_options[ 'model' ] : 
+								static::_connection( static::$_options[ 'users_table' ] );
+			static::_connection( )->setFetchMode( \PDO::FETCH_OBJ );
 			if ( is_array( $value ) )
 			{
 				foreach( $value as $k => $v )
@@ -238,13 +238,14 @@
 			static::$_tableColumns = ( empty( $columns ) ) ? static::$_tableColumns : $columns;
 			if ( !static::_checkConfig( static::$_tableColumns ) ){ return false; }
 			static::_debug( array( static::$_options , static::$_tableColumns ) , 
-				'User options set for authentication component!', static::$_options[ 'debug_category' ] );
+							'User options set for authentication component!', 
+										static::$_options[ 'debug_category' ] );
 			return static::$_configured = true;
 		}		
 		/**
 		*
 		*/
-		public static function setup( )
+		public static function setUp( )
 		{
 			if ( !static::_isConfigured( ) ){ return false; };
 			$qb = static::_connection( );
@@ -272,9 +273,8 @@
 		*/			
 		public static function random( $length = 50 , $characters = null )
 		{
-			
 			$characters = ( $characters ) ? $characters :
-				'0123456789abcdefghijklmnopqrstuvwxyz';
+							'0123456789abcdefghijklmnopqrstuvwxyz';
 			$string = '';
 			for ( $p = 0; $p < $length; $p++ ) 
 			{
@@ -300,7 +300,7 @@
 					return ( time( ) + 60 * intval( $value ) ); // *minutes
 				case false !== stripos( $value , 's' ) : 
 					return ( time( ) + 1 * intval( $value ) ); // *seconds
-				default: return ( time( ) + 60 * 60 * 24 * intval( $value ) ); // *days
+				default: return ( time( ) + 60 * 60 * 24 * intval( $value ) ); // days
 			}
 		}
 		/**
@@ -434,7 +434,7 @@
 			}
 			foreach ( $columns as $k => $v )
 			{
-				if ( null === $v ){ continue; }
+				if ( !$v ){ continue; }
 				$header = str_replace( '{' . $k . '}' , @$user->{ $v } , $header );
 				$subject = str_replace( '{' . $k . '}' , @$user->{ $v } , $subject );
 				$message = str_replace( '{' . $k . '}' , @$user->{ $v } , $message ); 
@@ -504,15 +504,16 @@
 		/**
 		*
 		*/
-		public static function setExpired( $recordID = null )
+		public static function setExpired( $record = null )
 		{
 			if ( !static::_isConfigured( ) ){ return false; }
 			$qb = static::_connection( static::$_options[ 'login_table' ] ); 
-			if ( $recordID )
+			if ( $record )
 			{
-				return $qb->where( 'id' , '=' , $recordID )
+				$result = $qb->where( 'id' , '=' , $record )
 						->update( array( 'expired' => 1) )
 						->run( );
+				return $result;
 			}
 			$qb->where( 'expires' , '<' , $qb->raw( 'NOW()' ) )
 				->update( array( 'expired' => 1) )
@@ -535,7 +536,7 @@
 				}
 			}
 			if ( !isset( $_SESSION[ 'user_id' ] ) ){ return false; }
-			static::_connection( )->setFetchMode( PDO::FETCH_OBJ );			
+			static::_connection( )->setFetchMode( \PDO::FETCH_OBJ );			
 			$login_data = static::_connection( static::$_options[ 'login_table' ] )
 						->where( 'user_id' , '=' , $_SESSION[ 'user_id' ] )
 						->where( 'expired' , '!=' , 1 )
@@ -600,7 +601,7 @@
 				'path'			=>	'/' ,
 				'domain'			=>	null ,
 				'secure'			=>	null ,
-				'http_only'		=>	null
+				'http_only'			=>	null
 			) ,
 			'guard'				=>	array
 			(
@@ -719,7 +720,7 @@
 			if ( !$data ){ return false; }
 			$cookie = json_decode( $data );
 			if ( !@$cookie[ 0 ] || !$cookie[ 1 ]  || !$cookie[ 2 ] ){ return false; }
-			static::_connection( )->setFetchMode( PDO::FETCH_OBJ );			
+			static::_connection( )->setFetchMode( \PDO::FETCH_OBJ );			
 			$user = static::_connection( static::$_options[ 'users_table' ] ) 
 					->where( static::$_tableColumns[ 'unique_key' ] , '=' , $cookie[ 0 ] )
 					->row( );

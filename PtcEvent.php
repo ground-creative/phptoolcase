@@ -5,18 +5,19 @@
 	* PHP version 5.3
 	* @category 	Libraries
 	* @package  	PhpToolCase
-	* @version	0.9.3b
+	* @version	0.9.1b
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
 	*/
-	
+
 	class PtcEvent
 	{
 		/**
 		* Alias of @ref getEvents()
+		* @deprecated
 		*/
-		public static function getEvent( $name = null ){ return static::getEvents( $name ); }
+		public static function getEvent( $name = null ){ return static::get( $name ); }
 		/**
 		* Registers the component with a constant for ptc helpers functions
 		*/
@@ -39,15 +40,14 @@
 				trigger_error( 'All event names must use "."!' , E_USER_ERROR );
 				return false;
 			}
-			if ( $callback instanceof \Closure || is_callable( $callback ) ){ $call = $callback; }
+			if ( $callback instanceof Closure || is_callable( $callback ) ){ $call = $callback; }
 			else
 			{
 				$try = explode( '@' , $callback );
-				$clean_name = explode( '::' , $try[ 0 ] );
-				if ( @class_exists( $clean_name[ 0 ] ) )
+				if ( @class_exists( $try[ 0 ] ) )
 				{
 					$method = ( sizeof( $try ) > 1 ) ? $try[ 1 ] : 'handle';
-					$call = ( false !== strpos( $try[ 0 ] , '::' ) ) ? $try[ 0 ] : array( new $try[ 0 ] , $method );
+					$call = array( new $try[ 0 ] , $method );
 				}
 				else	// no valid callback found
 				{
@@ -74,6 +74,16 @@
 		/**
 		* Returs the current events
 		* @param	string	$name	some event name
+		*/
+		public static function get( $name = null )
+		{
+			if ( $name && !array_key_exists( $name , static::$_events ) ){ return false; }
+			return ( $name ) ? static::$_events[ $name ] : static::$_events;
+		}
+		/**
+		* Returs the current events
+		* @param	string	$name	some event name
+		* @deprecated
 		*/
 		public static function getEvents( $name = null )
 		{

@@ -71,7 +71,7 @@
 			if ( empty( $this->_fields ) )
 			{
 				trigger_error( 'Nothing to save in table' . 
-					static::$storage[ 'table' ] . '!' , E_USER_WARNING );
+					static::$_storage[ 'table' ] . '!' , E_USER_WARNING );
 				return false;
 			}
 			static::_mapFields( );
