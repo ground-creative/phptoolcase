@@ -452,6 +452,7 @@
 			static::_fireEvent( 'before_logout' , array( $user_id , &$destroySession ) );
 			if ( isset( $_SESSION[ 'user_id' ] ) )
 			{ 
+				$options = static::$_options;
 				static::_connection( static::$_options[ 'login_table' ] )
 					->where( 'user_id' , '=' ,  $_SESSION[ 'user_id' ] )
 					->delete( )
@@ -463,12 +464,17 @@
 					$query->where( 'expires' , '<' , $query->raw( 'NOW()' ) )
 						->rawSelect( ' OR `expires` IS NULL' );
 				} )->delete( )->run( );*/
-				if ( @static::$_options[ 'remember_options' ][ 'param' ] )
+				if ( @$_options[ 'remember_options' ][ 'param' ] )
 				{
 					$update = array( static::$_tableColumns[ 'remember' ] => '' );
-					static::_connection( static::$_options[ 'users_table' ] )
+					static::_connection( $_options[ 'users_table' ] )
 						->update( static::_track( $update ) , $_SESSION[ 'user_id' ] )
 						->run( );
+					/*if ( static::getCookie( $_options[ 'remember_options' ][ 'param' ] ) )
+					{
+						//static::setCookie( $options[ 'param' ] , '' , strtotime( '-1 day' ) , $options[ 'path' ] , 
+						//			$options[ 'domain' ] , $options[ 'secure' ] , $options[ 'http_only' ] );
+					}*/
 				}
 			}
 			unset( $_SESSION[ 'token' ] );
@@ -532,7 +538,8 @@
 				if ( $user = static::_checkCookie( ) )
 				{ 
 					return ( static::_processLogin( 
-						$user->{ $columns[ 'unique_key' ] } , 'update' ) ) ? true : false; 
+						$user->{ static::$_tableColumns[ 'unique_key' ] } 
+											, 'update' ) ) ? true : false; 
 				}
 			}
 			if ( !isset( $_SESSION[ 'user_id' ] ) ){ return false; }
@@ -844,8 +851,9 @@
 			if ( static::$_options[ 'use_dates' ] )
 			{
 				if ( !@$columns[ 'created' ] || 
-					!@$columns[ 'update' ] || !@$columns[ 'last_login' ] )
+					!@$columns[ 'updated' ] || !@$columns[ 'last_login' ] )
 				{
+					
 					trigger_error( 'Cannot track user activity , please make sure ' . 
 						' that all columns for use_dates are available' , E_USER_ERROR );
 					return false;
