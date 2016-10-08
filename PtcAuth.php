@@ -33,7 +33,7 @@
 				return static::_processLogin( $rand , 'none' , $expires );
 			}
 			if ( !$user = static::user( $userID ) ){ return false; }
-			return static::_processLogin( $user->{$columns[ 'unique_key' ] } , 'none' , $expires );
+			return static::_processLogin( $user->{ $columns[ 'unique_key' ] } , 'none' , $expires );
 		}
 		/**
 		*
@@ -171,7 +171,7 @@
 			$value = ( $value ) ? $value : @$_SESSION[ 'user_id' ];
 			if ( !$value ){ return null; } // no user id set
 			$columns = static::$_tableColumns;
-			$column = ( is_numeric( $value ) ) ? $columns[ 'unique_key' ] : $columns[ 'email' ];
+			$column = ( is_numeric( $value ) ) ? $columns[ 'unique_key' ] : $columns[ 'username' ];
 			$obj = call_user_func_array( 
 				array( $connection , 'where' ) , array( $column , '=' , $value ) );		
 			return static::_guard( $obj->row( ) );
@@ -365,16 +365,16 @@
 		/**
 		* 0 some error occured , 2 email already exists , 1 created
 		*/
-		public static function create( $email , $password , $extraData = null , $isAdmin = 0 )
+		public static function create( $username , $password , $extraData = null , $isAdmin = 0 )
 		{			
 			if ( !static::_isConfigured( ) ){ return false; }
 			$code = 0;
 			$data = null;
-			static::_fireEvent( 'creating' , array( &$email , &$extraData , &$isAdmin ) );
+			static::_fireEvent( 'creating' , array( &$username , &$extraData , &$isAdmin ) );
 			$columns = static::$_tableColumns;
 			$connection = static::_connection( );
 			$connection->table( static::$_options[ 'users_table' ] )
-				->where( $columns[ 'email' ] , '=' , $email )
+				->where( $columns[ 'username' ] , '=' , $username )
 				->run( );
 			if ( $connection->CountRows( ) > 0 ){ $code = 2; } // email already exists
 			if ( 0 === $code )
@@ -386,7 +386,7 @@
 				(
 					$columns[ 'salt' ] 		=> $user_salt ,
 					$columns[ 'password' ] 	=> $password ,
-					$columns[ 'email' ] 		=> $email ,
+					$columns[ 'username' ] 	=> $username
 				);
 				if ( static::$_options[ 'verify' ] ) // create verification code
 				{
@@ -398,7 +398,7 @@
 				if ( $extraData ) // add extra data if any to the insert
 				{
 					$invalid_keys = array( $columns[ 'password' ] , 
-						$columns[ 'email' ] , $columns[ 'unique_key' ] , $columns[ 'salt' ] );
+						$columns[ 'username' ] , $columns[ 'unique_key' ] , $columns[ 'salt' ] );
 					foreach ( $extraData as $k => $v )
 					{
 						if ( in_array( $k , $invalid_keys ) ){ continue; }
@@ -410,7 +410,7 @@
 							->run( );
 				$code = ( $insert ) ? 1 : 0;
 			}	
-			static::_fireEvent( 'created' , array( $email , $code , $data ) );
+			static::_fireEvent( 'created' , array( $username , $code , $data ) );
 			return $code;
 		}
 		/**
@@ -464,17 +464,17 @@
 					$query->where( 'expires' , '<' , $query->raw( 'NOW()' ) )
 						->rawSelect( ' OR `expires` IS NULL' );
 				} )->delete( )->run( );*/
-				if ( @$_options[ 'remember_options' ][ 'param' ] )
+				if ( @$options[ 'remember_options' ][ 'param' ] )
 				{
 					$update = array( static::$_tableColumns[ 'remember' ] => '' );
-					static::_connection( $_options[ 'users_table' ] )
+					static::_connection( $options[ 'users_table' ] )
 						->update( static::_track( $update ) , $_SESSION[ 'user_id' ] )
 						->run( );
-					/*if ( static::getCookie( $_options[ 'remember_options' ][ 'param' ] ) )
+					if ( static::getCookie( $options[ 'remember_options' ][ 'param' ] ) )
 					{
-						//static::setCookie( $options[ 'param' ] , '' , strtotime( '-1 day' ) , $options[ 'path' ] , 
-						//			$options[ 'domain' ] , $options[ 'secure' ] , $options[ 'http_only' ] );
-					}*/
+						static::setCookie( $options[ 'param' ] , '' , strtotime( '-1 day' ) , $options[ 'path' ] , 
+									$options[ 'domain' ] , $options[ 'secure' ] , $options[ 'http_only' ] );
+					}
 				}
 			}
 			unset( $_SESSION[ 'token' ] );
@@ -486,25 +486,25 @@
 		/**
 		* 0 some error occured , 4 no match , 3 not verified , 2 not active ,  1 logged in
 		*/
-		public static function login( $email , $password )
+		public static function login( $username , $password )
 		{
 			if ( !static::_isConfigured( ) ){ return false; }
 			$code = 0;
-			static::_fireEvent( 'before_login' , array( $email ) );
+			static::_fireEvent( 'before_login' , array( $username ) );
 			$columns = static::$_tableColumns;
 			static::$_guard = false;
-			if ( !$user = static::user( $email ) ){ $code = 4; } // mo match
+			if ( !$user = static::user( $username ) ){ $code = 4; } // mo match
 			else if ( static::$_options[ 'verify' ] && 
 				true !== ( boolean ) $user->{ $columns[ 'verified' ] } ){ $code = 3; } // user is not verified
 			else if ( static::$_options[ 'check_active' ] && 
-				true !== (boolean) $user->{ $columns[ 'active' ] } ){ $code = 2; } // user is not active
+				true !== ( boolean ) $user->{ $columns[ 'active' ] } ){ $code = 2; } // user is not active
 			else
 			{
 				$password = static::_hashPassword( $user->{ $columns[ 'salt' ] } . $password );
 				if ( $password !== $user->{ $columns[ 'password' ] } ){ $code = 4; } // mo match
 			}
 			if ( 0 === $code ){ $code = static::_processLogin( $user->{ $columns[ 'unique_key' ] } ); }
-			static::_fireEvent( 'after_login' , array( $email , $code , static::_guard( $user ) ) );
+			static::_fireEvent( 'after_login' , array( $username , $code , static::_guard( $user ) ) );
 			return $code;
 		}
 		/**
@@ -621,11 +621,12 @@
 		protected static $_tableColumns = array
 		(
 			'salt'			=> 'user_salt' , // required ***
-			'email'		=> 'email' , // required ***
+			'username'	=> 'username' , // required ***
 			'password'	=> 'password' , // required ***
 			'unique_key'	=> 'id' , // required ***
 			'firstname'	=> 'firstname' , // optional
 			'lastname'	=> 'lastname' , // optional
+			'email'		=> 'email' , // optional
 			'group'		=> 'group' , // optional
 			'active'		=> 'is_active' , // optional controlled
 			'admin'		=> 'is_admin' , // optional controlled 
@@ -711,7 +712,11 @@
 				foreach ( static::$_options[ 'guard' ] as $column )
 				{
 					$col = static::$_tableColumns[ $column ];
-					if ( static::$_options[ 'model' ] ){ @$user->remove( $col ); }
+					if ( static::$_options[ 'model' ] && 
+						method_exists( $user , 'remove' ) )
+					{ 
+						$user->remove( $col ); 
+					}
 					else{ unset( $user->{ $col } ); }
 				}
 			}
@@ -874,6 +879,7 @@
 			$query = ' CREATE TABLE ' . static::$_options[ 'users_table' ] . ' ( ';
 			$columns = static::$_tableColumns;
 			$query .= '`' . $columns[ 'unique_key' ] . '` int(11) NOT NULL auto_increment,';
+			$query .= '`' . $columns[ 'username' ] . '` varchar(255) NOT NULL,';
 			if ( @$columns[ 'firstname' ] )
 			{
 				$query .= '`' . $columns[ 'firstname' ] . '` varchar(255) NULL,';
@@ -882,7 +888,10 @@
 			{
 				$query .= '`' . $columns[ 'lastname' ] . '` varchar(255) NULL,';
 			}
-			$query .= '`' . $columns[ 'email' ] . '` varchar(255) NOT NULL,';
+			if ( @$columns[ 'email' ] )
+			{
+				$query .= '`' . $columns[ 'email' ] . '` varchar(255) NULL,';
+			}
 			if ( @$columns[ 'group' ] )
 			{
 				$query .= '`' . $columns[ 'group' ] . '` varchar(255) NULL,';
