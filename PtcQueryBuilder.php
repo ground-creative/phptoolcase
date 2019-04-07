@@ -633,16 +633,15 @@
 			if ( is_numeric( $pos ) ) { $pos = ( $pos + 1 ); }
 			if ( is_null( $type ) ) 
 			{
-				switch ( $value ) 
-				{
-					case is_null( $value ): $type = \PDO::PARAM_NULL;
-					break;
-					case is_int( $value ): $type = \PDO::PARAM_INT;
-					break;
-					case is_bool( $value ): $type = \PDO::PARAM_BOOL;
-					break;
-					default: $type = \PDO::PARAM_STR;
-				}
+			    if (is_null($value)) {
+				$type = \PDO::PARAM_NULL;
+			    } elseif (is_int($value)) {
+				$type = \PDO::PARAM_INT;
+			    } elseif (is_bool($value)) {
+				$type = \PDO::PARAM_BOOL;
+			    } else {
+				$type = \PDO::PARAM_STR;
+			    }
 			}
 			$this->_query->bindValue( $pos , $value , $type );
 		}
