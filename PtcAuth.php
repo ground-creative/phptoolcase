@@ -173,7 +173,7 @@
 			$columns = static::$_tableColumns;
 			$column = ( is_numeric( $value ) ) ? $columns[ 'unique_key' ] : $columns[ 'username' ];
 			$obj = call_user_func_array( 
-				array( $connection , 'where' ) , array( $column , '=' , $value ) );		
+				array( $connection , 'where' ) , array( $column , '=' , $value ) );	
 			return static::_guard( $obj->row( ) );
 		}
 		/**
@@ -230,7 +230,8 @@
 			{
 				$options[ 'remember_options' ] = ( is_array( $options[ 'remember_options' ] ) ) ? 
 					$options[ 'remember_options' ] : array( 'param' => $options[ 'remember_options' ] ); 
-				$options[ 'remember_options' ] = array_merge( static::$_options , $options[ 'remember_options' ] );
+				$options[ 'remember_options' ] = array_merge( static::$_options[ 'remember_options' ] , 
+																$options[ 'remember_options' ] );
 			}
 			static::$_options = array_merge( static::$_options , $options );
 			static::$_options[ 'connection_manager' ] = 
@@ -251,7 +252,7 @@
 			$qb = static::_connection( );
 			if ( static::_checkSetup( static::$_options[ 'login_table' ] ) )
 			{
-				$qb->run( ' CREATE TABLE ' . static::$_options[ 'login_table' ] . ' (
+				$qb->run( ' CREATE TABLE `' . static::$_options[ 'login_table' ] . '` (
 						`id` int(11) NOT NULL auto_increment,
 						`user_id` int(11) NOT NULL, 
 						`session_id` char(32) binary NOT NULL, 
@@ -876,7 +877,7 @@
 		*/
 		protected static function _createUsersTable( )
 		{
-			$query = ' CREATE TABLE ' . static::$_options[ 'users_table' ] . ' ( ';
+			$query = ' CREATE TABLE `' . static::$_options[ 'users_table' ] . '` ( ';
 			$columns = static::$_tableColumns;
 			$query .= '`' . $columns[ 'unique_key' ] . '` int(11) NOT NULL auto_increment,';
 			$query .= '`' . $columns[ 'username' ] . '` varchar(255) NOT NULL,';
@@ -903,7 +904,7 @@
 				$query .= '`' . $columns[ 'verification' ] . '` varchar(65) NOT NULL,';
 				$query .= '`' . $columns[ 'verified' ] . '` tinyint(1) NOT NULL,';
 			}
-			if ( @static::$_options[ 'remember_me' ][ 'param' ] )
+			if ( @static::$_options[ 'remember_options' ][ 'param' ] )
 			{
 				$query .= '`' . $columns[ 'remember' ] . '` char(128) NULL,';
 			}
