@@ -428,8 +428,8 @@
 		(
 			'.php' , '.html' , '.xml', '.gif' , '.jpeg' , '.png' , '.js' , 
 			'.swf' , '.pdf' , '.ppd' , '.atom' , '.avi' , '.torrent' , 
-			'.rep' , '.bz' , '.bz2' , '.css' , '.tpl' , '.jpg' , 'jpgv' ,
-			'.exe' , '.mpeg' , '.mp4' , '.mp3' , '.xhtml' , '.htm'
+			'.rep' , '.bz' , '.bz2' , '.css' , '.tpl' , '.jpg' , '.jpgv' ,
+			'.exe' , '.mpeg' , '.mp4' , '.mp3' , '.xhtml' , '.htm', '.txt'
 		);
 		/**
 		*
