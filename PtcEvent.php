@@ -2,7 +2,7 @@
 
 	/**
 	* PHP TOOLCASE EVENT DISPATCHER CLASS
-	* PHP version 5.3
+	* PHP version 5.4+
 	* @category 	Libraries
 	* @package  	PhpToolCase
 	* @version	1.0.0

@@ -2,7 +2,7 @@
 
 	/**
 	* PHPTOOLCASE ROUTER CLASS
-	* PHP version 5.3
+	* PHP version 5.4+
 	* @category 	Library
 	* @version	1.0.0
 	* @author   	Irony <carlo@salapc.com>
