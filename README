@@ -1,12 +1,11 @@
  
 ##########################################################
 
-PhpToolCase Version 0.9.3b open source project
+PhpToolCase open source project
 
 A powerfull set of tools to speed up the process of coding
 
 ##########################################################
-
 
 
 PhpToolCase is a library to speed up the process of programming in php. 
@@ -16,7 +15,6 @@ All classes are independent, and can be used as stand-alone.
 
 
 Visit phptoolcase.com for complete guides and examples.
-
 
 
 == PROJECT INFO ===================================
@@ -40,7 +38,7 @@ Visit phptoolcase.com for complete guides and examples.
 == Evolution: view TODO
 
 
-== Requirements: php version 5.3+
+== Requirements: php version 5.4+
 
 
 

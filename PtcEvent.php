@@ -5,7 +5,7 @@
 	* PHP version 5.3
 	* @category 	Libraries
 	* @package  	PhpToolCase
-	* @version	0.9.1b
+	* @version	1.0.0
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com

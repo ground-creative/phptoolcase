@@ -6,7 +6,7 @@
 	* to let them work on script shutdown when FATAL error occurs.
 	* PHP version 5.3
 	* @category 	Library
-	* @version	0.9.3b
+	* @version	1.0.0
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
