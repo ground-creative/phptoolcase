@@ -8,7 +8,7 @@ jobs:
   upgrade-version:
     runs-on: ubuntu-latest
     steps:
-      - name: Update Files Version Field
+      - uses: actions/checkout@v2
       - uses: pocket-apps/action-update-version@v1
         with:
           files: 'package.json'
