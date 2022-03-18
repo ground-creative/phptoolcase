@@ -2,9 +2,10 @@
     "name": "phptoolcase/phptoolcase",
     "type": "library",
     "description": "A set of tools to speed up the process of coding",
-    "keywords": ["php developer tools", "php library", "php framework", "dynamic forms", "application programming", "help php", "debug php", "php tools", "php toolcase", "easy php"],
+    "keywords": ["php developer tools", "php library", "php framework", "application programming", "help php", "debug php", "php tools", "php toolcase", "easy php"],
     "homepage": "http://phptoolcase.com",
-    "license": "GPL V2",
+    "license": "GPL-3.0-or-later" ,
+    "version": "1.0.0" ,
     "authors": [
         {
             "name": "Carlo Pietrobattista",
