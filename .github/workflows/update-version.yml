@@ -12,4 +12,4 @@ jobs:
       - uses: pocket-apps/action-update-version@v1
         with:
           version-regexp: '\d+.\d+.\d+'
-          branch-name: 'main'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
