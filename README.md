@@ -21,7 +21,7 @@ Add the package to your composer.json file
 }
 ```
 
-and run "composer update"
+and run **composer update**
 
 ### Stand Alone 
 
