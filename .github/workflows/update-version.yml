@@ -13,4 +13,4 @@ jobs:
         with:
           files: 'package.json'
           version-regexp: '\d+.\d+.\d+'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          branch-name: 'main'
