@@ -17,7 +17,7 @@ Add the package to your composer.json file
 "require": 
 {
 
-        "tuyapiphp/tuyapiphp": "*"
+        "phptoolcase/phptoolcase": "*"
 }
 ```
 
@@ -28,11 +28,21 @@ and run composer update
 Download latest release [from here](https://github.com/ifsale/PhpToolCase/releases/) and include required files to your project.<br>
 
 ## Project Info
- 
-Home: http://phptoolcase.com<br>
-Documentation: http://www.phptoolcase.com/api/0.9.2<br>
-Tutorials: view the guides included with the API documentation<br>
-Wiki Pages: https://github.com/ifsale/PhpToolCase/wiki<br>
-Changes: view the CHANGELOG<br>
-Evolution: view TODO<br>
-Requirements: php 5.4+
+
+### Home
+http://phptoolcase.com
+
+### Documentation
+http://www.phptoolcase.com/api/0.9.2
+
+### Tutorials
+view the guides included with the API documentation
+
+#### Wiki Pages
+https://github.com/ifsale/PhpToolCase/wiki<br>
+
+### Changes
+view CHANGELOG
+
+### Evolution
+view TODO
