@@ -9,6 +9,8 @@ Visit the [project home](http://phptoolcase.com) for complete guides and example
 
 ## Installation
 
+### Composer
+
 Add the package to your composer.json file
 
 ```
@@ -20,6 +22,10 @@ Add the package to your composer.json file
 ```
 
 and run composer update
+
+### Stand Alone 
+
+Download latest release [from here](https://github.com/ifsale/PhpToolCase/releases/) and include required files to your project.<br>
 
 ## Project Info
  
