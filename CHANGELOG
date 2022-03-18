@@ -434,8 +434,3 @@ A powerfull set of tools to speed up the process of coding
 	-	added $_SESSION['debugStarted'] to check  if debugLoader() has already been called
 	
 	- 	readded the __constructor to call $this->debugLoader()
-
-
-
-
->>>>>>> master
