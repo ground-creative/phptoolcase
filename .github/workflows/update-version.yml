@@ -8,6 +8,7 @@ jobs:
   update-version-number:
     runs-on: ubuntu-latest
     steps:
+      - run: echo "GITHUB_WORKSPACE = $GITHUB_WORKSPACE"
       - uses: actions/checkout@v2
       - uses: pocket-apps/action-update-version@v1
         with:
