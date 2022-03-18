@@ -1,0 +1,16 @@
+
+name: Update Version
+on:
+  release:
+    types: [published]
+
+jobs:
+  upgrade-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Files Version Field
+      - uses: pocket-apps/action-update-version@v1
+        with:
+          files: 'package.json'
+          version-regexp: '\d+.\d+.\d+'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
