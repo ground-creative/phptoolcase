@@ -1,16 +1,15 @@
 
-name: Update Version
+name: Update Version Number
 on:
   release:
     types: [published]
 
 jobs:
-  upgrade-version:
+  update-version-number:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: pocket-apps/action-update-version@v1
         with:
-          files: 'package.json'
           version-regexp: '\d+.\d+.\d+'
           branch-name: 'main'
