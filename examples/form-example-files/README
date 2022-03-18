@@ -1,9 +1,0 @@
-
-EXAMPLES FOLDER FOR FORMS GENERATOR & VALIDATOR COMPONENT
-
-
-- ptcforms-ex1.php			login form example file
-- ptcforms-ex2.php			contact form example file
-- ptcforms-ex3.php			registration form example file
-- ptcforms-ex4.php			contact form example file with event handlers
-- ptcforms-ui-plugins.php		ui-plugins includes for all form examples
