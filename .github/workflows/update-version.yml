@@ -8,10 +8,11 @@ jobs:
   update-version-number:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "GITHUB_WORKSPACE = $GITHUB_WORKSPACE"
       - uses: actions/checkout@v2
       - uses: pocket-apps/action-update-version@v1
         with:
           files: 'composer.json'
           version-regexp: '\d+.\d+.\d+'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+         echo ${GITHUB_REF#refs/*/} ${tag}
