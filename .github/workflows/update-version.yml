@@ -16,11 +16,6 @@ jobs:
           files: 'composer.json'
           version-regexp: '\d+.\d+.\d+'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
-         echo $tag
-      - run: |
-          NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
       - uses: damienaicheh/extract-version-from-tag-action@v1.0.0
       - run: |
-         echo $MAJOR $MINOR $PATCH
-          echo "New version: ${NEW_VERSION}"
+         sed -i '/* @version/c\\t* @version\t$MAJOR.$MINOR.$PATCH' ptc*.php
