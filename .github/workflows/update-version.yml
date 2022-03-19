@@ -20,7 +20,6 @@ jobs:
          echo $tag
       - run: |
           NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
-      - name: Extract version from tag
       - uses: damienaicheh/extract-version-from-tag-action@v1.0.0
       - run: |
          echo $MAJOR $MINOR $PATCH
