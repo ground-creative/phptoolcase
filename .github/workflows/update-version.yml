@@ -15,4 +15,5 @@ jobs:
           version-regexp: '\d+.\d+.\d+'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-         echo ${GITHUB_REF#refs/*/} ${tag}
+         NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3) | cut -c 2- | cut -c 1-13
+         echo "New version: ${NEW_VERSION}"
