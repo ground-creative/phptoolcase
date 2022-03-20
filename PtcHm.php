@@ -4,7 +4,7 @@
 	* PHP TOOLCASE HANDYMAN CLASS
 	* PHP version 5.4+
 	* @category 	Library
-	* @version	1.2.9
+	* @version	1.0.0
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
