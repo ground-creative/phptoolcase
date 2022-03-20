@@ -4,7 +4,7 @@
 	* PHPTOOLCASE HELPER FUNCTIONS FILE
 	* PHP version 5.4+
 	* @category 	Library
-	* @version	1.9.4
+	* @version	1.1.7
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
