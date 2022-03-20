@@ -25,10 +25,4 @@ jobs:
       - name: Commit Changes To Master And Release
         run: |  
           echo ${GITHUB_REF#refs/*/}
-          git config --global user.name 'ifsale'
-          git config --global user.email 'irony00100@gmail.com'
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git commit -am "ci: update version to v$MAJOR.$MINOR.$PATCH"
-          git push origin HEAD:master
-          git tag -f -a v$MAJOR.$MINOR.$PATC-stable -m "update version number"
-          git push origin -f v$MAJOR.$MINOR.$PATC-stable
+
