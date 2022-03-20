@@ -1,8 +1,9 @@
 
 name: Update Version Number
-on:
-  release:
-    types: [published]
+on:  
+  push:
+    tags:
+      - '*'
 
 jobs:
   update-version-number:
