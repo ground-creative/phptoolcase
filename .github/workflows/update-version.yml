@@ -11,12 +11,12 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Update Composer.json Version Field 
-        uses: pocket-apps/action-update-version@v1
-        with:
-          files: 'composer.json'
-          version-regexp: '\d+.\d+.\d+'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Update Composer.json Version Field 
+      #  uses: pocket-apps/action-update-version@v1
+      #  with:
+      #    files: 'composer.json'
+      #    version-regexp: '\d+.\d+.\d+'
+      #    repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Extract Version From Latest Tag
         uses: damienaicheh/extract-version-from-tag-action@v1.0.0
       - name: Update Php Files With New Version Number
