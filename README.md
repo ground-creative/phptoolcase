@@ -25,7 +25,7 @@ and run **composer update**
 
 ### Stand Alone 
 
-Download latest release [from here](https://github.com/ifsale/PhpToolCase/releases/) and include required files to your project.<br>
+Download latest release [from here](https://github.com/ground-creative/phptoolcase/releases/) and include required files to your project.<br>
 
 ## Project Info
 
@@ -39,7 +39,7 @@ http://www.phptoolcase.com/api/0.9.2
 view the guides included with the API documentation
 
 #### Wiki Pages
-https://github.com/ifsale/PhpToolCase/wiki<br>
+https://github.com/ground-creative/phptoolcase/wiki<br>
 
 ### Changes
 view CHANGELOG
