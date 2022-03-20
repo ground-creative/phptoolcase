@@ -12,13 +12,13 @@ jobs:
         with:
           fetch-depth: 0
       - name: Update Files Version Field 
-      - uses: pocket-apps/action-update-version@v1
+        uses: pocket-apps/action-update-version@v1
         with:
           files: 'composer.json'
           version-regexp: '\d+.\d+.\d+'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Extract version from tag
-      - uses: damienaicheh/extract-version-from-tag-action@v1.0.0
+        uses: damienaicheh/extract-version-from-tag-action@v1.0.0
       - run: |
           sed -i '/* @version/c\\t* @version\t$MAJOR.$MINOR.$PATCH' ptc-helpers.php
       - run: |
