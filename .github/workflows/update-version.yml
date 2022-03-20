@@ -1,4 +1,3 @@
-
 name: Update Version Number
 on:
   release:
@@ -19,11 +18,11 @@ jobs:
       #    repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Extract Version From Latest Tag
         uses: damienaicheh/extract-version-from-tag-action@v1.0.0
-      - name: Update Php Files With New Version Number
+      - name: Update Files With New Version Number
         run: |
           sed -i "/* @version/c\\\t* @version\t$MAJOR.$MINOR.$PATCH" Ptc*.php ptc-helpers.php
           sed -i '/version/c\   \"version\" : \"$MAJOR.$MINOR.$PATCH\",' composer.json
-      - name: Commit Changes To Master And Release
+      - name: Commit Changes To Branches ${GITHUB_REF##*/} And ${{github.event.release.target_commitish}}
         run: |  
           # echo "Current tag ${GITHUB_REF##*/}" 
           # echo "Target branch ${{github.event.release.target_commitish}}"
