@@ -24,6 +24,7 @@ jobs:
           sed -i "/* @version/c\\\t* @version\t$MAJOR.$MINOR.$PATCH" Ptc*.php ptc-helpers.php
       - name: Commit Changes To Master And Release
         run: |  
+          echo "current branch ${GITHUB_REF#refs/heads/}"
           git config --global user.name 'ground-creative'
           git config --global user.email 'irony00100@gmail.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
