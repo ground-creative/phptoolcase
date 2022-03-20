@@ -3,50 +3,47 @@
 #  path = ../.gitalias
 
 [alias]
-   rebuild-tags = !git tag -l | xargs git tag -d && git fetch -t	# rebuild local tags from remote
-   last-com = log -1 HEAD --stat						# show last commit
-   uncommit = reset --soft HEAD~1						# reset last commit
-   # com-all = commit -am 								
-   log-pretty = log --pretty=oneline 					# show list of commits
-   list-branches = "!f() { echo "Listing branches"; git branch -vva; }; f"
-   # add and commit all changes
-   com-all = "!f() {\
+
+	current = rev-parse --abbrev-ref HEAD					# get current branch
+
+	rebuild-tags = !git tag -l | xargs git tag -d && git fetch -t	# rebuild local tags from remote
+   
+	last-com = log -1 HEAD --stat							# show last commit
+   
+	uncommit = reset --soft HEAD~1						# reset last commit	
+   
+	log-pretty = log --pretty=oneline 						# show list of commits
+   
+	list-branches = "!f() { echo "Listing branches"; git branch -vva; }; f"
+   
+	# add and commit all changes
+	# params: commit message
+	com-all = "!f() {\
 		echo \"\\033[33m- Adding Commit with all modifications\\033[0m\";\
 		echo \"\\033[36m\"'-- Command: git commit -am \"'\"$1\"'\"'\"\\033[0m\";\
 		git commit -am \"$1\";\
 	}; f"
-   # add,commit and push all changes
-   push-all = "!f() {\
+	
+	# add,commit and push all changes
+	# params: commit message
+	push-all = "!f() {\
 		git com-all \"$1\";\
 		echo \"\\033[33m- Pushing commit\\033[0m\";\
 		echo \"\\033[36m-- Command: git push origin\\033[0m\";\
 		git push origin;\
 	}; f"
 	
-    update-release = "!f() {\
+	# update latest release files from current branch
+	# params: commit message (optional)
+	update-release = "!f() {\
    		lastrev=$(git rev-list --tags --max-count=1);\
 		tag=$(git describe --tags "$lastrev");\
-		commit_msg='ci: update version to ' $tag;\
-		echo $commit_msg;\
-		echo \"\\033[33m- Updating release  with latest commit\\033[0m\";\
-	}; f"
-	
-	#	echo \"\\033[36m-- Command: git push origin $3 $2\\033[0m\";\
-	#	git tag -f -a ${GITHUB_REF##*/} -m "ci: update version to ${GITHUB_REF##*/}";\
-	#	git push origin -f ${GITHUB_REF##*/};\
-	
-    foo = "!f() {\
-		$(if [ $2 ] && [ $3 ]; then\
-		echo echo \"\\033[33m- Pushing commit to branch $2\\033[0m\";\
-		echo \"\\033[36m-- Command: git push origin $3 $2\\033[0m\";\
-		git push origin $2 $3;\
-		else echo echo \"\\033[33m- Pushing commit to current branch\\033[0m\";\
-		echo \"\\033[36m-- Command: git push $3\\033[0m\";\
-		git push $2;\
-		fi); \
-	}; f"
-	
-    test = "!f() {\
-		lastrev=$(git rev-list --tags --max-count=1);\
-		echo $(git describe --tags "$lastrev");\
+		commit_msg=\""ci: update version to $tag"\";\
+		echo \"\\033[33m- Deleting release $tag\\033[0m\";\
+		echo \"\\033[36m\"'-- Command: git tag -f -a \"'\"$tag\"'\" -m \"'\"$commit_msg\"'\"'\"\\033[0m\";\
+		git tag -f -a $tag -m \"$commit_msg\";\
+		target=$(git rev-parse --abbrev-ref HEAD);\
+		echo \"\\033[33m- Creating release with tag $tag from target $target\\033[0m\";\
+		echo \"\\033[36m-- Command: git push origin -f $tag\\033[0m\";\
+		git push origin -f $tag;\
 	}; f"
