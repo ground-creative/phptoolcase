@@ -14,7 +14,7 @@
     "easy php"
   ],
   "homepage": "http://phptoolcase.com",
-  "license": "GPL V2",
+  "license": "GPL-2.0-or-later",
   "version": "1.2.3",
   "authors": [
     {
