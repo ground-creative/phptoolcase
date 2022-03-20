@@ -26,8 +26,8 @@
     update-release = "!f() {\
    		lastrev=$(git rev-list --tags --max-count=1);\
 		tag=$(git describe --tags "$lastrev");\
-		commit_msg="update version to";\
-		echo $tag;\
+		commit_msg='ci: update version to ' $tag;\
+		echo $commit_msg;\
 		echo \"\\033[33m- Updating release  with latest commit\\033[0m\";\
 	}; f"
 	
