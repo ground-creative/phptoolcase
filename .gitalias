@@ -12,7 +12,7 @@
    # add and commit all changes
    com-all = "!f() {\
 		echo \"\\033[33mAdding Commit with all modifications\\033[0m\";\
-		echo 'Command: git commit -am \"'\"$1\"'\"';\
+		echo \"\\033[36m\"'Command: git commit -am \"'\"$1\"'\"'\"\\033[0m\";\
 		git commit -am \"$1\";\
 	}; f"
    # add,commit and push all changes
