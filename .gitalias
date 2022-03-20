@@ -23,7 +23,4 @@
 		git push;\
 	}; f"
 	
-	shortcut = "!f() \
-	{\
-		echo Hello world!; \
-	}; f"
+    foo='$(if [ x"`pwd`" = x"$HOME" ] ; then echo echo; else echo echo foo; fi)'
