@@ -14,4 +14,7 @@
 		echo "Adding Commit with all modifications";\
 		echo 'Command: git commit -am \"'\"$1\"'\"';\
 		git commit -am \"$1\";\
+		echo "Pushing commit to current branch";\
+		echo "Command: git push";\
+		git push;\
 	}; f"
