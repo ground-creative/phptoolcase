@@ -9,15 +9,13 @@
    # com-all = commit -am 								# add and commit all
    log-pretty = log --pretty=oneline 					# show list of commits
    list-branches = "!f() { echo "Listing branches"; git branch -vva; }; f"
-   push-all = "!f() {\
-		echo "Adding Commit with all modifications";\
-		echo 'Command: git commit -am \"'\"$1\"'\"';\
-		git commit -am \"$1\";\
-		echo "Pushing commit to current branch";\
-		echo "Command: git push";\
-		git push;\
-	}; f"
    com-all = "!f() {\
 		echo 'Command: git commit -am \"'\"$1\"'\"';\
 		git commit -am \"$1\";\
+	}; f"
+   push-all = "!f() {\
+		git com-all \"$1\";\
+		echo "Pushing commit to current branch";\
+		echo "Command: git push";\
+		git push;\
 	}; f"
