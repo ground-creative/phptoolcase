@@ -20,10 +20,9 @@ jobs:
       - name: Extract version from tag
         uses: damienaicheh/extract-version-from-tag-action@v1.0.0
       - run: |
-          sed -i '/* @version/c\\t* @version\t$MAJOR.$MINOR.$PATCH' ptc-helpers.php
-      - run: |
-          git config --global user.name 'Irony'
+          sed -i '/* @version/c\\t* @version\t${MAJOR}.$MINOR.$PATCH' ptc-helpers.php
+          git config --global user.name 'ifsale'
           git config --global user.email 'irony00100@gmail.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git commit -am "Automated changes"
+          git commit -am "ci: updated version to $MAJOR"
           git push origin HEAD:master
