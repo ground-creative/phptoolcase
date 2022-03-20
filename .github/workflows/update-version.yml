@@ -24,5 +24,10 @@ jobs:
           sed -i "/* @version/c\\\t* @version\t$MAJOR.$MINOR.$PATCH" Ptc*.php ptc-helpers.php
       - name: Commit Changes To Master And Release
         run: |  
-          echo the tag ${GITHUB_REF#refs/*/} ${GITHUB_REF##*/}
-
+          git config --global user.name 'ifsale'
+          git config --global user.email 'irony00100@gmail.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git commit -am "ci: update version to v$MAJOR.$MINOR.$PATCH"
+          git push origin HEAD:master
+          git tag -f -a ${GITHUB_REF##*/} -m "update version number"
+          git push origin -f ${GITHUB_REF##*/}
