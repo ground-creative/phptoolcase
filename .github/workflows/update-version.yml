@@ -18,6 +18,11 @@ jobs:
           version-regexp: '\d+.\d+.\d+'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: damienaicheh/extract-version-from-tag-action@v1.0.0
+      - uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "version"
+          replace: "test"
+          include: "ptc-helpers.php"
       - run: |
           sed -i 's/version/test/' ptc-helpers.php
       - run: |
