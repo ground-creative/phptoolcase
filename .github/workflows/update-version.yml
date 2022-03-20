@@ -24,11 +24,12 @@ jobs:
           sed -i "/* @version/c\\\t* @version\t$MAJOR.$MINOR.$PATCH" Ptc*.php ptc-helpers.php
       - name: Commit Changes To Master And Release
         run: |  
-          echo "current branch ${GITHUB_REF#refs/heads/}"
+          echo "Current tag ${GITHUB_REF##*/} 
+          echo "Target branch ${{github.event.release.target_commitish}}"
           git config --global user.name 'ground-creative'
           git config --global user.email 'irony00100@gmail.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git commit -am "ci: update version to $MAJOR.$MINOR.$PATCH"
-          git push origin HEAD:${GITHUB_REF#refs/heads/}
+          git push origin HEAD:${{github.event.release.target_commitish}}
           git tag -f -a ${GITHUB_REF##*/} -m "ci: updated files with version $MAJOR.$MINOR.$PATCH"
           git push origin -f ${GITHUB_REF##*/}
