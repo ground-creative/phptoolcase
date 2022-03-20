@@ -24,7 +24,7 @@ jobs:
           sed -i "/* @version/c\\\t* @version\t$MAJOR.$MINOR.$PATCH" Ptc*.php ptc-helpers.php
       - name: Commit Changes To Master And Release
         run: |  
-          echo "Current tag ${GITHUB_REF##*/} 
+          echo "Current tag ${GITHUB_REF##*/}" 
           echo "Target branch ${{github.event.release.target_commitish}}"
           git config --global user.name 'ground-creative'
           git config --global user.email 'irony00100@gmail.com'
