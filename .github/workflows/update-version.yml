@@ -20,4 +20,4 @@ jobs:
       - run: |
           sed -i '/* @version/c\\t* @version\t$MAJOR.$MINOR.$PATCH' Ptc*.php
       - run: |
-          sed -i '/* @version/c\\t* @version\t$MAJOR.$MINOR.$PATCH' ptc*.php
+          sed -i '/* @version/c\\t* @version\t$MAJOR.$MINOR.$PATCH' ptc-helpers.php
