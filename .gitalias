@@ -18,7 +18,7 @@
    # add,commit and push all changes
    push-all = "!f() {\
 		git com-all \"$1\";\
-		echo "Pushing commit to current branch";\
-		echo "Command: git push";\
+		echo \"\\033[31mPushing commit to current branch\\033[0m\";\
+		echo \"\\033[31mCommand: git push\\033[0m\";\
 		git push;\
 	}; f"
