@@ -17,16 +17,11 @@ jobs:
           version-regexp: '\d+.\d+.\d+'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: damienaicheh/extract-version-from-tag-action@v1.0.0
-      - uses: jacobtomlinson/gha-find-replace@v2
-        with:
-          find: "version"
-          replace: "test"
-          include: "ptc-helpers.php"
-      - run: | 
-          echo $modifiedFiles
       - run: |
-          sed -i '/* @version/c\\t* @version\t$MAJOR.$MINOR.$PATCH' Ptc*.php
-      - uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: 'master'
+          sed -i '/* @version/c\\t* @version\t$MAJOR.$MINOR.$PATCH' ptc-helpers.php
+      - run: |
+          git config --global user.name 'Irony'
+          git config --global user.email 'irony00100@gmail.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git commit -am "Automated changes"
+          git push
