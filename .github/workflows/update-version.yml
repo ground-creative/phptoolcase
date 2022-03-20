@@ -27,7 +27,7 @@ jobs:
           git config --global user.name 'ifsale'
           git config --global user.email 'irony00100@gmail.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git commit -am "ci: update version to v$MAJOR.$MINOR.$PATCH"
-          git push origin HEAD:master
-          git tag -f -a ${GITHUB_REF##*/} -m "update version number"
+          git commit -am "ci: update version to $MAJOR.$MINOR.$PATCH"
+          git push origin HEAD:${GITHUB_REF#refs/heads/}
+          git tag -f -a ${GITHUB_REF##*/} -m "ci: updated files with version $MAJOR.$MINOR.$PATCH"
           git push origin -f ${GITHUB_REF##*/}
