@@ -23,7 +23,8 @@ jobs:
           find: "version"
           replace: "test"
           include: "ptc-helpers.php"
-      - run: | echo $modifiedFiles
+      - run: | 
+          echo $modifiedFiles
       - run: |
           sed -i '/* @version/c\\t* @version\t$MAJOR.$MINOR.$PATCH' Ptc*.php
       - uses: ad-m/github-push-action@v0.6.0
