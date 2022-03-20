@@ -18,10 +18,22 @@
    # add,commit and push all changes
    push-all = "!f() {\
 		git com-all \"$1\";\
-		echo \"\\033[33m- Pushing commit to current branch\\033[0m\";\
+		echo \"\\033[33m- Pushing commit\\033[0m\";\
 		echo \"\\033[36m-- Command: git push origin\\033[0m\";\
 		git push origin;\
 	}; f"
+	
+    update-release = "!f() {\
+   		lastrev=$(git rev-list --tags --max-count=1);\
+		tag=$(git describe --tags "$lastrev");\
+		commit_msg="update version to";\
+		echo $tag;\
+		echo \"\\033[33m- Updating release  with latest commit\\033[0m\";\
+	}; f"
+	
+	#	echo \"\\033[36m-- Command: git push origin $3 $2\\033[0m\";\
+	#	git tag -f -a ${GITHUB_REF##*/} -m "ci: update version to ${GITHUB_REF##*/}";\
+	#	git push origin -f ${GITHUB_REF##*/};\
 	
     foo = "!f() {\
 		$(if [ $2 ] && [ $3 ]; then\
@@ -32,4 +44,9 @@
 		echo \"\\033[36m-- Command: git push $3\\033[0m\";\
 		git push $2;\
 		fi); \
+	}; f"
+	
+    test = "!f() {\
+		lastrev=$(git rev-list --tags --max-count=1);\
+		echo $(git describe --tags "$lastrev");\
 	}; f"
