@@ -51,3 +51,5 @@
 		echo \"\\033[36m-- Command: git push origin -f $tag\\033[0m\";\
 		git push origin -f $tag;\
 	}; f"
+
+	# some test 
