@@ -22,10 +22,11 @@ jobs:
         run: |
           sed -i "/* @version/c\\\t* @version\t$MAJOR.$MINOR.$PATCH" Ptc*.php ptc-helpers.php
           sed -i '/version/c\   \"version\" : \"$MAJOR.$MINOR.$PATCH\",' composer.json
-      - name: Commit Changes To Branches ${{GITHUB_REF##*/}} And ${{github.event.release.target_commitish}}
+      - name: Commit Changes To Branches TAGNAME And ${{github.event.release.target_commitish}}
         run: |  
           # echo "Current tag ${GITHUB_REF##*/}" 
           # echo "Target branch ${{github.event.release.target_commitish}}"
+          echo "Tag ${{github.event.pull_request.base.ref}}"
           git config --global user.name 'ground-creative'
           git config --global user.email 'irony00100@gmail.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
