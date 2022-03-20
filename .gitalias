@@ -1,0 +1,9 @@
+[alias]
+    rt = !git tag -l | xargs git tag -d && git fetch -t	# rebuild local tags from remote
+    st = status
+    ft  = fetch
+    br = branch
+    co = checkout
+    ll   = log --oneline
+    last = log -1 HEAD --stat					# show last commit
+    ac = commit -am 						# add and commit all
