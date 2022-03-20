@@ -12,6 +12,6 @@
    list-branches = "!f() { echo "Listing branches"; git branch -vva; }; f"
    push-all = "!f() {\
 		echo "Adding Commit with all modifications";\
-		echo "Command: git commit -am '\"$1\"'";\
+		echo "Command: git commit -am $1";\
 		git commit -am \"$1\";\
 	}; f"
