@@ -21,7 +21,7 @@ jobs:
       - name: Update Files With New Version Number
         run: |
           # sed -i "/* @version/c\\\t* @version\t$MAJOR.$MINOR.$PATCH" Ptc*.php ptc-helpers.php
-          # sed -i "/* @version/c\\\t* @version\t${GITHUB_REF##*/}" Ptc*.php ptc-helpers.php
+          sed -i "/* @version/c\\\t* @version\t${GITHUB_REF##*/}" Ptc*.php ptc-helpers.php
           sed -i "/version/c\  \"version\": \"${GITHUB_REF##*/}\"," composer.json
       - name: Commit Changes To Target And Release Branches
         run: |  
