@@ -19,6 +19,6 @@
    push-all = "!f() {\
 		git com-all \"$1\";\
 		echo \"\\033[33mPushing commit to current branch\\033[0m\";\
-		echo \"\\033[36mCommand: git push\\036[0m\";\
+		echo \"\\033[36mCommand: git push\\033[0m\";\
 		git push;\
 	}; f"
