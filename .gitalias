@@ -1,9 +1,16 @@
+# Add the following 2 lines to your .git/config file
+# [include]
+#  path = ../.gitalias
+
 [alias]
-    rt = !git tag -l | xargs git tag -d && git fetch -t	# rebuild local tags from remote
-    st = status
-    ft  = fetch
-    br = branch
-    co = checkout
-    ll   = log --oneline
-    last = log -1 HEAD --stat					# show last commit
-    ac = commit -am 						# add and commit all
+   rebuild-tags = !git tag -l | xargs git tag -d && git fetch -t	# rebuild local tags from remote
+   last-com = log -1 HEAD --stat						# show last commit
+   uncommit = reset --soft HEAD~1						# reset last commit
+   com-all = commit -am 								# add and commit all
+  # push-all = commit -am $1 				                        # add,commit and push all
+   log-pretty = log --pretty=oneline 					# show list of commits
+   list-branches = "!f() { echo "Listing branches"; git branch -vva; }; f"
+   push-all = "!f() {\
+		echo "Commiting all modifications";\
+		git commit -am \"$1\";\
+	}; f"
