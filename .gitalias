@@ -34,7 +34,7 @@
 		echo \"\\033[36m-- Command: git push origin $3 $2\\033[0m\";\
 		git push origin $2 $3;\
 		else echo echo \"\\033[33m- Pushing commit to current branch\\033[0m\";\
-		echo \"\\033[36m-- Command: git push $3\\033[0m\";\
+		echo \"\\033[36m-- Command: git push $2\\033[0m\";\
 		git push $2;\
 		fi); \
 	}; f"
