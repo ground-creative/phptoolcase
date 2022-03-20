@@ -23,7 +23,7 @@ jobs:
         run: |
           sed -i "/* @version/c\\\t* @version\t$MAJOR.$MINOR.$PATCH" ptc-helpers.php
       - name: Commit Changes To Master
-      - run: |  
+        run: |  
           git config --global user.name 'ifsale'
           git config --global user.email 'irony00100@gmail.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
