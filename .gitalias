@@ -11,14 +11,14 @@
    list-branches = "!f() { echo "Listing branches"; git branch -vva; }; f"
    # add and commit all changes
    com-all = "!f() {\
-		echo \"\\033[33mAdding Commit with all modifications\\033[0m\";\
-		echo \"\\033[36m\"'Command: git commit -am \"'\"$1\"'\"'\"\\033[0m\";\
+		echo \"\\033[33m- Adding Commit with all modifications\\033[0m\";\
+		echo \"\\033[36m\"'-- Command: git commit -am \"'\"$1\"'\"'\"\\033[0m\";\
 		git commit -am \"$1\";\
 	}; f"
    # add,commit and push all changes
    push-all = "!f() {\
 		git com-all \"$1\";\
-		echo \"\\033[33mPushing commit to current branch\\033[0m\";\
-		echo \"\\033[36mCommand: git push\\033[0m\";\
+		echo \"\\033[33m- Pushing commit to current branch\\033[0m\";\
+		echo \"\\033[36m-- Command: git push\\033[0m\";\
 		git push;\
 	}; f"
