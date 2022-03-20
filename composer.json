@@ -15,7 +15,7 @@
   ],
   "homepage": "http://phptoolcase.com",
   "license": "GPL-2.0-or-later",
-  "version": "1.0.2",
+   "version" : "$MAJOR.$MINOR.$PATCH",
   "authors": [
     {
       "name": "Carlo Pietrobattista",
