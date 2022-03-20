@@ -13,6 +13,10 @@
 	uncommit = reset --soft HEAD~1						# reset last commit	
    
 	log-pretty = log --pretty=oneline 						# show list of commits
+	
+	no-assume-unchanged = "!f() { git update-index --no-assume-unchanged $1; }; f"
+	
+	assume-unchanged = "!f() { git update-index --assume-unchanged $1; }; f"
    
 	list-branches = "!f() { echo "Listing branches"; git branch -vva; }; f"
    
