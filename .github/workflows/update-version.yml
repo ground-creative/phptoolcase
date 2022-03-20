@@ -18,6 +18,6 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: damienaicheh/extract-version-from-tag-action@v1.0.0
       - run: |
-          sed -i '/* @version/c\\t* @version\t$MAJOR.$MINOR.$PATCH' Ptc*.php
+          sed -i 's/version/test' ptc-helpers.php
       - run: |
-          sed -i '/* @version/c\\t* @version\t$MAJOR.$MINOR.$PATCH' ptc-helpers.php
+          sed -i '/* @version/c\\t* @version\t$MAJOR.$MINOR.$PATCH' Ptc*.php
