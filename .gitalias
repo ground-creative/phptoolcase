@@ -22,3 +22,8 @@
 		echo \"\\033[36m-- Command: git push\\033[0m\";\
 		git push;\
 	}; f"
+	
+	shortcut = "!f() \
+	{\
+		echo Hello world!; \
+	}; f"
