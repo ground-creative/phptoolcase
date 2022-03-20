@@ -18,18 +18,23 @@
    # add,commit and push all changes
    push-all = "!f() {\
 		git com-all \"$1\";\
-		echo \"\\033[33m- Pushing commit to current branch\\033[0m\";\
-		echo \"\\033[36m-- Command: git push\\033[0m\";\
-		git push;\
+		$(if [ $2 ] && [ $3 ]; then\
+		echo echo \"\\033[33m- Pushing commit to branch $2\\033[0m\";\
+		echo \"\\033[36m-- Command: git push origin $3 $2\\033[0m\";\
+		git push origin $2 $3;\
+		else echo echo \"\\033[33m- Pushing commit to current branch\\033[0m\";\
+		echo \"\\033[36m-- Command: git push $3\\033[0m\";\
+		git push $2;\
+		fi); \
 	}; f"
 	
     foo = "!f() {\
-		$(if [ $2 ]; then\
+		$(if [ $2 ] && [ $3 ]; then\
 		echo echo \"\\033[33m- Pushing commit to branch $2\\033[0m\";\
 		echo \"\\033[36m-- Command: git push origin $3 $2\\033[0m\";\
-		git push origin $3 $2;\
+		git push origin $2 $3;\
 		else echo echo \"\\033[33m- Pushing commit to current branch\\033[0m\";\
 		echo \"\\033[36m-- Command: git push $3\\033[0m\";\
-		git push $3;\
+		git push $2;\
 		fi); \
 	}; f"
