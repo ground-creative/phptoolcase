@@ -1,2 +1,4 @@
 .gitattributes export-ignore
 TODO export-ignore
+CHANGELOG export-ignore
+.gitalias export-ignore
