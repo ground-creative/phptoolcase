@@ -99,8 +99,13 @@
 				FILE="$(echo "$line" | cut -d' ' -f1)";\
 				OPTION="$(echo "$line" | cut -d' ' -f2)";\
 				if [ $OPTION = "export-ignore" ]; then\
-					echo \"\\033[36m-- Command: git rm --cached $FILE\\033[0m\";\
-					git rm --cached $FILE;\
+					if [ -d "$FILE" ]; then\
+						echo \"\\033[36m-- Command: git rm -r --cached $FILE\\033[0m\";\
+						git rm -r --cached $FILE;\
+					else\
+						echo \"\\033[36m-- Command: git rm --cached $FILE\\033[0m\";\
+						git rm --cached $FILE;\
+					fi;\
 				fi;\
 			done <$input;\
 			LASTLINE=$(tail -n 1 $input);\
