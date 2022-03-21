@@ -33,4 +33,4 @@ jobs:
           git commit -am "ci: update version to ${GITHUB_REF##*/}"
           git push origin HEAD:${{github.event.release.target_commitish}}
           git tag -f -a ${GITHUB_REF##*/} -m "ci: update version to ${GITHUB_REF##*/}"
-          git push origin -f ${GITHUB_REF##*/}
+          git push origin -f ${GITHUB_REF##*/} 
