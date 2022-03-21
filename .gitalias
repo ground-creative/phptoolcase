@@ -36,10 +36,16 @@
 		fi;\
 	}; f"
    
-	# add and commit all changes, params: commit message
+	# add and commit all changes, params: commit message (opional, the last commit will be used if not set)
 	com-all = "!f() {\
 		echo \"\\033[33m- Adding Commit with all modifications\\033[0m\";\
-		echo \"\\033[36m\"'-- Command: git commit -am \"'\"$1\"'\"'\"\\033[0m\";\
+		if [ $1 ]; then\
+			echo \"\\033[36m\"'-- Command: git commit -am \"'\"$1\"'\"'\"\\033[0m\";\
+			git commit -am \"$1\";\
+		else\
+			echo \"\\033[36m\"'-- Command: git commit -a --reuse-message=HEAD \"'\"$1\"'\"'\"\\033[0m\";\
+			git commit -a --reuse-message=HEAD;\
+		fi;\
 		git commit -am \"$1\";\
 	}; f"
 	
@@ -52,8 +58,7 @@
 	}; f"
 	
 	# show config details, ex: "git show-cmd" "git show-cmd alias" "git show-cmd alias push"
-	show-cmd = \
-		"!f() { \
+	show-cmd = "!f() { \
 		"something";\
 		sep="?" ;\
 		name=${1:-alias};\
@@ -112,8 +117,13 @@
 			FILE="$(echo "$LASTLINE" | cut -d' ' -f1)";\
 			OPTION="$(echo "$LASTLINE" | cut -d' ' -f2)";\
 			if [ $OPTION = "export-ignore" ]; then\
+				if [ -d "$FILE" ]; then\
+					echo \"\\033[36m-- Command: git rm -r --cached $FILE\\033[0m\";\
+					git rm -r --cached $FILE;\
+				else\
 					echo \"\\033[36m-- Command: git rm --cached $FILE\\033[0m\";\
 					git rm --cached $FILE;\
+				fi;\
 			fi;\
 		fi;\
 	}; f"
