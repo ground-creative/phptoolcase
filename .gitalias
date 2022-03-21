@@ -43,7 +43,7 @@
 			echo \"\\033[36m\"'-- Command: git commit -am \"'\"$1\"'\"'\"\\033[0m\";\
 			git commit -am \"$1\";\
 		else\
-			echo \"\\033[36m\"'-- Command: git commit -a --reuse-message=HEAD \"'\"$1\"'\"'\"\\033[0m\";\
+			echo \"\\033[36m-- Command: git commit -a --reuse-message=HEAD\\033[0m\";\
 			git commit -a --reuse-message=HEAD;\
 		fi;\
 		git commit -am \"$1\";\
@@ -51,7 +51,11 @@
 	
 	# add,commit and push all changes, params: commit message
 	push-all = "!f() {\
-		git com-all \"$1\";\
+		if [ $1 ]; then\
+			git com-all \"$1\";\
+		else\
+			git com-all;\
+		fi;\
 		echo \"\\033[33m- Pushing commit\\033[0m\";\
 		echo \"\\033[36m-- Command: git push origin\\033[0m\";\
 		git push origin;\
