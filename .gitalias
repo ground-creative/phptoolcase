@@ -22,11 +22,11 @@
 
 	# reset last commit	
 	# params: commit id (optional)
-	incom = "!f() {\
+	uncom = "!f() {\
 		if [ $1 ]; then\
 			git revert --no-commit --no-edit $1;\
 		else\
-			reset --soft HEAD~1	;\
+			git reset --soft HEAD~1	;\
 		fi;\
 	}; f"
 	
@@ -111,6 +111,7 @@
 		if [ -e $input ]; then\
 			while IFS= read -r line;\
 				do\
+				echo "$line";\
 				FILE="$(echo "$line" | cut -d' ' -f1)";\
 				OPTION="$(echo "$line" | cut -d' ' -f2)";\
 				if [ $OPTION = "export-ignore" ]; then\
@@ -118,5 +119,12 @@
 					git reset $FILE && git add $FILE;\
 				fi;\
 			done <$input;\
+			LASTLINE=$(tail -n 1 $input);\
+			FILE="$(echo "$LASTLINE" | cut -d' ' -f1)";\
+			OPTION="$(echo "$LASTLINE" | cut -d' ' -f2)";\
+			if [ $OPTION = "export-ignore" ]; then\
+					echo \"\\033[36m-- Command: git reset $FILE && git add $FILE\\033[0m\";\
+					git reset $FILE && git add $FILE;\
+			fi;\
 		fi;\
 	}; f"
