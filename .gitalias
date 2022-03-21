@@ -76,12 +76,9 @@
 	
 	# update latest release files from current branch
 	update-release = "!f() {\
-		echo \"\\033[33m- Excluding files in gitattributes temporarly\\033[0m\";\
-		git rm-release-files;\
    		lastrev=$(git rev-list --tags --max-count=1);\
 		tag=$(git describe --tags "$lastrev");\
 		commit_msg=\""ci: updated version"\";\
-		git com-all;\
 		echo \"\\033[33m- Deleting release $tag\\033[0m\";\
 		echo \"\\033[36m\"'-- Command: git tag -f -a \"'\"$tag\"'\" -m \"'\"$commit_msg\"'\"'\"\\033[0m\";\
 		git tag -f -a $tag -m \"$commit_msg\";\
@@ -89,10 +86,6 @@
 		echo \"\\033[33m- Creating release with tag $tag from target $target\\033[0m\";\
 		echo \"\\033[36m-- Command: git push origin -f $tag\\033[0m\";\
 		git push origin -f $tag;\
-		echo \"\\033[33m- Adding previously excluded files\\033[0m\";\
-		git add-release-files;\
-		echo \"\\033[33m- Reverting last commit\\033[0m\";\
-		git uncom;\
 	}; f"
 	
 	# temp remove files in gitattributes to update release
