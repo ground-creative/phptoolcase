@@ -10,9 +10,25 @@
    
 	last-com = log -1 HEAD --stat							# show last commit
    
-	uncom = reset --soft HEAD~1							# reset last commit	
-   
-	log-pretty = log --pretty=oneline 						# show list of commits
+	# show list of commits
+	# params: number of commits (optional)
+	show-com = "!f() {\
+		if [ $1 ]; then\
+			git log --pretty=oneline -n $1;\
+		else\
+			git log --pretty=oneline;\
+		fi;\
+	}; f"	
+
+	# reset last commit	
+	# params: commit id (optional)
+	incom = "!f() {\
+		if [ $1 ]; then\
+			git revert --no-commit --no-edit $1;\
+		else\
+			reset --soft HEAD~1	;\
+		fi;\
+	}; f"
 	
 	list-alias = config --get-regexp alias					# show list of alias
 	
@@ -75,45 +91,32 @@
 		git push origin -f $tag;\
 	}; f"
 	
-	test = "!f() {\
-	input=".gitattributes";\
-	while IFS= read -r line;\
-	do\
-		VART+=$line;\
-	done <$input;\
-	echo ${VART[0]};\
-	}; f"
-	
 	rm-c = "!f() {\
 		input=".gitattributes";\
 		if [ -e $input ]; then\
-				while IFS= read -r line;\
-				do\
-					FILE="$(echo "$line" | cut -d' ' -f1)";\
-					OPTION="$(echo "$line" | cut -d' ' -f2)";\
-					if [ $OPTION = "export-ignore" ]; then\
-						echo \"\\033[36m-- Command: git rm --cached $FILE\\033[0m\";\
-						git rm --cached $FILE;\
-					fi;\
-				done <$input;\
-			else\
-			echo "nok";\
+			while IFS= read -r line;\
+			do\
+				FILE="$(echo "$line" | cut -d' ' -f1)";\
+				OPTION="$(echo "$line" | cut -d' ' -f2)";\
+				if [ $OPTION = "export-ignore" ]; then\
+					echo \"\\033[36m-- Command: git rm --cached $FILE\\033[0m\";\
+					git rm --cached $FILE;\
+				fi;\
+			done <$input;\
 		fi;\
 	}; f"
 	
 	reset-c = "!f() {\
 		input=".gitattributes";\
 		if [ -e $input ]; then\
-				while IFS= read -r line;\
+			while IFS= read -r line;\
 				do\
-					FILE="$(echo "$line" | cut -d' ' -f1)";\
-					OPTION="$(echo "$line" | cut -d' ' -f2)";\
-					if [ $OPTION = "export-ignore" ]; then\
-						echo \"\\033[36m-- Command: git reset $FILE && git add $FILE\\033[0m\";\
-						git reset $FILE && git add $FILE;\
-					fi;\
-				done <$input;\
-			else\
-			echo "nok";\
+				FILE="$(echo "$line" | cut -d' ' -f1)";\
+				OPTION="$(echo "$line" | cut -d' ' -f2)";\
+				if [ $OPTION = "export-ignore" ]; then\
+					echo \"\\033[36m-- Command: git reset $FILE && git add $FILE\\033[0m\";\
+					git reset $FILE && git add $FILE;\
+				fi;\
+			done <$input;\
 		fi;\
 	}; f"
