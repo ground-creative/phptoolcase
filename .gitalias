@@ -9,26 +9,6 @@
 	rebuild-tags = !git tag -l | xargs git tag -d && git fetch -t	# rebuild local tags from remote
    
 	last-com = log -1 HEAD --stat							# show last commit
-   
-	# show list of commits
-	# params: number of commits (optional)
-	show-com = "!f() {\
-		if [ $1 ]; then\
-			git log --pretty=oneline -n $1;\
-		else\
-			git log --pretty=oneline;\
-		fi;\
-	}; f"	
-
-	# reset last commit	
-	# params: commit id (optional)
-	uncom = "!f() {\
-		if [ $1 ]; then\
-			git revert --no-commit --no-edit $1;\
-		else\
-			git reset --soft HEAD~1	;\
-		fi;\
-	}; f"
 	
 	list-alias = config --get-regexp alias					# show list of alias
 	
@@ -37,17 +17,33 @@
 	unchanged = "!f() { git update-index --assume-unchanged $1; }; f"
    
 	list-branches = "!f() { echo "Listing branches"; git branch -vva; }; f"
+	
+	# show list of commits, params: number of commits (optional)
+	show-com = "!f() {\
+		if [ $1 ]; then\
+			git log --pretty=oneline -n $1;\
+		else\
+			git log --pretty=oneline;\
+		fi;\
+	}; f"	
+
+	# reset commit, params: commit id (optional, the last id will be used if empty)
+	uncom = "!f() {\
+		if [ $1 ]; then\
+			git revert --no-commit --no-edit $1;\
+		else\
+			git reset --soft HEAD~1	;\
+		fi;\
+	}; f"
    
-	# add and commit all changes
-	# params: commit message
+	# add and commit all changes, params: commit message
 	com-all = "!f() {\
 		echo \"\\033[33m- Adding Commit with all modifications\\033[0m\";\
 		echo \"\\033[36m\"'-- Command: git commit -am \"'\"$1\"'\"'\"\\033[0m\";\
 		git commit -am \"$1\";\
 	}; f"
 	
-	# add,commit and push all changes
-	# params: commit message
+	# add,commit and push all changes, params: commit message
 	push-all = "!f() {\
 		git com-all \"$1\";\
 		echo \"\\033[33m- Pushing commit\\033[0m\";\
@@ -55,10 +51,7 @@
 		git push origin;\
 	}; f"
 	
-	# show config details
-	# ex: "git show-cmd"
-	# ex: "git show-cmd alias"
-	# ex: "git show-cmd alias push"
+	# show config details, ex: "git show-cmd" "git show-cmd alias" "git show-cmd alias push"
 	show-cmd = \
 		"!f() { \
 		"something";\
@@ -77,14 +70,13 @@
 	}; f"
 	
 	# update latest release files from current branch
-	# params: commit message (optional)
 	update-release = "!f() {\
 		echo \"\\033[33m- Excluding files in gitattributes temporarly\\033[0m\";\
 		git rm-release-files;\
    		lastrev=$(git rev-list --tags --max-count=1);\
 		tag=$(git describe --tags "$lastrev");\
 		commit_msg=\""ci: updated version"\";\
-		git com-all "ci:temp remove release files temp";\
+		git com-all "ci:temp remove release files";\
 		echo \"\\033[33m- Deleting release $tag\\033[0m\";\
 		echo \"\\033[36m\"'-- Command: git tag -f -a \"'\"$tag\"'\" -m \"'\"$commit_msg\"'\"'\"\\033[0m\";\
 		git tag -f -a $tag -m \"$commit_msg\";\
@@ -98,6 +90,7 @@
 		git uncom;\
 	}; f"
 	
+	# temp remove files in gitattributes to update release
 	rm-release-files = "!f() {\
 		input=".gitattributes";\
 		if [ -e $input ]; then\
@@ -120,6 +113,7 @@
 		fi;\
 	}; f"
 	
+	# add files removed for release update
 	add-release-files = "!f() {\
 		input=".gitattributes";\
 		if [ -e $input ]; then\

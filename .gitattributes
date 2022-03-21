@@ -2,3 +2,6 @@
 TODO export-ignore
 CHANGELOG export-ignore
 .gitalias export-ignore
+.github/ export-ignore
+.examples/ export-ignore
+.gitignore export-ignore
