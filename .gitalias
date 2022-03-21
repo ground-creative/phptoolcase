@@ -1,0 +1,119 @@
+# Add the following 2 lines to your .git/config file
+# [include]
+#  path = ../.gitalias
+
+[alias]
+
+	current = rev-parse --abbrev-ref HEAD					# get current branch
+
+	rebuild-tags = !git tag -l | xargs git tag -d && git fetch -t	# rebuild local tags from remote
+   
+	last-com = log -1 HEAD --stat							# show last commit
+   
+	uncom = reset --soft HEAD~1							# reset last commit	
+   
+	log-pretty = log --pretty=oneline 						# show list of commits
+	
+	list-alias = config --get-regexp alias					# show list of alias
+	
+	no-unchanged = "!f() { git update-index --no-assume-unchanged $1; }; f"
+	
+	unchanged = "!f() { git update-index --assume-unchanged $1; }; f"
+   
+	list-branches = "!f() { echo "Listing branches"; git branch -vva; }; f"
+   
+	# add and commit all changes
+	# params: commit message
+	com-all = "!f() {\
+		echo \"\\033[33m- Adding Commit with all modifications\\033[0m\";\
+		echo \"\\033[36m\"'-- Command: git commit -am \"'\"$1\"'\"'\"\\033[0m\";\
+		git commit -am \"$1\";\
+	}; f"
+	
+	# add,commit and push all changes
+	# params: commit message
+	push-all = "!f() {\
+		git com-all \"$1\";\
+		echo \"\\033[33m- Pushing commit\\033[0m\";\
+		echo \"\\033[36m-- Command: git push origin\\033[0m\";\
+		git push origin;\
+	}; f"
+	
+	# show config details
+	# ex: "git show-cmd"
+	# ex: "git show-cmd alias"
+	# ex: "git show-cmd alias push"
+	show-cmd = \
+		"!f() { \
+		"something";\
+		sep="?" ;\
+		name=${1:-alias};\
+		echo -n -e '\\033[48;2;255;255;01m' ;\
+		echo -n -e '\\033[38;2;255;0;01m' ;\
+		echo "$name"; \
+		echo -n -e '\\033[m' ;\
+		git config --get-regexp ^$name\\..*$2+ | \
+		cut -c 1-40 | \
+		sed -e s/^$name.// \
+		-e s/\\ /\\ $(printf $sep)--\\>\\ / | \
+		column -t -s $(printf $sep) | \
+		sort -k 1 ;\
+	}; f"
+	
+	# update latest release files from current branch
+	# params: commit message (optional)
+	update-release = "!f() {\
+   		lastrev=$(git rev-list --tags --max-count=1);\
+		tag=$(git describe --tags "$lastrev");\
+		commit_msg=\""ci: updated version"\";\
+		echo \"\\033[33m- Deleting release $tag\\033[0m\";\
+		echo \"\\033[36m\"'-- Command: git tag -f -a \"'\"$tag\"'\" -m \"'\"$commit_msg\"'\"'\"\\033[0m\";\
+		git tag -f -a $tag -m \"$commit_msg\";\
+		target=$(git rev-parse --abbrev-ref HEAD);\
+		echo \"\\033[33m- Creating release with tag $tag from target $target\\033[0m\";\
+		echo \"\\033[36m-- Command: git push origin -f $tag\\033[0m\";\
+		git push origin -f $tag;\
+	}; f"
+	
+	test = "!f() {\
+	input=".gitattributes";\
+	while IFS= read -r line;\
+	do\
+		VART+=$line;\
+	done <$input;\
+	echo ${VART[0]};\
+	}; f"
+	
+	rm-c = "!f() {\
+		input=".gitattributes";\
+		if [ -e $input ]; then\
+				while IFS= read -r line;\
+				do\
+					FILE="$(echo "$line" | cut -d' ' -f1)";\
+					OPTION="$(echo "$line" | cut -d' ' -f2)";\
+					if [ $OPTION = "export-ignore" ]; then\
+						echo \"\\033[36m-- Command: git rm --cached $FILE\\033[0m\";\
+						git rm --cached $FILE;\
+					fi;\
+				done <$input;\
+			else\
+			echo "nok";\
+		fi;\
+	}; f"
+	
+	reset-c = "!f() {\
+		input=".gitattributes";\
+		if [ -e $input ]; then\
+				while IFS= read -r line;\
+				do\
+					FILE="$(echo "$line" | cut -d' ' -f1)";\
+					OPTION="$(echo "$line" | cut -d' ' -f2)";\
+					if [ $OPTION = "export-ignore" ]; then\
+						echo \"\\033[36m-- Command: git reset $FILE && git add $FILE\\033[0m\";\
+						git reset $FILE && git add $FILE;\
+					fi;\
+				done <$input;\
+			else\
+			echo "nok";\
+		fi;\
+	}; f"

@@ -1,7 +1,0 @@
-.gitattributes export-ignore
-.gitignore export-ignore
-.alias export-ignore
-.github/ export-ignore
-.examples/ export-ignore
-TODO export-ignore
-CHANGELOG export-ignore
