@@ -1,6 +1,6 @@
 <?php
 
-	/**
+	/** A
 	* PHPTOOLCASE VIEW CLASS
 	* PHP version 5.4+
 	* @category 	Library
