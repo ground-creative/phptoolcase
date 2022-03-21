@@ -81,7 +81,7 @@
    		lastrev=$(git rev-list --tags --max-count=1);\
 		tag=$(git describe --tags "$lastrev");\
 		commit_msg=\""ci: updated version"\";\
-		git com-all "ci:temp remove release files";\
+		git com-all;\
 		echo \"\\033[33m- Deleting release $tag\\033[0m\";\
 		echo \"\\033[36m\"'-- Command: git tag -f -a \"'\"$tag\"'\" -m \"'\"$commit_msg\"'\"'\"\\033[0m\";\
 		git tag -f -a $tag -m \"$commit_msg\";\
