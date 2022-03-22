@@ -63,7 +63,6 @@
 	
 	# show config details, ex: "git show-cmd" "git show-cmd alias" "git show-cmd alias push"
 	show-cmd = "!f() { \
-		"something";\
 		sep="?" ;\
 		name=${1:-alias};\
 		echo -n -e '\\033[48;2;255;255;01m' ;\
