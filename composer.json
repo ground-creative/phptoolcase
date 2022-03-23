@@ -31,6 +31,6 @@
 	} ,
 	"autoload":
 	{
-		"classmap": [ "vendor/phptoolcase/phptoolcase/lib" ]
+		"classmap": [ "lib" ]
 	}
 }
