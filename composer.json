@@ -1,29 +1,36 @@
 {
-  "name": "phptoolcase/phptoolcase",
-  "type": "library",
-  "description": "A set of tools to speed up the process of coding",
-  "keywords": [
-    "php developer tools",
-    "php library",
-    "php framework",
-    "application programming",
-    "help php",
-    "debug php",
-    "php tools",
-    "php toolcase",
-    "easy php"
-  ],
-  "homepage": "http://phptoolcase.com",
-  "license": "GPL-2.0-or-later",
-  "version": "v1.0.0-stable",
-  "authors": [
-    {
-      "name": "Carlo Pietrobattista",
-      "email": "carlo@ground-creative.com",
-      "role": "Developer"
-    }
-  ],
-  "require": {
-    "php": ">=5.4.0"
-  }
+	"name": "phptoolcase/phptoolcase",
+	"type": "library",
+	"description": "A set of tools to speed up the process of coding",
+	"keywords": 
+	[
+		"php developer tools",
+		"php library",
+		"php framework",
+		"application programming",
+		"help php",
+		"debug php",
+		"php tools",
+		"php toolcase",
+		"easy php"
+	],
+	"homepage": "http://phptoolcase.com",
+	"license": "GPL-2.0-or-later",
+	"version": "v1.0.0-stable",
+	"authors": 
+	[
+		{
+			"name": "Carlo Pietrobattista",
+			"email": "carlo@ground-creative.com",
+			"role": "Developer"
+		}
+	],
+	"require": 
+	{
+		"php": ">=5.4.0"
+	} ,
+	"autoload":
+	{
+		"classmap": [ "vendor/phptoolcase/phptoolcase/lib" ]
+	}
 }

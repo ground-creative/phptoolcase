@@ -16,14 +16,13 @@ Add the package to your composer.json file
 ```
 "require": 
 {
-
         "phptoolcase/phptoolcase": "*"
 }
 ```
 
 and run **composer update**
 
-### Stand Alone 
+### Stand-Alone 
 
 Download latest release [from here](https://github.com/ground-creative/phptoolcase/releases/) and include required files to your project.<br>
 
