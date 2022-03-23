@@ -1,16 +1,22 @@
+### A collection of shortcuts for git ########################################################
+#
+# @Version 1.0.1
+#
+# Installation Instructions
 # Add the following 2 lines to your .git/config file
 # [include]
 #  path = ../.gitalias
-
+#
+##############################################################################
 [alias]
 
 	current = rev-parse --abbrev-ref HEAD					# get current branch
 
-	rebuild-tags = !git tag -l | xargs git tag -d && git fetch -t	# rebuild local tags from remote
-   
+	rebuild-tags = !git tag -l | xargs git tag -d && git fetch -t		# rebuild local tags from remote
+	
 	last-com = log -1 HEAD --stat							# show last commit
 	
-	list-alias = config --get-regexp alias					# show list of alias
+	list-alias = config --get-regexp alias						# show list of alias
 	
 	no-unchanged = "!f() { git update-index --no-assume-unchanged $1; }; f"
 	
@@ -35,7 +41,7 @@
 			git reset --soft HEAD~1	;\
 		fi;\
 	}; f"
-   
+
 	# add and commit all changes, params: commit message (opional, the last commit will be used if not set)
 	com-all = "!f() {\
 		echo \"\\033[33m- Adding Commit with all modifications\\033[0m\";\
@@ -46,13 +52,12 @@
 			echo \"\\033[36m-- Command: git commit -a --reuse-message=HEAD\\033[0m\";\
 			git commit -a --reuse-message=HEAD;\
 		fi;\
-		git commit -am \"$1\";\
 	}; f"
 	
-	# add,commit and push all changes, params: commit message
+	# add,commit and push all changes, params: commit message (opional, the last commit will be used if not set)
 	push-all = "!f() {\
 		if [ $1 ]; then\
-			git com-all \"$1\";\
+			git com-all $1;\
 		else\
 			git com-all;\
 		fi;\
@@ -89,4 +94,9 @@
 		echo \"\\033[33m- Creating release with tag $tag from target $target\\033[0m\";\
 		echo \"\\033[36m-- Command: git push origin -f $tag\\033[0m\";\
 		git push origin -f $tag;\
+	}; f"
+	
+	# upgrade the script
+	upgrade-script =  "!f() {\
+		wget https://raw.githubusercontent.com/ground-creative/.gitalias/main/.gitalias -O .gitalias;\
 	}; f"
