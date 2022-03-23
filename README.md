@@ -17,7 +17,7 @@ Add the package to your composer.json file
 "require": 
 {
 
-        "ground-creative/phptoolcase": "*"
+        "phptoolcase/phptoolcase": "*"
 }
 ```
 
