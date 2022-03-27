@@ -6,13 +6,13 @@
 	* PHPTOOLCASE ROUTER CLASS
 	* PHP version 5.4+
 	* @category 	Library
-	* @version	v1.1.0-stable
+	* @version	v1.0.0-stable
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
 	*/
 
-	class PtcRouter
+	class Router
 	{
 		/**
 		* Retrievesthe executed route for a request
@@ -58,7 +58,7 @@
 			return ( isset( $_SERVER[ 'HTTPS' ] ) && $_SERVER[ 'HTTPS' ] ) ? 'https' : 'http';
 		}
 		/**
-		* Alias of PtcRouter::getControllers( )
+		* Alias of Router::getControllers( )
 		*/
 		public static function getController( $name = null )
 		{ 
@@ -332,10 +332,10 @@
 				'global_filters'	=> static::$_globalFilters ,
 				'redirects'	=> null
 			);
-			if ( isset( $_COOKIE[ 'PtcRouter_redirects' ] ) && 
-					null !== $_COOKIE[ 'PtcRouter_redirects' ] )
+			if ( isset( $_COOKIE[ 'Router_redirects' ] ) && 
+					null !== $_COOKIE[ 'Router_redirects' ] )
 			{
-				$debug[ 'redirects' ] = json_decode( $_COOKIE[ 'PtcRouter_redirects' ] );
+				$debug[ 'redirects' ] = json_decode( $_COOKIE[ 'Router_redirects' ] );
 			}
 			if ( !empty( static::$_globalFilters ) ) // check global filters patterns first
 			{
@@ -530,7 +530,7 @@
 		*/
 		protected static function _processErrorPage( )
 		{
-			$debug = '<b><i>PtcRouter::notFound( )</i></b> was called with status code';
+			$debug = '<b><i>Router::notFound( )</i></b> was called with status code';
 			static::_debug( static::$_notFound[ 'code' ] , $debug , 'Router Action' );
 			if ( static::$_notFound[ 'code' ] ){ static::header( static::$_notFound[ 'code' ] ); }
 			if ( static::$_notFound[ 'callback' ] )
@@ -646,13 +646,13 @@
 		{
 			if ( 'remove' === $statusCode )
 			{
-				setcookie( 'PtcRouter_redirects' , null , time( ) + 600 , '/' );
+				setcookie( 'Router_redirects' , null , time( ) + 600 , '/' );
 				return;
 			}
-			if ( isset( $_COOKIE[ 'PtcRouter_redirects' ] ) && 
-					null !== $_COOKIE[ 'PtcRouter_redirects' ] )
+			if ( isset( $_COOKIE[ 'Router_redirects' ] ) && 
+					null !== $_COOKIE[ 'Router_redirects' ] )
 			{
-				$data = json_decode( $_COOKIE[ 'PtcRouter_redirects' ] );
+				$data = json_decode( $_COOKIE[ 'Router_redirects' ] );
 			}
 			$current = static::getUri( );
 			$build = static::getProtocol( ) . '://' . $_SERVER[ 'HTTP_HOST' ] . $current[ 'path' ];
@@ -660,7 +660,7 @@
 			$build .= ' ' . $statusCode;
 			@$data[ ] = static::getProtocol( ) . '://' . $_SERVER[ 'HTTP_HOST' ] . 
 										$current[ 'path' ] . ' ' . $statusCode;
-			setcookie( 'PtcRouter_redirects' , json_encode( $data ) , time( ) + 600 , '/' );
+			setcookie( 'Router_redirects' , json_encode( $data ) , time( ) + 600 , '/' );
 		}
 		/**
 		* Stores group filters to pass to the routes
@@ -1194,7 +1194,7 @@
 				'protocol'	=> 'any' ,
 				'domain'	=> $_SERVER[ 'HTTP_HOST' ]
 			);	
-			$obj = new PtcRoute( $options );
+			$obj = new Route( $options );
 			static::$_groups[ end( $current_group ) ]->add( $obj );
 			$msg = 'Added new route <b><i>' . $obj->route . '</i></b>';
 			static::_debug( $obj , $msg , 'Router Config' );
@@ -1410,7 +1410,7 @@
 	| ----------------------------------------------------------------------------
 	*/
 	
-	class PtcRoute
+	class Route
 	{
 		/**
 		*

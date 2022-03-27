@@ -6,13 +6,13 @@
 	* PHP TOOLCASE OBJECT RELATIONAL MAPPING CLASS
 	* PHP version 5.4+
 	* @category 	Library
-	* @version	v1.1.0-stable
+	* @version	v1.0.0-stable
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
 	*/
 
-	class PtcMapper
+	class Model
 	{
 		/**
 		* Retrives the query builder from the connection manager and table column names 
@@ -337,7 +337,7 @@
 			return call_user_func( $manager . '::getQB' , static::$_connectionName );	
 		}
 		/**
-		* Initializes the class, adding columns and table name to the PtcMapper::$_storage property. 
+		* Initializes the class, adding columns and table name to the Model::$_storage property. 
 		* See @ref using_boot
 		* @return	the name of called class as string
 		*/		
@@ -366,7 +366,7 @@
 			return $class;
 		}
 		/**
-		* Replaces column names with values in the PtcMapper::$_map property. 
+		* Replaces column names with values in the Model::$_map property. 
 		* See @ref mapping_fields
 		*/
 		protected function _mapFields( )
@@ -384,7 +384,7 @@
 			}
 		}
 		/**
-		* Guards protected fields defined with the PtcMapper::$_guard property
+		* Guards protected fields defined with the Model::$_guard property
 		*/
 		protected static function _guard( $data )
 		{

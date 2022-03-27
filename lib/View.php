@@ -6,13 +6,13 @@
 	* PHPTOOLCASE VIEW CLASS
 	* PHP version 5.4+
 	* @category 	Library
-	* @version	v1.1.0-stable
+	* @version	v1.0.0-stable
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
 	*/
 
-	class PtcView
+	class View
 	{
 		/**
 		* Compiles a view
@@ -21,7 +21,7 @@
 		*/
 		public static function make( $view , $data = null )
 		{
-			$view = new PtcViewTpl( $view , static::$_base ); // create a new view object
+			$view = new ViewTpl( $view , static::$_base ); // create a new view object
 			if ( $data ) // add data to the template
 			{ 
 				foreach ( $data as $k => $v ){ $view->set( $k , $v ); }
@@ -75,7 +75,7 @@
 	| ----------------------------------------------------------------------------
 	*/
 	
-	class PtcViewTpl
+	class ViewTpl
 	{
 		/**
 		* Adds the html template and the base path

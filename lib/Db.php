@@ -6,13 +6,13 @@
 	* PHP TOOLCASE DATABASE CONNECTION MANAGER CLASS
 	* PHP version 5.4+
 	* @category 	Library
-	* @version	v1.1.0-stable
+	* @version	v1.0.0-stable
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
 	*/
 
-	class PtcDb
+	class Db
 	{
 		/** 
 		* Adds a connection to the manager, will trigger an error if connection name is already present.
@@ -34,7 +34,7 @@
 				if( !array_key_exists( $k , static::$_connectionOptions ) )
 				{
 					trigger_error( 'Unknown option "' . $k . 
-						'" passed as argument to PtcDb!',E_USER_WARNING );
+						'" passed as argument to Db!',E_USER_WARNING );
 				}
 			}
 			$options['name' ] = $name;

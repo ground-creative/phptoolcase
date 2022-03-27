@@ -6,13 +6,13 @@
 	* PHP TOOLCASE HANDYMAN CLASS
 	* PHP version 5.4+
 	* @category 	Library
-	* @version	v1.1.0-stable
+	* @version	v1.0.0-stable
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
 	*/
 
-	class PtcHandyMan			
+	class HandyMan			
 	{
 		/**
 		* Alias of @ref addDirs()
@@ -248,7 +248,7 @@
 				'(' . json_encode( $data) . ')' : json_encode( $data );
 		}
 		/**
-		* Adds path(s) to the PtcHandyMan::$_dirs property to load classes when needed. 
+		* Adds path(s) to the HandyMan::$_dirs property to load classes when needed. 
 		* See @ref add_dirs and @ref namespace_dirs
 		* @param	string|array		$paths	full path(s) to directories with classes
 		*/
@@ -323,7 +323,7 @@
 			if ( $useHelpers && $registerAutoLoader && 
 				file_exists( dirname( __FILE__ ) . '/PtcEvent.php' ) ) { PtcEvent::register( ); }
 			//$namespace = @strtoupper( @str_replace( '\\' , '_' , __NAMESPACE__ ) ) . '_';
-			if ( !defined( '_PTCHANDYMAN_') ){ @define( '_PTCHANDYMAN_' , $this_class ); }
+			if ( !defined( '_HandyMan_') ){ @define( '_HandyMan_' , $this_class ); }
 			$debug = array( $addThisPath , $useHelpers , $registerAutoLoader , static::getDirs( ) );
 			static::_debug( $debug , '<b>Autoloader registerd!<b>' , 'Autoloader Registered' );
 		}
@@ -336,7 +336,7 @@
 		*/		
 		public static function getConventions( ){ return static::$_namingConventions; }
 		/**
-		* Adds a separator to the  PtcHandyMan::$_separators property for the autoloader. 
+		* Adds a separator to the  HandyMan::$_separators property for the autoloader. 
 		* See @ref using_separators
 		* @param	array|string		$sep		the separator(s) to be added
 		*/
@@ -354,7 +354,7 @@
 			}
 		}
 		/**
-		* Adds naming convention(s) to the PtcHandyMan::$_namingConventions property for the autoloader.
+		* Adds naming convention(s) to the HandyMan::$_namingConventions property for the autoloader.
 		* See @ref using_separators
 		* @param	array|string		$conventions		the naming convention(s) to be added
 		*/
@@ -375,7 +375,7 @@
 		/**
 		* Returns the current included paths for  the autoloader. See @ref getDirs
 		* @param	string		$type		directories , ns , files
-		* @return	the PtcHandyMan::$_dirs property based on the $type argument
+		* @return	the HandyMan::$_dirs property based on the $type argument
 		*/
 		public static function getDirs( $type = null )
 		{ 
@@ -391,8 +391,8 @@
 		}
 		/**
 		* Helper method to retrieve paths for the application. See @ref usingAddedPath
-		* @param	string		$name		the path to return stored in the PtcHandyMan::$_appPaths property
-		* @return	the PtcHandyMan::$_appPaths property based on the $name argument
+		* @param	string		$name		the path to return stored in the HandyMan::$_appPaths property
+		* @return	the HandyMan::$_appPaths property based on the $name argument
 		*/
 		public static function getAppPaths( $name = null )
 		{
@@ -406,7 +406,7 @@
 			return static::$_appPaths[ $name ];
 		}
 		/**
-		* Adds paths to the PtcHandyMan::$_appPaths property for later usage. See @ref addingAppPath 
+		* Adds paths to the HandyMan::$_appPaths property for later usage. See @ref addingAppPath 
 		* @param	array 		$paths		array of paths to add
 		*/
 		public static function addAppPaths( $paths )
@@ -629,7 +629,7 @@
 			return false;
 		}
 		/**
-		* Builds application paths for the first time when PtcHandyMan::getAppPath( ) is called.
+		* Builds application paths for the first time when HandyMan::getAppPath( ) is called.
 		*/
 		protected static function _buildAppPaths( )
 		{
@@ -640,7 +640,7 @@
 			);
 		}
 		/**
-		* Adds a directory to the PtcHandyMan::$_dirs array to autoload classes
+		* Adds a directory to the HandyMan::$_dirs array to autoload classes
 		* @param	string		$directory		the full path to the directory
 		* @return	false if directory is already present, true otherwise
 		*/
@@ -655,7 +655,7 @@
 			return true;
 		}
 		/**
-		* Adds a directory to the PtcHandyMan::$_dirs array to load classes that use namespaces
+		* Adds a directory to the HandyMan::$_dirs array to load classes that use namespaces
 		* @param	string		$namespace		the namespace for the path toa utoload classes
 		* @param	string		$directory		the full path to the directory
 		* @return	true if directory is not present, triggers an error otherwise 

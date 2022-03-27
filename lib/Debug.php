@@ -8,7 +8,7 @@
 	* to let them work on script shutdown when FATAL error occurs.
 	* PHP version 5.4+
 	* @category 	Library
-	* @version	v1.1.0-stable
+	* @version	v1.0.0-stable
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
@@ -16,7 +16,7 @@
 
 	//declare( ticks = 1 ); // used by the watch var , function calls trace and code coverage utilities
 
-	class PtcDebug
+	class Debug
 	{
 		/**
 		* Checks if debuggger has been loaded
@@ -24,7 +24,7 @@
 		*/
 		public static function isLoaded( )
 		{
-			return ( defined( '_PTCDEBUG_NAMESPACE_' ) ) ? true : false;
+			return ( defined( '_Debug_NAMESPACE_' ) ) ? true : false;
 		}
 		/**
 		* Returns the buffer array
@@ -32,7 +32,7 @@
 		*/
 		public static function getBuffer( ) { return static::$_buffer; }	
 		/** 
-		* Retrieves the code coverage analysis data stored in the PtcDebug::$_finalCoverageData property
+		* Retrieves the code coverage analysis data stored in the Debug::$_finalCoverageData property
 		*/
 		public static function getCoverage( ) { return static::$_finalCoverageData; }
 		/**
@@ -78,12 +78,12 @@
 		}
 		/**
 		* Loads the debug interface and/or the console class if requested. See @ref dbg_getting_started
-		* @param 	array 		$options		array of options, see PtcDebug::$ _defaultOptions
+		* @param 	array 		$options		array of options, see Debug::$ _defaultOptions
 		*/
 		public static function load( $options = null )
 		{
 			$now = microtime( true );
-			if ( defined( '_PTCDEBUG_NAMESPACE_' ) )	// check if the debug class is already loaded
+			if ( defined( '_Debug_NAMESPACE_' ) )	// check if the debug class is already loaded
 			{
 				$err = array( 'errno' => static::msgType( E_USER_NOTICE ),
 							'errstr' => 'Debug already loaded!','errfile' => 'trace' );
@@ -115,19 +115,19 @@
 				else{ $buffer .= '<br>Session id is ' . session_id( ); }
 			}
 			if ( !@$_SESSION ){ $_SESSION = array( ); }
-			if ( !@$_SESSION[ 'ptcdebug' ] ){ $_SESSION[ 'ptcdebug' ] = array( ); }
+			if ( !@$_SESSION[ 'Debug' ] ){ $_SESSION[ 'Debug' ] = array( ); }
 			if ( @$_GET[ static::$_options[ 'url_key' ] ] == static::$_options[ 'url_pass' ] )
 			{
-				$_SESSION[ 'ptcdebug' ][ static::$_options[ 'url_key' ] ] = true;
-				$_SESSION[ 'ptcdebug' ][ 'code_highlighter' ]	= true;
-				$_SESSION[ 'ptcdebug' ][ 'search_files' ] = true;
-				//$buffer .= '<br>PtcDebug turned on!';
+				$_SESSION[ 'Debug' ][ static::$_options[ 'url_key' ] ] = true;
+				$_SESSION[ 'Debug' ][ 'code_highlighter' ]	= true;
+				$_SESSION[ 'Debug' ][ 'search_files' ] = true;
+				//$buffer .= '<br>Debug turned on!';
 			}
 			else if ( @$_GET[ static::$_options[ 'url_key' ] . '_off' ] == static::$_options[ 'url_pass' ] )
 			{
-				$_SESSION[ 'ptcdebug' ][ static::$_options[ 'url_key' ] ] = false;
-				$_SESSION[ 'ptcdebug' ][ 'code_highlighter' ]	= false;
-				$_SESSION[ 'ptcdebug' ][ 'search_files' ] = false;
+				$_SESSION[ 'Debug' ][ static::$_options[ 'url_key' ] ] = false;
+				$_SESSION[ 'Debug' ][ 'code_highlighter' ]	= false;
+				$_SESSION[ 'Debug' ][ 'search_files' ] = false;
 			}
 			if ( static::_getSessionVars( static::$_options[ 'url_key' ] ) )
 			{ 
@@ -197,7 +197,7 @@
 					static::$_options[ 'show_sql' ] = static::_getSessionVars( 'show_sql' );
 					static::$_options[ 'show_w3c' ] = static::_getSessionVars( 'show_w3c' );
 				}
-				@define( '_PTCDEBUG_NAMESPACE_' , $called_class ); 
+				@define( '_Debug_NAMESPACE_' , $called_class ); 
 				static::$_tickTime = ( ( microtime( true ) - $now ) + static::$_tickTime );
 				static::bufferLog( '' , '<span>' . $buffer . '<span>' , 'Debug Loader' );
 			}
@@ -694,7 +694,7 @@
 		*/
 		protected static $_tickTime = 0;
 		/**
-		* Exclude PtcDebug::$_buildBuffer from execution timing property
+		* Exclude Debug::$_buildBuffer from execution timing property
 		*/	
 		protected static $_countTime = true;
 		/**
@@ -716,22 +716,22 @@
 		/**
 		* Property that holds the css for the floating panel
 		*/
-		protected static $_panelCss = '#ptcDebugPanel{font-family:Arial,sant-serif;
+		protected static $_panelCss = '#DebugPanel{font-family:Arial,sant-serif;
 				position:fixed;top:{PANEL_TOP};right:{PANEL_RIGHT};
 				background:#eee;color:#333;z-index:10000;line-height:1.3em;
 				text-align:left;padding:0px;margin:0px;height:25px;}
-				#ptcDebugPanel ul.tabs li{background-color:#ddd;border-color:#999;margin:0 -3px -1px 0;
+				#DebugPanel ul.tabs li{background-color:#ddd;border-color:#999;margin:0 -3px -1px 0;
 				padding:3px 6px;border-width:1px;list-style:none;display:inline-block;border-style:solid;}
-				#ptcDebugPanel ul.tabs li.active{background-color:#fff;border-bottom-color:transparent;
-				text-decoration:}#ptcDebugPanel ul.tabs li:hover{background-color:#eee;}
-				#ptcDebugPanel ul.tabs li.active:hover{background-color:#fff;}
-				#ptcDebugPanel ul.tabs.merge-up{margin-top:-24px;}
-				#ptcDebugPanel ul.tabs.right{padding:0 0 0 0;text-align:right;}
-				#ptcDebugPanel ul.tabs{border-bottom-color:#999;border-bottom-width:1px;font-size:14px;
+				#DebugPanel ul.tabs li.active{background-color:#fff;border-bottom-color:transparent;
+				text-decoration:}#DebugPanel ul.tabs li:hover{background-color:#eee;}
+				#DebugPanel ul.tabs li.active:hover{background-color:#fff;}
+				#DebugPanel ul.tabs.merge-up{margin-top:-24px;}
+				#DebugPanel ul.tabs.right{padding:0 0 0 0;text-align:right;}
+				#DebugPanel ul.tabs{border-bottom-color:#999;border-bottom-width:1px;font-size:14px;
 				list-style:none;margin:0;padding:0;z-index:100000;position:relative;
-				background-color:#EEE}#ptcDebugPanel ul.tabs a{color:purple;font-size:10px;
-				text-decoration:none;}#ptcDebugPanel .tabs a:hover{color:red;}
-				#ptcDebugPanel ul.tabs a.active{color:black;background-color:yellow;}
+				background-color:#EEE}#DebugPanel ul.tabs a{color:purple;font-size:10px;
+				text-decoration:none;}#DebugPanel .tabs a:hover{color:red;}
+				#DebugPanel ul.tabs a.active{color:black;background-color:yellow;}
 				.msgTable{padding:0;margin:0;border:1px solid #999;font-family:Arial;
 				font-size:11px;text-align:left;border-collapse:separate;border-spacing:2px;}
 				.msgTable th{margin:0;border:0;padding:3px 5px;vertical-align:top;
@@ -750,15 +750,15 @@
 				.innerTable a.inspector{color:lightgreen !important;}
 				.innerTable a.general{color:darkgrey !important;}
 				.innerTable a.show-all{color:red !important;}.innerTable a.top-links{color:white;}
-				#ptcDebugFilterBar{background-color:black;margin-bottom:8px;padding:4px;
+				#DebugFilterBar{background-color:black;margin-bottom:8px;padding:4px;
 				font-size:13px;}.innerTable{z-index:10000;position:relative;background:#eee;
 				height:300px;padding:30px 10px 0 10px;overflow:auto;clear:both;}
 				.innerTable a{color:dodgerBlue;font-size:bold;text-decoration:none}
 				.innerTable p{font-size:12px;color:#333;text-align:left;line-height:12px;}
 				.innerPanel h1{font-size:16px;font-weight:bold;margin-bottom:20px;
 				padding:0;border:0px;background-color:#EEE;}
-				#ptcDebugPanelTitle{height:25px;float:left;z-index:1000000;position:relative;}
-				#ptcDebugPanelTitle h1{font-size:16px;font-weight:bold;margin-bottom:20px;
+				#DebugPanelTitle{height:25px;float:left;z-index:1000000;position:relative;}
+				#DebugPanelTitle h1{font-size:16px;font-weight:bold;margin-bottom:20px;
 				margin-left:10px;padding:0 0 0 0;border:0px;background-color:#EEE;
 				color:#669;margin-top:5px;;height:20px;}
 				#analysisPanel h2{font-size:14px;font-weight:bold;margin-bottom:20px;
@@ -772,7 +772,7 @@
 				#varsPanel a{text-decoration:none;font-size:14px;font-weight:bold;color:#669;
 				line-height:25px;}.count_vars{font-size:11px;color:purple;padding:0;margin:0;}
 				.fixed{width:1%;white-space:nowrap;}.fixed1{width:5%;white-space:nowrap;}
-				#ptcDebugStatusBar{height:2px;background-color:#999;}' ;
+				#DebugStatusBar{height:2px;background-color:#999;}' ;
 		/**
 		* Sends the buffer to the PhpConsole class. See @ref ajax_env
 		*/
@@ -860,10 +860,10 @@
 		*/
 		protected static function _setSessionVars()
 		{
-			$_SESSION[ 'ptcdebug' ]['show_messages']=static::$_options['show_messages'];
-			$_SESSION[ 'ptcdebug' ]['show_globals']=static::$_options['show_globals'];
-			$_SESSION[ 'ptcdebug' ]['show_sql']=static::$_options['show_sql'];
-			$_SESSION[ 'ptcdebug' ]['show_w3c']=static::$_options['show_w3c'];
+			$_SESSION[ 'Debug' ]['show_messages']=static::$_options['show_messages'];
+			$_SESSION[ 'Debug' ]['show_globals']=static::$_options['show_globals'];
+			$_SESSION[ 'Debug' ]['show_sql']=static::$_options['show_sql'];
+			$_SESSION[ 'Debug' ]['show_w3c']=static::$_options['show_w3c'];
 		}
 		/**
 		* Controls which panels will be shown with $_GET variable "hidepanels"
@@ -873,27 +873,27 @@
 			$hide = @explode( ',' , $_GET[ 'hidepanels' ] );
 			if ( !@empty( $hide ) )
 			{
-				$_SESSION[ 'ptcdebug' ][ 'show_messages' ] = true;
-				$_SESSION[ 'ptcdebug' ][ 'show_globals' ] = true;
-				$_SESSION[ 'ptcdebug' ][ 'show_sql' ] = true;
-				$_SESSION[ 'ptcdebug' ][ 'show_w3c' ] = true;
+				$_SESSION[ 'Debug' ][ 'show_messages' ] = true;
+				$_SESSION[ 'Debug' ][ 'show_globals' ] = true;
+				$_SESSION[ 'Debug' ][ 'show_sql' ] = true;
+				$_SESSION[ 'Debug' ][ 'show_w3c' ] = true;
 				foreach ( $hide as $k => $v )
 				{
 					if ( $v == 'msg' || $v == 'all' )
 					{ 
-						$_SESSION[ 'ptcdebug' ][ 'show_messages' ] = false; 
+						$_SESSION[ 'Debug' ][ 'show_messages' ] = false; 
 					}
 					if ( $v == 'globals' || $v == 'all' )
 					{ 
-						$_SESSION[ 'ptcdebug' ][ 'show_globals' ] = false; 
+						$_SESSION[ 'Debug' ][ 'show_globals' ] = false; 
 					}
 					if ( $v == 'sql' || $v == 'all' )
 					{ 
-						$_SESSION[ 'ptcdebug' ][ 'show_sql' ] = false; 
+						$_SESSION[ 'Debug' ][ 'show_sql' ] = false; 
 					}
 					if ( $v == 'w3c' || $v == 'all' )
 					{ 
-						$_SESSION[ 'ptcdebug' ][ 'show_w3c' ] = false; 
+						$_SESSION[ 'Debug' ][ 'show_w3c' ] = false; 
 					}
 				}
 			}			
@@ -912,7 +912,7 @@
 		protected static function _buildBuffer( $type , $string , $statement = null , $category = null )
 		{
 			if ( @in_array( $category , static::$_options[ 'exclude_categories' ] ) ){ return; }
-			if ( defined( '_PTCDEBUG_NAMESPACE_' ) && 
+			if ( defined( '_Debug_NAMESPACE_' ) && 
 				@static::_getSessionVars( static::$_options[ 'url_key' ] ) && 
 					( static::$_options[ 'show_interface' ] || static::$_options[ 'debug_console' ] ) ) 
 			{
@@ -1360,7 +1360,7 @@
 		/**
 		* Trace php as best as we can
 		* @param	int	$depth	the maximum trace depth
-		* @return	the trace without the methods in the PtcDebug::$_excludeMethods property
+		* @return	the trace without the methods in the Debug::$_excludeMethods property
 		*/
 		protected static function _debugTrace( $depth = NULL )
 		{										
@@ -1373,7 +1373,7 @@
 			//$this_methods = get_class_methods( get_called_class( ) );
 			foreach ( $raw_trace as $k => $arr )
 			{
-				if((@$arr['class']=='PtcDebug' && (@preg_match("|_|",@$arr['function']) || 
+				if((@$arr['class']=='Debug' && (@preg_match("|_|",@$arr['function']) || 
 								@in_array(@$arr['function'],static::$_excludeMethods))) || 
 							@preg_match("|__|",@$arr['function'])){ unset($raw_trace[$k]); }
 			}
@@ -1425,8 +1425,8 @@
 			static::_sortBuffer( );
 			$interface = static::_includeJs( );					// include js
 			$interface .= static::_includeCss( );					// include css
-			$interface .= '<div id="ptcDebugPanel">';
-			$interface .= '<div id="ptcDebugPanelTitle" style="display:none;">&nbsp;</div>';
+			$interface .= '<div id="DebugPanel">';
+			$interface .= '<div id="DebugPanelTitle" style="display:none;">&nbsp;</div>';
 			$interface .= static::_buildMenu( );					// top menu
 			$interface .= static::_buildMsgPanel( 'log' , 'msgPanel' );	// msgs
 			$interface .= static::_buildMsgPanel( 'sql' , 'sqlPanel' );		// sql
@@ -1434,7 +1434,7 @@
 			$interface .= static::_buildVarsPanel( );				// vars
 			$interface .= static::_buildW3cPanel( );				// w3c
 			$interface .= static::_buildTimerPanel( );				// timer
-			$interface .= '<div id="ptcDebugStatusBar" style="display:none;">&nbsp;</div>';
+			$interface .= '<div id="DebugStatusBar" style="display:none;">&nbsp;</div>';
 			$interface .= '</div>';
 			//$interface = static::_compressHtml( $interface );	// make html lighter
 			return $interface;
@@ -1507,7 +1507,7 @@
 				if ( sizeof( $categories ) > 1 )
 				{
 					ksort( $categories );
-					$div .= '<div id="ptcDebugFilterBar"><a href="#" onClick="ptc_filter_categories(\'' . 
+					$div .= '<div id="DebugFilterBar"><a href="#" onClick="ptc_filter_categories(\'' . 
 									$type . 'Table\',\'showAll\')" class="show-all">Show All</a> | ';
 					foreach ( $categories as $k => $v )
 					{ 
@@ -1926,20 +1926,20 @@
 					panels.analysis="analysisPanel";
 					function ptc_show_panel(elId,panelTitle,el)
 					{
-						var floatDivId="ptcDebugPanel";
+						var floatDivId="DebugPanel";
 						var tabs=document.getElementById(\'floatingTab\').getElementsByTagName("a");
 						for(var i=0;i<tabs.length;i++){tabs[i].className="";}
 						if(document.getElementById(elId).style.display=="none")
 						{ 	
 							ptc_reset_panels();
 							document.getElementById(elId).style.display=\'\'; 
-							document.getElementById(\'ptcDebugStatusBar\').style.display=\'\';
+							document.getElementById(\'DebugStatusBar\').style.display=\'\';
 							document.getElementById(floatDivId).style.width=\'100%\';
 							el.className="active";activePanelID=elId;ptc_set_title(panelTitle);
 						}
 						else
 						{
-							document.getElementById(\'ptcDebugPanelTitle\').style.display=\'none\';
+							document.getElementById(\'DebugPanelTitle\').style.display=\'none\';
 							ptc_reset_panels();
 							document.getElementById(floatDivId).style.width=\'\';
 						}
@@ -1947,15 +1947,15 @@
 					};
 					function ptc_reset_panels()
 					{
-						document.getElementById(\'ptcDebugStatusBar\').style.display=\'none\'; 
+						document.getElementById(\'DebugStatusBar\').style.display=\'none\'; 
 						for(var i in panels){document.getElementById(panels[i]).style.display=\'none\';}
 					};
 					function ptc_set_title(panelTitle)
 					{
-						document.getElementById(\'ptcDebugPanelTitle\').style.display=\'\';
-						document.getElementById(\'ptcDebugPanelTitle\').innerHTML=\'<h1>\'+panelTitle+\'</h1>\';
+						document.getElementById(\'DebugPanelTitle\').style.display=\'\';
+						document.getElementById(\'DebugPanelTitle\').innerHTML=\'<h1>\'+panelTitle+\'</h1>\';
 					};
-					function hideInterface(){document.getElementById(\'ptcDebugPanel\').style.display=\'none\';};
+					function hideInterface(){document.getElementById(\'DebugPanel\').style.display=\'none\';};
 					function ptc_show_vars(elId,link)
 					{
 						var element=document.getElementById(elId).style;
@@ -2006,7 +2006,7 @@
 					{
 						var query="http://' . addslashes( $_SERVER[ 'HTTP_HOST' ] ) .
 							$path = addslashes( str_replace( realpath( $_SERVER[ 'DOCUMENT_ROOT' ] ) ,
-							'' , realpath( dirname( __FILE__ ) ) ) ) . '/PtcDebug.php?session_name=' . 
+							'' , realpath( dirname( __FILE__ ) ) ) ) . '/Debug.php?session_name=' . 
 													session_name( ) . '&ptc_read_file="+filename;
 						if(line){query+="&ptc_read_line="+line;}
 						newwindow=window.open(query,"name","height=350,width=820");
@@ -2028,7 +2028,7 @@
 							var query="http://' . addslashes( $_SERVER[ 'HTTP_HOST' ] ) .
 							$path = addslashes( str_replace( realpath( $_SERVER[ 'DOCUMENT_ROOT' ] ) ,
 							'' , realpath( dirname( __FILE__ ) ) ) ) . 
-							'/PtcDebug.php?session_name=' . session_name( ) . 
+							'/Debug.php?session_name=' . session_name( ) . 
 							'&ptc_search_files="+document.getElementsByName("ptc_search_files")[0].value;
 							query+="&ptc_search_path="+document.getElementsByName("ptc_search_path")[0].value;
 							newwindow=window.open(query,"name","height=350,width=1220");
@@ -2064,7 +2064,7 @@
 					};
 					window.onload=function( ) 
 					{
-						var div=document.getElementById("ptcDebugStatusBar");
+						var div=document.getElementById("DebugStatusBar");
 						var press=false;
 						div.onmousedown=function(){press=true;return false;};
 						this.onmouseover=div.style.cursor="s-resize";
@@ -2080,7 +2080,7 @@
 					};
 					/*function ptc_minimize( )
 					{
-						var floatDivId="ptcDebugPanel";resetPanels();
+						var floatDivId="DebugPanel";resetPanels();
 						document.getElementById(floatDivId).style.width=\'300px\';
 						return false;
 					};*/
@@ -2204,12 +2204,12 @@
 			return ( @is_string( $var ) ) ? @htmlentities( $var ) : $var;
 		}
 		/**
-		* Retrieves the session var for the ptcdebug class
+		* Retrieves the session var for the Debug class
 		* @param	string		$var		the session var to retrieve
 		*/
 		protected static function _getSessionVars( $var = null )
 		{
-			return ( $var ) ? @$_SESSION[ 'ptcdebug' ][ $var ] : @$_SESSION[ 'ptcdebug' ];
+			return ( $var ) ? @$_SESSION[ 'Debug' ][ $var ] : @$_SESSION[ 'Debug' ];
 		}
 		/**
 		* Shows the search popup window with the result
@@ -2227,7 +2227,7 @@
 			$result .= '<table class="msgTable" id="searchString" border="1" style="width:100%;">';
 			$result .= '<tbody><tr><th>#</th><th>file</th><th>line</th>';
 			$result .= '<th>string</th><th>occurences</th></tr>';
-			$result .= PtcDebug::findString( $string , $path );
+			$result .= Debug::findString( $string , $path );
 			$result = str_replace( $path , '' , $result );
 			return $result . '</tbody></table></div>';
 		}
@@ -2239,8 +2239,8 @@
 	{
 		session_name( $_GET[ 'session_name' ] );
 		@session_start( );
-		if ( !@$_SESSION[ 'ptcdebug' ][ 'code_highlighter' ] ) { exit( ); }
-		echo PtcDebug::highlightFile( $_GET[ 'ptc_read_file' ] , @$_GET[ 'ptc_read_line' ] );
+		if ( !@$_SESSION[ 'Debug' ][ 'code_highlighter' ] ) { exit( ); }
+		echo Debug::highlightFile( $_GET[ 'ptc_read_file' ] , @$_GET[ 'ptc_read_line' ] );
 		exit( );
 	}
 	/**
@@ -2250,7 +2250,7 @@
 	{
 		session_name( $_GET[ 'session_name' ] );
 		@session_start( );
-		if ( !@$_SESSION[ 'ptcdebug' ][ 'search_files' ] ) { exit( ); }
-		echo PtcDebug::showSearchPopup( $_GET[ 'ptc_search_files' ] , @$_GET[ 'ptc_search_path' ] );
+		if ( !@$_SESSION[ 'Debug' ][ 'search_files' ] ) { exit( ); }
+		echo Debug::showSearchPopup( $_GET[ 'ptc_search_files' ] , @$_GET[ 'ptc_search_path' ] );
 		exit( );
 	}

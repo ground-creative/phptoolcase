@@ -7,13 +7,13 @@
 	* PHP version 5.4+
 	* @category 	Libraries
 	* @package  	PhpToolCase
-	* @version	v1.1.0-stable
+	* @version	v1.0.0-stable
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
 	*/
 
-	class PtcEvent
+	class Event
 	{
 		/**
 		* Alias of @ref getEvents()
@@ -25,7 +25,7 @@
 		*/
 		public static function register( )
 		{
-			if ( !defined( '_PTCEVENT_' ) ) { @define( '_PTCEVENT_' , get_called_class( ) ); }
+			if ( !defined( '_Event_' ) ) { @define( '_Event_' , get_called_class( ) ); }
 		}
 		/**
 		* Adds a listener to an event
