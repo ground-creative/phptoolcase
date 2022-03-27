@@ -325,7 +325,7 @@
 				file_exists( dirname( __FILE__ ) . '/Event.php' ) ){ Event::register( ); }
 			//$namespace = @strtoupper( @str_replace( '\\' , '_' , __NAMESPACE__ ) ) . '_';
 			if ( !defined( '_PTCHANDYMAN_' ) ){ @define( '_PTCHANDYMAN_' , $this_class ); }
-			$debug = array( $addThisPath , $useHelpers , $registerAutoLoader , static::getDirs( ) );
+			$debug = [ $addThisPath , $useHelpers , $registerAutoLoader , static::getDirs( ) ];
 			static::_debug( $debug , '<b>Autoloader registerd!<b>' , 'Autoloader Registered' );
 		}
 		/**
