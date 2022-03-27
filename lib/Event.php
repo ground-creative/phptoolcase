@@ -83,7 +83,7 @@
 			return ( $name ) ? static::$_events[ $name ] : static::$_events;
 		}
 		/**
-		* Returs the current events
+		* Returs the current events, DEPRECATED use @ref get( )
 		* @param	string	$name	some event name
 		* @deprecated
 		*/
