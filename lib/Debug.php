@@ -24,7 +24,7 @@
 		*/
 		public static function isLoaded( )
 		{
-			return ( defined( '_Debug_NAMESPACE_' ) ) ? true : false;
+			return ( defined( '_PTCDEBUG_NAMESPACE_' ) ) ? true : false;
 		}
 		/**
 		* Returns the buffer array
@@ -62,7 +62,7 @@
 		/**
 		* Sets the error handler to be the debug class. good for production with "$dieOnFatal" set to false.
 		* See @ref replaceErrorHandler
-		* @param	string		$dieOnFatal		die if fatal error occurs
+		* @param	string	$dieOnFatal	die if fatal error occurs
 		*/
 		public static function setErrorHandler( $dieOnFatal = true )
 		{
@@ -78,12 +78,12 @@
 		}
 		/**
 		* Loads the debug interface and/or the console class if requested. See @ref dbg_getting_started
-		* @param 	array 		$options		array of options, see Debug::$ _defaultOptions
+		* @param 	array 	$options		array of options, see Debug::$ _defaultOptions
 		*/
 		public static function load( $options = null )
 		{
 			$now = microtime( true );
-			if ( defined( '_Debug_NAMESPACE_' ) )	// check if the debug class is already loaded
+			if ( defined( '_PTCDEBUG_NAMESPACE_' ) )	// check if the debug class is already loaded
 			{
 				$err = array( 'errno' => static::msgType( E_USER_NOTICE ),
 							'errstr' => 'Debug already loaded!','errfile' => 'trace' );
@@ -197,7 +197,7 @@
 					static::$_options[ 'show_sql' ] = static::_getSessionVars( 'show_sql' );
 					static::$_options[ 'show_w3c' ] = static::_getSessionVars( 'show_w3c' );
 				}
-				@define( '_Debug_NAMESPACE_' , $called_class ); 
+				@define( '_PTCDEBUG_NAMESPACE_' , $called_class ); 
 				static::$_tickTime = ( ( microtime( true ) - $now ) + static::$_tickTime );
 				static::bufferLog( '' , '<span>' . $buffer . '<span>' , 'Debug Loader' );
 			}
@@ -912,7 +912,7 @@
 		protected static function _buildBuffer( $type , $string , $statement = null , $category = null )
 		{
 			if ( @in_array( $category , static::$_options[ 'exclude_categories' ] ) ){ return; }
-			if ( defined( '_Debug_NAMESPACE_' ) && 
+			if ( defined( '_PTCDEBUG_NAMESPACE_' ) && 
 				@static::_getSessionVars( static::$_options[ 'url_key' ] ) && 
 					( static::$_options[ 'show_interface' ] || static::$_options[ 'debug_console' ] ) ) 
 			{

@@ -17,7 +17,7 @@
 	{
 		/**
 		* Alias of @ref getEvents()
-		* @deprecated
+		* @deprecated, use @ref get( )
 		*/
 		public static function getEvent( $name = null ){ return static::get( $name ); }
 		/**
@@ -25,7 +25,7 @@
 		*/
 		public static function register( )
 		{
-			if ( !defined( '_Event_' ) ) { @define( '_Event_' , get_called_class( ) ); }
+			if ( !defined( '_PTCEVENT_' ) ) { @define( '_PTCEVENT_' , get_called_class( ) ); }
 		}
 		/**
 		* Adds a listener to an event
@@ -83,7 +83,8 @@
 			return ( $name ) ? static::$_events[ $name ] : static::$_events;
 		}
 		/**
-		* Returs the current events, DEPRECATED use @ref get( )
+		* Returs the current events
+		* @deprecated, use @ref get( )
 		* @param	string	$name	some event name
 		* @deprecated
 		*/

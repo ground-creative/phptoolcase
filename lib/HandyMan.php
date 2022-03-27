@@ -245,7 +245,7 @@
 				else{ header( 'Content-Type: application/json' ); }
 			}
 			return ( $callback ) ? $_GET[ $callback ] . 
-				'(' . json_encode( $data) . ')' : json_encode( $data );
+				'(' . json_encode( $data ) . ')' : json_encode( $data );
 		}
 		/**
 		* Adds path(s) to the HandyMan::$_dirs property to load classes when needed. 
@@ -303,8 +303,8 @@
 		/** 
 		* Registers the autoloader to load classes when needed. See @ref hm_getting_started
 		* @param	bool		$addThisPath			adds the path where the class resides as a directory
-		* @param	bool		$useHelpers			loads the ptc-helpers.php file if found, and registers the event class
-		* @param	bool		$registerAutoLoader	registers the load method with the spl utilities
+		* @param	bool		$useHelpers			loads the shortcuts.php file if found, and registers the event class
+		* @param	bool		$registerAutoLoader		registers the load method with the spl utilities
 		*/
 		public static function register( $addThisPath = true , $useHelpers = true , $registerAutoLoader = true )
 		{
@@ -316,14 +316,15 @@
 				static::addDir( $this_dir ); 
 			}	// add this path
 			if ( $registerAutoLoader ) { spl_autoload_register( array( $this_class , 'load' ) ); }
-			if ( $useHelpers && file_exists( dirname( __FILE__ ) . '/ptc-helpers.php' ) ) // add helpers if found
+			
+			if ( $useHelpers && file_exists( dirname( __FILE__ ) . '/shortcuts.php' ) ) // add helpers if found
 			{ 
-				require_once( dirname( __FILE__ ) . '/ptc-helpers.php' ); 
+				require_once( dirname( __FILE__ ) . '/shortcuts.php' ); 
 			}
 			if ( $useHelpers && $registerAutoLoader && 
-				file_exists( dirname( __FILE__ ) . '/PtcEvent.php' ) ) { PtcEvent::register( ); }
+				file_exists( dirname( __FILE__ ) . '/Event.php' ) ){ Event::register( ); }
 			//$namespace = @strtoupper( @str_replace( '\\' , '_' , __NAMESPACE__ ) ) . '_';
-			if ( !defined( '_HandyMan_') ){ @define( '_HandyMan_' , $this_class ); }
+			if ( !defined( '_PTCHANDYMAN_' ) ){ @define( '_PTCHANDYMAN_' , $this_class ); }
 			$debug = array( $addThisPath , $useHelpers , $registerAutoLoader , static::getDirs( ) );
 			static::_debug( $debug , '<b>Autoloader registerd!<b>' , 'Autoloader Registered' );
 		}
@@ -535,13 +536,13 @@
 		protected static function _realpath( $path )
 		{
 			if ( $result = realpath( $path ) ){ return $result; } 
-			if ( class_exists( __NAMESPACE__ . '\PtcEvent' ) )
+			if ( class_exists( __NAMESPACE__ . '\Event' ) )
 			{
-				$listener = PtcEvent::getEvents( 'autoloader' );
+				$listener = Event::get( 'autoloader' );
 				if ( isset( $listener[ 'realpath' ] ) )
 				{
 					$p_path = $path;
-					PtcEvent::fire( 'autoloader.realpath' , array( &$path ) );
+					Event::fire( 'autoloader.realpath' , array( &$path ) );
 					return ( $path !== $p_path ) ? $path : $result;
 				}
 			}
@@ -671,7 +672,7 @@
 			return true;
 		}
 		/**
-		* Send messsages to the PtcDebug class if present
+		* Send messsages to the Debug class if present
 		* @param 	mixed 		$string		the string to pass
 		* @param 	mixed 		$statement		some statement if required
 		* @param	string		$category		a category for the messages panel
