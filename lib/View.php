@@ -6,7 +6,7 @@
 	* PHPTOOLCASE VIEW CLASS
 	* PHP version 5.4+
 	* @category 	Library
-	* @version	v1.0.0-stable
+	* @version	v1.1.0-stable
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
@@ -64,8 +64,7 @@
 		protected static function _debug( $string , $statement = null , $category = null )
 		{
 			if ( !defined( '_PTCDEBUG_NAMESPACE_' ) ){ return false; }
-			return @call_user_func_array( array( '\\' . _PTCDEBUG_NAMESPACE_ , 
-							'bufferLog' ) ,  array( $string , $statement , $category ) );
+			return @call_user_func_array( [ '\\' . _PTCDEBUG_NAMESPACE_ , 'bufferLog' ] ,  [ $string , $statement , $category ] );
 		}
 	}
 	
@@ -186,7 +185,7 @@
 			return str_replace( '//' , '/' , $this->_base . $this->_template );
 		}
 		/**
-		* Sends messsages to the PtcDebug class if present
+		* Sends messsages to the Debug class if present
 		* @param 	mixed 		$string		the string to pass
 		* @param 	mixed 		$statement	some statement if required
 		* @param	string		$category	a category for the messages panel
@@ -194,7 +193,6 @@
 		protected function _debug( $string , $statement = null , $category = null )
 		{
 			if ( !defined( '_PTCDEBUG_NAMESPACE_' ) ){ return false; }
-			return @call_user_func_array( array( '\\' . _PTCDEBUG_NAMESPACE_ , 
-							'bufferLog' ) ,  array( $string , $statement , $category ) );
+			return @call_user_func_array( [ '\\' . _PTCDEBUG_NAMESPACE_ , 'bufferLog' ] ,  [ $string , $statement , $category ] );
 		}
 	}

@@ -6,7 +6,7 @@
 	* PHP TOOLCASE OBJECT RELATIONAL MAPPING CLASS
 	* PHP version 5.4+
 	* @category 	Library
-	* @version	v1.0.0-stable
+	* @version	v1.1.0-stable
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
@@ -84,6 +84,7 @@
 			{
 				static::_fireEvent( 'updating' , array( &$this ) );
 				unset( $values[ static::$_uniqueKey ] );
+				if ( !$this->_fields ){ return null; }
 				$result = $qb->table( $storage[ 'table' ] )
 							->update( $values , $this->_fields[ static::$_uniqueKey ] )
 							->run( );
@@ -92,6 +93,7 @@
 			else // insert new row
 			{
 				static::_fireEvent( 'inserting' , array( &$this ) );
+				if ( !$this->_fields ){ return null; }
 				$result = $qb->table( $storage[ 'table' ] )->insert( $this->_fields )->run( ); 
 				static::_fireEvent( 'inserted' , array( &$this , $result ) );
 			}

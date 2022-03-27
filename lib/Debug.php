@@ -8,7 +8,7 @@
 	* to let them work on script shutdown when FATAL error occurs.
 	* PHP version 5.4+
 	* @category 	Library
-	* @version	v1.0.0-stable
+	* @version	v1.1.0-stable
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
@@ -25,6 +25,24 @@
 		public static function isLoaded( )
 		{
 			return ( defined( '_PTCDEBUG_NAMESPACE_' ) ) ? true : false;
+		}
+		/**
+		* Dumps a var in readable format with var_dump( )
+		* @param 	mixed	$var		the name of the variable to dump
+		* @return	the dumped variable
+		*/
+		public static function dumpVar( $var )
+		{
+			return '<pre>' . "\n" . var_dump( $var ) . "\n" . '</pre>' . "\n";
+		}
+		/**
+		* Dumps a var in readable format with print_r( )
+		* @param 	mixed	$var		the name of the variable to dump
+		* @return	the dumped variable
+		*/
+		public static function printVar( $var )
+		{
+			return '<pre>' . "\n" . print_r( $var , true ) . "\n" . '</pre>' . "\n";
 		}
 		/**
 		* Returns the buffer array
@@ -58,7 +76,45 @@
 				}
 			}
 			return false;
-		}													
+		}		
+		/**
+		* Retrieves the client ip address
+		* @return	the client ip address
+		*/	
+		public static function getClientIP( ) 
+		{ 
+			if ( @$_SERVER[ 'HTTP_CLIENT_IP' ] ) 
+			{
+				return $_SERVER[ 'HTTP_CLIENT_IP' ]; 
+			} 
+			if ( @$_SERVER[ 'HTTP_X_FORWARDED_FOR' ] ) 
+			{
+				foreach ( explode( ',' , $_SERVER[ 'HTTP_X_FORWARDED_FOR' ] ) as $ip ) 
+				{ 
+					if ( trim( $ip ) ) 
+					{ 
+						return $ip; 
+					} 
+				} 
+			}
+			if ( @$_SERVER[ 'HTTP_X_FORWARDED' ] ) 
+			{ 
+				return $_SERVER[ 'HTTP_X_FORWARDED' ]; 
+			} 
+			if ( @$_SERVER[ 'HTTP_X_CLUSTER_CLIENT_IP' ] ) 
+			{ 
+				return $_SERVER[ 'HTTP_X_CLUSTER_CLIENT_IP' ]; 
+			} 
+			if ( @$_SERVER[ 'HTTP_FORWARDED_FOR' ] ) 
+			{ 
+				return $_SERVER[ 'HTTP_FORWARDED_FOR' ]; 
+			} 
+			if ( @$_SERVER[ 'HTTP_FORWARDED' ] ) 
+			{ 
+				return $_SERVER[ 'HTTP_FORWARDED' ]; 
+			} 
+			return @$_SERVER[ 'REMOTE_ADDR' ]; 
+		}			
 		/**
 		* Sets the error handler to be the debug class. good for production with "$dieOnFatal" set to false.
 		* See @ref replaceErrorHandler
@@ -115,19 +171,19 @@
 				else{ $buffer .= '<br>Session id is ' . session_id( ); }
 			}
 			if ( !@$_SESSION ){ $_SESSION = array( ); }
-			if ( !@$_SESSION[ 'Debug' ] ){ $_SESSION[ 'Debug' ] = array( ); }
+			if ( !@$_SESSION[ 'ptcdebug' ] ){ $_SESSION[ 'ptcdebug' ] = array( ); }
 			if ( @$_GET[ static::$_options[ 'url_key' ] ] == static::$_options[ 'url_pass' ] )
 			{
-				$_SESSION[ 'Debug' ][ static::$_options[ 'url_key' ] ] = true;
-				$_SESSION[ 'Debug' ][ 'code_highlighter' ]	= true;
-				$_SESSION[ 'Debug' ][ 'search_files' ] = true;
+				$_SESSION[ 'ptcdebug' ][ static::$_options[ 'url_key' ] ] = true;
+				$_SESSION[ 'ptcdebug' ][ 'code_highlighter' ]	= true;
+				$_SESSION[ 'ptcdebug' ][ 'search_files' ] = true;
 				//$buffer .= '<br>Debug turned on!';
 			}
 			else if ( @$_GET[ static::$_options[ 'url_key' ] . '_off' ] == static::$_options[ 'url_pass' ] )
 			{
-				$_SESSION[ 'Debug' ][ static::$_options[ 'url_key' ] ] = false;
-				$_SESSION[ 'Debug' ][ 'code_highlighter' ]	= false;
-				$_SESSION[ 'Debug' ][ 'search_files' ] = false;
+				$_SESSION[ 'ptcdebug' ][ static::$_options[ 'url_key' ] ] = false;
+				$_SESSION[ 'ptcdebug' ][ 'code_highlighter' ]	= false;
+				$_SESSION[ 'ptcdebug' ][ 'search_files' ] = false;
 			}
 			if ( static::_getSessionVars( static::$_options[ 'url_key' ] ) )
 			{ 
@@ -616,15 +672,15 @@
 		*/
 		protected static $_defaultOptions = array
 		(
-			'url_key'			=>	'debug' , // the key to pass to the url to turn on debug
+			'url_key'				=>	'debug' , // the key to pass to the url to turn on debug
 			'url_pass'			=>	'true' , // the pass to turn on debug
 			'replace_error_handler'	=>	true , // replace default php error handler
 			'error_reporting'		=>	E_ALL , // error reporting flag
-			'catch_exceptions'	=>	true , // sets exception handler to be this class method
-			'check_referer'		=>   	false , // check referer for key and pass ( good for ajax debugging )
-			'die_on_error'		=>	true , // die if fatal error occurs ( with this class error handler )
+			'catch_exceptions'		=>	true , // sets exception handler to be this class method
+			'check_referer'		=>   false , // check referer for key and pass ( good for ajax debugging )
+			'die_on_error'			=>	true , // die if fatal error occurs ( with this class error handler )
 			'debug_console'		=>	false , // only for Chrome,show messages in console ( phpConsole needed )
-			'allowed_ips'		=>	null , // restrict access with ip's
+			'allowed_ips'			=>	null , // restrict access with ip's
 			'session_start'		=>	false , // start session for persistent debugging
 			'show_interface'		=>	true , // show the interface ( false to debug in console only )
 			'set_time_limit'		=>	null , // set php execution time limit
@@ -634,16 +690,17 @@
 			'show_sql'			=>	true , // show sql panel
 			'show_w3c'			=>	true, // show the w3c panel
 			'minified_html'		=>	true , // compress html for a lighter output
-			'trace_depth'		=>	10 , // maximum depth for the backtrace
-			'max_dump_depth'	=>	6 , // maximum depth for the dump function	
+			'trace_depth'			=>	10 , // maximum depth for the backtrace
+			'max_dump_depth'		=>	6 , // maximum depth for the dump function	
 			'panel_top'			=>	'0px' , // panel top position
-			'panel_right'		=>	'0px' , // panel right position
-			'default_category'	=>	'General' , // default category for the messages
-			'enable_inspector'	=>	true , // enable variables inspector, use declare(ticks=n); in code block
+			'panel_right'			=>	'0px' , // panel right position
+			'default_category'		=>	'General' , // default category for the messages
+			'enable_inspector'		=>	true , // enable variables inspector, use declare(ticks=n); in code block
 			'code_coverage'		=>	true, // enable code coverage analysis, use "full" to start globally
 			'trace_functions'		=>	true, // enable function calls tracing, use "full" to start globally
-			'exclude_categories'	=>	array( ) , // exclude categories from the output
-			'max_header_size'		=>	4096 // maximum header size for phpconsole
+			'exclude_categories'	=>	[ ] , // exclude categories from the output
+			'max_header_size'		=>	4096 , // maximum header size for phpconsole
+			'event_class'			=>	'Event'
 		);
 		/**
 		* Array of methods excluded from the backtrace
@@ -716,22 +773,22 @@
 		/**
 		* Property that holds the css for the floating panel
 		*/
-		protected static $_panelCss = '#DebugPanel{font-family:Arial,sant-serif;
+		protected static $_panelCss = '#PtcDebugPanel{font-family:Arial,sant-serif;
 				position:fixed;top:{PANEL_TOP};right:{PANEL_RIGHT};
 				background:#eee;color:#333;z-index:10000;line-height:1.3em;
 				text-align:left;padding:0px;margin:0px;height:25px;}
-				#DebugPanel ul.tabs li{background-color:#ddd;border-color:#999;margin:0 -3px -1px 0;
+				#PtcDebugPanel ul.tabs li{background-color:#ddd;border-color:#999;margin:0 -3px -1px 0;
 				padding:3px 6px;border-width:1px;list-style:none;display:inline-block;border-style:solid;}
-				#DebugPanel ul.tabs li.active{background-color:#fff;border-bottom-color:transparent;
-				text-decoration:}#DebugPanel ul.tabs li:hover{background-color:#eee;}
-				#DebugPanel ul.tabs li.active:hover{background-color:#fff;}
-				#DebugPanel ul.tabs.merge-up{margin-top:-24px;}
-				#DebugPanel ul.tabs.right{padding:0 0 0 0;text-align:right;}
-				#DebugPanel ul.tabs{border-bottom-color:#999;border-bottom-width:1px;font-size:14px;
+				#PtcDebugPanel ul.tabs li.active{background-color:#fff;border-bottom-color:transparent;
+				text-decoration:}#PtcDebugPanel ul.tabs li:hover{background-color:#eee;}
+				#PtcDebugPanel ul.tabs li.active:hover{background-color:#fff;}
+				#PtcDebugPanel ul.tabs.merge-up{margin-top:-24px;}
+				#PtcDebugPanel ul.tabs.right{padding:0 0 0 0;text-align:right;}
+				#PtcDebugPanel ul.tabs{border-bottom-color:#999;border-bottom-width:1px;font-size:14px;
 				list-style:none;margin:0;padding:0;z-index:100000;position:relative;
-				background-color:#EEE}#DebugPanel ul.tabs a{color:purple;font-size:10px;
-				text-decoration:none;}#DebugPanel .tabs a:hover{color:red;}
-				#DebugPanel ul.tabs a.active{color:black;background-color:yellow;}
+				background-color:#EEE}#PtcDebugPanel ul.tabs a{color:purple;font-size:10px;
+				text-decoration:none;}#PtcDebugPanel .tabs a:hover{color:red;}
+				#PtcDebugPanel ul.tabs a.active{color:black;background-color:yellow;}
 				.msgTable{padding:0;margin:0;border:1px solid #999;font-family:Arial;
 				font-size:11px;text-align:left;border-collapse:separate;border-spacing:2px;}
 				.msgTable th{margin:0;border:0;padding:3px 5px;vertical-align:top;
@@ -757,8 +814,8 @@
 				.innerTable p{font-size:12px;color:#333;text-align:left;line-height:12px;}
 				.innerPanel h1{font-size:16px;font-weight:bold;margin-bottom:20px;
 				padding:0;border:0px;background-color:#EEE;}
-				#DebugPanelTitle{height:25px;float:left;z-index:1000000;position:relative;}
-				#DebugPanelTitle h1{font-size:16px;font-weight:bold;margin-bottom:20px;
+				#PtcDebugPanelTitle{height:25px;float:left;z-index:1000000;position:relative;}
+				#PtcDebugPanelTitle h1{font-size:16px;font-weight:bold;margin-bottom:20px;
 				margin-left:10px;padding:0 0 0 0;border:0px;background-color:#EEE;
 				color:#669;margin-top:5px;;height:20px;}
 				#analysisPanel h2{font-size:14px;font-weight:bold;margin-bottom:20px;
@@ -772,7 +829,7 @@
 				#varsPanel a{text-decoration:none;font-size:14px;font-weight:bold;color:#669;
 				line-height:25px;}.count_vars{font-size:11px;color:purple;padding:0;margin:0;}
 				.fixed{width:1%;white-space:nowrap;}.fixed1{width:5%;white-space:nowrap;}
-				#DebugStatusBar{height:2px;background-color:#999;}' ;
+				#PtcDebugStatusBar{height:2px;background-color:#999;}' ;
 		/**
 		* Sends the buffer to the PhpConsole class. See @ref ajax_env
 		*/
@@ -843,14 +900,14 @@
 		* Checks if a given ip has access
 		* @param 	string|array		$allowedIps		the ip's that are allowed
 		*/
-		protected static function _checkAccess($allowedIps=null)
+		protected static function _checkAccess( $allowedIps = null )
 		{
-			static::$_options['allowed_ips']=(!$allowedIps) ? static::$_options['allowed_ips'] : $allowedIps;
-			if(static::$_options['allowed_ips'])
+			static::$_options[ 'allowed_ips' ] = ( !$allowedIps ) ? static::$_options[ 'allowed_ips' ] : $allowedIps;
+			if ( static::$_options[ 'allowed_ips' ] )
 			{
-				static::$_options['allowed_ips']=(is_array(static::$_options['allowed_ips'])) ? 
-									static::$_options['allowed_ips'] : array(static::$_options['allowed_ips']);
-				if(@in_array(@$_SERVER['REMOTE_ADDR'],static::$_options['allowed_ips'])){ return true; }
+				static::$_options[ 'allowed_ips' ] = ( is_array( static::$_options[ 'allowed_ips' ] ) ) ? 
+									static::$_options[ 'allowed_ips' ] : array( static::$_options[ 'allowed_ips' ] );
+				if ( @in_array( @static::getClientIP( ) , static::$_options[ 'allowed_ips' ] ) ){ return true; }
 				return false;
 			}
 			return true;
@@ -860,10 +917,10 @@
 		*/
 		protected static function _setSessionVars()
 		{
-			$_SESSION[ 'Debug' ]['show_messages']=static::$_options['show_messages'];
-			$_SESSION[ 'Debug' ]['show_globals']=static::$_options['show_globals'];
-			$_SESSION[ 'Debug' ]['show_sql']=static::$_options['show_sql'];
-			$_SESSION[ 'Debug' ]['show_w3c']=static::$_options['show_w3c'];
+			$_SESSION[ 'ptcdebug' ]['show_messages'] = static::$_options['show_messages'];
+			$_SESSION[ 'ptcdebug' ]['show_globals'] = static::$_options['show_globals'];
+			$_SESSION[ 'ptcdebug' ]['show_sql'] = static::$_options['show_sql'];
+			$_SESSION[ 'ptcdebug' ]['show_w3c'] = static::$_options['show_w3c'];
 		}
 		/**
 		* Controls which panels will be shown with $_GET variable "hidepanels"
@@ -873,27 +930,27 @@
 			$hide = @explode( ',' , $_GET[ 'hidepanels' ] );
 			if ( !@empty( $hide ) )
 			{
-				$_SESSION[ 'Debug' ][ 'show_messages' ] = true;
-				$_SESSION[ 'Debug' ][ 'show_globals' ] = true;
-				$_SESSION[ 'Debug' ][ 'show_sql' ] = true;
-				$_SESSION[ 'Debug' ][ 'show_w3c' ] = true;
+				$_SESSION[ 'ptcdebug' ][ 'show_messages' ] = true;
+				$_SESSION[ 'ptcdebug' ][ 'show_globals' ] = true;
+				$_SESSION[ 'ptcdebug' ][ 'show_sql' ] = true;
+				$_SESSION[ 'ptcdebug' ][ 'show_w3c' ] = true;
 				foreach ( $hide as $k => $v )
 				{
 					if ( $v == 'msg' || $v == 'all' )
 					{ 
-						$_SESSION[ 'Debug' ][ 'show_messages' ] = false; 
+						$_SESSION[ 'ptcdebug' ][ 'show_messages' ] = false; 
 					}
 					if ( $v == 'globals' || $v == 'all' )
 					{ 
-						$_SESSION[ 'Debug' ][ 'show_globals' ] = false; 
+						$_SESSION[ 'ptcdebug' ][ 'show_globals' ] = false; 
 					}
 					if ( $v == 'sql' || $v == 'all' )
 					{ 
-						$_SESSION[ 'Debug' ][ 'show_sql' ] = false; 
+						$_SESSION[ 'ptcdebug' ][ 'show_sql' ] = false; 
 					}
 					if ( $v == 'w3c' || $v == 'all' )
 					{ 
-						$_SESSION[ 'Debug' ][ 'show_w3c' ] = false; 
+						$_SESSION[ 'ptcdebug' ][ 'show_w3c' ] = false; 
 					}
 				}
 			}			
@@ -911,11 +968,18 @@
 		*/
 		protected static function _buildBuffer( $type , $string , $statement = null , $category = null )
 		{
+			$events = '';
 			if ( @in_array( $category , static::$_options[ 'exclude_categories' ] ) ){ return; }
 			if ( defined( '_PTCDEBUG_NAMESPACE_' ) && 
 				@static::_getSessionVars( static::$_options[ 'url_key' ] ) && 
 					( static::$_options[ 'show_interface' ] || static::$_options[ 'debug_console' ] ) ) 
 			{
+				$event_class = static::$_options[ 'event_class' ];
+				$events = $event_class::getEvents( 'debug' );
+				if ( is_array( $events ) && array_key_exists( 'prebuffer' , $events ) )
+				{
+					$event_class::fire( 'debug.prebuffer' , [ $type , &$string , &$statement , &$category ] );
+				}
 				$buffer = array( 'start_time' => microtime( true ) , 'type' => $type );
 				$php_trace = static::_debugTrace( static::$_options[ 'trace_depth' ] );
 				$buffer[ 'errline' ] = @$php_trace[ 'line' ];
@@ -973,6 +1037,10 @@
 				{ 					
 					static::$_tickTime = ( ( microtime( true ) - $buffer[ 'start_time' ] ) + static::$_tickTime );
 				}
+			}
+			if ( is_array( $events ) && array_key_exists( 'postbuffer' , $events ) )
+			{
+				$event_class::fire( 'debug.postbuffer' , [ $type , &$buffer , &$category ] );
 			}
 		}
 		/**
@@ -1425,8 +1493,8 @@
 			static::_sortBuffer( );
 			$interface = static::_includeJs( );					// include js
 			$interface .= static::_includeCss( );					// include css
-			$interface .= '<div id="DebugPanel">';
-			$interface .= '<div id="DebugPanelTitle" style="display:none;">&nbsp;</div>';
+			$interface .= '<div id="PtcDebugPanel">';
+			$interface .= '<div id="PtcDebugPanelTitle" style="display:none;">&nbsp;</div>';
 			$interface .= static::_buildMenu( );					// top menu
 			$interface .= static::_buildMsgPanel( 'log' , 'msgPanel' );	// msgs
 			$interface .= static::_buildMsgPanel( 'sql' , 'sqlPanel' );		// sql
@@ -1434,7 +1502,7 @@
 			$interface .= static::_buildVarsPanel( );				// vars
 			$interface .= static::_buildW3cPanel( );				// w3c
 			$interface .= static::_buildTimerPanel( );				// timer
-			$interface .= '<div id="DebugStatusBar" style="display:none;">&nbsp;</div>';
+			$interface .= '<div id="PtcDebugStatusBar" style="display:none;">&nbsp;</div>';
 			$interface .= '</div>';
 			//$interface = static::_compressHtml( $interface );	// make html lighter
 			return $interface;
@@ -1926,20 +1994,20 @@
 					panels.analysis="analysisPanel";
 					function ptc_show_panel(elId,panelTitle,el)
 					{
-						var floatDivId="DebugPanel";
+						var floatDivId="PtcDebugPanel";
 						var tabs=document.getElementById(\'floatingTab\').getElementsByTagName("a");
 						for(var i=0;i<tabs.length;i++){tabs[i].className="";}
 						if(document.getElementById(elId).style.display=="none")
 						{ 	
 							ptc_reset_panels();
 							document.getElementById(elId).style.display=\'\'; 
-							document.getElementById(\'DebugStatusBar\').style.display=\'\';
+							document.getElementById(\'PtcDebugStatusBar\').style.display=\'\';
 							document.getElementById(floatDivId).style.width=\'100%\';
 							el.className="active";activePanelID=elId;ptc_set_title(panelTitle);
 						}
 						else
 						{
-							document.getElementById(\'DebugPanelTitle\').style.display=\'none\';
+							document.getElementById(\'PtcDebugPanelTitle\').style.display=\'none\';
 							ptc_reset_panels();
 							document.getElementById(floatDivId).style.width=\'\';
 						}
@@ -1947,15 +2015,15 @@
 					};
 					function ptc_reset_panels()
 					{
-						document.getElementById(\'DebugStatusBar\').style.display=\'none\'; 
+						document.getElementById(\'PtcDebugStatusBar\').style.display=\'none\'; 
 						for(var i in panels){document.getElementById(panels[i]).style.display=\'none\';}
 					};
 					function ptc_set_title(panelTitle)
 					{
-						document.getElementById(\'DebugPanelTitle\').style.display=\'\';
-						document.getElementById(\'DebugPanelTitle\').innerHTML=\'<h1>\'+panelTitle+\'</h1>\';
+						document.getElementById(\'PtcDebugPanelTitle\').style.display=\'\';
+						document.getElementById(\'PtcDebugPanelTitle\').innerHTML=\'<h1>\'+panelTitle+\'</h1>\';
 					};
-					function hideInterface(){document.getElementById(\'DebugPanel\').style.display=\'none\';};
+					function hideInterface(){document.getElementById(\'PtcDebugPanel\').style.display=\'none\';};
 					function ptc_show_vars(elId,link)
 					{
 						var element=document.getElementById(elId).style;
@@ -2064,7 +2132,7 @@
 					};
 					window.onload=function( ) 
 					{
-						var div=document.getElementById("DebugStatusBar");
+						var div=document.getElementById("PtcDebugStatusBar");
 						var press=false;
 						div.onmousedown=function(){press=true;return false;};
 						this.onmouseover=div.style.cursor="s-resize";
@@ -2080,7 +2148,7 @@
 					};
 					/*function ptc_minimize( )
 					{
-						var floatDivId="DebugPanel";resetPanels();
+						var floatDivId="PtcDebugPanel";resetPanels();
 						document.getElementById(floatDivId).style.width=\'300px\';
 						return false;
 					};*/
@@ -2209,7 +2277,7 @@
 		*/
 		protected static function _getSessionVars( $var = null )
 		{
-			return ( $var ) ? @$_SESSION[ 'Debug' ][ $var ] : @$_SESSION[ 'Debug' ];
+			return ( $var ) ? @$_SESSION[ 'ptcdebug' ][ $var ] : @$_SESSION[ 'ptcdebug' ];
 		}
 		/**
 		* Shows the search popup window with the result
@@ -2239,7 +2307,7 @@
 	{
 		session_name( $_GET[ 'session_name' ] );
 		@session_start( );
-		if ( !@$_SESSION[ 'Debug' ][ 'code_highlighter' ] ) { exit( ); }
+		if ( !@$_SESSION[ 'ptcdebug' ][ 'code_highlighter' ] ) { exit( ); }
 		echo Debug::highlightFile( $_GET[ 'ptc_read_file' ] , @$_GET[ 'ptc_read_line' ] );
 		exit( );
 	}
@@ -2250,7 +2318,7 @@
 	{
 		session_name( $_GET[ 'session_name' ] );
 		@session_start( );
-		if ( !@$_SESSION[ 'Debug' ][ 'search_files' ] ) { exit( ); }
+		if ( !@$_SESSION[ 'ptcdebug' ][ 'search_files' ] ) { exit( ); }
 		echo Debug::showSearchPopup( $_GET[ 'ptc_search_files' ] , @$_GET[ 'ptc_search_path' ] );
 		exit( );
 	}

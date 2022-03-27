@@ -6,7 +6,7 @@
 	* PHPTOOLCASE ROUTER CLASS
 	* PHP version 5.4+
 	* @category 	Library
-	* @version	v1.0.0-stable
+	* @version	v1.1.0-stable
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
@@ -332,10 +332,10 @@
 				'global_filters'	=> static::$_globalFilters ,
 				'redirects'	=> null
 			);
-			if ( isset( $_COOKIE[ 'Router_redirects' ] ) && 
-					null !== $_COOKIE[ 'Router_redirects' ] )
+			if ( isset( $_COOKIE[ 'PtcRouter_redirects' ] ) && 
+					null !== $_COOKIE[ 'PtcRouter_redirects' ] )
 			{
-				$debug[ 'redirects' ] = json_decode( $_COOKIE[ 'Router_redirects' ] );
+				$debug[ 'redirects' ] = json_decode( $_COOKIE[ 'PtcRouter_redirects' ] );
 			}
 			if ( !empty( static::$_globalFilters ) ) // check global filters patterns first
 			{
@@ -646,13 +646,13 @@
 		{
 			if ( 'remove' === $statusCode )
 			{
-				setcookie( 'Router_redirects' , null , time( ) + 600 , '/' );
+				setcookie( 'PtcRouter_redirects' , null , time( ) + 600 , '/' );
 				return;
 			}
-			if ( isset( $_COOKIE[ 'Router_redirects' ] ) && 
-					null !== $_COOKIE[ 'Router_redirects' ] )
+			if ( isset( $_COOKIE[ 'PtcRouter_redirects' ] ) && 
+					null !== $_COOKIE[ 'PtcRouter_redirects' ] )
 			{
-				$data = json_decode( $_COOKIE[ 'Router_redirects' ] );
+				$data = json_decode( $_COOKIE[ 'PtcRouter_redirects' ] );
 			}
 			$current = static::getUri( );
 			$build = static::getProtocol( ) . '://' . $_SERVER[ 'HTTP_HOST' ] . $current[ 'path' ];
@@ -660,7 +660,7 @@
 			$build .= ' ' . $statusCode;
 			@$data[ ] = static::getProtocol( ) . '://' . $_SERVER[ 'HTTP_HOST' ] . 
 										$current[ 'path' ] . ' ' . $statusCode;
-			setcookie( 'Router_redirects' , json_encode( $data ) , time( ) + 600 , '/' );
+			setcookie( 'PtcRouter_redirects' , json_encode( $data ) , time( ) + 600 , '/' );
 		}
 		/**
 		* Stores group filters to pass to the routes
@@ -1109,9 +1109,6 @@
 		*/
 		protected static function _checkParams( $params , $route , $uri )
 		{
-			$param_values = static::$_paramValues;
-			$param_values_raw = static::$_cleanParamValues;
-			$values = static::$_values;
 			foreach ( $params as $k => $v )
 			{
 				if ( preg_match( '|{.*?}|' , $v ) ) // check patterns on parameters
@@ -1132,27 +1129,24 @@
 							$result = call_user_func_array( 
 								$route->patterns[ $raw ] , array( $uri[ $k ] , $route->route ) );
 							if ( !$result ){ return false; }
-							$values[ ] = $result;
+							static::$_values[ ] = $result;
 							continue;
 						}
 						preg_match( '~' . $route->patterns[ $raw ] . '~' , $uri[ $k ] , $matches );
 						if ( empty( $matches ) ){ return false; } // abort if no matches
 					}
-					$param_values[ $v ] = $uri[ $k ];
-					$param_values_raw[ $raw ]	= $uri[ $k ];			
-					$values[ ] = $uri[ $k ];
+					static::$_paramValues[ $v ] = $uri[ $k ];
+					static::$_cleanParamValues[ $raw ]	= $uri[ $k ];			
+					static::$_values[ ] = $uri[ $k ];
 					continue;
 				}
 				if ( $v !== $uri[ $k ] ){ return false; } // uri does not match
 			}
-			if ( static::$_subdomain ){ $values[ ] = static::$_subdomain; }
-			if ( !empty( $param_values_raw ) ) // set values for the route object
+			if ( static::$_subdomain ){ static::$_values[ ] = static::$_subdomain; }
+			if ( !empty( static::$_cleanParamValues ) ) // set values for the route object
 			{ 
-				$route->set( 'values' , $param_values_raw ); 
+				$route->set( 'values' , static::$_cleanParamValues ); 
 			}
-			static::$_paramValues = $param_values;
-			static::$_cleanParamValues = $param_values_raw;
-			static::$_values = $values;
 			return true;
 		}
 		/**
@@ -1222,9 +1216,9 @@
 		protected static function _cleanRoute( $route , $trailingSlash = null )
 		{
 			$route = str_replace( '//' , '/' , $route ); // patch
+			if ( static::_checkFileExtension( $route ) ){ return $route; } 
 			if ( '*' === substr( $route , 0 , 1 ) ){ return $route; }
 			$route = ( '/' !== substr( $route , 0 , 1 ) ) ? '/' . $route : $route;
-			if ( static::_checkFileExtension( $route ) ){ return $route; } 
 			if ( is_bool( $trailingSlash ) ) // work with trailing slash if required
 			{
 				if ( $trailingSlash ) // add trailing slash if not present
@@ -1234,11 +1228,10 @@
 				}
 				else // remove trailing slash if present
 				{
-					$route = ( '/' === substr( $route , -1 ) ) ? substr( $route , 1 ) : $route;	
+					$route = ( '/' === $r = substr( $route , -1 ) ) ? $r : $route;	
 				}
 			}
-			return $route;
-		}
+			
 		/**
 		*
 		*/

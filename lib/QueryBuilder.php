@@ -6,7 +6,7 @@
 	* PHP TOOLCASE QUERY BUILDER CLASS
 	* PHP version 5.4+
 	* @category 	Library
-	* @version	v1.0.0-stable
+	* @version	v1.1.0-stable
 	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
@@ -513,6 +513,10 @@
 		*/
 		protected $_isClosure = false;
 		/**
+		* Property that stores the start of the closure engine
+		*/
+		protected $_startClosure = false;
+		/**
 		* Fecth mode pdo property for current query
 		*/
 		protected $_fetchMode = array( );
@@ -633,13 +637,14 @@
 			if ( false !== strpos( $value , 'or_' ) )  
 			{
 				$value = str_replace( 'or_' , '' , $value );
-				$this->_where .= ( !$this->_where ) ? ' WHERE ' : ' OR ';
+				$this->_where .= ( !$this->_where ) ? ' WHERE ' : ( ( $this->_startClosure ) ? '' : ' OR ' );
 			}
 			else
 			{ 
 				$value = str_replace( 'and_' , '' , $value );
-				$this->_where .= ( !$this->_where ) ? ' WHERE ' : ' AND ';
+				$this->_where .= ( !$this->_where ) ? ' WHERE ' : ( ( $this->_startClosure ) ? '' : ' AND ' );
 			}
+			$this->_startClosure = false;
 			return $value;
 		}
 		/**
@@ -749,6 +754,7 @@
 			$this->_where .= ( !$this->_where ) ? ' WHERE ' : 
 				' ' . strtoupper( str_replace( '_' , ' ' , strtolower( $type ) ) ) . ' ';
 			$this->_where  .= ' ( ';
+			$this->_startClosure = true;
 			call_user_func_array( $function , array( $this ) );
 			$this->_where  .= ' ) ';
 			$this->_isClosure = false;
