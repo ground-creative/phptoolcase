@@ -1216,9 +1216,9 @@
 		protected static function _cleanRoute( $route , $trailingSlash = null )
 		{
 			$route = str_replace( '//' , '/' , $route ); // patch
-			if ( static::_checkFileExtension( $route ) ){ return $route; } 
 			if ( '*' === substr( $route , 0 , 1 ) ){ return $route; }
 			$route = ( '/' !== substr( $route , 0 , 1 ) ) ? '/' . $route : $route;
+			if ( static::_checkFileExtension( $route ) ){ return $route; } 
 			if ( is_bool( $trailingSlash ) ) // work with trailing slash if required
 			{
 				if ( $trailingSlash ) // add trailing slash if not present
@@ -1228,10 +1228,11 @@
 				}
 				else // remove trailing slash if present
 				{
-					$route = ( '/' === $r = substr( $route , -1 ) ) ? $r : $route;	
+					$route = ( '/' === substr( $route , -1 ) ) ? substr( $route , 1 ) : $route;	
 				}
 			}
-			
+			return $route;
+		}
 		/**
 		*
 		*/
