@@ -1,5 +1,7 @@
 <?php
 
+	namespace phptoolcase;
+
 	/**
 	* PHPTOOLCASE ROUTER CLASS
 	* PHP version 5.4+

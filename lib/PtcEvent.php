@@ -1,5 +1,7 @@
 <?php
 
+	namespace phptoolcase;
+
 	/**
 	* PHP TOOLCASE EVENT DISPATCHER CLASS
 	* PHP version 5.4+

@@ -1,5 +1,7 @@
 <?php
 
+	namespace phptoolcase;
+
 	/**
 	* PHP TOOLCASE OBJECT RELATIONAL MAPPING CLASS
 	* PHP version 5.4+

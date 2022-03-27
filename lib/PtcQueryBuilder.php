@@ -1,5 +1,7 @@
 <?php
 
+	namespace phptoolcase;
+
 	/**
 	* PHP TOOLCASE QUERY BUILDER CLASS
 	* PHP version 5.4+

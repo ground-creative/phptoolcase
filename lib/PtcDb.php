@@ -1,5 +1,7 @@
 <?php
 
+	namespace phptoolcase;
+
 	/**
 	* PHP TOOLCASE DATABASE CONNECTION MANAGER CLASS
 	* PHP version 5.4+
