@@ -290,7 +290,7 @@
 			}
 			if ( !$callback = static::_checkCallback( $callback ) ){ return false; }
 			static::$_currentGroups[ ] = $name;
-			static::$_groups[ $name ] = new PtcGroupRoutes( static::$_currentGroups );
+			static::$_groups[ $name ] = new GroupRoutes( static::$_currentGroups );
 			call_user_func( $callback ); // execute the callback
 			array_pop( static::$_currentGroups ); // remove last added group
 			return static::$_groups[ $name ];
@@ -1175,7 +1175,7 @@
 		{
 			if ( !array_key_exists( static::$_mainGroupName , static::$_groups ) )
 			{ 
-				$main_group = new PtcGroupRoutes( array( static::$_mainGroupName ) );
+				$main_group = new GroupRoutes( array( static::$_mainGroupName ) );
 				static::$_groups[ static::$_mainGroupName ] = $main_group;
 			}
 			$current_group = ( !empty( static::$_currentGroups ) ) ? 
@@ -1277,7 +1277,7 @@
 	| ----------------------------------------------------------------------------
 	*/
 	
-	class PtcGroupRoutes
+	class GroupRoutes
 	{
 		/**
 		*
