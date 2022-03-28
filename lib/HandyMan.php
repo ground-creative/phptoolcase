@@ -303,26 +303,24 @@
 		/** 
 		* Registers the autoloader to load classes when needed. See @ref hm_getting_started
 		* @param	bool		$addThisPath			adds the path where the class resides as a directory
-		* @param	bool		$useHelpers			loads the shortcuts.php file if found, and registers the event class
-		* @param	bool		$registerAutoLoader		registers the load method with the spl utilities
+		* @param	bool		$useHelpers			loads the shortcuts.php file if found
+		* @param	bool		$registerAutoLoader	registers the load method with the spl utilities and the event class if present
 		*/
 		public static function register( $addThisPath = true , $useHelpers = true , $registerAutoLoader = true )
 		{
 			$this_class = get_called_class( );
-			if ( $addThisPath )
+			if ( $addThisPath )	// add this path
 			{
 				$this_dir = ( is_string( $addThisPath ) ) ? 
 					array( $addThisPath => dirname( __FILE__ ) ) : dirname( __FILE__ );
 				static::addDir( $this_dir ); 
-			}	// add this path
-			if ( $registerAutoLoader ) { spl_autoload_register( array( $this_class , 'load' ) ); }
-			
+			}	
+			if ( $registerAutoLoader ) { spl_autoload_register( [ $this_class , 'load' ] ); }
 			if ( $useHelpers && file_exists( dirname( __FILE__ ) . '/shortcuts.php' ) ) // add helpers if found
 			{ 
 				require_once( dirname( __FILE__ ) . '/shortcuts.php' ); 
 			}
-			if ( $useHelpers && $registerAutoLoader && 
-				file_exists( dirname( __FILE__ ) . '/Event.php' ) ){ Event::register( ); }
+			if ( $registerAutoLoader && file_exists( dirname( __FILE__ ) . '/Event.php' ) ){ Event::register( ); }
 			//$namespace = @strtoupper( @str_replace( '\\' , '_' , __NAMESPACE__ ) ) . '_';
 			if ( !defined( '_PTCHANDYMAN_' ) ){ @define( '_PTCHANDYMAN_' , $this_class ); }
 			$debug = [ $addThisPath , $useHelpers , $registerAutoLoader , static::getDirs( ) ];
