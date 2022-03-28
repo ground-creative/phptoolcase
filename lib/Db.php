@@ -127,7 +127,7 @@
 			'db'					=>	'database' , // the database name
 			'charset'   			=> 	'utf8' , // the database charset
 			'query_builder'			=>	false , // use the query builder component
-			'query_builder_class'	=>	'PtcQueryBuilder' , // the name of the query builder class
+			'query_builder_class'	=>	'QueryBuilder' , // the name of the query builder class
 			'pdo_attributes'		=>	array // attributes for the pdo object
 			( 
 				\PDO::ATTR_ERRMODE 			=> 	\PDO::ERRMODE_WARNING ,
@@ -206,12 +206,12 @@
 		/**
 		* Adds namespace to the library components
 		*/	
-		protected static function _namespace( $className , $string = 'PtcQueryBuilder' )
+		protected static function _namespace( $className , $string = 'QueryBuilder' )
 		{
 			return ( $string === $className ) ? __NAMESPACE__ . '\\' . $className : $className;
 		}
 		/**
-		* Sends messsages to the PtcDebug class if present
+		* Sends messsages to the Debug class if present
 		* @param 	mixed 		$string			the string to pass
 		* @param 	mixed 		$statement		some statement if required
 		* @param	string		$category		some category

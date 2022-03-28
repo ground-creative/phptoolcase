@@ -21,7 +21,7 @@
 		*/
 		public static function getEvent( $name = null ){ return static::get( $name ); }
 		/**
-		* Registers the component with a constant for ptc helpers functions
+		* Registers the component with a constant for ptc shortcuts
 		*/
 		public static function register( )
 		{

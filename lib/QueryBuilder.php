@@ -523,7 +523,7 @@
 		/**
 		* Event class name property
 		*/ 
-		protected $_eventClass = 'PtcEvent';
+		protected $_eventClass = 'Event';
 		/**
 		* Builds the query based on the type
 		*/
@@ -823,7 +823,7 @@
 			return _QUERY_BUILDER_RANDOM_ID_; 
 		}
 		/**
-		* Fires "ptc.query" event if PtcEvent class is present. See @ref query_event
+		* Fires "ptc.query" event if Event class is present. See @ref query_event
 		*/
 		protected function _fireEvent( $data )
 		{
@@ -835,13 +835,13 @@
 		* Retrieves the event class names and it's namespace
 		* @return	the event class name defined in the "$_eventclass" property and the namespace
 		*/		
-		protected function _namespace( $className = 'PtcEvent' )
+		protected function _namespace( $className = 'Event' )
 		{
-			return ( 'PtcEvent' === $className ) ? 
+			return ( 'Event' === $className ) ? 
 				__NAMESPACE__ . '\\' . $this->_eventClass : $this->_eventClass;
 		}
 		/**
-		* Send messsages to the PtcDebug class if present
+		* Send messsages to the Debug class if present
 		* @param 	mixed 		$string		the string to pass
 		* @param 	mixed 		$statement		some statement if required
 		* @param	string		$category		a category for the messages panel
@@ -867,7 +867,7 @@
 			return $string;
 		}
 		/**
-		* Adds execution time and query results to the PtcDebug class
+		* Adds execution time and query results to the Debug class
 		* @param	string		$reference	a reference to look for ("$statement")
 		* @param	string		$type		the type of debug  (timer, attach)
 		* @param 	mixed 		$string		the string to pass
