@@ -31,7 +31,6 @@
 	} ,
 	"autoload":
 	{
-		"classmap": [ "lib" ] ,
-		"files": [ "lib/shortcuts.php" ]
+		"classmap": [ "lib" ]
 	}
 }
