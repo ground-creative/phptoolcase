@@ -7,7 +7,7 @@
 	* PHP version 5.4+
 	* @category 	Library
 	* @version	v1.1.0-stable
-	* @author   	Carlo Pietrobattista <carlo@ground-creative.com>
+	* @author   	Irony <carlo@salapc.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
 	*/
@@ -17,8 +17,8 @@
 		/** 
 		* Adds a connection to the manager, will trigger an error if connection name is already present.
 		* See @ref db_getting_started
-		* @param	array		$options		the details of the connection, see @ref connection_options
-		* @param	string		$name		the name of the connection
+		* @param	array	$options		the details of the connection, see @ref connection_options
+		* @param	string	$name		the name of the connection
 		* @return 	an array with the connection details as values or false if name is already present 
 		*/
 		public static function add( $options , $name = 'default' )
