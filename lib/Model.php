@@ -162,7 +162,7 @@
 		*/
 		public static function observe( $class = null )
 		{
-			$events_class = static::_namespace( static::$_eventClass , 'PtcEvent' );
+			$events_class = static::_namespace( static::$_eventClass , 'Event' );
 			if ( !class_exists( $events_class ) )
 			{
 				trigger_error( $events_class . ' NOT FOUND!' , E_USER_ERROR );
@@ -207,11 +207,11 @@
 		/**
 		* Event class name property. See @ref specifyEventClass
 		*/
-		protected static $_eventClass = 'PtcEvent';
+		protected static $_eventClass = 'Event';
 		/**
 		* Connection Manager class name property. See @ref specifyConnectionManagerClass
 		*/
-		protected static $_connectionManager = 'PtcDb';
+		protected static $_connectionManager = 'Db';
 		/**
 		* Connection name to be used property. See @ref change_connection
 		*/
@@ -318,7 +318,7 @@
 		protected static function _fireEvent( $event , $data )
 		{
 			$event = ( is_array( $event ) ) ? $event : array( $event );
-			$event_class = static::_namespace( static::$_eventClass, 'PtcEvent' );
+			$event_class = static::_namespace( static::$_eventClass, 'Event' );
 			if ( array_key_exists( $class = get_called_class( ) , static::$_observers ) )
 			{
 				foreach ( static::$_observers[ $class ] as $k => $v )
@@ -335,7 +335,7 @@
 		*/		
 		protected static function _getQB( )
 		{
-			$manager = static::_namespace( static::$_connectionManager , 'PtcDb' );
+			$manager = static::_namespace( static::$_connectionManager , 'Db' );
 			return call_user_func( $manager . '::getQB' , static::$_connectionName );	
 		}
 		/**
@@ -412,7 +412,7 @@
 		/**
 		* Adds namespace to the library components
 		*/	
-		protected static function _namespace( $className , $string = 'PtcDb' )
+		protected static function _namespace( $className , $string = 'Db' )
 		{
 			return ( $string === $className ) ? 
 				__NAMESPACE__ . '\\' . $className : $className;
