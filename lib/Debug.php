@@ -700,7 +700,7 @@
 			'trace_functions'		=>	true, // enable function calls tracing, use "full" to start globally
 			'exclude_categories'	=>	[ ] , // exclude categories from the output
 			'max_header_size'		=>	4096 , // maximum header size for phpconsole
-			'event_class'			=>	'Event'
+			'event_class'			=>	'phptoolcase\Event'
 		);
 		/**
 		* Array of methods excluded from the backtrace
