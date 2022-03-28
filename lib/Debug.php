@@ -9,7 +9,7 @@
 	* PHP version 5.4+
 	* @category 	Library
 	* @version	v1.1.0-stable
-	* @author   	Irony <carlo@salapc.com>
+	* @author   	Carlo Pietrobattista <carlo@ground-creative.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
 	*/
