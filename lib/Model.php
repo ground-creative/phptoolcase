@@ -139,12 +139,12 @@
 			{ 
 				return static::$_storage[ $class ][ 'columns' ]; 
 			}
-			$cols = array( );
+			$cols = [ ];
 			$qb = static::_getQB( );
 			$qb->setFetchMode( \PDO::FETCH_ASSOC );
 			$columns = $qb->run( 'SHOW COLUMNS FROM ' . 
 						$qb->addBackTicks( static::$_storage[ $class ][ 'table' ] ) );
-			foreach ( $columns as  $name ){ $cols[ $name[ 'Field' ] ] = $name[ 'Field' ]; }
+			foreach ( $columns as $name ){ $cols[ $name[ 'Field' ] ] = $name[ 'Field' ]; }
 			return static::$_storage[ $class ][ 'columns' ] = $cols;
 		}
 		/**
@@ -158,7 +158,7 @@
 		}
 		/**
 		* Adds observers to the class to use event listeners with the queries. See @ref using_observers
-		* @param	string		$class	the name of the class that will be used as observer
+		* @param	string	$class	the name of the class that will be used as observer
 		*/
 		public static function observe( $class = null )
 		{
@@ -312,8 +312,8 @@
 		}
 		/**
 		* Fires events if methods are present in observers classes. See @ref using_observers
-		* @param	string		$event	the event name stored in the $_observers property
-		* @param	array		$data		in array with the data to pass to the listeners
+		* @param		string	$event	the event name stored in the $_observers property
+		* @param		array	$data	an array with the data to pass to the listeners
 		*/
 		protected static function _fireEvent( $event , $data )
 		{
@@ -348,18 +348,18 @@
 			$qb = static::_getQB( );
 			if ( !array_key_exists( $class = get_called_class( ) , static::$_storage ) )
 			{
-				static::$_storage[ $class ] = array( );
+				static::$_storage[ $class ] = [ ];
 				if ( static::$_table ){ static::$_storage[ $class ][ 'table' ] = static::$_table; }
 				else
 				{
 					static::$_storage[ $class ][ 'table' ] = strpos( $class , '\\' ) ? 
 						@strtolower( end( explode( '\\' , $class ) ) ) : strtolower( $class );
 				}
-				$qb->run( 'SHOW TABLES LIKE ?' , array( static::$_storage[ $class ][ 'table' ] ) );
+				$qb->run( 'SHOW TABLES LIKE ?' , [ static::$_storage[ $class ][ 'table' ] ] );
 				if ( !$qb->countRows( ) )
 				{ 
 					trigger_error( 'Table ' . static::$_storage[ $class ][ 'table' ] . 
-								' does not exists, quitting now!' , E_USER_ERROR );
+								' does not exist, quitting now!' , E_USER_ERROR );
 					return false;
 				}
 				static::$_storage[ $class ][ 'columns' ] = static::getColumns( );
