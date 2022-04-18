@@ -41,7 +41,7 @@ view the guides included with the API documentation
 https://github.com/ground-creative/phptoolcase/wiki<br>
 
 ### Changes
-view CHANGELOG
+[view CHANGELOG](https://github.com/ground-creative/phptoolcase/blob/master/CHANGELOG)
 
 ### Evolution
-view TODO
+[view TODO](https://github.com/ground-creative/phptoolcase/blob/master/TODO)
