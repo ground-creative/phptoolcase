@@ -101,7 +101,7 @@
 			{
 				if ( in_array( $method , get_class_methods( $qb ) ) )
 				{
-					return call_user_func_array( array( $qb , $method ) , $args );
+					return call_user_func_array( [ $qb , $method ] , $args );
 				}
 				trigger_error( 'Call to undefined method "' . $method . '"!' , E_USER_ERROR );
 				return false;
@@ -109,7 +109,7 @@
 			else // call the pdo object methods
 			{
 				$pdo = static::$_connections[ $name ][ 'pdo_object' ];
-				return call_user_func_array( array( $pdo , $method ) , $args );
+				return call_user_func_array( [ $pdo , $method ] , $args );
 			}
 			trigger_error( 'Call to undefined method "' . $method . '"!' , E_USER_ERROR );
 			return false;
@@ -137,11 +137,11 @@
 		/**
 		* Pdo and query builder objects property
 		*/
-		protected static $_connections = array( );
+		protected static $_connections = [ ];
 		/**
 		* Connection details property
 		*/
-		protected static $_connectionsDetails = array( );
+		protected static $_connectionsDetails = [ ];
 		/**
 		* Initializes the pdo and query builder obejcts
 		* @param	string		$name		the name of the connection
@@ -169,8 +169,8 @@
 						return false;
 					}
 				}
-				static::_debug( array( 'details' => static::$_connectionsDetails[ $name ] , 
-						'connection' => static::$_connections[ $name ] ) , 'connection <b>"' . 
+				static::_debug( [ 'details' => static::$_connectionsDetails[ $name ] , 
+						'connection' => static::$_connections[ $name ] ] , 'connection <b>"' . 
 											$name . '"</b> initialized' , 'Connection Manager' );
 			}
 			return true;
@@ -205,6 +205,9 @@
 		}
 		/**
 		* Adds namespace to the library components
+		* @param 	mixed 		$className		the name of the called class
+		* @param 	mixed 		$string			the name of the query builder class
+		* @return	the current class name
 		*/	
 		protected static function _namespace( $className , $string = 'QueryBuilder' )
 		{
@@ -219,7 +222,7 @@
 		protected static function _debug( $string , $statement = null , $category = null )
 		{
 			if ( !defined( '_PTCDEBUG_NAMESPACE_' ) ){ return false; }
-			return @call_user_func_array( array( '\\' . _PTCDEBUG_NAMESPACE_ , 'bufferSql' ) ,  
-												array( $string , $statement , $category )  );
+			return @call_user_func_array( [ '\\' . _PTCDEBUG_NAMESPACE_ , 'bufferSql' ] ,  
+												[ $string , $statement , $category ] );
 		}
 	}
