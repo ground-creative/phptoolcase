@@ -7,7 +7,7 @@
 	* PHP version 5.4+
 	* @category 	Library
 	* @version	v1.1.0-stable
-	* @author   	Irony <carlo@salapc.com>
+	* @author   	Carlo Pietrobattista <carlo@ground-creative.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
 	*/
@@ -119,20 +119,20 @@
 		*/
 		protected static $_connectionOptions = array
 		(
-			'name'				=>	'default' , // the connection name
-			'driver'    				=> 	'mysql' , // the driver for the pdo object
-			'user'				=>	'root' , // the database username
-			'pass'				=>	'' , // the username password
-			'host'				=>	'localhost' , // the database host
-			'db'					=>	'database' , // the database name
-			'charset'   			=> 	'utf8' , // the database charset
-			'query_builder'			=>	false , // use the query builder component
+			'name'				=>	'default' , 	// the connection name
+			'driver'    				=> 	'mysql' , 		// the driver for the pdo object
+			'user'				=>	'root' , 		// the database username
+			'pass'				=>	'' , 			// the username password
+			'host'				=>	'localhost' , 	// the database host
+			'db'					=>	'database' , 	// the database name
+			'charset'   			=> 	'utf8' , 		// the database charset
+			'query_builder'			=>	false , 		// use the query builder component
 			'query_builder_class'	=>	'QueryBuilder' , // the name of the query builder class
-			'pdo_attributes'		=>	array // attributes for the pdo object
-			( 
-				\PDO::ATTR_ERRMODE 			=> 	\PDO::ERRMODE_WARNING ,
+			'pdo_attributes'		=>		 		// attributes for the pdo object
+			[ 
+				\PDO::ATTR_ERRMODE 				=> 	\PDO::ERRMODE_WARNING ,
 				\PDO::ATTR_DEFAULT_FETCH_MODE 	=> 	\PDO::FETCH_OBJ
-			)
+			]
 		);
 		/**
 		* Pdo and query builder objects property
@@ -154,7 +154,7 @@
 				static::$_connections[ $name ][ 'pdo_object' ] = new \PDO( 
 					static::_pdoDriver( $options[ 'driver' ] , $options[ 'host' ] ) . ';dbname=' . $options[ 'db' ] . 
 					';charset:' . $options[ 'charset' ] .';' , $options[ 'user' ] , $options [ 'pass' ] , 
-						array( \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES ' . $options[ 'charset' ] ) );
+						[ \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES ' . $options[ 'charset' ] ] );
 				if ( !static::$_connections[ $name ][ 'pdo_object' ]){ return false; } // pdo failed
 				foreach ( $options[ 'pdo_attributes' ] as $k => $v )
 				{
