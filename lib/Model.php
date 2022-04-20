@@ -64,7 +64,7 @@
 		}
 		/**
 		* Inserts a new record in table. See @ref adding_record and @ref update_record
-		* @return	the numbr of affected rows
+		* @return	the number of affected rows
 		*/
 		public function save( )
 		{
