@@ -198,11 +198,11 @@
 		/**
 		* Maps column names to fields, if "as" is used. See @ref mapping_fields
 		*/
-		protected static $_map = array( );
+		protected static $_map = [ ];
 		/**
 		* Guards certain table columns that should not be used with the object
 		*/
-		protected static $_guard = array( );
+		protected static $_guard =[ ];
 		/**
 		* Event class name property. See @ref specifyEventClass
 		*/
@@ -218,23 +218,23 @@
 		/**
 		* Possible observer events array. See @ref using_observers
 		*/
-		protected static $_events = array
-		(	
+		protected static $_events =
+		[	
 			'inserting' , 'inserted' , 'updating' , 'updated' , 
 			'deleting' , 'deleted' , 'saving' , 'saved'
-		);
+		];
 		/**
 		* Property that holds the observer classes
 		*/
-		protected static $_observers = array( );
+		protected static $_observers = [ ];
 		/**
 		* Column and table names property
 		*/
-		protected static $_storage = array( );
+		protected static $_storage = [ ];
 		/**
 		* Array of created values property 
 		*/
-		protected $_fields = array( );
+		protected $_fields = [ ];
 		/**
 		* Sets values
 		* @param	string		$key		the column name
