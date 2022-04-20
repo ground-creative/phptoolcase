@@ -42,7 +42,7 @@
 		public function select( $columns )
 		{ 
 			$this->_columns = '';
-			$columns = is_array( $columns ) ? $columns : array( $columns );
+			$columns = is_array( $columns ) ? $columns : [ $columns ];
 			foreach ( $columns as $v )
 			{
 				if ( $val = $this->_checkRawValue( $v ) )
@@ -177,8 +177,8 @@
 		/**
 		* Runs queries if pdo object is present. See @ref qb_getting_started
 		* @param	string		$query	the query to run
-		* @param	array		$bind		the values to bind to the query
-		* @param	numeric	$type		the query type ( 1,2,3)		
+		* @param	array		$bind	the values to bind to the query
+		* @param	numeric		$type	the query type ( 1,2,3)		
 		* @return	the query result if select, otherwise the number of affected rows
 		*/
 		public function run( $query = null , $bind = null , $type = null ) 
@@ -376,7 +376,7 @@
 			$this->_query = null;
 			$this->_currentQueryType = null;
 			$this->_currentQuery = null;
-			$this->_bindings = array( );
+			$this->_bindings = [ ];
 			$this->_join = null;
 		}
 		/**
@@ -391,7 +391,7 @@
 				trigger_error( 'Class ' . $class . ' does not exists!' , E_USER_ERROR );
 				return false;
 			}
-			$this->_fetchMode = ( $class ) ? array( $mode , $class ) : array( $mode );
+			$this->_fetchMode = ( $class ) ? [ $mode , $class ] : [ $mode ];
 			return $this;
 		}
 		/**
@@ -439,7 +439,7 @@
 		/**
 		* Limit property for the query
 		*/
-		protected $_bindLimit = array( );
+		protected $_bindLimit = [ ];
 		/**
 		* Columns property for the query
 		*/
@@ -491,15 +491,15 @@
 		/**
 		* Place holders property
 		*/
-		protected $_bindings = array( );
+		protected $_bindings = [ ];
 		/**
 		* Operator for where and join clauses property
 		*/
-		protected $_operators = array( '=' , '<' , '>' , '<=' , '>=' , '<>' , '!=' , 'like' , 'not like' , 'between' , 'ilike' );
+		protected $_operators = [ '=' , '<' , '>' , '<=' , '>=' , '<>' , '!=' , 'like' , 'not like' , 'between' , 'ilike' ];
 		/**
 		* Queries that need a return result propeerty
 		*/
-		protected $_returnStatements = array( 'SHOW' , 'SELECT' );
+		protected $_returnStatements = [ 'SHOW' , 'SELECT' ];
 		/**
 		* Join Property
 		*/
@@ -519,7 +519,7 @@
 		/**
 		* Fecth mode pdo property for current query
 		*/
-		protected $_fetchMode = array( );
+		protected $_fetchMode = [ ];
 		/**
 		* Event class name property
 		*/ 
@@ -585,7 +585,7 @@
 					$this->_query->setFetchMode( $this->_fetchMode[ 0 ] , $this->_fetchMode[ 1 ] );	
 				}
 				else{ $this->_query->setFetchMode( $this->_fetchMode[ 0 ] ); }
-				$this->_fetchMode = array( );
+				$this->_fetchMode = [ ];
 			}
 			switch ( $mode )
 			{
@@ -598,7 +598,7 @@
 			}
 			self::_debugBuffer(  ' - ' . $query . ' - ' ); 	// debug stop timer
 			$final_query = $this->_debugQuery( $this->_lastQuery->queryString , $this->_bindings );
-			$this->_fireEvent( array( $final_query , $result , $this->_bindings ) ); // ptc.query event
+			$this->_fireEvent( [ $final_query , $result , $this->_bindings ] ); // ptc.query event
 			$this->reset( );					// reset properties
 			// debug attach result
 			self::_debugBuffer(  ' - ' . $query . ' - ' , 'attach' , $result , ' - ' . $final_query . ' - ' );
@@ -750,12 +750,12 @@
 		protected function _runClosure( \Closure $function , $type )
 		{
 			$this->_isClosure = true;
-			if ( 'join' === $type ){ return call_user_func_array( $function , array( $this ) ); }
+			if ( 'join' === $type ){ return call_user_func_array( $function , [ $this ] ); }
 			$this->_where .= ( !$this->_where ) ? ' WHERE ' : 
 				' ' . strtoupper( str_replace( '_' , ' ' , strtolower( $type ) ) ) . ' ';
 			$this->_where  .= ' ( ';
 			$this->_startClosure = true;
-			call_user_func_array( $function , array( $this ) );
+			call_user_func_array( $function , [ $this ] );
 			$this->_where  .= ' ) ';
 			$this->_isClosure = false;
 		}
@@ -779,7 +779,7 @@
 		protected function _formatTable( $table )
 		{
 			$string = null;
-			$table = ( is_array( $table ) ) ? $table : array( $table );
+			$table = ( is_array( $table ) ) ? $table : [ $table ];
 			foreach ( $table as $v )
 			{
 				if ( $val = $this->_checkRawValue( $v ) )
@@ -849,8 +849,8 @@
 		protected static function _debug( $string , $statement = null , $category = 'QueryBuilder' )
 		{
 			if ( !defined( '_PTCDEBUG_NAMESPACE_' ) ){ return false; }
-			return @call_user_func_array( array( _PTCDEBUG_NAMESPACE_ , 'bufferSql' ) ,  
-										array( $string , $statement , $category )  );
+			return @call_user_func_array( [ _PTCDEBUG_NAMESPACE_ , 'bufferSql' ] ,  
+											[ $string , $statement , $category ]  );
 		}
 		/**
 		* Sends queries to the Debugger & Logger if present
@@ -878,13 +878,12 @@
 			if ( !defined( '_PTCDEBUG_NAMESPACE_' ) ){ return false; }
 			if ( $type == 'attach' )
 			{
-				return @call_user_func_array( array( '\\' . _PTCDEBUG_NAMESPACE_ ,
-								'addToBuffer' ) ,  array( $reference , $string , $statement ) );
+				return @call_user_func_array( [ '\\' . _PTCDEBUG_NAMESPACE_ ,
+								'addToBuffer' ] ,  [ $reference , $string , $statement ] );
 			}
 			else
 			{
-				return @call_user_func_array( array( '\\' . 
-							_PTCDEBUG_NAMESPACE_ , 'stopTimer' ) , array( $reference ) );
+				return @call_user_func_array( [ '\\' . _PTCDEBUG_NAMESPACE_ , 'stopTimer' ] ,[ $reference ] );
 			}
 		}
 	}

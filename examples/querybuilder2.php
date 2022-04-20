@@ -2,22 +2,25 @@
 
 	/* 
 	* EXAMPLE 2 FILE FOR PTCQUERYBUILDER CLASS
-	* PREPARED QUERIES FROM THE PTCQUERYBUILDER-EX1.PHP FILE WILL BE EXECUTED
+	* PREPARED QUERIES FROM THE QUERYBUILDER-EX1.PHP FILE WILL BE EXECUTED
 	* RUN() , ROW() AND FIND() WIL BE USED TO EXECUTE  QUERIES INSTEAD OF PREPARE()
 	* WHEN USING THE ABOVE METHODS, PLACE HOLDERS ARE NOT NEEDED
 	*/
+		
+	use phptoolcase\QueryBuilder;
 	
 	/*** DB DETAILS NEEDED TO EXECUTE QUERIES ***/
-	$db[ 'host' ] = 'localhost';			// mysql host
-	$db[ 'user' ] = 'user';				// mysql user
-	$db[ 'pass' ] = 'pass';				// mysql pass
-	$db[ 'database' ] = 'database';		// mysql database name
+	$db[ 'host' ] = 'localhost';				// mysql host
+	$db[ 'user' ] = 'root';					// mysql user
+	$db[ 'pass' ] = '';						// mysql pass
+	$db[ 'database' ] = 'testtoolcase';			// mysql database name
 	/*************************************************************/
+	
+	require dirname(__FILE__) . '/../vendor/autoload.php';
 
 	$running = true;	// preventing the example1 file to print the queries
 	
-	require_once( 'ptcquerybuilder-ex1.php' ); // require the example 1 file with the prepared queries
-	
+	require_once( 'querybuilder1.php' ); 	// require the example 1 file with the prepared queries
 	
 	/* INITIALIZING A PDO OBJECT TO RUN QUERIES WITH THE QUERYBUILDER */
 	$pdo = new PDO( 'mysql:host=' . $db[ 'host' ] . ';dbname=' . $db[ 'database' ] . 
@@ -26,7 +29,7 @@
 
 
 	/* INITIALIZING THE QUERY BUILDER WITH PDO SUPPORT */
-	$qb = new PtcQueryBuilder( $pdo );
+	$qb = new QueryBuilder( $pdo );
 	
 	
 	/* CREATE THE EXAMPLE TABLE */

@@ -4,9 +4,10 @@
 	* EXAMPLE FILE FOR PTCROUTER CLASS WITH GLOBAL PATTERNS AND ROUTE FILTERS
 	*/
 	
+	use phptoolcase\Router;
 	
 	/* ADDING A FILTER THAT CAN BE USED WITH ROUTES */
-	PtcRouter::filter( 'some.filter', function( $route , $uri , $response = null )
+	Router::filter( 'some.filter', function( $route , $uri , $response = null )
 	{
 		print "executing filter";
 		/* if we want to stop all routes execution we can use the routed( ) method */
@@ -16,7 +17,7 @@
 	} );
 	
 	/* ADDING A GLOBAL PATTERN */
-	PtcRouter::when( 'some-url/*' , function( )
+	Router::when( 'some-url/*' , function( )
 	{
 		print "global pattern executed";
 		/* if return is used all routes execution will be discarded */

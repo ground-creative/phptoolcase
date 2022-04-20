@@ -244,8 +244,7 @@
 				else if ( $callback ){ header( 'Content-Type: application/javascript' ); }
 				else{ header( 'Content-Type: application/json' ); }
 			}
-			return ( $callback ) ? $_GET[ $callback ] . 
-				'(' . json_encode( $data ) . ')' : json_encode( $data );
+			return ( $callback ) ? $_GET[ $callback ] . '(' . json_encode( $data ) . ')' : json_encode( $data );
 		}
 		/**
 		* Adds path(s) to the HandyMan::$_dirs property to load classes when needed. 

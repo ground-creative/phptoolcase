@@ -7,20 +7,24 @@
 	use phptoolcase\Db as DB;
 	
 	/*** DB DETAILS NEEDED FOR THE EXAMPLE TO WORK ***/
+	$db[ 'host' ] = 'localhost';				// mysql host
 	$db[ 'user' ] = 'root';					// mysql user
 	$db[ 'pass' ] = '';						// mysql pass
-	$db[ 'database' ] = 'database name';		// mysql database name
+	$db[ 'database' ] = 'testtoolcase';			// mysql database name
 	/*************************************************************/
 
 	require dirname(__FILE__) . '/../vendor/autoload.php';
 	
+	
+	/* ADDING A NEW CONNECTION */
 	DB::add( array
 	(
-		'user'			=>	$db[ 'user' ],
-		'pass'			=>	$db[ 'pass' ],
-		'db'				=>	$db[ 'database' ],
-		'query_builder'		=>	true,	// initialize the query builder
-		'pdo_attributes'	=> 		// adding pdo attributes
+		'host'			=>	$db[ 'host' ] ,
+		'user'			=>	$db[ 'user' ] ,
+		'pass'			=>	$db[ 'pass' ] ,
+		'db'				=>	$db[ 'database' ] ,
+		'query_builder'		=>	true ,	// initialize the query builder
+		'pdo_attributes'	=> 			// adding pdo attributes
 		[
 			\PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC 
 		]
@@ -31,5 +35,3 @@
 	
 	/* RUNNING THE QUERY BUILDER , REFER TO THE QUERY BUILDER EXAMPLE FILES FOR USAGE */
 	echo '<b>prepare select statement:</b> ' . $qb->table( 'test_table' )->select( 'some_column as test' )->prepare( );
-	
-	

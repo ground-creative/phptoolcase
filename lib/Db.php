@@ -117,23 +117,23 @@
 		/** 
 		* Default connection options property, see @ref connection_options
 		*/
-		protected static $_connectionOptions = array
-		(
-			'name'				=>	'default' , 	// the connection name
-			'driver'    				=> 	'mysql' , 		// the driver for the pdo object
-			'user'				=>	'root' , 		// the database username
-			'pass'				=>	'' , 			// the username password
-			'host'				=>	'localhost' , 	// the database host
-			'db'					=>	'database' , 	// the database name
-			'charset'   			=> 	'utf8' , 		// the database charset
-			'query_builder'			=>	false , 		// use the query builder component
-			'query_builder_class'	=>	'QueryBuilder' , // the name of the query builder class
-			'pdo_attributes'		=>		 		// attributes for the pdo object
+		protected static $_connectionOptions =
+		[
+			'name'				=>	'default' , 		// the connection name
+			'driver'    				=> 	'mysql' , 			// the driver for the pdo object
+			'user'				=>	'root' , 			// the database username
+			'pass'				=>	'' , 				// the username password
+			'host'				=>	'localhost' , 		// the database host
+			'db'					=>	'database' , 		// the database name
+			'charset'   			=> 	'utf8' , 			// the database charset
+			'query_builder'			=>	false , 			// use the query builder component
+			'query_builder_class'	=>	'QueryBuilder' , 	// the name of the query builder class
+			'pdo_attributes'		=>		 			// attributes for the pdo object
 			[ 
 				\PDO::ATTR_ERRMODE 				=> 	\PDO::ERRMODE_WARNING ,
 				\PDO::ATTR_DEFAULT_FETCH_MODE 	=> 	\PDO::FETCH_OBJ
 			]
-		);
+		];
 		/**
 		* Pdo and query builder objects property
 		*/

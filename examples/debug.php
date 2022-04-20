@@ -1,9 +1,10 @@
-<<<<<<< HEAD
 <?php
 
 	/* 
-	* EXAMPLE FILE FOR PTCDEBUG CLASS
+	* EXAMPLE FILE FOR DEBUG CLASS
 	*/
+	
+	use phptoolcase\Debug;
 
 	session_start( );				// start session for persistent debugging and code highlighter popup
 
@@ -13,21 +14,9 @@
 
 	//$_GET[ 'debug_off' ] = true;    	// turn off debug
 
-	require_once( '../PtcDebug.php' );	// include the PtcDebug class
+	require dirname(__FILE__) . '/../vendor/autoload.php';
 
-	$options = array				// add some options before class initialization
-=======
-<?
-	//session_start();				# start session for persistent debugging
-	
-	$_GET['debug']=true;       		# turn on the debug
-	
-	//$_GET['debugOff']=true;    		# turn off debug
-	
-	require_once('../PtcDebug.php');	# include the PtcDebug class
-	
-	$options=array
->>>>>>> master
+	$options = array
 	(
 		'url_key'			=>	'debug' ,
 		'url_pass'			=>	'true' ,
@@ -35,33 +24,33 @@
 		'debug_console'	=>	true , // send messages to console, chrome only with php-console extension
 	);
 
-	PtcDebug::load( $options );		// initialize the class
+	Debug::load( $options );		// initialize the class
 	
 	
 	/* START CODE COVERAGE ANALYSIS TO CHECK WHICH LINES HAVE BEEN EXECUTED */
-	PtcDebug::startCoverage( );	// set option['code_coverage'] to "full" to check the hole application
+	Debug::startCoverage( );	// set option['code_coverage'] to "full" to check the hole application
 	
 	
 	/* START TRACING FUNCTION CALLS */
-	PtcDebug::startTrace( );	// set option['trace_functions'] to "full" to check the hole application
+	Debug::startTrace( );	// set option['trace_functions'] to "full" to check the hole application
 
 
 	/* LOGGING A MESSAGE */
-	PtcDebug::bufferLog( 'just a message' );
+	Debug::bufferLog( 'just a message' );
 
 
 	/* LOGGING A VARIABLE WITH A STATEMENT */
 	$var = 'just a string';
-	PtcDebug::bufferLog( $var, 'testing a variable' );
+	Debug::bufferLog( $var, 'testing a variable' );
 
 
 	/* LOGGING AN ARRAY TO THE MESSAGE PANEL WITH A DIFFERENT CATEGORY */
 	$array = array( 'key' => 'value' , 'key1' => 'value1' );
-	PtcDebug::bufferLog( $array , 'testing an array' , 'new category' );
+	Debug::bufferLog( $array , 'testing an array' , 'new category' );
 	
 	
 	/* LOGGING AN OBJECT */
-	PtcDebug::bufferLog( ( object ) $array , 'testing an object' );
+	Debug::bufferLog( ( object ) $array , 'testing an object' );
 
 
 	/* THROWING A NOTICE */
@@ -83,51 +72,40 @@
 
 	/* LOGGING SQL QUERIES AND TIMING EXECUTION */
 	$sql = 'select from where something';		// some sql query, will be used as reference
-	PtcDebug::bufferSql( '' , $sql  );			// leaving the first parameter empty, can be added later with the query result
+	Debug::bufferSql( '' , $sql  );			// leaving the first parameter empty, can be added later with the query result
 	$sql_result = array( 'key' => 'value' , 'key1' => 'value1' ); // this should be the sql result of the sql query
-	PtcDebug::stopTimer( $sql );				// time execution, the query is used as reference
-	PtcDebug::addToBuffer( $sql , $sql_result );	// attaching the result to the message based on the reference
+	Debug::stopTimer( $sql );				// time execution, the query is used as reference
+	Debug::addToBuffer( $sql , $sql_result );	// attaching the result to the message based on the reference
 
 
 	/* WATCHING A VARIABLE */	
 	declare(ticks=1)						// declaring code block it is more precise for watching vars
 	{
 		$var = 'some test';
-		PtcDebug::watch( 'var' );				// passing the variable without the "$" symbol
+		Debug::watch( 'var' );				// passing the variable without the "$" symbol
 		$var = 'some new value';				// the variable changed
 	}
 	
 	
 	/* TIMING A LOOP */
-	PtcDebug::bufferLog( '' , 'timing a loop' );	// leaving the first parameter empty
+	Debug::bufferLog( '' , 'timing a loop' );	// leaving the first parameter empty
 	for ( $i = 0; $i < 100; $i++ ){ @$a[ ] = $i; }
-	PtcDebug::stopTimer( 'timing a loop' );		// using the reference to attach the execution time to the buffer
+	Debug::stopTimer( 'timing a loop' );		// using the reference to attach the execution time to the buffer
 	
 	
 	/* STOP CODE COVERAGE ANALYSIS */
-	PtcDebug::stopCoverage( );	// we could start it again later, if stopCoverage( ) is not used it will be stopped at shutdown
+	Debug::stopCoverage( );	// we could start it again later, if stopCoverage( ) is not used it will be stopped at shutdown
 	
 	
-<<<<<<< HEAD
 	/* STOT TRACING FUNCTION CALLS */
-	PtcDebug::stopTrace( );		// we could start it again later, if stopTrace( ) is not used it will be stopped at shutdown
+	Debug::stopTrace( );		// we could start it again later, if stopTrace( ) is not used it will be stopped at shutdown
 	
 	
 	/* DOWLOAD PHP-CONSOLE FOR CHROME TO SEE MESSAGES IN CONSOLE */
-	PtcDebug::bufferLog( '' , '<span style="color:red;">**For Chrome Browser:</span> 
+	Debug::bufferLog( '' , '<span style="color:red;">**For Chrome Browser:</span> 
 						<a target="_blank" href="https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef">
 							Download php-console</a> chrome extension to see debug output in console');
 	
 	
 	/* CATCHING AN EXCEPTION */
 	throw new Exception( 'Uncaught Exception' );
-	
-=======
-	function ddas()
-	{
-		fopen();
-	}
->>>>>>> master
-	
-	//session_destroy();
-

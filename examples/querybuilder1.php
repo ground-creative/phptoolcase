@@ -3,13 +3,15 @@
 	/* 
 	* EXAMPLE 1 FILE FOR PTCQUERYBUILDER CLASS, PREPARING QUERIES FOR LATER USAGE
 	* ALL QUERIES THAT ARE PREPARED WITH THE QUERYBUILDER, NEED PLACE HOLDERS
-	* TO SEE THE QUERIES EXECUTED REFER TO PTCQUERYBUILDER-EX2.PHP EXAMPLE FILE
+	* TO SEE THE QUERIES EXECUTED REFER TO QUERYBUILDER2.PHP EXAMPLE FILE
 	*/
 	
-	require_once( '../PtcQueryBuilder.php' ); // including the query builder component
+	use phptoolcase\QueryBuilder;
+	
+	require dirname(__FILE__) . '/../vendor/autoload.php';
 	
 	
-	$qb = new PtcQueryBuilder( );	// initializing the class
+	$qb = new QueryBuilder( );	// initializing the class
 	
 	
 	/* SELECT ALL RECORDS */

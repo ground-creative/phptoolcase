@@ -8,41 +8,42 @@
 	* OBSERVERS CAN BE ADDED TO THE CLASS WITH THE PTCEVENT COMPONENT
 	*
 	*/
+	
+	use phptoolcase\Db as DB;
+	use phptoolcase\Model;
 
 	/*** DB DETAILS NEEDED FOR THE EXAMPLE TO WORK ***/
-	$db[ 'user' ] = 'user';				// mysql user
-	$db[ 'pass' ] = 'pass';				// mysql pass
-	$db[ 'database' ] = 'database';		// mysql database name
+	$db[ 'host' ] = 'localhost';				// mysql host
+	$db[ 'user' ] = 'root';					// mysql user
+	$db[ 'pass' ] = '';						// mysql pass
+	$db[ 'database' ] = 'testtoolcase';			// mysql database name
 	/*************************************************************/
 	
-	require_once( '../PtcDb.php' ); // including the PtcDb class
+	require dirname(__FILE__) . '/../vendor/autoload.php';
 
-	/* ADDING DATABASE CONNECTION WITH THE QUERY BUILDER CLASS SUPPORT */
-	require_once( '../PtcQueryBuilder.php' ); // including the Query Builder class
-	PtcDb::add( array
+
+	DB::add( array
 	(
-		'user'			=>	$db[ 'user' ],
-		'pass'			=>	$db[ 'pass' ],
-		'db'				=>	$db[ 'database' ],
-		'query_builder'		=>	true,	// initialize the query builder
+		'host'			=>	$db[ 'host' ] ,
+		'user'			=>	$db[ 'user' ] ,
+		'pass'			=>	$db[ 'pass' ] ,
+		'db'				=>	$db[ 'database' ] ,
+		'query_builder'		=>	true ,	// initialize the query builder
 	) );
 	
 	/* CREATE THE EXAMPLE TABLE */
-	PtcDb::run( "DROP TABLE IF EXISTS `test_table`" );
-	PtcDb::run( "CREATE TABLE `test_table` 
+	DB::run( "DROP TABLE IF EXISTS `test_table`" );
+	DB::run( "CREATE TABLE `test_table` 
 	(
 		`id` int NOT NULL AUTO_INCREMENT, 
 		PRIMARY KEY(`id`),
 		`field1` varchar(255),
 		`field2` varchar(255)
 	)" );
-
-
-	require_once( '../PtcMapper.php' ); // including the ORM class
-
-
+	
+	
 	/* EXTENDING THE CLASS WITH THE TABLE NAME */
-	class Test_Table extends PtcMapper
+	class Test_Table extends Model
 	{
 		/* USING THE CLASS NAME AS TABLE */
 		//protected static $_table = ''; 
@@ -50,8 +51,7 @@
 		/* MAP FIELD NAMES IF "AS" IS USED IN A SELECT QUERY */
 		//protected static $_map = array( 'field1' => 'test' ); 
 	
-		/* USE THIS PROPERTY IF THE TABLE USES ANOTHER 
-		*  COLUMN NAME FOR THE PRIMARY KEY */
+		/* USE THIS PROPERTY IF THE TABLE USES ANOTHER COLUMN NAME FOR THE PRIMARY KEY */
 		//protected static $_uniqueKey = 'id';
 		
 		/* OBSERVER EXAMPLE, WORKS WITH PTCEVENT COMPONENT */

@@ -21,7 +21,7 @@
 		/**
 		* Resets previously set values
 		*/
-		public function reset( ){ $this->_fields = array( ); }
+		public function reset( ){ $this->_fields = [ ]; }
 		/**
 		* Removes values from fields property
 		* @param	string		$key		the table column name
@@ -54,12 +54,11 @@
 		public function delete( )
 		{
 			$storage = static::$_storage[ get_called_class( ) ];
-			static::_fireEvent( 'deleting' , array( &$this->_fields[ static::$_uniqueKey ] , &$this ) );
+			static::_fireEvent( 'deleting' , [ &$this->_fields[ static::$_uniqueKey ] , &$this ] );
 			$result = static::_getQB( )->table( $storage[ 'table' ] )
 							->delete( $this->_fields[ static::$_uniqueKey ] )
 							->run( );	 
-			static::_fireEvent( 'deleted' , 
-				array( &$this->_fields[ static::$_uniqueKey ] , &$this , &$result ) );
+			static::_fireEvent( 'deleted' , [ &$this->_fields[ static::$_uniqueKey ] , &$this , &$result ] );
 			//$this->reset( );	// reset fields
 			return $result;
 		}
@@ -78,26 +77,26 @@
 			}
 			static::_mapFields( );
 			$values = $this->_fields;
-			static::_fireEvent( 'saving' , array( &$this ) );
+			static::_fireEvent( 'saving' , [ &$this ] );
 			$qb = static::_getQB( );
 			if ( array_key_exists( static::$_uniqueKey , $this->_fields ) ) // update record
 			{
-				static::_fireEvent( 'updating' , array( &$this ) );
+				static::_fireEvent( 'updating' , [ &$this ] );
 				unset( $values[ static::$_uniqueKey ] );
 				if ( !$this->_fields ){ return null; }
 				$result = $qb->table( $storage[ 'table' ] )
 							->update( $values , $this->_fields[ static::$_uniqueKey ] )
 							->run( );
-				static::_fireEvent( 'updated' , array( &$this , $result ) );
+				static::_fireEvent( 'updated' , [ &$this , $result ] );
 			}
 			else // insert new row
 			{
-				static::_fireEvent( 'inserting' , array( &$this ) );
+				static::_fireEvent( 'inserting' , [ &$this ] );
 				if ( !$this->_fields ){ return null; }
 				$result = $qb->table( $storage[ 'table' ] )->insert( $this->_fields )->run( ); 
-				static::_fireEvent( 'inserted' , array( &$this , $result ) );
+				static::_fireEvent( 'inserted' , [ &$this , $result ] );
 			}
-			static::_fireEvent( 'saved' , array( &$this , $result ) );
+			static::_fireEvent( 'saved' , [ &$this , $result ] );
 			//$this->reset( );	// reset fields
 			return $result;
 		}
@@ -281,17 +280,17 @@
 			{
 				$column = substr( $method , 4 );
 				if ( !static::_checkColumn( $column ) ){ return false; }
-				static::_fireEvent( array( 'updating' , 'saving' ) , array( &$column , &$args ) );			     
+				static::_fireEvent( [ 'updating' , 'saving' ] , [ &$column , &$args ] );			     
 				$result = $qb->table( static::$_storage[ $class ][ 'table' ] )
 							->where( static::$_uniqueKey , '=' , $args[ 1 ] )
-							->update( array( $column => $args[ 0 ] ) )
+							->update( [ $column => $args[ 0 ] ] )
 							->run( );
-				static::_fireEvent( array( 'updated' , 'saved' ) , array( &$column , &$args , &$result ) );
+				static::_fireEvent( [ 'updated' , 'saved' ] , [ &$column , &$args , &$result ] );
 				return $result;
 			}
 			$qb->setFetchMode( \PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE , $class );
 			$qb->table( static::$_storage[ $class ][ 'table' ] );
-			return call_user_func_array( array( $qb , $method ), $args );
+			return call_user_func_array( [ $qb , $method ] , $args );
 		}
 		/**
 		* Checks if a given column name exists in table
@@ -317,7 +316,7 @@
 		*/
 		protected static function _fireEvent( $event , $data )
 		{
-			$event = ( is_array( $event ) ) ? $event : array( $event );
+			$event = ( is_array( $event ) ) ? $event : [ $event ];
 			$event_class = static::_namespace( static::$_eventClass, 'Event' );
 			if ( array_key_exists( $class = get_called_class( ) , static::$_observers ) )
 			{

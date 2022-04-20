@@ -613,6 +613,7 @@
 			{
 				foreach ( static::$_globalFilters as $k => $v )
 				{
+					$filtered = '';
 					$check_request = explode( '|' , $v[ 'request' ] );
 					if ( false === in_array( 'any' , $check_request ) && 
 						false === in_array( $request , $check_request ) ){ continue; }

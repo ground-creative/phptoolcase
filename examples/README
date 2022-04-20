@@ -2,14 +2,14 @@
 EXAMPLE FILES FOR ALL LIBRARY COMPONENTS:
 
 
-- ptcdebug-ex.php			debugger & logger examples file
-- ptcdb-ex.php				mysql query helper examples file
-- ptchm-ex.php			handyman example file
-- ptcevent-ex.php			event dispacher component example file
-- ptcmapper-ex.php			ptcmapper object relational mapping example file
-- ptcquerybuilder-ex1.php	example file for query builder, preparing queries
-- ptcquerybuilder-ex2.php	example file for query builder, executing queries
-- ptchelpers-ex.php			phptoolcase helper functions example file
-- autoloader-example-files	examples folder for the handyman component
-- router-example-files		examples folder for the router component
-- view-example-files		examples folder for the view component
+- debugphp				debugger & logger examples file
+- db.php					mysql query helper examples file
+- hm.php					handyman example file
+- event.php				event dispacher component example file
+- model.php				mapper object relational mapping example file
+- querybuilder1.php			example file for query builder, preparing queries
+- querybuilder2.php			example file for query builder, executing queries
+- helpers.php				phptoolcase helper functions example file
+- autoloader				examples folder for the handyman component
+- router					examples folder for the router component
+- view					examples folder for the view component
