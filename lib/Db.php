@@ -34,7 +34,7 @@
 				if( !array_key_exists( $k , static::$_connectionOptions ) )
 				{
 					trigger_error( 'Unknown option "' . $k . 
-						'" passed as argument to Db!',E_USER_WARNING );
+						'" passed as argument to the Db manager!',E_USER_WARNING );
 				}
 			}
 			$options['name' ] = $name;

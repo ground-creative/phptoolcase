@@ -36,7 +36,7 @@
 	/* ADDING A ROUTE FOR ANY REQUEST */
 	Router::any( $base_path . '/any-request' , function( )
 	{
-		print 'called the main page';
+		print 'called any request uri';
 	} );
 	
 	

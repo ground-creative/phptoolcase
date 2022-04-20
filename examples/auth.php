@@ -52,8 +52,10 @@
 	
 	
 	/* SETUP THE DATABASE TABLES */
-	Auth::setUp( );								// should be removed after first run
-	
+	if ( empty( DB::run( 'SHOW TABLES LIKE "users"' ) ) )
+	{
+		Auth::setUp( );	
+	}
 	
 	/* ADDING A NEW USER TO THE DATABASE */
 	Auth::create( 'some@email.com' , 'some_pass' );	// extra data and an isAdmin flag can also be added

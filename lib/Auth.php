@@ -237,7 +237,7 @@
 			}
 			static::$_options = array_merge( static::$_options , $options );
 			static::$_options[ 'connection_manager' ] = 
-				static::_namespace( static::$_options[ 'connection_manager' ] ,'PtcDb' );
+				static::_namespace( static::$_options[ 'connection_manager' ] ,'Db' );
 			static::$_tableColumns = ( empty( $columns ) ) ? static::$_tableColumns : $columns;
 			if ( !static::_checkConfig( static::$_tableColumns ) ){ return false; }
 			static::_debug( array( static::$_options , static::$_tableColumns ) , 
@@ -567,7 +567,7 @@
 		public static function observe( $class = null )
 		{
 			if ( !class_exists( $events_class = 
-				static::_namespace( static::$_options[ 'event_class' ] , 'PtcEvent' ) ) )
+				static::_namespace( static::$_options[ 'event_class' ] , 'Event' ) ) )
 			{
 				trigger_error( $events_class . ' not found, cannot use observer!' , E_USER_ERROR );
 				return false;
@@ -587,13 +587,13 @@
 		/**
 		*
 		*/
-		protected static $_options = array
-		( 
+		protected static $_options =
+		[
 			'app_key'				=>	'private_app_key' ,
 			'connection_name'		=>	'default' ,
-			'connection_manager'	=>	'PtcDb' ,
+			'connection_manager'	=>	'Db' ,
 			'model'				=>	null ,
-			'event_class'			=>	'PtcEvent' ,
+			'event_class'			=>	'Event' ,
 			'users_table'			=>	'users' ,
 			'login_table'			=>	'logged_in_users' ,
 			'verify'				=>	false ,
@@ -603,26 +603,26 @@
 			'cookie_prefix'			=>	'$x$' ,
 			'keep_sessions'		=>	30 , // in days
 			'debug_category'		=>	'Authentication' , 
-			'remember_options'		=>	array
-			(
+			'remember_options'		=>
+			[
 				'param' 			=>	null ,
 				'type' 			=>	'request' ,
 				'expires' 			=>	'30' ,
 				'path'			=>	'/' ,
 				'domain'			=>	null ,
 				'secure'			=>	null ,
-				'http_only'			=>	null
-			) ,
-			'guard'				=>	array
-			(
+				'http_only'		=>	null
+			] ,
+			'guard'				=>	
+			[
 				'salt' , 'password' , 'created' , 'last_login' , 'remember'
-			) 
-		);		
+			]
+		];		
 		/**
 		*
 		*/
-		protected static $_tableColumns = array
-		(
+		protected static $_tableColumns =
+		[
 			'salt'			=> 'user_salt' , // required ***
 			'username'	=> 'username' , // required ***
 			'password'	=> 'password' , // required ***
@@ -639,28 +639,28 @@
 			'created'		=> 'created' , // optional controlled
 			'updated'		=> 'updated' , // optional controlled
 			'last_login'	=> 'last_login' , // optional controlled
-		);
+		];
 		/**
 		*
 		*/
-		protected static $_defaultEmailTpl = array
-		(
+		protected static $_defaultEmailTpl =
+		[
 			'header'		=> 'Your verification code' ,
 			'subject'		=> 'Sent by your website' ,
 			'message'	=> 'Your verification code is {verification}' ,
-		);
+		];
 		/**
 		* Possible observer events array. See @ref using_observers
 		*/
-		protected static $_events = array
-		(	
+		protected static $_events =
+		[	
 			'creating' , 'created' , 'updating' , 'updated' , 'before_login' , 
 			'after_login' , 'before_logout' , 'after_logout' ,'verifying' , 'verified'
-		);
+		];
 		/**
 		* Property that holds the observer classes
 		*/
-		protected static $_observers = array( );
+		protected static $_observers = [ ];
 		/**
 		*
 		*/
@@ -675,7 +675,7 @@
 		protected static function _checkSetup( $table )
 		{
 			$qb = static::_connection( );
-			$qb->run( 'SHOW TABLES LIKE ?' , array( $table ) );
+			$qb->run( 'SHOW TABLES LIKE ?' , [ $table ] );
 			if ( $qb->countRows( ) )
 			{ 
 				static::_debug( 'Table ' . $table . 
@@ -692,8 +692,8 @@
 		*/
 		protected static function _fireEvent( $event , $data )
 		{
-			$event = ( is_array( $event ) ) ? $event : array( $event );
-			$event_class = static::_namespace( static::$_options[ 'event_class' ] , 'PtcEvent' );
+			$event = ( is_array( $event ) ) ? $event : [ $event ];
+			$event_class = static::_namespace( static::$_options[ 'event_class' ] , 'Event' );
 			if ( array_key_exists( $class = get_called_class( ) , static::$_observers ) )
 			{
 				foreach ( static::$_observers[ $class ] as $k => $v )
@@ -1035,21 +1035,20 @@
 		*/
 		protected static function _connection( $table = null )
 		{ 
-			$class = static::_namespace( static::$_options[ 'connection_manager' ] ,'PtcDb' );
+			$class = static::_namespace( static::$_options[ 'connection_manager' ] ,'Db' );
 			$arg = static::$_options[ 'connection_name' ];
-			$connection = call_user_func_array( array( $class , 'getQB' ) , array( $arg ) );
+			$connection = call_user_func_array( [ $class , 'getQB' ] , [ $arg ] );
 			return ( $table ) ? $connection->table( $table ) : $connection;
 		}
 		/**
 		* Adds namespace to the library components
 		*/	
-		protected static function _namespace( $className , $string = 'PtcDb' )
+		protected static function _namespace( $className , $string = 'Db' )
 		{
-			return ( $string === $className ) ? 
-				__NAMESPACE__ . '\\' . $className : $className;
+			return ( $string === $className ) ? __NAMESPACE__ . '\\' . $className : $className;
 		}
 		/**
-		* Send messsages to the PtcDebug class if present
+		* Send messsages to the Debug class if present
 		* @param 	mixed 		$string		the string to pass
 		* @param 	mixed 		$statement	some statement if required
 		* @param	string		$category	a category for the messages panel
