@@ -19,7 +19,7 @@ jobs:
           echo "Current tag is " ${GITHUB_REF##*/}
           echo "Target branch is ${{github.event.release.target_commitish}}"
           git config --global user.name 'ground-creative'
-          git config --global user.email 'irony00100@gmail.com'
+          git config --global user.email 'carlo@ground-creative.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git commit -am "ci: update version to ${GITHUB_REF##*/}"
           git push origin HEAD:${{github.event.release.target_commitish}}

@@ -22,11 +22,13 @@
 	
 	require_once( 'querybuilder1.php' ); 	// require the example 1 file with the prepared queries
 	
+	
 	/* INITIALIZING A PDO OBJECT TO RUN QUERIES WITH THE QUERYBUILDER */
 	$pdo = new PDO( 'mysql:host=' . $db[ 'host' ] . ';dbname=' . $db[ 'database' ] . 
 									';charset:uft8;' , $db[ 'user' ] , $db[ 'pass' ] );
 	$pdo->setAttribute( PDO::ATTR_DEFAULT_FETCH_MODE , PDO::FETCH_OBJ ); // setting pdo default fetch mode
-
+	$pdo->setAttribute( PDO::ATTR_ERRMODE , PDO::ERRMODE_WARNING );
+	
 
 	/* INITIALIZING THE QUERY BUILDER WITH PDO SUPPORT */
 	$qb = new QueryBuilder( $pdo );

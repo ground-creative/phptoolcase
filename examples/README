@@ -9,7 +9,7 @@ EXAMPLE FILES FOR ALL LIBRARY COMPONENTS:
 - model.php				mapper object relational mapping example file
 - querybuilder1.php			example file for query builder, preparing queries
 - querybuilder2.php			example file for query builder, executing queries
-- helpers.php				phptoolcase helper functions example file
+- shortcuts.php			phptoolcase shortcut functions example file
 - autoloader				examples folder for the handyman component
 - router					examples folder for the router component
 - view					examples folder for the view component

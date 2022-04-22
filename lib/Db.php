@@ -14,6 +14,10 @@
 
 	class Db
 	{
+		/**
+		* Alias of @ref getConnection()
+		*/
+		public static function getConnections( ){ return static::getConnection( ); }
 		/** 
 		* Adds a connection to the manager, will trigger an error if connection name is already present.
 		* See @ref db_getting_started
@@ -34,7 +38,7 @@
 				if( !array_key_exists( $k , static::$_connectionOptions ) )
 				{
 					trigger_error( 'Unknown option "' . $k . 
-						'" passed as argument to the Db manager!',E_USER_WARNING );
+						'" passed as argument to the Db manager!', E_USER_WARNING );
 				}
 			}
 			$options['name' ] = $name;
