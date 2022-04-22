@@ -7,9 +7,11 @@
 
 	final class DBTest extends TestCase
 	{
-		public function setup( )
+		protected static $_connection = [ ];
+	
+		public static function setUpBeforeClass( )
 		{
-			$this->connection =
+			static::$_connection =
 			[
 				'host' => 'localhost' ,			// mysql host
 				'user' => 'root' ,				// mysql user
@@ -20,18 +22,19 @@
 	
 		public function testAddConnection( )
 		{
-			$con = DB::add( array
-			(
-				'host'			=>	$this->connection[ 'host' ] ,
-				'user'			=>	$this->connection[ 'user' ] ,
-				'pass'			=>	$this->connection[ 'pass' ] ,
-				'db'				=>	$this->connection[ 'database' ] ,
+			$con = DB::add(
+			[
+				'host'			=>	static::$_connection[ 'host' ] ,
+				'user'			=>	static::$_connection[ 'user' ] ,
+				'pass'			=>	static::$_connection[ 'pass' ] ,
+				'db'				=>	static::$_connection[ 'database' ] ,
 				'query_builder'		=>	true ,	// initialize the query builder
 				'pdo_attributes'	=> 			// adding pdo attributes
 				[
-					\PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC 
+					\PDO::ATTR_DEFAULT_FETCH_MODE =>	\PDO::FETCH_ASSOC ,
+					\PDO::ATTR_ERRMODE			 =>	\PDO::ERRMODE_WARNING
 				]
-			) , 'new connection' );
+			] , 'new connection' );
 			$this->assertTrue( is_array( $con ) );
 			return $con;
 		}

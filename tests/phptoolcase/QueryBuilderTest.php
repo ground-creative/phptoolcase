@@ -36,24 +36,42 @@
 			)" );
 		}
 	
-		public function testPrepareStatement( )
+		public function testPrepare( )
 		{
 			$statement = static::$_qb->table( 'test_table' )->prepare( );
 			$this->assertTrue( is_string( $statement ) );
 			$this->assertEquals( 'SELECT * FROM `test_table`' , $statement );
 		}
 		
-		public function testInsertQuery( )
+		public function testInsert( )
 		{
 			$values = [ 'field1' => 'somevalue' , 'field2' => 'somevalue12' , 'field3' => 180 ];
-			$query_insert = static::$_qb->table( 'test_table' )->insert( $values )->run( );
-			$this->assertEquals( 1 , $query_insert );
+			$query = static::$_qb->table( 'test_table' )->insert( $values )->run( );
+			$this->assertEquals( 1 , $query );
 		}
 		
-		public function testInsertQueryWithNullValue( )
+		public function testInsertWithNullValue( )
 		{
 			$values = [ 'field1' => 'somevalue' , 'field2' => 'somevalue12' ];
-			$query_insert = static::$_qb->table( 'test_table' )->insert( $values )->run( );
-			$this->assertEquals( 1 , $query_insert );
+			$query = static::$_qb->table( 'test_table' )->insert( $values )->run( );
+			$this->assertEquals( 1 , $query );
+		}
+		/**
+		* @depends testInsert
+		*/
+		public function testGetAllRecords( )
+		{
+			$query = static::$_qb->table( 'test_table' )->run( );
+			$this->assertTrue( is_array( $query ) );
+		}
+		/**
+		* @depends testInsert
+		*/
+		public function testSelectQuery( )
+		{
+			$query = static::$_qb->table( 'test_table' )
+							->where( 'field1' , '=' , 'somevalue' )
+							->run( );
+			$this->assertTrue( is_array( $query ) );
 		}
 	}
