@@ -50,7 +50,7 @@
 			$this->assertEquals( 1 , $query );
 		}
 		
-		public function testInsertWithNullValue( )
+		public function testInsertPartialValues( )
 		{
 			$values = [ 'field1' => 'somevalue' , 'field2' => 'somevalue12' ];
 			$query = static::$_qb->table( 'test_table' )->insert( $values )->run( );
@@ -62,7 +62,7 @@
 		public function testGetAllRecords( )
 		{
 			$query = static::$_qb->table( 'test_table' )->run( );
-			$this->assertTrue( is_array( $query ) );
+			$this->assertTrue( ( sizeof( $query ) > 0 ) );
 		}
 		/**
 		* @depends testInsert
@@ -72,6 +72,6 @@
 			$query = static::$_qb->table( 'test_table' )
 							->where( 'field1' , '=' , 'somevalue' )
 							->run( );
-			$this->assertTrue( is_array( $query ) );
+			$this->assertTrue( ( sizeof( $query ) == 1 ) );
 		}
 	}
