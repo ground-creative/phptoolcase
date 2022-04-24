@@ -495,7 +495,7 @@
 		/**
 		* Operator for where and join clauses property
 		*/
-		protected $_operators = [ '=' , '<' , '>' , '<=' , '>=' , '<>' , '!=' , 'like' , 'not like' , 'between' , 'ilike' ];
+		protected $_operators = [ '=' , '<' , '>' , 'is' , '<=' , '>=' , '<>' , '!=' , 'like' , 'not like' , 'between' , 'ilike' ];
 		/**
 		* Queries that need a return result propeerty
 		*/
@@ -612,16 +612,16 @@
 		*/
 		protected function _bind( $pos , $value , $type = null )
 		{
-			if ( is_numeric( $pos ) ) { $pos = ( $pos + 1 ); }
+			if ( is_numeric( $pos ) ){ $pos = ( $pos + 1 ); }
 			if ( is_null( $type ) ) 
 			{
 				switch ( $value ) 
 				{
-					case is_int( $value ): $type = \PDO::PARAM_INT;
+					case is_null( $value ): $type = \PDO::PARAM_NULL;
 					break;
 					case is_bool( $value ): $type = \PDO::PARAM_BOOL;
 					break;
-					case is_null( $value ): $type = \PDO::PARAM_NULL;
+					case is_int( $value ): $type = \PDO::PARAM_INT;
 					break;
 					default: $type = \PDO::PARAM_STR;
 				}
