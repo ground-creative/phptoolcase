@@ -495,7 +495,8 @@
 		/**
 		* Operator for where and join clauses property
 		*/
-		protected $_operators = [ '=' , '<' , '>' , 'is' , '<=' , '>=' , '<>' , '!=' , 'like' , 'not like' , 'between' , 'ilike' ];
+		protected $_operators = [ '=' , '!=' , '<' , '>' , 'is' , 'is not' , '<=' , '>=' , 
+									'<>' , 'like' , 'not like' , 'between' , 'ilike' ];
 		/**
 		* Queries that need a return result propeerty
 		*/
