@@ -13,10 +13,10 @@
 		{
 			static::$_connection =
 			[
-				'host' => 'localhost' ,			// mysql host
-				'user' => 'root' ,				// mysql user
-				'pass' => '' ,					// mysql pass
-				'database' => 'testtoolcase'		// mysql database name
+				'host' => $GLOBALS[ 'DB_HOST' ] ,			// mysql host
+				'user' =>  $GLOBALS[ 'DB_USER' ] ,		// mysql user
+				'pass' => $GLOBALS[ 'DB_PASSWORD' ] ,	// mysql pass
+				'database' => $GLOBALS[ 'DB_DBNAME' ]	// mysql database name
 			];
 		}
 	

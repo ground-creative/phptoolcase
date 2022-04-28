@@ -13,7 +13,7 @@
 	$db[ 'host' ] = 'localhost';				// mysql host
 	$db[ 'user' ] = 'root';					// mysql user
 	$db[ 'pass' ] = '';						// mysql pass
-	$db[ 'database' ] = 'testtoolcase';			// mysql database name
+	$db[ 'database' ] = 'phptoolcase';			// mysql database name
 	/*************************************************************/
 	
 	require dirname(__FILE__) . '/../vendor/autoload.php';
@@ -92,6 +92,7 @@
 	
 	
 	/* CREATE ONE MORE EXAMPLE TABLE FOR THE JOIN QUERY */
+	$qb->run( "DROP TABLE IF EXISTS `test_table1`" );
 	$qb->run( "CREATE TABLE `test_table1` 
 	(
 		`id` int NOT NULL AUTO_INCREMENT, 

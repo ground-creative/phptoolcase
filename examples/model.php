@@ -16,7 +16,7 @@
 	$db[ 'host' ] = 'localhost';				// mysql host
 	$db[ 'user' ] = 'root';					// mysql user
 	$db[ 'pass' ] = '';						// mysql pass
-	$db[ 'database' ] = 'testtoolcase';			// mysql database name
+	$db[ 'database' ] = 'phptoolcase';			// mysql database name
 	/*************************************************************/
 	
 	require dirname(__FILE__) . '/../vendor/autoload.php';
