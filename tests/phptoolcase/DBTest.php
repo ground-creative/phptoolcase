@@ -5,6 +5,9 @@
 	use PHPUnit\Framework\TestCase;
 	use phptoolcase\Db as DB;
 
+	/**
+	* @requires extension pdo
+	*/
 	final class DBTest extends TestCase
 	{
 		protected static $_connection = [ ];

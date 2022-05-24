@@ -4,6 +4,9 @@
 
 	use PHPUnit\Framework\TestCase;
 
+	/**
+	* @requires extension pdo
+	*/
 	final class QueryBuilderTest extends TestCase
 	{
 		protected static $_connection = [ ];

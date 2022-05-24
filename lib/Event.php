@@ -63,12 +63,11 @@
 				$debug = ' wildcard to ';
 				if ( !array_key_exists( $event[ 0 ] , static::$_wildCards ) )
 				{
-					static::$_wildCards[ $event[ 0 ] ] = array( );
+					static::$_wildCards[ $event[ 0 ] ] = [ ];
 					$debug =' new wildcard ';
 				}
 				static::$_wildCards[ $event[ 0 ] ][  ] = $call;
-				static::_debug( array( $call ) , 'added ' . $debug . '<b>"' . $event[ 0 ] . '.*"</b>' , 
-																	'Event Manager' );
+				static::_debug( [ $call ] , 'added ' . $debug . '<b>"' . $event[ 0 ] . '.*"</b>' , 'Event Manager' );
 				return true;
 			}
 			static::_addEvent( $event , $call , $priority ); // add event
@@ -158,8 +157,9 @@
 				foreach ( static::$_wildCards[ $event[ 0 ] ] as $wildcard )
 				{
 					$data = ( is_array( $data ) ) ? $data : array( $data );
-					static::_debug( array( 'callback' => $wildcard , 'data' => array( $data , $main ) ) , 
-					'firing wildcard <b>' . $event[ 0 ] . '.' . $event[ 1 ] . '[ ' . $a . ' ]</b>' , 'Event Manager' );
+					static::_debug( [ 'callback' => $wildcard , 'data' => [ $data , $main ] ] , 
+										'firing wildcard <b>' . $event[ 0 ] . '.' . $event[ 1 ] . 
+														'[ ' . $a . ' ]</b>' , 'Event Manager' );
 					$a++;
 					if ( false === static::_run( $wildcard , array( $data , $main ) ) ){ return; }
 				}
@@ -177,11 +177,11 @@
 		/**
 		* Property that holds the events
 		*/
-		protected static $_events = array( );
+		protected static $_events = [ ];
 		/**
 		* Property that holds the wildcards
 		*/
-		protected static $_wildCards = array( );
+		protected static $_wildCards = [ ];
 		/**
 		* Adds events to the class
 		* @param	string	$event	some name for the event
