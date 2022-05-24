@@ -137,21 +137,3 @@
 			Event::fire( 'test.event1' , [ $this , true ] );
 		}
 	}
-	
-	class MyObserver 
-	{
-		public function handle( $data = null )
-		{
-			
-		}
-		
-		public function myMethod( $data = null )
-		{
-		      
-		}  
-	}
-			
-	function event_callback( $data = null )
-	{
-		
-	}

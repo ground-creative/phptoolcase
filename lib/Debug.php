@@ -6,7 +6,7 @@
 	* DEBUGGER & LOGGER CLASS
 	* <br>All class properties and methods are static because it's required 
 	* to let them work on script shutdown when FATAL error occurs.
-	* PHP version 5.4+
+	* PHP version 5.6+
 	* @category 	Library
 	* @version	v1.1.1-stable
 	* @author   	Carlo Pietrobattista <carlo@ground-creative.com>

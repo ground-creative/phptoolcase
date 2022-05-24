@@ -3,8 +3,6 @@
 	namespace phptoolcase;
 
 	use PHPUnit\Framework\TestCase;
-	
-	use PHPUnit\Framework\Assert;
 
 	/**
 	* @requires extension pdo
@@ -246,10 +244,10 @@
 		*/			
 		public function testObserverUpdateEvent( )
 		{
-			$row = Test_Table::all( ); 
+			/*$row = Test_Table::all( ); 
 			$row[ 0 ]->stringfield1 = 'model updated value';
 			$row[ 0 ]->stringfield2 = 'model updated value again';
-			$row[ 0 ]->save( );
+			$row[ 0 ]->save( );*/
 		}
 		/**
 		* @Depends DBTest::testAddConnection
@@ -257,99 +255,66 @@
 		*/		
 		public function testObserverDeleteEvent( )
 		{
-			$row = new Test_Table( );
+			/*$row = new Test_Table( );
 			$row->stringfield1 = 'model test';
 			$row->stringfield2 = 'model test other value';
 			$row->save( );
 			$last_id = Test_Table::lastId( );
-			Test_Table::find( $last_id )->delete( );
+			Test_Table::find( $last_id )->delete( );*/
 		}
-	}
-	
-	class Test_Table extends Model
-	{
-		protected static $_connectionName ='new connection';
-		
-		protected static $_map = [ 'stringfield1' => 'str' ]; 
-	}
-	
-	class Test_Table_Custom_Name extends Model
-	{
-		protected static $_connectionName ='new connection';
-	
-		protected static $_table = 'test_table';
-	}
-	
-	class Test_Table_Guard_Columns extends Model
-	{
-		protected static $_connectionName ='new connection';
-	
-		protected static $_table = 'test_table';
-		
-		protected static $_guard = [ 'stringfield1' , 'intfield' ];
-	}
-	
-	class Test_Table_Custom_Unique_key extends Model
-	{
-		protected static $_connectionName ='new connection';
-	
-		protected static $_table = 'test_table';
-		
-		protected static $_uniqueKey ='sid';
-	}
-	
-	class TestObserver
-	{
-		public static function inserting( &$values )
+		/**
+		* @Depends DBTest::testAddConnection
+		*/		
+		public function testAddOptionsOnInitilization( )
 		{
-			Assert::assertEquals( 'model test' , $values->stringfield1 );
-			Assert::assertEquals( 'model test other value' , $values->stringfield2 );
-			$values->stringfield1 = 'some new observer value';
-			$values->stringfield2 = 'another new observer value';
+			/*$row = new Test_Table_Use_Boot_Method( );
+			$row->stringfield1 = 'model test';
+			$row->stringfield2 = 'model test other value';
+			$row->save( );*/
 		}
-		
-		public static function inserted( $values , $result )
+		/**
+		* @Depends DBTest::testAddConnection
+		*/		
+		public function testCustomUniqueKey( )
 		{
-			Assert::assertEquals( 1 , $result );
-			Assert::assertEquals( 'some new observer value' , $values->stringfield1 );
-			Assert::assertEquals( 'another new observer value' , $values->stringfield2 );
+			Test_Table_Custom_Unique_key::run( "DROP TABLE IF EXISTS `test_table_custom_key`" );
+			Test_Table_Custom_Unique_key::run( "CREATE TABLE `test_table_custom_key` 
+			(
+				`sid` int NOT NULL AUTO_INCREMENT, 
+				PRIMARY KEY(`sid`),
+				`stringfield1` varchar(255),
+				`stringfield2` varchar(255),
+				`stringfield3` varchar(255),
+				`intfield` int(11) ,
+				`boolfield` tinyint(1)
+			)" );
+			$row = new Test_Table_Custom_Unique_key( );
+			$row->stringfield1 = 'model test';
+			$row->stringfield2 = 'model test other value';
+			$row->save( );
+			$last_id = Test_Table_Custom_Unique_key::lastId( );
+			$record = Test_Table_Custom_Unique_key::find( $last_id );
+			$this->assertTrue( array_key_exists( 'sid' , $record->toArray( ) ) );
 		}
-		
-		public static function updating( &$values )
+		/**
+		* @Depends DBTest::testAddConnection
+		*/		
+		public function testCustomEventClass( )
 		{
-			Assert::assertEquals( 'model updated value' , $values->stringfield1 );
-			Assert::assertEquals( 'model updated value again' , $values->stringfield2 );
-			$values->stringfield1 = 'some new observer updated value';
-			$values->stringfield2 = 'another new observer updated value';
+			/*Test_Table_Custom_Event_Class::observe( '\phptoolcase\TestObserver' );
+			$row = new Test_Table_Custom_Event_Class( );
+			$row->stringfield1 = 'model test';
+			$row->stringfield2 = 'model test other value';
+			$row->save( );*/
 		}
-		
-		public static function updated( $values , $result )
+		/**
+		* @Depends DBTest::testAddConnection
+		*/		
+		public function testCustomConnectionManagerClass( )
 		{
-			Assert::assertEquals( 1 , $result );
-			Assert::assertEquals( 'some new observer updated value' , $values->stringfield1 );
-			Assert::assertEquals( 'another new observer updated value' , $values->stringfield2 );
-		}
-		
-		public static function saving( &$values )
-		{
-			Assert::assertStringStartsWith( 'model' , $values->stringfield1 );
-		}
-		
-		public static function saved( $values , $result )
-		{
-			Assert::assertEquals( 1 , $result );
-			Assert::assertStringEndsWith( 'value' , $values->stringfield1 );
-		}
-		
-		public static function deleting( &$id )
-		{
-			Assert::assertTrue( is_numeric( $id ) );
-		}
-		
-		public static function deleted( $id , $values )
-		{
-			Assert::assertTrue( is_numeric( $id ) );
-			Assert::assertEquals( 'some new observer value' , $values->stringfield1 );
-			Assert::assertEquals( 'another new observer value' , $values->stringfield2 );
+			$records = Test_Table_Custom_Connection_Class::order( 'id' , 'desc' )
+						->limit( 1 )
+						->run( );
+			$this->assertTrue( ( sizeof( $records ) == 1 ) );	
 		}
 	}

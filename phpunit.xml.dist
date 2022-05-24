@@ -3,7 +3,9 @@
 <phpunit  bootstrap="tests/bootstrap.php" colors="true">
 	<testsuites>
 		<testsuite name="PhpToolCase Test Suite">
-			<directory>tests/phptoolcase/</directory>
+			<directory>tests/phptoolcase</directory>
+			<directory suffix=".php">tests/phptoolcase/dependencies</directory>
+			<exclude>tests/phptoolcase/dependencies/views</exclude>
 		</testsuite>
 	</testsuites>
 	<filter>
@@ -16,5 +18,5 @@
 		<var name="DB_USER" value="root" />
 		<var name="DB_PASSWORD" value="" />
 		<var name="DB_DBNAME" value="phptoolcase" />
-    </php>
+	</php>
 </phpunit>

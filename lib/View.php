@@ -4,7 +4,7 @@
 
 	/**
 	* PHPTOOLCASE VIEW CLASS
-	* PHP version 5.4+
+	* PHP version 5.6+
 	* @category 	Library
 	* @version	v1.1.1-stable
 	* @author   	Carlo Pietrobattista <carlo@ground-creative.com>
@@ -21,6 +21,12 @@
 		*/
 		public static function make( $view , $data = null )
 		{
+			if ( !static::$_base )
+			{
+				$msg = 'Please configure a base path for the view templates!';
+				trigger_error( $msg , E_USER_ERROR ); 
+				return false;
+			}
 			$view = new ViewTpl( $view , static::$_base ); // create a new view object
 			if ( $data ) // add data to the template
 			{ 
@@ -40,9 +46,10 @@
 				trigger_error( $msg , E_USER_ERROR ); 
 				return false;
 			}
+			$err_path = $path;
 			if ( !$path = @realpath( $path ) )
 			{
-				trigger_error( 'Views path "' . $path .
+				trigger_error( 'Views path "' . $err_path .
 					'" does not exists or is not accessible!' , E_USER_ERROR ); 
 				return false;
 			}
@@ -78,7 +85,7 @@
 	{
 		/**
 		* Adds the html template and the base path
-		* @param	string	$template	the html view file
+		* @param	string	$template	the html view file name without .php
 		* @param	string	$base		a base path where the file resides
 		*/
 		public function __construct( $template , $base = null )
@@ -99,6 +106,13 @@
 		/**
 		* Retrieves page variables for the view
 		* @param	string	$var		used to secify a variable by name to return
+		*/
+		public function get( $var = null )
+		{
+			return ( $var ) ? $this->_pageVars[ $var] : $this->_pageVars;
+		}
+		/**
+		* @deprecated, use @ref get( )
 		*/
 		public function getPageVars( $var = null )
 		{
