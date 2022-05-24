@@ -3,6 +3,8 @@
 	namespace phptoolcase;
 
 	use PHPUnit\Framework\TestCase;
+	
+	use PHPUnit\Framework\Assert;
 
 	/**
 	* @requires extension pdo
@@ -52,7 +54,7 @@
 		/**
 		* @Depends DBTest::testAddConnection
 		*/		
-		public function testAddRecord( )
+		public function testInsertRecord( )
 		{
 			$row = new Test_Table( );
 			$row->stringfield1 = 'model test';
@@ -65,7 +67,7 @@
 		/**
 		* @Depends DBTest::testAddConnection
 		*/		
-		public function testAddRecordFromAssociativeArray( )
+		public function testInsertRecordFromAssociativeArray( )
 		{
 			$arr = [ 'stringfield1' => 'created from array' , 'stringfield2' => 'created from array again' ];
 			$row = Test_Table::create( $arr );
@@ -76,7 +78,7 @@
 		}
 		/**
 		* @Depends DBTest::testAddConnection
-		* @depends testAddRecord
+		* @depends testInsertRecord
 		*/		
 		public function testUpdateRecord( )
 		{
@@ -91,7 +93,7 @@
 		}
 		/**
 		* @Depends DBTest::testAddConnection
-		* @depends testAddRecord
+		* @depends testInsertRecord
 		* @depends testUpdateRecord
 		*/		
 		public function testDeleteRecord( )
@@ -102,7 +104,7 @@
 		}
 		/**
 		* @Depends DBTest::testAddConnection
-		* @depends testAddRecord
+		* @depends testInsertRecord
 		*/		
 		public function testDeleteRecordWithQueryBuilder( )
 		{
@@ -223,7 +225,44 @@
 		*/			
 		public function testGuardColumns( )
 		{
-		
+			$data = Test_Table_Guard_Columns::all( );
+			$this->assertFalse( array_key_exists( 'stringfield1' , $data[ 0 ] ) );
+			$this->assertFalse( array_key_exists( 'intfield' , $data[ 0 ] ) );
+		}
+		/**
+		* @Depends DBTest::testAddConnection
+		*/			
+		public function testObserverInsertEvent( )
+		{
+			Test_Table::observe( '\phptoolcase\TestObserver' );
+			$row = new Test_Table( );
+			$row->stringfield1 = 'model test';
+			$row->stringfield2 = 'model test other value';
+			$row->save( );
+		}
+		/**
+		* @Depends DBTest::testAddConnection
+		* @depends testObserverInsertEvent
+		*/			
+		public function testObserverUpdateEvent( )
+		{
+			$row = Test_Table::all( ); 
+			$row[ 0 ]->stringfield1 = 'model updated value';
+			$row[ 0 ]->stringfield2 = 'model updated value again';
+			$row[ 0 ]->save( );
+		}
+		/**
+		* @Depends DBTest::testAddConnection
+		* @depends testObserverInsertEvent
+		*/		
+		public function testObserverDeleteEvent( )
+		{
+			$row = new Test_Table( );
+			$row->stringfield1 = 'model test';
+			$row->stringfield2 = 'model test other value';
+			$row->save( );
+			$last_id = Test_Table::lastId( );
+			Test_Table::find( $last_id )->delete( );
 		}
 	}
 	
@@ -239,4 +278,78 @@
 		protected static $_connectionName ='new connection';
 	
 		protected static $_table = 'test_table';
+	}
+	
+	class Test_Table_Guard_Columns extends Model
+	{
+		protected static $_connectionName ='new connection';
+	
+		protected static $_table = 'test_table';
+		
+		protected static $_guard = [ 'stringfield1' , 'intfield' ];
+	}
+	
+	class Test_Table_Custom_Unique_key extends Model
+	{
+		protected static $_connectionName ='new connection';
+	
+		protected static $_table = 'test_table';
+		
+		protected static $_uniqueKey ='sid';
+	}
+	
+	class TestObserver
+	{
+		public static function inserting( &$values )
+		{
+			Assert::assertEquals( 'model test' , $values->stringfield1 );
+			Assert::assertEquals( 'model test other value' , $values->stringfield2 );
+			$values->stringfield1 = 'some new observer value';
+			$values->stringfield2 = 'another new observer value';
+		}
+		
+		public static function inserted( $values , $result )
+		{
+			Assert::assertEquals( 1 , $result );
+			Assert::assertEquals( 'some new observer value' , $values->stringfield1 );
+			Assert::assertEquals( 'another new observer value' , $values->stringfield2 );
+		}
+		
+		public static function updating( &$values )
+		{
+			Assert::assertEquals( 'model updated value' , $values->stringfield1 );
+			Assert::assertEquals( 'model updated value again' , $values->stringfield2 );
+			$values->stringfield1 = 'some new observer updated value';
+			$values->stringfield2 = 'another new observer updated value';
+		}
+		
+		public static function updated( $values , $result )
+		{
+			Assert::assertEquals( 1 , $result );
+			Assert::assertEquals( 'some new observer updated value' , $values->stringfield1 );
+			Assert::assertEquals( 'another new observer updated value' , $values->stringfield2 );
+		}
+		
+		public static function saving( &$values )
+		{
+			Assert::assertStringStartsWith( 'model' , $values->stringfield1 );
+		}
+		
+		public static function saved( $values , $result )
+		{
+			Assert::assertEquals( 1 , $result );
+			Assert::assertStringEndsWith( 'value' , $values->stringfield1 );
+		}
+		
+		public static function deleting( &$id )
+		{
+			Assert::assertTrue( is_numeric( $id ) );
+		}
+		
+		public static function deleted( $id , $values )
+		{
+			Assert::assertTrue( is_numeric( $id ) );
+			Assert::assertEquals( 'some new observer value' , $values->stringfield1 );
+			Assert::assertEquals( 'another new observer value' , $values->stringfield2 );
+		}
 	}
