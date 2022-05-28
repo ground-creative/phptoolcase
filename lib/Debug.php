@@ -207,7 +207,7 @@
 				}
 				if ( static::$_options[ 'catch_exceptions' ] )	// set exception handler
 				{
-					set_exception_handler( array( $called_class , 'exceptionHandler' ) );
+					set_exception_handler( [ $called_class , 'exceptionHandler' ] );
 					$buffer .= "<br>Exception Handler turned on!";
 				}
 				if ( static::$_options[ 'debug_console' ] )	// try to load the console class

@@ -3,6 +3,7 @@
 	namespace phptoolcase;
 
 	use PHPUnit\Framework\TestCase;
+	use phptoolcase\Db as DB;
 
 	/**
 	* @requires extension pdo
@@ -277,8 +278,9 @@
 		*/		
 		public function testCustomUniqueKey( )
 		{
-			Test_Table_Custom_Unique_key::run( "DROP TABLE IF EXISTS `test_table_custom_key`" );
-			Test_Table_Custom_Unique_key::run( "CREATE TABLE `test_table_custom_key` 
+			$qb = DB::getQB( 'new connection' );
+			$qb->run( "DROP TABLE IF EXISTS `test_table_custom_key`" );
+			$qb->run( "CREATE TABLE `test_table_custom_key` 
 			(
 				`sid` int NOT NULL AUTO_INCREMENT, 
 				PRIMARY KEY(`sid`),
