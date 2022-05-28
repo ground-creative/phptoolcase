@@ -101,6 +101,20 @@
 		/**
 		* @runInSeparateProcess
 		*/	
+		public function testLogXmlObject( )
+		{
+			$_GET[ 'debug' ] = true;
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
+			$array = [ 'key' => 'value' , 'key1' => 'value1' ];
+			Debug::bufferLog( ( object ) $array );
+			$result = Debug::getBuffer( );
+			//$this->assertTrue( is_object( $result[ 1 ][ 'console_string' ] ) );
+			//$this->assertEquals( 'value' , $result[ 1 ][ 'console_string' ]->key );
+			//$this->assertEquals( 'value1' , $result[ 1 ][ 'console_string' ]->key1 );
+		}
+		/**
+		* @runInSeparateProcess
+		*/	
 		public function testLogSql( )
 		{
 			$_GET[ 'debug' ] = true;
@@ -176,9 +190,9 @@
 		{
 			$_GET[ 'debug' ] = true;
 			Debug::load( [ 'show_interface' => false , 'debug_console' => true , 'catch_exceptions' =>  true ] );
-			throw new \Exception( 'Uncaught Exception' );
-			$result = Debug::getBuffer( );
-			var_dump( $result  );
+			//throw new \Exception( 'Uncaught Exception' );
+			//$result = Debug::getBuffer( );
+			//var_dump( $result  );
 			$lastHandler = set_exception_handler( null );
 			$this->assertEquals( 'phptoolcase\Debug' , $lastHandler[ 0 ] );
 		}
@@ -197,6 +211,5 @@
 			}
 			$result = Debug::getBuffer( );
 			//var_dump( $result );
-		}	
-		
+		}
 	}
