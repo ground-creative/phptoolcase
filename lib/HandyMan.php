@@ -311,7 +311,7 @@
 			if ( $addThisPath )	// add this path
 			{
 				$this_dir = ( is_string( $addThisPath ) ) ? 
-					array( $addThisPath => dirname( __FILE__ ) ) : dirname( __FILE__ );
+							[ $addThisPath => dirname( __FILE__ ) ] : dirname( __FILE__ );
 				static::addDir( $this_dir ); 
 			}	
 			if ( $registerAutoLoader ) { spl_autoload_register( [ $this_class , 'load' ] ); }
@@ -377,13 +377,13 @@
 		*/
 		public static function getDirs( $type = null )
 		{ 
-			if ( $type && !in_array( $type , array( 'directories' , 'ns' , 'files' ) ) ) // wrong parameter
+			if ( $type && !in_array( $type , [ 'directories' , 'ns' , 'files' ] ) )
 			{ 
 				trigger_error( 'No directories are present with the "' . 
 								$type . '" parameter!' , E_USER_WARNING );
 				return;
 			}
-			else if ( $type && !@static::$_dirs[ $type ] ) { return false; } // no values in array
+			else if ( $type && !@static::$_dirs[ $type ] ) { return null; } // no values in array
 			if ( @static::$_dirs[ $type ] ) {  return static::$_dirs[ $type ]; } // return value
 			return @static::$_dirs;								// return all values
 		}

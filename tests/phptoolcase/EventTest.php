@@ -104,7 +104,7 @@
 			} );
 			Event::listen( 'prevent.propagation' , function( $obj , $var )
 			{
-				$this->assertCount( 0 , [ 'foo' ] );
+				$obj->assertCount( 0 , [ 'foo' ] );
 			} );
 			Event::fire( 'prevent.propagation' , [ $this , true ] );
 		}
@@ -129,11 +129,17 @@
 		{
 			Event::listen( 'test.event1' , function( $obj , $var )
 			{
-				$this->assertCount( 0 , [ 'foo' ] );
+				$obj->assertCount( 0 , [ 'foo' ] );
 			} );
 			Event::remove( 'test.event1' , 1 );
 			$events = Event::get( 'test' );
 			$this->assertCount( 1 , $events[ 'event1' ] );
 			Event::fire( 'test.event1' , [ $this , true ] );
+		}
+		
+		public function testRegisterClassNameConstant( )
+		{
+			Event::register( );
+			$this->assertTrue( defined( '_PTCEVENT_' ) );
 		}
 	}
