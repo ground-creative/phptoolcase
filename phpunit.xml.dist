@@ -20,5 +20,6 @@
 		<server name="REQUEST_URI" value="127.0.0.1"/>
 		<server name="HTTP_HOST" value="127.0.0.1"/>
 		<server name='HTTP_HOST' value='http://localhost' />
+		<server name='REMOTE_ADDR' value='127.0.0.1' />
 	</php>
 </phpunit>

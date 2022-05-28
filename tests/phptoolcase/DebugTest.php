@@ -30,9 +30,19 @@
 		public function testLoad( )
 		{
 			$_GET[ 'debug' ] = true;
-			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
+			Debug::load( );
+			$this->assertTrue( Debug::isLoaded( ) );
+		}
+		/**
+		* @runInSeparateProcess
+		*/	
+		public function testIsAlreadyLoaded( )
+		{
+			$_GET[ 'debug' ] = true;
+			Debug::load( );
+			Debug::load( );
 			$result = Debug::getBuffer( );
-			$this->assertEquals( 'Debug Loader' , $result[ 0 ][ 'console_category' ] );
+			$this->assertEquals( 'Debug already loaded!' , $result[ 1 ][ 'errstr' ] );
 		}
 		/**
 		* @runInSeparateProcess
@@ -77,12 +87,13 @@
 		{
 			$_GET[ 'debug' ] = true;
 			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
-			$array = [ 'key' => 'value' , 'key1' => 'value1' ];
+			$array = [ 'key' => 'value' , 'key1' => 'value1' , 'key2' => [ 'some value' ] ];
 			Debug::bufferLog( $array );
 			$result = Debug::getBuffer( );
 			$this->assertTrue( is_array( $result[ 1 ][ 'console_string' ] ) );
 			$this->assertEquals( 'value' , $result[ 1 ][ 'console_string' ][ 'key' ] );
 			$this->assertEquals( 'value1' , $result[ 1 ][ 'console_string' ][ 'key1' ] );
+			$this->assertEquals( 'some value' , $result[ 1 ][ 'console_string' ][ 'key2' ][ 0 ] );
 		}
 		/**
 		* @runInSeparateProcess
@@ -101,16 +112,52 @@
 		/**
 		* @runInSeparateProcess
 		*/	
-		public function testLogXmlObject( )
+		public function testLogSimpleXmlObject( )
 		{
 			$_GET[ 'debug' ] = true;
 			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
-			$array = [ 'key' => 'value' , 'key1' => 'value1' ];
-			Debug::bufferLog( ( object ) $array );
+			$xml = new \SimpleXMLElement( "<?xml version=\"1.0\" encoding=\"utf-8\"?><root>some test</root>" );
+			Debug::bufferLog( $xml );
 			$result = Debug::getBuffer( );
-			//$this->assertTrue( is_object( $result[ 1 ][ 'console_string' ] ) );
-			//$this->assertEquals( 'value' , $result[ 1 ][ 'console_string' ]->key );
-			//$this->assertEquals( 'value1' , $result[ 1 ][ 'console_string' ]->key1 );
+			$this->assertTrue( is_object( $result[ 1 ][ 'console_string' ] ) );
+			$this->assertInstanceOf( \SimpleXMLElement::class , $result[ 1 ][ 'console_string' ] );
+			$this->assertEquals( 62 , strlen( $result[ 1 ][ 'console_string' ]->asXML( ) ) );
+		}
+		/**
+		* @runInSeparateProcess
+		*/	
+		public function testLogReflectionClass( )
+		{
+			$_GET[ 'debug' ] = true;
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
+			$o_reflection_class = new \ReflectionClass( 'phptoolcase\Db' );
+			Debug::bufferLog( $o_reflection_class );
+			$result = Debug::getBuffer( );
+			$this->assertInstanceOf( \ReflectionClass::class , $result[ 1 ][ 'console_string' ] );
+		}
+		/**
+		* @runInSeparateProcess
+		*/	
+		public function testLogReflectionFunction( )
+		{
+			$_GET[ 'debug' ] = true;
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
+			$ref_function = new \ReflectionFunction( 'ptc_path' );
+			Debug::bufferLog( $ref_function );
+			$result = Debug::getBuffer( );
+			$this->assertInstanceOf( \ReflectionFunction::class , $result[ 1 ][ 'console_string' ] );
+		}
+		/**
+		* @runInSeparateProcess
+		*/	
+		public function testLogClosure( )
+		{
+			$_GET[ 'debug' ] = true;
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
+			$closure = function( ){ return true; };
+			Debug::bufferLog( $closure );
+			$result = Debug::getBuffer( );
+			$this->assertInstanceOf( \Closure::class , $result[ 1 ][ 'console_string' ] );
 		}
 		/**
 		* @runInSeparateProcess
@@ -120,10 +167,22 @@
 			$_GET[ 'debug' ] = true;
 			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
 			$sql = 'select from where something';
-			Debug::bufferSql( '' , $sql  );
+			Debug::bufferSql( '' , $sql );
 			$result = Debug::getBuffer( );
 			$this->assertEquals( 'sql' , $result[ 1 ][ 'type' ] );
 			$this->assertEquals( 'select from where something' , $result[ 1 ][ 'console_statement' ] );
+		}
+		/**
+		* @runInSeparateProcess
+		*/	
+		public function testAddToBuffer( )
+		{
+			$_GET[ 'debug' ] = true;
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
+			Debug::bufferLog( '' , 'some message' );
+			Debug::addToBuffer( 'some message' , [ 'some array value' ] );
+			$result = Debug::getBuffer( );
+			$this->assertEquals( 'some array value' , $result[ 1 ][ 'console_string' ][ 0 ] );
 		}
 		/**
 		* @runInSeparateProcess
@@ -192,7 +251,6 @@
 			Debug::load( [ 'show_interface' => false , 'debug_console' => true , 'catch_exceptions' =>  true ] );
 			//throw new \Exception( 'Uncaught Exception' );
 			//$result = Debug::getBuffer( );
-			//var_dump( $result  );
 			$lastHandler = set_exception_handler( null );
 			$this->assertEquals( 'phptoolcase\Debug' , $lastHandler[ 0 ] );
 		}
@@ -201,7 +259,8 @@
 		*/	
 		public function testWatchVariableChanges( )
 		{
-			$_GET[ 'debug' ] = true;
+			// ticks are not working with phpunit
+			/*$_GET[ 'debug' ] = true;
 			Debug::load( [ 'show_interface' => false , 'debug_console' => true , 'enable_inspector' => true ] );
 			declare(ticks=1)	
 			{
@@ -209,7 +268,64 @@
 				Debug::watch( 'var' );
 				$var = 'some new value';
 			}
-			$result = Debug::getBuffer( );
+			$result = Debug::getBuffer( );*/
 			//var_dump( $result );
+		}
+		/**
+		* @runInSeparateProcess
+		*/	
+		public function testCheckReferer( )
+		{
+			$_SERVER[ 'HTTP_REFERER' ] = 'https://127.0.0.1/?debug=true';
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true , 'check_referer' =>  true ] );
+			$this->assertTrue( Debug::isLoaded( ) );
+		}
+		/**
+		* @runInSeparateProcess
+		*/	
+		public function testGetClientIp( )
+		{
+			$this->assertEquals( '127.0.0.1' , Debug::getClientIP( ) );
+		}
+		/**
+		* @runInSeparateProcess
+		*/	
+		public function testCustomUrlkeyAndPass( )
+		{
+			$_GET[ 'custom' ] = 'pass';
+			Debug::load( [ 'url_key' => 'custom' , 'url_pass' => 'pass' ] );
+			$this->assertTrue( Debug::isLoaded( ) );
+		}
+		/**
+		* @runInSeparateProcess
+		*/	
+		public function testTimer( )
+		{
+			$_GET[ 'debug' ] = true;
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
+			Debug::bufferLog( '' , 'timing a loop' );
+			for ( $i = 0; $i < 100; $i++ ){ @$a[ ] = $i; }
+			Debug::stopTimer( 'timing a loop' );
+			$result = Debug::getBuffer( );
+			$this->assertStringMatchesFormat( '%f ms' , $result[ 1 ][ 'console_time' ] );
+		}
+		/**
+		* @runInSeparateProcess
+		*/	
+		public function testLimitPhpTrace( )
+		{
+			$_GET[ 'debug' ] = true;
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true , 'trace_depth' => 5 ] );
+			Debug::bufferLog( 'just a message' );
+			$result = Debug::getBuffer( );
+			$found = false;
+			$this->assertCount( 5 , $result[ 1 ][ 'errfile' ] );
+		}
+		/**
+		* @runInSeparateProcess
+		*/	
+		public function testGetCodeCoverageData( )
+		{
+			
 		}
 	}

@@ -6,22 +6,16 @@
 	
 	class Test_Table extends Model
 	{
-		protected static $_connectionName ='new connection';
-		
 		protected static $_map = [ 'stringfield1' => 'str' ]; 
 	}
 	
 	class Test_Table_Custom_Name extends Model
 	{
-		protected static $_connectionName ='new connection';
-	
 		protected static $_table = 'test_table';
 	}
 	
 	class Test_Table_Guard_Columns extends Model
 	{
-		protected static $_connectionName ='new connection';
-	
 		protected static $_table = 'test_table';
 		
 		protected static $_guard = [ 'stringfield1' , 'intfield' ];
@@ -29,8 +23,6 @@
 	
 	class Test_Table_Custom_Unique_key extends Model
 	{
-		protected static $_connectionName ='new connection';
-	
 		protected static $_table = 'test_table_custom_key';
 		
 		protected static $_uniqueKey ='sid';
@@ -38,8 +30,6 @@
 	
 	class Test_Table_Use_Boot_Method extends Model
 	{
-		protected static $_connectionName ='new connection';
-	
 		protected static $_table = 'test_table';
 		
 		public static function boot( )
@@ -50,8 +40,6 @@
 	
 	class Test_Table_Custom_Event_Class extends Model
 	{
-		protected static $_connectionName ='new connection';
-	
 		protected static $_table = 'test_table';
 		
 		protected static $_eventClass ='\phptoolcase\EventClass';
@@ -59,11 +47,16 @@
 	
 	class Test_Table_Custom_Connection_Class extends Model
 	{
-		protected static $_connectionName ='new connection';
-	
 		protected static $_table = 'test_table';
 		
 		protected static $_connectionManager ='\phptoolcase\DBClass';
+	}
+
+	class Test_Table_Custom_Connection_Name extends Model
+	{
+		protected static $_connectionName ='new connection';
+	
+		protected static $_table = 'test_table';
 	}
 	
 	class TestObserver

@@ -69,11 +69,11 @@
 			Event::listen( 'test.event7' , function( $obj , &$var )
 			{
 				$var = true;
-			}  , 2 );
+			}  , 20 );
 			Event::listen( 'test.event7' , function( $obj  , &$var )
 			{
 				$var = false;
-			}  , 1 );
+			}  , 10 );
 			$var = true;
 			Event::fire( 'test.event7' , [ $this , &$var ] );
 			$this->assertFalse( $var );
@@ -101,11 +101,11 @@
 			{
 				$obj->assertTrue( $var );
 				return false;	// preventing event propagation
-			} );
+			} , 20 );
 			Event::listen( 'prevent.propagation' , function( $obj , $var )
 			{
 				$obj->assertCount( 0 , [ 'foo' ] );
-			} );
+			} , 10 );
 			Event::fire( 'prevent.propagation' , [ $this , true ] );
 		}
 		

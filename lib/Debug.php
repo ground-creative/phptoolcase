@@ -1441,30 +1441,34 @@
 			//$this_methods = get_class_methods( get_called_class( ) );
 			foreach ( $raw_trace as $k => $arr )
 			{
-				if((@$arr['class']=='Debug' && (@preg_match("|_|",@$arr['function']) || 
-								@in_array(@$arr['function'],static::$_excludeMethods))) || 
-							@preg_match("|__|",@$arr['function'])){ unset($raw_trace[$k]); }
-			}
-			if(!empty($raw_trace))
-			{
-				$raw_trace=@array_values($raw_trace);
-				$raw_trace=@array_reverse($raw_trace);					
-				if($depth>count($raw_trace)){ $depth=count($raw_trace); }
-				for($i=0;$i<$depth;$i++)
+				if ( ( @$arr[ 'class' ] == 'Debug' &&
+					( @preg_match( "|_|" , @$arr[ 'function' ] ) || 
+						@in_array( @$arr[ 'function' ] , static::$_excludeMethods ) ) ) || 
+											@preg_match( "|__|" , @$arr[ 'function' ] ) )
 				{ 
-					if(@$raw_trace[$i]['line'] && @$raw_trace[$i]['file'])
+					unset( $raw_trace[ $k ] ); 
+				}
+			}
+			if ( !empty( $raw_trace ) )
+			{
+				$raw_trace = @array_values( $raw_trace );
+				$raw_trace = @array_reverse( $raw_trace );					
+				if ( $depth>count( $raw_trace ) ){ $depth = count( $raw_trace ); }
+				for ( $i = 0; $i < ( $depth + 1 ); $i++ )
+				{ 
+					if ( @$raw_trace[ $i ][ 'line' ] && @$raw_trace[ $i ][ 'file' ] )
 					{
-						$php_trace['file'][]=$raw_trace[$i]['file'].':'.$raw_trace[$i]['line'];
-						$php_trace['line'][]=$raw_trace[$i]['line'];
-						$php_trace['class'][]=@$raw_trace[$i]['class'];
+						$php_trace[ 'file' ][ ] = $raw_trace[ $i ][ 'file' ] . ':' . $raw_trace[ $i ][ 'line' ];
+						$php_trace[ 'line' ][ ] = $raw_trace[ $i ][ 'line' ];
+						$php_trace[ 'class' ][ ] = @$raw_trace[ $i ][ 'class' ];
 						//$php_trace['function'][]=$raw_trace[$i]['function'];
-						$php_trace['function'][]=(@$raw_trace[$i]['function']) ? 
-												$raw_trace[$i]['function'].'()' : null;
+						$php_trace[ 'function' ][ ] = ( @$raw_trace[ $i ][ 'function' ] ) ? 
+												$raw_trace[ $i ][ 'function' ] . '()' : null;
 					}
 				}
 				unset( $raw_trace );
 			}
-			else{ $php_trace=null; }
+			else{ $php_trace = null; }
 			return @$php_trace;
 		}
 		/**

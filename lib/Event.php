@@ -161,7 +161,7 @@
 										'firing wildcard <b>' . $event[ 0 ] . '.' . $event[ 1 ] . 
 														'[ ' . $a . ' ]</b>' , 'Event Manager' );
 					$a++;
-					if ( false === static::_run( $wildcard , array( $data , $main ) ) ){ return; }
+					if ( false === static::_run( $wildcard , [ $data , $main ] ) ){ return; }
 				}
 			}
 			$a = 0;

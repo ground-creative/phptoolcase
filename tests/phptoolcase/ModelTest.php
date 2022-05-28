@@ -10,8 +10,25 @@
 	*/
 	final class ModelTest extends TestCase
 	{
+		protected static $_connection = [ ];
+		
+		public static function setUpBeforeClass( )
+		{
+			DB::add(
+			[
+				'host'			=>	$GLOBALS[ 'DB_HOST' ] ,
+				'user'			=>	$GLOBALS[ 'DB_USER' ] ,
+				'pass'			=>	$GLOBALS[ 'DB_PASSWORD' ] ,
+				'db'				=>	$GLOBALS[ 'DB_DBNAME' ] ,
+				'query_builder'		=>	true ,	// initialize the query builder
+				'pdo_attributes'	=> 			// adding pdo attributes
+				[
+					\PDO::ATTR_DEFAULT_FETCH_MODE =>	\PDO::FETCH_ASSOC ,
+					\PDO::ATTR_ERRMODE			 =>	\PDO::ERRMODE_WARNING
+				]
+			] );
+		}
 		/**
-		* @Depends DBTest::testAddConnection
 		* @Depends QueryBuilderTest::testInsert
 		*/
 		public function testGetAllRecords( )
@@ -20,7 +37,6 @@
 			$this->assertTrue( ( sizeof( $data ) > 0 ) );
 		}
 		/**
-		* @Depends DBTest::testAddConnection
 		* @Depends QueryBuilderTest::testInsert
 		*/
 		public function testFindOneRecordById( )
@@ -33,7 +49,6 @@
 			$this->assertFalse( ( bool ) $record->boolfield );
 		}
 		/**
-		* @Depends DBTest::testAddConnection
 		* @Depends QueryBuilderTest::testInsert
 		*/
 		public function testSpecifyTableName( )
@@ -42,7 +57,6 @@
 			$this->assertTrue( ( sizeof( $data ) > 0 ) );
 		}
 		/**
-		* @Depends DBTest::testAddConnection
 		* @Depends QueryBuilderTest::testInsert
 		*/
 		public function testUsingTheQueryBuilderDirectly( )
@@ -50,9 +64,7 @@
 			$data = Test_Table::where( 'id' , '!=' , 200 )->run( );
 			$this->assertTrue( ( sizeof( $data ) > 0 ) );
 		}
-		/**
-		* @Depends DBTest::testAddConnection
-		*/		
+	
 		public function testInsertRecord( )
 		{
 			$row = new Test_Table( );
@@ -63,9 +75,7 @@
 			$this->assertEquals( 'model test' , $data[ 0 ]->stringfield1 );
 			$this->assertEquals( 'model test other value' , $data[ 0 ]->stringfield2 );
 		}
-		/**
-		* @Depends DBTest::testAddConnection
-		*/		
+	
 		public function testInsertRecordFromAssociativeArray( )
 		{
 			$arr = [ 'stringfield1' => 'created from array' , 'stringfield2' => 'created from array again' ];
@@ -76,7 +86,6 @@
 			$this->assertEquals( 'created from array again' , $data[ 0 ]->stringfield2 );
 		}
 		/**
-		* @Depends DBTest::testAddConnection
 		* @depends testInsertRecord
 		*/		
 		public function testUpdateRecord( )
@@ -91,7 +100,6 @@
 			$this->assertEquals( 'model updated value again ' . $rand , $row->stringfield2 );
 		}
 		/**
-		* @Depends DBTest::testAddConnection
 		* @depends testInsertRecord
 		* @depends testUpdateRecord
 		*/		
@@ -102,7 +110,6 @@
 			$this->assertNull($row );
 		}
 		/**
-		* @Depends DBTest::testAddConnection
 		* @depends testInsertRecord
 		*/		
 		public function testDeleteRecordWithQueryBuilder( )
@@ -115,7 +122,6 @@
 			$this->assertTrue( ( sizeof( $data ) == 0 ) );
 		}
 		/**
-		* @Depends DBTest::testAddConnection
 		* @Depends QueryBuilderTest::testInsert
 		*/		
 		public function testConvertValuesToArray( )
@@ -124,7 +130,6 @@
 			$this->assertTrue( is_array( $row->toArray( ) ) );
 		}
 		/**
-		* @Depends DBTest::testAddConnection
 		* @Depends QueryBuilderTest::testInsert
 		*/		
 		public function testConvertValuesToJson( )
@@ -133,7 +138,6 @@
 			$this->assertNotNull( json_decode( $row->toJson( ) ) );
 		}
 		/**
-		* @Depends DBTest::testAddConnection
 		* @Depends QueryBuilderTest::testInsertWithPartialValues
 		*/		
 		public function testRetrieveSingleValueById( )
@@ -142,7 +146,6 @@
 			$this->assertEquals( 'some string' , $val );
 		}
 		/**
-		* @Depends DBTest::testAddConnection
 		* @Depends QueryBuilderTest::testInsertWithPartialValues
 		*/		
 		public function testRetrieveSingleValueWithColumn( )
@@ -151,7 +154,6 @@
 			$this->assertEquals( 'some string' , $val );
 		}
 		/**
-		* @Depends DBTest::testAddConnection
 		* @Depends QueryBuilderTest::testInsertWithPartialValues
 		*/		
 		public function testUpdateSingleValueById( )
@@ -161,7 +163,6 @@
 			$this->assertEquals( 'new single value' , $val );
 		}
 		/**
-		* @Depends DBTest::testAddConnection
 		* @depends testUpdateSingleValueById
 		*/	
 		public function testMapFieldNames( )
@@ -171,16 +172,13 @@
 						->run( );
 			$this->assertEquals( 'new single value' , $data[ 0 ]->str );
 		}
-		/**
-		* @Depends DBTest::testAddConnection
-		*/			
+		
 		public function testFindWithEmptyResult( )
 		{
 			$record = Test_Table::find( 10000 );
 			$this->assertNull( $record );
 		}
 		/**
-		* @Depends DBTest::testAddConnection
 		* @Depends QueryBuilderTest::testInsert
 		*/
 		public function testRemoveValue( )
@@ -190,7 +188,6 @@
 			$this->assertFalse( array_key_exists( 'stringfield1' , $data[ 0 ] ) );
 		}
 		/**
-		* @Depends DBTest::testAddConnection
 		* @Depends QueryBuilderTest::testInsert
 		*/	
 		public function testResetValues( )
@@ -199,9 +196,7 @@
 			$data[ 0 ]->reset( );
 			$this->assertCount( 0 , $data[ 0 ]->toArray( ) );
 		}
-		/**
-		* @Depends DBTest::testAddConnection
-		*/			
+		
 		public function testGetColumns( )
 		{
 			$columns = Test_Table::getColumns( );
@@ -212,25 +207,19 @@
 			$this->assertTrue( array_key_exists( 'intfield' , $columns ) );
 			$this->assertTrue( array_key_exists( 'boolfield' , $columns ) );
 		}
-		/**
-		* @Depends DBTest::testAddConnection
-		*/			
+
 		public function testGetTableName( )
 		{
 			$this->assertEquals( 'test_table' , Test_Table::getTable( ) );
 		}
-		/**
-		* @Depends DBTest::testAddConnection
-		*/			
+	
 		public function testGuardColumns( )
 		{
 			$data = Test_Table_Guard_Columns::all( );
 			$this->assertFalse( array_key_exists( 'stringfield1' , $data[ 0 ] ) );
 			$this->assertFalse( array_key_exists( 'intfield' , $data[ 0 ] ) );
 		}
-		/**
-		* @Depends DBTest::testAddConnection
-		*/			
+			
 		public function testObserverInsertEvent( )
 		{
 			Test_Table::observe( '\phptoolcase\TestObserver' );
@@ -240,7 +229,6 @@
 			$row->save( );
 		}
 		/**
-		* @Depends DBTest::testAddConnection
 		* @depends testObserverInsertEvent
 		*/			
 		public function testObserverUpdateEvent( )
@@ -251,7 +239,6 @@
 			$row[ 0 ]->save( );*/
 		}
 		/**
-		* @Depends DBTest::testAddConnection
 		* @depends testObserverInsertEvent
 		*/		
 		public function testObserverDeleteEvent( )
@@ -263,9 +250,7 @@
 			$last_id = Test_Table::lastId( );
 			Test_Table::find( $last_id )->delete( );*/
 		}
-		/**
-		* @Depends DBTest::testAddConnection
-		*/		
+	
 		public function testAddOptionsOnInitilization( )
 		{
 			/*$row = new Test_Table_Use_Boot_Method( );
@@ -273,9 +258,7 @@
 			$row->stringfield2 = 'model test other value';
 			$row->save( );*/
 		}
-		/**
-		* @Depends DBTest::testAddConnection
-		*/		
+	
 		public function testCustomUniqueKey( )
 		{
 			$qb = DB::getQB( 'new connection' );
@@ -298,9 +281,7 @@
 			$record = Test_Table_Custom_Unique_key::find( $last_id );
 			$this->assertTrue( array_key_exists( 'sid' , $record->toArray( ) ) );
 		}
-		/**
-		* @Depends DBTest::testAddConnection
-		*/		
+	
 		public function testCustomEventClass( )
 		{
 			/*Test_Table_Custom_Event_Class::observe( '\phptoolcase\TestObserver' );
@@ -311,7 +292,15 @@
 		}
 		/**
 		* @Depends DBTest::testAddConnection
-		*/		
+		*/	
+		public function testCustomConnectionName( )
+		{
+			$records = Test_Table_Custom_Connection_Name::order( 'id' , 'desc' )
+						->limit( 1 )
+						->run( );
+			$this->assertTrue( ( sizeof( $records ) == 1 ) );	
+		}
+
 		public function testCustomConnectionManagerClass( )
 		{
 			$records = Test_Table_Custom_Connection_Class::order( 'id' , 'desc' )
