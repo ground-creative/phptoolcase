@@ -6,7 +6,7 @@
 	* PHP TOOLCASE EVENT DISPATCHER CLASS
 	* @category 	Libraries
 	* @package  	PhpToolCase
-	* @version	v1.1.1-stable
+	* @version	v1.1.2
 	* @author   	Carlo Pietrobattista <carlo@ground-creative.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
