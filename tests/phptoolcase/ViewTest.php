@@ -6,7 +6,7 @@
 
 	final class ViewTest extends TestCase
 	{
-		public static function setUpBeforeClass( )
+		public static function setUpBeforeClass( ) : void
 		{
 			View::path( dirname( __FILE__ ) . '/../../examples/view' );
 		}

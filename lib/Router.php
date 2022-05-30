@@ -4,7 +4,6 @@
 
 	/**
 	* PHPTOOLCASE ROUTER CLASS
-	* PHP version 5.6+
 	* @category 	Library
 	* @version	v1.1.1-stable
 	* @author   	Carlo Pietrobattista <carlo@ground-creative.com>

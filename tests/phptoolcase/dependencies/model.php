@@ -61,7 +61,7 @@
 	
 	class TestObserver
 	{
-		public static function inserting( &$values )
+		public static function inserting( $values )
 		{
 			//var_dump( $values );
 			Assert::assertEquals( 'model test' , $values->stringfield1 );
@@ -92,7 +92,7 @@
 			Assert::assertEquals( 'another new observer updated value' , $values->stringfield2 );
 		}
 		
-		public static function saving( &$values )
+		public static function saving( $values )
 		{
 			Assert::assertStringStartsWith( 'model' , $values->stringfield1 );
 		}
@@ -103,7 +103,7 @@
 			Assert::assertStringEndsWith( 'value' , $values->stringfield1 );
 		}
 		
-		public static function deleting( &$id )
+		public static function deleting( $id )
 		{
 			Assert::assertTrue( is_numeric( $id ) );
 		}

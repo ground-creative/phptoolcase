@@ -6,7 +6,6 @@
 	* DEBUGGER & LOGGER CLASS
 	* <br>All class properties and methods are static because it's required 
 	* to let them work on script shutdown when FATAL error occurs.
-	* PHP version 5.6+
 	* @category 	Library
 	* @version	v1.1.1-stable
 	* @author   	Carlo Pietrobattista <carlo@ground-creative.com>
@@ -1454,7 +1453,7 @@
 				$raw_trace = @array_values( $raw_trace );
 				$raw_trace = @array_reverse( $raw_trace );					
 				if ( $depth>count( $raw_trace ) ){ $depth = count( $raw_trace ); }
-				for ( $i = 0; $i < ( $depth + 1 ); $i++ )
+				for ( $i = 0; $i < $depth; $i++ )
 				{ 
 					if ( @$raw_trace[ $i ][ 'line' ] && @$raw_trace[ $i ][ 'file' ] )
 					{

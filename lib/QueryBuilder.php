@@ -4,7 +4,6 @@
 
 	/**
 	* PHP TOOLCASE QUERY BUILDER CLASS
-	* PHP version 5.6+
 	* @category 	Library
 	* @version	v1.1.1-stable
 	* @author   	Carlo Pietrobattista <carlo@ground-creative.com>
@@ -616,16 +615,11 @@
 			if ( is_numeric( $pos ) ){ $pos = ( $pos + 1 ); }
 			if ( is_null( $type ) ) 
 			{
-				switch ( $value ) 
-				{
-					case is_null( $value ): $type = \PDO::PARAM_NULL;
-					break;
-					case is_bool( $value ): $type = \PDO::PARAM_BOOL;
-					break;
-					case is_int( $value ): $type = \PDO::PARAM_INT;
-					break;
-					default: $type = \PDO::PARAM_STR;
-				}
+				if ( is_null( $value ) ){ $type = \PDO::PARAM_NULL; } 
+				else if ( is_bool( $value ) ){ $type = \PDO::PARAM_BOOL; }
+				else if ( is_int( $value ) ){ $type = \PDO::PARAM_INT; }
+				//else if ( is_string( $value ) ){ $type = \PDO::PARAM_STR; } 
+				else { $type = \PDO::PARAM_STR; }
 			}
 			$this->_query->bindValue( $pos , $value , $type );
 		}
@@ -671,7 +665,7 @@
 				return $this;
 			}
 			$this->_where .= '  ?';
-			$this->_bindings[ ] = ( @get_magic_quotes_gpc( ) ) ? @stripslashes( $value ) : $value;
+			$this->_bindings[ ] = static::_magicQuotes( $value );
 			return $this;
 		}
 		/**
@@ -690,7 +684,7 @@
 					continue;
 				}
 				$this->_where .= '?,';
-				$this->_bindings[ ] = ( @get_magic_quotes_gpc( ) ) ? @stripslashes( $v ) : $v;
+				$this->_bindings[ ] = static::_magicQuotes( $v );
 				//$this->_where .=  is_numeric( $v ) ? ( int ) $v . ',': $this->sanitize( $v ). ',';
 			}
 			$this->_where = substr( $this->_where , 0 , strlen( $this->_where ) - 1 );
@@ -711,14 +705,14 @@
 			else
 			{ 
 				$this->_where .= ' ? ';
-				$this->_bindings[ ] = ( get_magic_quotes_gpc( ) ) ? stripslashes( $start ) : $start;
 			}
+			$this->_bindings[ ] = static::_magicQuotes( $start );
 			$this->_where .= ' AND ';
 			if ( $val = $this->_checkRawValue( $end ) ){ $this->_where .= ' ' . $val; }
 			else
 			{ 
 				$this->_where .= ' ? ';
-				$this->_bindings[ ] = ( get_magic_quotes_gpc( ) ) ? stripslashes( $end ) : $end;
+				$this->_bindings[ ] = static::_magicQuotes( $end );
 			}
 			return $this;
 		}
@@ -866,6 +860,21 @@
 				else{ $string = preg_replace( '/' . $k . '/' , $v , $string , 1 ); }
 			}
 			return $string;
+		}
+		/**
+		* Removes magic quotes if used by php
+		* @param	string		$value		the value to remove slashes
+		*/
+		protected function _magicQuotes( $value ) 
+		{
+			if ( ( int ) PHP_VERSION < 8 )
+			{
+				return ( @get_magic_quotes_gpc( ) ) ? @stripslashes( $value ) : $value;
+			}
+			else
+			{
+				 return $value;
+			}
 		}
 		/**
 		* Adds execution time and query results to the Debug class

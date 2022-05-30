@@ -13,7 +13,7 @@
 		
 		protected static $_qb = '';
 	
-		public static function setUpBeforeClass( )
+		public static function setUpBeforeClass( ) : void
 		{
 			static::$_connection =
 			[
@@ -63,13 +63,14 @@
 			$this->assertEquals( 1 , $query );
 			$record = static::$_qb->table( 'test_table' )
 							->where( 'intfield' , '=' , $rand )
-							->row( );
+							->row( );				
 			$this->assertNull( $record->stringfield1 );
-			$this->assertEmpty( $record->stringfield2 );
+			$this->assertTrue( is_string( $record->stringfield2 ) );
 			$this->assertEquals( 'some value' , $record->stringfield3 );
 			$this->assertTrue( is_numeric( $record->intfield ) );
 			$this->assertEquals( $rand , $record->intfield );
-			$this->assertFalse( ( bool ) $record->boolfield );
+			$this->assertEquals( '0' , $record->boolfield );
+			
 		}
 		
 		public function testInsertWithPartialValues( )
@@ -101,10 +102,10 @@
 		*/
 		public function testSelectRowWithWhereClause( )
 		{
-			$query = static::$_qb->table( 'test_table' )
+			$record = static::$_qb->table( 'test_table' )
 							->where( 'stringfield3' , '=' , 'some value' )
-							->row( );
-			$this->assertTrue( ( sizeof( $query ) == 1 ) );
+							->row( );				
+			$this->assertEquals( 'some value' , $record->stringfield3 );			
 		}
 		/**
 		* @depends testInsert
@@ -247,7 +248,7 @@
 			$query = static::$_qb->table( 'test_table' )
 							->where( 'boolfield' , '=' , 0 )
 							->where( 'stringfield3' , '=' , 'some value' )
-							->run( );
+							->row( );
 			$this->assertFalse( is_null( $query ) );
 		}
 		/**
@@ -258,7 +259,7 @@
 			$query = static::$_qb->table( 'test_table' )
 							->where( 'boolfield' , '=' , 0 )
 							->or_where( 'stringfield3' , '=' , 'some value' )
-							->row( );
+							->run( );
 			$this->assertTrue( ( sizeof( $query ) > 0 ) );
 		}
 		/**

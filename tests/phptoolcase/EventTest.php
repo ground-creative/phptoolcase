@@ -51,6 +51,7 @@
 				$data[ 0 ]->assertTrue( $data[ 1 ] );
 				$data[ 0 ]->assertStringStartsWith( 'test' , $event );
 			} );
+			$this->assertTrue( true );	// stop complaining in console about no test beingperformed
 		}
 		
 		public function testManipulateData( )

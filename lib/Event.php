@@ -4,7 +4,6 @@
 
 	/**
 	* PHP TOOLCASE EVENT DISPATCHER CLASS
-	* PHP version 5.6+
 	* @category 	Libraries
 	* @package  	PhpToolCase
 	* @version	v1.1.1-stable
@@ -213,7 +212,7 @@
 		*/
 		protected static function _run( $event , $data ) 
 		{
-			$data = ( is_array( $data ) ) ? $data : array( $data );
+			$data = ( is_array( $data ) ) ? $data : [ $data ];
 			return call_user_func_array( $event , $data );
 		}
 		/**

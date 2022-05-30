@@ -12,7 +12,7 @@
 	{
 		protected static $_connection = [ ];
 		
-		public static function setUpBeforeClass( )
+		public static function setUpBeforeClass( ) : void
 		{
 			DB::add(
 			[
@@ -231,33 +231,33 @@
 		/**
 		* @depends testObserverInsertEvent
 		*/			
-		public function testObserverUpdateEvent( )
+		/*public function testObserverUpdateEvent( )
 		{
-			/*$row = Test_Table::all( ); 
+			$row = Test_Table::all( ); 
 			$row[ 0 ]->stringfield1 = 'model updated value';
 			$row[ 0 ]->stringfield2 = 'model updated value again';
-			$row[ 0 ]->save( );*/
-		}
+			$row[ 0 ]->save( );
+		}*/
 		/**
 		* @depends testObserverInsertEvent
 		*/		
-		public function testObserverDeleteEvent( )
+		/*public function testObserverDeleteEvent( )
 		{
-			/*$row = new Test_Table( );
+			$row = new Test_Table( );
 			$row->stringfield1 = 'model test';
 			$row->stringfield2 = 'model test other value';
 			$row->save( );
 			$last_id = Test_Table::lastId( );
-			Test_Table::find( $last_id )->delete( );*/
-		}
+			Test_Table::find( $last_id )->delete( );
+		}*/
 	
-		public function testAddOptionsOnInitilization( )
+		/*public function testAddOptionsOnInitilization( )
 		{
-			/*$row = new Test_Table_Use_Boot_Method( );
+			$row = new Test_Table_Use_Boot_Method( );
 			$row->stringfield1 = 'model test';
 			$row->stringfield2 = 'model test other value';
-			$row->save( );*/
-		}
+			$row->save( );
+		}*/
 	
 		public function testCustomUniqueKey( )
 		{
@@ -282,14 +282,14 @@
 			$this->assertTrue( array_key_exists( 'sid' , $record->toArray( ) ) );
 		}
 	
-		public function testCustomEventClass( )
+		/*public function testCustomEventClass( )
 		{
-			/*Test_Table_Custom_Event_Class::observe( '\phptoolcase\TestObserver' );
+			Test_Table_Custom_Event_Class::observe( '\phptoolcase\TestObserver' );
 			$row = new Test_Table_Custom_Event_Class( );
 			$row->stringfield1 = 'model test';
 			$row->stringfield2 = 'model test other value';
-			$row->save( );*/
-		}
+			$row->save( );
+		}*/
 		/**
 		* @Depends DBTest::testAddConnection
 		*/	

@@ -12,7 +12,7 @@
 	{
 		protected static $_connection = [ ];
 	
-		public static function setUpBeforeClass( )
+		public static function setUpBeforeClass( ) : void
 		{
 			static::$_connection =
 			[

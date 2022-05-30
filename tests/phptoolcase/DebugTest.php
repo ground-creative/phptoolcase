@@ -210,11 +210,11 @@
 		}
 		/**
 		* @runInSeparateProcess
-		*/	
-		public function testThrowPhpError( )
+		*/
+		public function testCatchPhpError( )
 		{
 			$_GET[ 'debug' ] = true;
-			Debug::load( [ 'show_interface' => false , 'debug_console' => true , 'replace_error_handler' =>  true ] );
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true , 'replace_error_handler' =>  true , 'die_on_error'=> false ] );
 			trigger_error( 'some error' , E_USER_ERROR );
 			$result = Debug::getBuffer( );
 			$this->assertEquals( 'Php Error' , $result[ 1 ][ 'console_string' ][ 'errno' ] );
@@ -257,10 +257,10 @@
 		/**
 		* @runInSeparateProcess
 		*/	
-		public function testWatchVariableChanges( )
+		/*public function testWatchVariableChanges( )
 		{
 			// ticks are not working with phpunit
-			/*$_GET[ 'debug' ] = true;
+			$_GET[ 'debug' ] = true;
 			Debug::load( [ 'show_interface' => false , 'debug_console' => true , 'enable_inspector' => true ] );
 			declare(ticks=1)	
 			{
@@ -268,9 +268,9 @@
 				Debug::watch( 'var' );
 				$var = 'some new value';
 			}
-			$result = Debug::getBuffer( );*/
+			$result = Debug::getBuffer( );
 			//var_dump( $result );
-		}
+		}*/
 		/**
 		* @runInSeparateProcess
 		*/	
@@ -318,14 +318,20 @@
 			Debug::load( [ 'show_interface' => false , 'debug_console' => true , 'trace_depth' => 5 ] );
 			Debug::bufferLog( 'just a message' );
 			$result = Debug::getBuffer( );
-			$found = false;
 			$this->assertCount( 5 , $result[ 1 ][ 'errfile' ] );
 		}
 		/**
 		* @runInSeparateProcess
 		*/	
-		public function testGetCodeCoverageData( )
+		/*public function testLimitDump( )
 		{
 			
-		}
+		}*/
+		/**
+		* @runInSeparateProcess
+		*/	
+		/*public function testGetCodeCoverageData( )
+		{
+			
+		}*/
 	}
