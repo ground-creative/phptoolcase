@@ -3,6 +3,7 @@
 	namespace phptoolcase;
 
 	use PHPUnit\Framework\TestCase;
+	use PHPUnit\Framework\Assert;
 
 	/**
 	* @requires extension pdo
@@ -70,7 +71,6 @@
 			$this->assertTrue( is_numeric( $record->intfield ) );
 			$this->assertEquals( $rand , $record->intfield );
 			$this->assertEquals( '0' , $record->boolfield );
-			
 		}
 		
 		public function testInsertWithPartialValues( )
@@ -506,5 +506,15 @@
 								->or_on(  'test_table.id' , '=' ,  'test_table1.id' );
 						} )->run( );			
 			$this->assertTrue( ( sizeof( $query ) > 0 ) );
+		}
+		
+		public function testQueryEvent( )
+		{
+			Event::listen( 'ptc.query' , function( $data )
+			{
+				Assert::assertStringStartsWith( 'INSERT INTO' , $data );
+				Event::remove( 'ptc.query' , 0 );
+			} );
+			$this->testInsert( );
 		}
 	}

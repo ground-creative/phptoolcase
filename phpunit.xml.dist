@@ -6,9 +6,14 @@
     </include>
   </coverage>
   <testsuites>
-    <testsuite name="PhpToolCase Test Suite">
-      <directory>tests/phptoolcase</directory>
-      <directory suffix=".php">tests/phptoolcase/dependencies</directory>
+    <testsuite name="components">
+      <directory>./tests/phptoolcase</directory>
+      <directory suffix=".php">./tests/phptoolcase/dependencies</directory>
+      <exclude>./tests/phptoolcase/ShortCutsTest.php</exclude>
+    </testsuite>
+    <testsuite name="shortcuts">
+      <directory>./tests/phptoolcase/ShortCutsTest.php</directory>
+      <directory suffix=".php">./tests/phptoolcase/dependencies</directory>
     </testsuite>
   </testsuites>
   <php>

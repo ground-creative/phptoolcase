@@ -155,7 +155,7 @@
 				$obj->assertTrue( $var );
 			} );
 			$result = Debug::getBuffer( );
-			$this->assertInstanceOf( \Closure::class , $result[ 1 ][ 'errstr' ][ 'callback' ] );
+			$this->assertInstanceOf( \Closure::class , end( $result )[ 'errstr' ][ 'callback' ] );
 		}
 		/*
 		* @runInSeparateProcess
@@ -170,23 +170,22 @@
 			} );
 			Event::fire( 'test.eventY' , [ $this , true ] );
 			$result = Debug::getBuffer( );
-			$this->assertStringStartsWith( 'firing wildcard' , $result[ 4 ][ 'errmsg' ] );
-			$this->assertStringStartsWith( 'firing event' , $result[ 5 ][ 'errmsg' ] );
+			$this->assertStringStartsWith( 'firing event test.eventY' , strip_tags( end( $result )[ 'errmsg' ] ) );
 		}
 		/*
 		* @runInSeparateProcess
 		*/
 		public function testDeleteEventDebug( )
 		{
-			//$_GET[ 'debug' ] = true;
-			//Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
-			
-			//Event::remove( 'test.eventZ' , 0 );
-			//$result = Debug::getBuffer( );
-			//$events = Event::get( 'test' );
-			//var_dump( $result[ 1 ] );
-			
-			//$this->assertStringStartsWith( 'firing wildcard' , $result[ 4 ][ 'errmsg' ] );
-			//$this->assertStringStartsWith( 'firing event' , $result[ 5 ][ 'errmsg' ] );
+			$_GET[ 'debug' ] = true;
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
+			Event::listen( 'test.eventZ' , function( $obj , $var )
+			{
+				$obj->assertCount( 0 , [ 'foo' ] );
+			} );
+			Event::remove( 'test.eventZ' , 0 );
+			$result = Debug::getBuffer( );
+			$events = Event::get( 'test' );
+			$this->assertStringStartsWith( 'removing event test.eventZ' , strip_tags( end( $result )[ 'errmsg' ] ) );
 		}
 	}

@@ -8,16 +8,53 @@
 
 	final class ShortCutsTest extends TestCase
 	{
-	
+		/**
+		* @runInSeparateProcess
+		*/	
 		public function test_ptc_log( )
 		{
 			$_GET[ 'debug' ] = true;
-			//Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
 			ptc_log( 'just a message' ); 
 			$result = Debug::getBuffer( );
 			$this->assertEquals( 'just a message' , $result[ 1 ][ 'console_string' ] );
 		}
-		
+		/**
+		* @runInSeparateProcess
+		*/	
+		public function test_ptc_log_sql( )
+		{
+			$_GET[ 'debug' ] = true;
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
+			ptc_log_sql( 'select from where something' ); 
+			$result = Debug::getBuffer( );
+			$this->assertEquals( 'select from where something' , $result[ 1 ][ 'console_string' ] );
+		}
+		/**
+		* @runInSeparateProcess
+		*/	
+		public function test_ptc_stop_timer( )
+		{
+			$_GET[ 'debug' ] = true;
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
+			Debug::bufferLog( '' , 'timing a loop' );
+			for ( $i = 0; $i < 100; $i++ ){ @$a[ ] = $i; }
+			Debug::stopTimer( 'timing a loop' );
+			$result = Debug::getBuffer( );
+			$this->assertStringMatchesFormat( '%f ms' , $result[ 1 ][ 'console_time' ] );
+		}
+		/**
+		* @runInSeparateProcess
+		*/	
+		public function test_ptc_attach( )
+		{
+			$_GET[ 'debug' ] = true;
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
+			Debug::bufferLog( '' , 'some message' );
+			Debug::addToBuffer( 'some message' , [ 'some array value' ] );
+			$result = Debug::getBuffer( );
+			$this->assertEquals( 'some array value' , $result[ 1 ][ 'console_string' ][ 0 ] );
+		}
 		/**
 		* @runInSeparateProcess
 		*/	
