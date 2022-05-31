@@ -20,12 +20,6 @@
 		*/
 		public static function make( $view , $data = null )
 		{
-			if ( !static::$_base )
-			{
-				$msg = 'Please configure a base path for the view templates!';
-				trigger_error( $msg , E_USER_ERROR ); 
-				return false;
-			}
 			$view = new ViewTpl( $view , static::$_base ); // create a new view object
 			if ( $data ) // add data to the template
 			{ 
