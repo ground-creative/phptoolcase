@@ -192,7 +192,7 @@
 	*/
 	function ptc_array_del( array &$array , $path , $delimiter = '.' )
 	{
-		return ptc_run( [ @constant( '_PTCHANDYMAN_' ) , 'arrayCount' ] , [ &$array , $path , $delimiter ] );
+		return ptc_run( [ @constant( '_PTCHANDYMAN_' ) , 'arrayDel' ] , [ &$array , $path , $delimiter ] );
 	}
 	/**
 	* Retrieves a session variable. See HandyMan::sessionGet( )

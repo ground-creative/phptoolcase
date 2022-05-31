@@ -185,7 +185,7 @@
 		{
 			$data = Test_Table::all( );
 			$data[ 0 ]->remove( 'stringfield1' );
-			$this->assertFalse( array_key_exists( 'stringfield1' , $data[ 0 ] ) );
+			$this->assertArrayNotHasKey( 'stringfield1' , $data[ 0 ]->toArray( ) );
 		}
 		/**
 		* @Depends QueryBuilderTest::testInsert
@@ -200,12 +200,12 @@
 		public function testGetColumns( )
 		{
 			$columns = Test_Table::getColumns( );
-			$this->assertTrue( array_key_exists( 'id' , $columns ) );
-			$this->assertTrue( array_key_exists( 'stringfield1' , $columns ) );
-			$this->assertTrue( array_key_exists( 'stringfield2' , $columns ) );
-			$this->assertTrue( array_key_exists( 'stringfield3' , $columns ) );
-			$this->assertTrue( array_key_exists( 'intfield' , $columns ) );
-			$this->assertTrue( array_key_exists( 'boolfield' , $columns ) );
+			$this->assertArrayHasKey( 'id' , $columns );
+			$this->assertArrayHasKey( 'stringfield1' , $columns );
+			$this->assertArrayHasKey( 'stringfield2' , $columns );
+			$this->assertArrayHasKey( 'stringfield3' , $columns );
+			$this->assertArrayHasKey( 'intfield' , $columns );
+			$this->assertArrayHasKey( 'boolfield' , $columns );
 		}
 
 		public function testGetTableName( )
@@ -216,8 +216,8 @@
 		public function testGuardColumns( )
 		{
 			$data = Test_Table_Guard_Columns::all( );
-			$this->assertFalse( array_key_exists( 'stringfield1' , $data[ 0 ] ) );
-			$this->assertFalse( array_key_exists( 'intfield' , $data[ 0 ] ) );
+			$this->assertArrayNotHasKey( 'stringfield1' , $data[ 0 ]->toArray( ) );
+			$this->assertArrayNotHasKey( 'intfield' , $data[ 0 ]->toArray( ) );
 		}
 			
 		public function testObserverInsertEvent( )

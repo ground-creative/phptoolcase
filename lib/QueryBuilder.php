@@ -625,7 +625,7 @@
 		}
 		/**
 		* adds "and" or "or" to the query
-		* @param	string		$value		the value to check
+		* @param	string	$value	the value to check
 		*/			
 		protected function _addAndOR( $value )
 		{
@@ -644,10 +644,10 @@
 		}
 		/**
 		* Builds the where clause
-		* @param	string		$type		specifies "and"/"or"
-		* @param	string		$column		the table column
-		* @param	string		$operator		the operator to use
-		* @param	mixed		$value		the value to check
+		* @param	string	$type		specifies "and"/"or"
+		* @param	string	$column		the table column
+		* @param	string	$operator	the operator to use
+		* @param	mixed	$value		the value to check
 		*/
 		protected function _buildWhereClause( $type , $column , $operator = null , $value = null )
 		{
@@ -728,7 +728,7 @@
 			return false;
 		}
 		/**
-		*
+		* Cecks qery operators
 		*/
 		protected function _checkOperator( $operator )
 		{

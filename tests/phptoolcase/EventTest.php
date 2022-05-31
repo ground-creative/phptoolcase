@@ -142,5 +142,51 @@
 		{
 			Event::register( );
 			$this->assertTrue( defined( '_PTCEVENT_' ) );
+		}		
+		/*
+		* @runInSeparateProcess
+		*/
+		public function testAddEventDebug( )
+		{
+			$_GET[ 'debug' ] = true;
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
+			Event::listen( 'test.eventX' , function( $obj , $var )
+			{
+				$obj->assertTrue( $var );
+			} );
+			$result = Debug::getBuffer( );
+			$this->assertInstanceOf( \Closure::class , $result[ 1 ][ 'errstr' ][ 'callback' ] );
+		}
+		/*
+		* @runInSeparateProcess
+		*/
+		public function testFireEventDebug( )
+		{
+			$_GET[ 'debug' ] = true;
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
+			Event::listen( 'test.eventY' , function( $obj , $var )
+			{
+				$obj->assertTrue( $var );
+			} );
+			Event::fire( 'test.eventY' , [ $this , true ] );
+			$result = Debug::getBuffer( );
+			$this->assertStringStartsWith( 'firing wildcard' , $result[ 4 ][ 'errmsg' ] );
+			$this->assertStringStartsWith( 'firing event' , $result[ 5 ][ 'errmsg' ] );
+		}
+		/*
+		* @runInSeparateProcess
+		*/
+		public function testDeleteEventDebug( )
+		{
+			//$_GET[ 'debug' ] = true;
+			//Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
+			
+			//Event::remove( 'test.eventZ' , 0 );
+			//$result = Debug::getBuffer( );
+			//$events = Event::get( 'test' );
+			//var_dump( $result[ 1 ] );
+			
+			//$this->assertStringStartsWith( 'firing wildcard' , $result[ 4 ][ 'errmsg' ] );
+			//$this->assertStringStartsWith( 'firing event' , $result[ 5 ][ 'errmsg' ] );
 		}
 	}
