@@ -162,6 +162,20 @@
 		/**
 		* @runInSeparateProcess
 		*/	
+		public function testLogPOObject( )
+		{
+			$_GET[ 'debug' ] = true;
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
+			$dsn = "mysql:host=" . $GLOBALS[ 'DB_HOST' ] . ";dbname=" . 
+						$GLOBALS[ 'DB_DBNAME' ]. ";charset=utf8;port=3306";
+			$pdo = new \PDO( $dsn , $GLOBALS[ 'DB_USER' ] , $GLOBALS[ 'DB_PASSWORD' ] );
+			Debug::bufferLog( $pdo );
+			$result = Debug::getBuffer( );
+			$this->assertInstanceOf( \PDO::class , $result[ 1 ][ 'console_string' ] );
+		}
+		/**
+		* @runInSeparateProcess
+		*/	
 		public function testLogSql( )
 		{
 			$_GET[ 'debug' ] = true;

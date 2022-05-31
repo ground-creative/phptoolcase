@@ -1283,20 +1283,16 @@
 				else if ( is_object( $avar ) )
 				{
 					$continue = true;
-					if ( false === strpos( @get_class( $avar ) , 'Reflection' ) && 
-							false === strpos( @get_class( $avar ) , 'SimpleXML' ) )
+					if ( $avar instanceof \Closure )
 					{
 						$rf = @new \ReflectionFunction( $avar );
-						if ( false !== @strpos( $rf->getName( ) , '{closure}' ) ) // work with lambda functions first
-						{
-							@$result .= $indent . ( $varName ? $varName . ' => ' : '');
-							$result .= '<span>**RUNTIME CREATED FUNCTION** ';
-							if ( @$rf->getFileName( ) ) { $result .= @$rf->getFileName( ); } 
-							if ( @$rf->getStartLine( ) ) { $result .= ':' . @$rf->getStartLine( ); } 
-							if ( @$rf->getEndline( ) ) { $result .= '-' . @$rf->getEndline( ); }
-							$result .= '</span><br>'; 
-							$continue = false;
-						}
+						@$result .= $indent . ( $varName ? $varName . ' => ' : '');
+						$result .= '<span>**RUNTIME CREATED FUNCTION** ';
+						if ( @$rf->getFileName( ) ) { $result .= @$rf->getFileName( ); } 
+						if ( @$rf->getStartLine( ) ) { $result .= ':' . @$rf->getStartLine( ); } 
+						if ( @$rf->getEndline( ) ) { $result .= '-' . @$rf->getEndline( ); }
+						$result .= '</span><br>'; 
+						$continue = false;
 					}
 					if ( $continue )
 					{
@@ -1473,12 +1469,12 @@
 		/**
 		* Gets the fatal error on shutdown
 		*/
-		protected static function _lastError()
+		protected static function _lastError( )
 		{
-			if(static::$_options['replace_error_handler'] && $error=error_get_last()) 
+			if ( static::$_options[ 'replace_error_handler' ] && $error = error_get_last( ) ) 
 			{
-				$err_type=static::msgType( $error['type'] );
-				if($err_type=='Php Error')
+				$err_type = static::msgType( $error['type'] );
+				if ( $err_type == 'Php Error' )
 				{				   
 					ini_set( 'memory_limit' , memory_get_usage( true ) + 1000000 );
 					$err=array('errno'=>$err_type,'errstr'=>$error['message'],
