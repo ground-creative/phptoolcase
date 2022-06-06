@@ -166,8 +166,9 @@
 			$a = 0;
 			foreach ( $events as $sub_event )	// run events
 			{ 
-				static::_debug( array( 'callback' => $sub_event , 'data' => $data ) , 
-					'firing event <b>' . $event[ 0 ] . '.' . $event[ 1 ] . '[ ' . $a . ' ]</b>' , 'Event Manager' );
+				static::_debug( [ 'callback' => $sub_event , 'data' => $data ] , 
+								'firing event <b>' . $event[ 0 ] . '.' . $event[ 1 ] . 
+											'[ ' . $a . ' ]</b>' , 'Event Manager' );
 				$a++;
 				if ( false === static::_run( $sub_event , $data ) ){ return; } 
 			}

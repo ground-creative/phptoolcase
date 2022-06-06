@@ -517,4 +517,16 @@
 			} );
 			$this->testInsert( );
 		}
+		/*
+		* @runInSeparateProcess
+		*/		
+		public function testQueryDebug( )
+		{
+			$_GET[ 'debug' ] = true;
+			Debug::load( [ 'show_interface' => false , 'debug_console' => true ] );
+			$this->testInsert( );
+			$result = Debug::getBuffer( );
+			$this->assertStringStartsWith( ' - SELECT * FROM' , strip_tags( end( $result )[ 'errmsg' ] ) );
+			$this->assertStringMatchesFormat( '%f ms' , end( $result )[ 'console_time' ] );
+		}
 	}
