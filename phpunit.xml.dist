@@ -10,6 +10,7 @@
       <directory>./tests/phptoolcase</directory>
       <directory suffix=".php">./tests/phptoolcase/dependencies</directory>
       <exclude>./tests/phptoolcase/ShortCutsTest.php</exclude>
+      <exclude>./tests/phptoolcase/dependencies/router</exclude>
     </testsuite>
     <testsuite name="shortcuts">
       <directory>./tests/phptoolcase/ShortCutsTest.php</directory>
@@ -21,8 +22,8 @@
     <var name="DB_USER" value="root"/>
     <var name="DB_PASSWORD" value=""/>
     <var name="DB_DBNAME" value="phptoolcase"/>
+    <var name="ROUTER_REQUESTS_PATH" value="/projects/php/phptoolcase/tests/phptoolcase/dependencies/router/"/>
     <server name="REQUEST_URI" value="127.0.0.1"/>
-    <server name="HTTP_HOST" value="127.0.0.1"/>
     <server name="HTTP_HOST" value="http://localhost"/>
     <server name="REMOTE_ADDR" value="127.0.0.1"/>
   </php>
