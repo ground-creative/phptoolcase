@@ -62,12 +62,23 @@
 	} )->where( 'sid' , '\d+' )
 		->where( 'lang' , 'es|en' );	
 	
-	Router::get( $base_path . '/lang-test/{lang?}/' , function( $lang )
+	Router::get( $base_path . '/lang-test/{lang?}/' , function( $lang = null )
 	{
-		print "testing a parameter against a pattern " . $lang;
+		print "testing optional parameter against a pattern " . @$lang;
 	} )->where( 'lang' , 'es|en' );
 	
+	Router::get( $base_path . '/lang-multiple/{sid?}/{lang?}/' , function( $sid = null , $lang = null )
+	{
+		print "testing optional parameter against a pattern " . @$sid . "-" . @$lang;
+	} )->where( 'sid' , '\d+' )
+		->where( 'lang' , 'es|en' );
 	
+	Router::get( $base_path . '/lang-more/{sid?}/{lang?}/{date?}/' , function( $sid = null , $lang = null , $date = null )
+	{
+		print "testing optional parameter against a pattern " . @$sid . "-" . @$lang . "/" . @$date;
+	} )->where( 'sid' , '\d+' )
+		->where( 'lang' , 'es|en' )
+		->where( 'date' , '([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))' );	
 	
 	
 	Router::get( $base_path . '/user/area/{user_name}/{id?}/' , function( $userName , $id = null )
@@ -94,11 +105,25 @@
 	{
 		print "testing optional parameter " . @$id;
 	} );	
+	
+	Router::get( $base_path . '/router-parameter/{id}/{name}/{date}/' , function( $id , $name , $date )
+	{
+		print "testing optional parameter " . Router::getValue( 'id' ) . "-" . Router::getValue( 'name' )  . "/" . Router::getValue( 'date' );
+	} );	
+	
+	require_once( 'filters.php' );
+	Router::get( $base_path . '/filter-test' , function( )
+	{
+		print "executing route after filter ";
+	} )->before( 'some.filter' )
+	->after( 'some.filter' );
+	
+	require_once( 'UserController.php' );
+	Router::controller( $base_path . '/controller/' ,  'UserController' );
 
 	Router::notFound( 404 , function( ) // not found urls
 	{
 		print "the 404 callback was executed";
 	} );
 
-	/* EXECUTING THE ROUTES */
-	Router::run( true );  // argument $checkErrors should be set to false in production
+	Router::run( true );

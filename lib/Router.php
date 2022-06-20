@@ -203,7 +203,11 @@
 		{
 			$array = ( $clean ) ? static::$_cleanParamValues : static::$_paramValues;
 			if ( !$name ) { return $array; } // return all values
-			if ( !array_key_exists( $name , $array ) ){ return null; }
+			if ( !array_key_exists( $name , $array ) )
+			{ 
+				trigger_error( 'Route parameter "' . $name . '" does not exist!' , E_USER_WARNING );
+				return null; 
+			}	
 			return $array[ $name ]; 
 		}
 		/**
