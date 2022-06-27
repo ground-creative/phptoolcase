@@ -237,6 +237,10 @@
 		/**
 		*
 		*/
+		public static function getRoutes( ){ return static::$_map; }
+		/**
+		*
+		*/
 		public static function routed( $routed = null )
 		{ 
 			if ( is_bool( $routed ) )

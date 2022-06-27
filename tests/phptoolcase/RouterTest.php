@@ -213,10 +213,48 @@
 			$this->assertTrue( static::_assertUrlIsNotFound( $this->client , 'controller/user/failure/' ) );
 		}
 		
-		public function testTrailingSlashRedirect( )
+		public function testNoTrailingSlashRedirect( )
 		{
 			$response = $this->client->get( static::$_baseUri . 'any-request' );
 			$this->assertEquals( 200 , $response->getStatusCode( ) );
+		}
+
+		public function testTrailingSlashConfig( )
+		{
+			$response = $this->client->get( static::$_baseUri . 'any-request/?test_no_trailing_slash=true' );
+			$this->assertEquals( 200 , $response->getStatusCode( ) );
+			$response = $this->client->get( static::$_baseUri . 'any-request' );
+			$this->assertEquals( 200 , $response->getStatusCode( ) );
+		}
+		
+		public function testRouteMap( )
+		{
+			$response = $this->client->get( static::$_baseUri . 'test-map/' );
+			$this->assertEquals( 200 , $response->getStatusCode( ) );
+			$this->assertStringEndsWith( '{param?}/' , ( string ) $response->getBody( ) );
+			$response = $this->client->get( static::$_baseUri . 'test-map/123/' );
+			$this->assertEquals( 200 , $response->getStatusCode( ) );
+			$this->assertStringEndsWith( '123/' , ( string ) $response->getBody( ) );
+			$response = $this->client->get( static::$_baseUri . 'test-map/456/' );
+			$this->assertEquals( 200 , $response->getStatusCode( ) );
+			$this->assertStringEndsWith( '{param?}/' , ( string ) $response->getBody( ) );
+		}	
+		
+		public function testRouteFilters( )
+		{
+			$response = $this->client->get( static::$_baseUri . 'test-before-filter/' );
+			$this->assertEquals( 200 , $response->getStatusCode( ) );
+			$this->assertEquals( 'before filter executed' , ( string ) $response->getBody( ) );
+			$response = $this->client->get( static::$_baseUri . 'test-after-filter/' );
+			$this->assertEquals( 200 , $response->getStatusCode( ) );
+			$this->assertEquals( 'executed after filter' , ( string ) $response->getBody( ) );
+			$response = $this->client->get( static::$_baseUri . 'test-after-filter/' );
+			$this->assertEquals( 200 , $response->getStatusCode( ) );
+			$this->assertEquals( 'executed after filter' , ( string ) $response->getBody( ) );
+			
+			$response = $this->client->get( static::$_baseUri . 'test-discard-route-filter/' );
+			var_dump($response->getStatusCode( ) );
+			//$this->assertTrue( static::_assertUrlIsNotFound( $this->client , 'test-discard-route-filter/' ) );
 		}
 		
 		protected static function _assertUrlIsNotFound( $client , $uri )

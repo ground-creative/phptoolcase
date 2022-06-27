@@ -9,7 +9,7 @@
 	Router::get( $base_path , function( )
 	{
 		print 'called the main page by get request';
-	} )->map( 'index' ); // map route to be retrieved later
+	} );
 	
 	Router::post( $base_path , function( )
 	{
@@ -112,15 +112,47 @@
 	} );	
 	
 	require_once( 'filters.php' );
-	Router::get( $base_path . '/filter-test' , function( )
+	
+	Router::get( $base_path . '/test-before-filter/' , function( )
 	{
-		print "executing route after filter ";
-	} )->before( 'some.filter' )
-	->after( 'some.filter' );
+		print $GLOBALS[ 'test_before_filter' ];
+		
+	} )->before( 'before.filter' );
+	
+	Router::get( $base_path . '/test-after-filter/' , function( )
+	{
+		
+	} )->before( 'after.filter' );
+	
+	Router::get( $base_path . '/test-discard-route-filter/' , function( )
+	{
+		
+	} )->before( 'before.discard_route' );
 	
 	require_once( 'UserController.php' );
 	Router::controller( $base_path . '/controller/' ,  'UserController' );
 
+	if ( isset( $_GET[ 'test_no_trailing_slash' ] ) )
+	{ 
+		Router::trailingSlash( false );
+	}
+	
+	Router::get( $base_path . '/test-map/{param?}/' , function( $param = null )
+	{
+		if ( $param == '123' )
+		{
+			echo Router::getRoute( 'test-map' );
+		}
+		else if ( $param ) 
+		{
+			echo Router::getRoute( 'test-map' , false );
+		}
+		else
+		{
+			echo Router::getRoute( 'test-map' );
+		}
+	} )->map( 'test-map' );
+	
 	Router::notFound( 404 , function( ) // not found urls
 	{
 		print "the 404 callback was executed";
