@@ -7,7 +7,11 @@
 	* <br>All class properties and methods are static because it's required 
 	* to let them work on script shutdown when FATAL error occurs.
 	* @category 	Library
+<<<<<<< Updated upstream
 	* @version	v1.1.5
+=======
+	* @version	v1.1.3
+>>>>>>> Stashed changes
 	* @author   	Carlo Pietrobattista <carlo@ground-creative.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
@@ -968,8 +972,9 @@
 		protected static function _buildBuffer( $type , $string , $statement = null , $category = null )
 		{
 			$events = '';
-			if ( is_array( static::$_options[ 'exclude_categories' ] ) && 
-				@in_array( $category , static::$_options[ 'exclude_categories' ] ) ){ return; }
+			if ( !array_key_exists( 'exclude_categories' , static::$_options ) ){ return; }
+			//if ( is_array( static::$_options[ 'exclude_categories' ] ) && 
+			//	@in_array( $category , static::$_options[ 'exclude_categories' ] ) ){ return; }
 			if ( defined( '_PTCDEBUG_NAMESPACE_' ) && 
 				@static::_getSessionVars( static::$_options[ 'url_key' ] ) && 
 					( static::$_options[ 'show_interface' ] || static::$_options[ 'debug_console' ] ) ) 
