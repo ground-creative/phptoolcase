@@ -8,9 +8,9 @@
 	* to let them work on script shutdown when FATAL error occurs.
 	* @category 	Library
 <<<<<<< Updated upstream
-	* @version	v1.1.5
+	* @version	v1.1.6
 =======
-	* @version	v1.1.3
+	* @version	v1.1.6
 >>>>>>> Stashed changes
 	* @author   	Carlo Pietrobattista <carlo@ground-creative.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
