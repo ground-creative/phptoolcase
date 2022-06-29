@@ -968,7 +968,8 @@
 		protected static function _buildBuffer( $type , $string , $statement = null , $category = null )
 		{
 			$events = '';
-			if ( @in_array( $category , static::$_options[ 'exclude_categories' ] ) ){ return; }
+			if ( is_array( static::$_options[ 'exclude_categories' ] ) && 
+				@in_array( $category , static::$_options[ 'exclude_categories' ] ) ){ return; }
 			if ( defined( '_PTCDEBUG_NAMESPACE_' ) && 
 				@static::_getSessionVars( static::$_options[ 'url_key' ] ) && 
 					( static::$_options[ 'show_interface' ] || static::$_options[ 'debug_console' ] ) ) 
