@@ -5,7 +5,7 @@
 	/**
 	* PHP TOOLCASE OBJECT RELATIONAL MAPPING CLASS
 	* @category 	Library
-	* @version	v1.1.3
+	* @version	v1.1.4
 	* @author   	Carlo Pietrobattista <carlo@ground-creative.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
