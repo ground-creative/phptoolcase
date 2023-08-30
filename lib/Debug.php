@@ -9,12 +9,12 @@
 	* @category 	Library
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
-	* @version	v1.1.7
+	* @version	v1.1.8
 =======
-	* @version	v1.1.7
+	* @version	v1.1.8
 >>>>>>> Stashed changes
 =======
-	* @version	v1.1.7
+	* @version	v1.1.8
 >>>>>>> Stashed changes
 	* @author   	Carlo Pietrobattista <carlo@ground-creative.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
