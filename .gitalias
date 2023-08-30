@@ -1,6 +1,7 @@
 ### A collection of shortcuts for git ########################################################
 #
-# @Version 1.0.2
+# https://github.com/ground-creative/.gitalias/blob/main/.gitalias
+# @Version 1.0.3
 #
 # Installation Instructions
 # Add the following 2 lines to your .git/config file
