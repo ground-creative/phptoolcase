@@ -142,10 +142,15 @@
 		/**
 		*
 		*/
-		public static function notFound( $code = 404 , $callback = null )
+		public static function notFound( $code = 404 , $callback = null , $priority = 100)
 		{
 			$callback = static::_checkCallback( $callback );
-			return static::$_notFound = array( 'code' => $code , 'callback' => $callback );
+			return static::$_notFound[] = 
+			[
+				'code' 		=> 	$code, 
+				'callback' 		=> 	$callback,
+				'priority'		=>	$priority
+			];
 		}
 		/**
 		*
@@ -381,7 +386,7 @@
 		/**
 		*
 		*/
-		protected static $_notFound = null;
+		protected static $_notFound = [];
 		/**
 		*
 		*/
@@ -528,7 +533,7 @@
 				static::_setRedirectCookie( 'remove' );
 				$debug_mgs = 'No available routes found matching the current request!';
 				static::_debug( $debug_mgs , '' , 'Router Config' );
-				if ( static::$_notFound ){ return static::_processErrorPage( ); } // the error page
+				if (!empty(static::$_notFound)){ return static::_processErrorPage( ); } // the error page
 				return false;
 			}
 		}
@@ -537,12 +542,29 @@
 		*/
 		protected static function _processErrorPage( )
 		{
-			$debug = '<b><i>Router::notFound( )</i></b> was called with status code';
-			static::_debug( static::$_notFound[ 'code' ] , $debug , 'Router Action' );
-			if ( static::$_notFound[ 'code' ] ){ static::header( static::$_notFound[ 'code' ] ); }
-			if ( static::$_notFound[ 'callback' ] )
+			$debug = 'Testing not found callbacks';
+			static::_debug( '', $debug, 'Router Action' );
+			usort(static::$_notFound, function($a, $b) 
 			{
-				return call_user_func( static::$_notFound[ 'callback' ] ); 
+				if ($a['priority'] > $b['priority']){ return 1; } 
+				elseif ($a['priority'] < $b['priority']){ return -1; }
+				return 0;
+			});
+			foreach (static::$_notFound as $not_found)
+			{
+				if ( $not_found[ 'code' ] ){ static::header( $not_found[ 'code' ] ); }
+				if ( $not_found[ 'callback' ] )
+				{
+					$stop = call_user_func( $not_found[ 'callback' ] ); 		
+					$debug = '<b><i>Router::notFound( )</i></b> was called with status code ' . $not_found['code'];
+					static::_debug( $not_found , $debug , 'Router Action' );
+					if (true === $stop)
+					{ 
+						$debug = '<b><i>Router::notFound( )</i></b> stopped execution of not found callbacks';
+						static::_debug( $not_found , $debug , 'Router Action' );
+						break; 
+					}
+				}
 			}
 		}
 		/**
