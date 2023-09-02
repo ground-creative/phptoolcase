@@ -5,7 +5,7 @@
 	/**
 	* PHPTOOLCASE VIEW CLASS
 	* @category 	Library
-	* @version	v1.1.8
+	* @version	v1.1.9-stable
 	* @author   	Carlo Pietrobattista <carlo@ground-creative.com>
 	* @license  	http://www.gnu.org/copyleft/gpl.html GNU General Public License
 	* @link     	http://phptoolcase.com
